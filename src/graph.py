@@ -1,9 +1,11 @@
+
 import networkx as nx
 import matplotlib.pyplot as plt
 import commonVar as common
 import numpy as np
 from networkx.drawing.nx_agraph import graphviz_layout
 import usefulFunctions as uf
+#import seaborn as sns
 
 
 def createGraph():
@@ -93,6 +95,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     if static is True:
         pos = graphviz_layout(common.G)
 
+    #pos = nx.spring_layout(common.G)
     if n is True:  # draw nodes
         nx.draw_networkx_nodes(common.G, pos, node_size=60, node_color=c)
 
