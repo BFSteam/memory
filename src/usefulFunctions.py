@@ -5,26 +5,24 @@ def vprint(*args, sep=' ', end='\n', file=None):
     if common.verbose is True:
         print(*args, sep=' ', end='\n', file=None)
 
-
-def digit_input(DEFAULT=1, msg=""):
+def digit_input(msg="Enter a number: ", DEFAULT=0):
     """
-
-    takes an input and controls if it is emplty or a string
-
-    DEFAULT: the default value returned if errors
-
-    msg: the input message
-
+        prompt the user for a numeric input
+        prompt again if the input is not numeric
+        return an integer or a float
     """
-
-    input_str = input(msg)
-    if len(input_str) == 0:
-        pass
-    elif not input_str.isdigit():
-        pass
+    while True:
+        # strip() removes any leading or trailing whitespace
+        num_str = input(msg).strip()
+        if len(num_str) == 0:
+            return DEFAULT
+        # make sure that all char can be in a typical number
+        if all(c in '+-.0123456789' for c in num_str):
+            break
+        else:
+            return DEFAULT
+    # a float contains a period (US)
+    if '.' in num_str:
+        return float(num_str)
     else:
-        try:
-            DEFAULT = eval(input_str)
-        except ValueError:
-            pass
-    return DEFAULT
+        return int(num_str)

@@ -56,9 +56,8 @@ def loadParameters(self):
 
     common.averageDegree = uf.digit_input(
         msg="Enter average degree for users? (default = " + str(common.averageDegree) + ") ", DEFAULT=common.averageDegree)
-    common.P_a = float(common.averageDegree) / common.N_USERS
+    common.P_a = common.averageDegree / common.N_USERS
     common.P_s = 10 * common.P_a
     common.N_AGENTS = common.N_USERS + common.N_SOURCES
-
     self.nCycles = uf.digit_input(
-        msg="How many cycles? (0 = exit) ", DEFAULT=1)
+        msg="How many cycles? (default 5) ", DEFAULT=5)

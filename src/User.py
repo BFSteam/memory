@@ -39,7 +39,6 @@ class User(Agent):
 
         """
 
-        print("list neighbours", common.G.neighbors(self.number))
         return common.G.neighbors(self.number)
 
     def listNeighboursNode(self, n):
@@ -59,10 +58,8 @@ class User(Agent):
         """
 
         if n < common.N_SOURCES:
-            print(n, " is ", False)
             return False
         else:
-            print(n, " is ", True)
             return True
 
     def getStateFromNode(self, n):
@@ -74,14 +71,14 @@ class User(Agent):
 
         return common.G.nodes(data=True)[n][1]['agent'].state
 
-    def createEdge(self, n):
+    def addEdge(self, n, weight=0.3 + 0.7 * np.random.random_sample()):
         """
 
         create link with a node with id a
 
         """
 
-        common.G.add_edge(self.number, n)
+        common.G.add_edge(self.number, n, weight=weight)
 
     def removeEdge(self, n):
         """
@@ -128,8 +125,6 @@ class User(Agent):
         # read anything
         if news == {}:
             return False
-
-        print(self.distance(news['new']))
         # if a news is beautiful forget the worse
         if len(self.database) == common.memorySize:
             if self.distance(news['new']) > threshold:
@@ -140,7 +135,7 @@ class User(Agent):
                 del(self.database[key])
         # add element to memory
         self.database[news['id-n']] = news    # else append new
-        print("Agent", self.number, "remembered", self.database)
+        uf.vprint("Agent", self.number, "remembered", self.database)
         # cut memory
         if cutoldest is True:
             # while len memory > size of memory cut first element
@@ -159,7 +154,7 @@ class User(Agent):
             else:
                 forgot = self.database[random.choice(list(self.database))]
                 if forgot != news:
-                    print("Agent", self.number, "forgot", forgot)
+                    uf.vprint("Agent", self.number, "forgot", forgot)
                     del(forgot)
         return True
 
@@ -378,6 +373,18 @@ class User(Agent):
         iWantToRemember = self.chooseNews(newsToChose)
         self.becomeInactive(tired=self.remember(iWantToRemember))
 
+    def onlySources(self):
+        """
+
+        if user is connected only with sources return True
+
+        """
+
+        if any([self.isUser(x) for x in self.listNeighbours()]) is False:
+            return True
+        else:
+            return False
+
     def activeDiffusion(self):
         """
 
@@ -389,25 +396,31 @@ class User(Agent):
 
         """
 
+        # check if memory is empty
         if len(self.database) == 0:
             return False
+
+        # check if user is connected only to sources
+        if self.onlySources() is True:
+            return False
+
         bestNews = self.findKeyDistanceMinMax(
             self.database, 'new', minor=False)
         bestWeight = 0
         bestNeighbour = self.number
         for neighbour in self.listNeighbours():
-            if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight:
+            if self.isUser(neighbour) is False:
+                continue
+            if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight: # add default value
                 bestWeight = common.G.get_edge_data(
                     *(self.number, neighbour))['weight']
                 bestNeighbour = neighbour
-        print("#100000")
-        common.G.nodes(data=True)[bestNeighbour][1]['agent'].remember(bestNews)
-        print("#200000")
-        shuffledNeighbour = random.choice(self.listNeighbours())
-        print("2.50000")
-        common.G.nodes(data=True)[
-            shuffledNeighbour][1]['agent'].remember(bestNews)
-        print("#30000")
+        common.G.node[bestNeighbour]['agent'].remember(bestNews)
+        while True:
+            shuffledNeighbour = random.choice(self.listNeighbours())
+            if self.isUser(shuffledNeighbour) is True:
+                break
+        common.G.node[shuffledNeighbour]['agent'].remember(bestNews)
         return True
 
     def firstAction(self):
@@ -420,6 +433,82 @@ class User(Agent):
         if self.checkActivation(t_inactive=3, p_inactive=0.08) is True:
             self.passiveDiffusion()
             self.activeDiffusion()
+
+    def createEdge(self):
+        """
+
+        adds edge between the user and another node in the graph
+
+        """
+
+        n1 = random.choice(common.G.nodes())
+        n2 = random.choice(common.G.nodes())
+        nlist = []
+        dlist = []
+        d1 = -1
+        d2 = -1
+
+        # random choice
+        shuf = common.G.nodes()
+        random.shuffle(shuf)
+        for node in shuf:
+            # if nodes are not connected pick another one
+            if common.G.has_edge(self.number, node) is True:
+                continue
+            # if picked node is itself pick another one
+            if node == self.number:
+                continue
+            # if picked node is inactive pick another one
+            if common.G.node[node]['agent'].active is False:
+                continue
+            d1 = self.distance(common.G.node[node]['agent'].state)
+            n1 = node
+        # check if user is not connected to any node and rewire it randomly
+        if self.listNeighbours() == []:
+            self.addEdge(n1)
+            return True
+        for firstnode in self.listNeighbours():
+            # check if user is connected only to sources
+            if self.onlySources() is True:
+                return False
+
+            # skip adding connection from source
+            if self.isUser(firstnode) is False:
+                d2 = -1
+                continue
+
+            for secondnode in common.G.node[firstnode]['agent'].listNeighbours():
+                nlist.append(secondnode)
+                dlist.append(self.distance(common.G.node[secondnode]['agent'].state))
+        nlist = [x for (y, x) in sorted(zip(dlist, nlist))]
+        while True and not nlist:
+            n2 = nlist[random.randint(0, 10)]
+            if n2 in self.listNeighbours():
+                nlist.remove(n2)
+                continue
+            else:
+                break
+        d2 = self.distance(common.G.node[n2]['agent'].state)
+        if d1 > d2:
+            self.addEdge(n1, weight=0.3 + 0.7 * np.random.random_sample())
+        else:
+            self.addEdge(n2, weight=0.3 + 0.7 * np.random.random_sample())
+        return True
+
+    def deleteEdge(self, p=0.1):
+        if self.listNeighbours() == []:
+                return False
+        if np.random.random_sample() < p:
+            self.removeEdge(random.choice(self.listNeighbours()))
+            return True
+        d = 1
+        n = self.number
+        for node in self.listNeighbours():
+            if self.distance(common.G.node[node]['agent'].state) < d:
+                d = self.distance(common.G.node[node]['agent'].state)
+                n = node
+        self.removeEdge(n)
+        return True
 
     def hasNews(self, id_source=0, date=1):
         """

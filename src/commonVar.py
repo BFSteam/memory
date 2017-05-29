@@ -1,3 +1,4 @@
+
 # commonVar.py
 
 G = 0  # graph address
