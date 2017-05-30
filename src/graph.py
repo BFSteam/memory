@@ -77,27 +77,29 @@ def getGraph():
     except:
         return 0
 
-
 def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
-
     clearNetworkXdisplay()
     c = []
     if clrs == 'state':  # draw colors thinking of state
         for i in range(len(common.G.nodes())):
             if common.G.nodes(data=True)[i][1]['agent'].hasNews(id_source=1, date=1) is True:
                 c.append('green')
-                uf.vprint("green")
+                continue
             elif common.G.nodes(data=True)[i][1]['agent'].hasNews(id_source=4, date=1) is True:
                 c.append('yellow')
-                uf.vprint("yellow")
+                continue
             else:
                 if common.G.nodes()[i] < common.N_SOURCES:
                     c.append('red')
+                    continue
                 else:
                     if common.G.nodes(data=True)[i][1]['agent'].active is True:
                         c.append('blue')
+                        continue
                     else:
                         c.append('grey')
+                        continue
+    
     if spring is True:
         if static is True:
             pos = graphviz_layout(common.G)

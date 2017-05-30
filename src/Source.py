@@ -7,6 +7,7 @@ import commonVar as common
 import math
 import os
 import binascii
+import usefulFunctions as uf
 
 
 class Source(Agent):
@@ -41,20 +42,8 @@ class Source(Agent):
         self.news = {}
         self.reliability = np.random.random_sample()
 
-        # source state
-        self.state = np.zeros(common.dim)  # inizializzato a zero
-        # number of relevant topics for the source: 1, 2 or 3
-        r = np.random.randint(1, 4)
-        # added r number of ones and noise: the noise is 0.15 for one single
-        # topic, 0.1 for 2 and 0.5 for three
-        for i in range(r):
-            self.state[i] = 1
-        for i in range(common.dim):
-            self.state[i] += (0.15 / r) * np.random.random_sample()
-        # the state is shuffled because the topics are not in a partcular
-        # order. then it's normalized
-        np.random.shuffle(self.state)
-        self.state = self.state / self.state.sum()
+        self.genState(n=3, noise=0.15)
+
         print(self.state)
         if (common.cycle / 100.).is_integer():
             self.generateNews()
@@ -105,10 +94,6 @@ class Source(Agent):
             self.database[stringa]['id-source'] = self.number
             self.database[stringa]['date-creation'] = common.cycle
             self.database[stringa]['relevance'] = np.random.random_sample()
-            self.database[stringa]['id-send'] = self.number
-            self.database[stringa]['date-send'] = common.cycle
-            self.database[stringa]['id-recive'] = self.number
-            self.database[stringa]['date-recive'] = common.cycle
 
         print(self.number, " generateNews ", n)
 
@@ -120,3 +105,7 @@ class Source(Agent):
                 return True
             else:
                 return False
+
+    def debug(self):
+        print(self.number)
+        print(self.database)

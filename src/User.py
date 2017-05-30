@@ -19,7 +19,8 @@ class User(Agent):
         self.activate()
         self.inactiveTime = 0
         self.activeTime = 0
-
+        self.genState(n=1, noise=0.15)
+        
     def activate(self, p=0.5):
         """
 
@@ -106,7 +107,7 @@ class User(Agent):
         if a == 'scalar':
             return np.dot(self.state, n)
 
-    def remember(self, news, cutoldest=True, threshold=0.9, rnd=0.1):
+    def remember(self, news, cutoldest=True, threshold=0.9, rnd=0.1, id_send=-1):
         """
 
         register news in a log file 'memory'.
@@ -125,6 +126,10 @@ class User(Agent):
         # read anything
         if news == {}:
             return False
+
+        if news['id-n'] in self.database:
+            return False
+
         # if a news is beautiful forget the worse
         if len(self.database) == common.memorySize:
             if self.distance(news['new']) > threshold:
@@ -134,8 +139,17 @@ class User(Agent):
                         tmin = self.distance(self.database[key]['new'])
                 del(self.database[key])
         # add element to memory
-        self.database[news['id-n']] = news    # else append new
+        # else append new
+        ii = news['id-n']
+        self.database[ii] = {}
+        self.database[ii]['id-n'] = news['id-n']
+        self.database[ii]['new'] = news['new']
+        self.database[ii]['id-source'] = news['id-source']
+        self.database[ii]['date-creation'] = news['date-creation']
+        self.database[ii]['relevance'] = news['relevance']
+
         uf.vprint("Agent", self.number, "remembered", self.database)
+
         # cut memory
         if cutoldest is True:
             # while len memory > size of memory cut first element
@@ -147,6 +161,7 @@ class User(Agent):
                         tdate = self.database[key]['date-creation']
                         kmin = key
                 del(self.database[kmin])
+
         # random forget
         if np.random.random_sample() < rnd:
             if self.database == {}:
@@ -189,7 +204,7 @@ class User(Agent):
         """
 
         Given a dict of dict and an innerkey 'findKeyMinMax' returns the
-        key of the minimum distance innerkey
+        database with the innerkey at the min distance
 
         minor: minimum if True, else, maximum
 
@@ -268,10 +283,7 @@ class User(Agent):
         n: int, id of the agent
 
         """
-
-        for i, j in enumerate(common.G.nodes()):
-            if j == n:
-                return common.G.nodes(data=True)[i][1]['agent'].database
+        return common.G.node[n]['agent'].database
 
     def getAllNewsFromUser(self, n):
         """
@@ -283,20 +295,11 @@ class User(Agent):
         n: int, id of the agents
 
         """
-
-        for i, j in enumerate(common.G.nodes()):
-            if j == n:
-                if common.G.nodes(data=True)[i][1]['agent'].database == {}:
-                    return {}
-                else:
-                    dmax = -1
-                    kmax = 0
-                    for key in common.G.nodes(data=True)[i][1]['agent'].database:
-                        if self.distance(common.G.nodes(data=True)[i][1]['agent'].database[key]['new']) > dmax:
-                            dmax = self.distance(common.G.nodes(data=True)[
-                                                 i][1]['agent'].database[key]['new'])
-                            kmax = key
-                return {common.G.nodes(data=True)[i][1]['agent'].database[kmax]['id-n']: common.G.nodes(data=True)[i][1]['agent'].database[kmax]}
+        if common.G.node[n]['agent'].database == {}:
+            return {}
+        else:
+            tdata = self.findKeyDistanceMinMax(data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
+            return {tdata['id-n']: tdata}
 
     def becomeActive(self, t=7, p=0.08):
         """
@@ -334,7 +337,6 @@ class User(Agent):
         tiredness: how much he is tired
 
         """
-
         if tired is True:
             p = p * tiredness
         if self.activeTime > t:
@@ -371,7 +373,21 @@ class User(Agent):
 
         newsToChose = self.readNews()
         iWantToRemember = self.chooseNews(newsToChose)
-        self.becomeInactive(tired=self.remember(iWantToRemember))
+        remembered = self.remember(iWantToRemember)
+        self.becomeInactive(tired=remembered)
+        self.changeState(iWantToRemember)
+
+    def changeState(self, news, p=0.5):
+        """
+
+        
+
+        """
+        if news == {}:
+            return False
+        self.state = self.state + p * news['relevance'] * news['new']
+        self.state = self.state / self.state.sum()
+        return True
 
     def onlySources(self):
         """
@@ -385,7 +401,7 @@ class User(Agent):
         else:
             return False
 
-    def activeDiffusion(self):
+    def activeDiffusion(self, p=0.1):
         """
 
         performs active diffusion with the best news in memory
@@ -395,7 +411,6 @@ class User(Agent):
         the orher randomly to a neighbour
 
         """
-
         # check if memory is empty
         if len(self.database) == 0:
             return False
@@ -411,16 +426,21 @@ class User(Agent):
         for neighbour in self.listNeighbours():
             if self.isUser(neighbour) is False:
                 continue
-            if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight: # add default value
+            if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight:  # add default value
                 bestWeight = common.G.get_edge_data(
                     *(self.number, neighbour))['weight']
                 bestNeighbour = neighbour
-        common.G.node[bestNeighbour]['agent'].remember(bestNews)
+        # common.G.node[bestNeighbour]['agent'].remember(bestNews)
         while True:
             shuffledNeighbour = random.choice(self.listNeighbours())
             if self.isUser(shuffledNeighbour) is True:
                 break
-        common.G.node[shuffledNeighbour]['agent'].remember(bestNews)
+        # common.G.node[shuffledNeighbour]['agent'].remember(bestNews)
+        if np.random.random_sample() < p:
+            finalNeighbour = shuffledNeighbour
+        else:
+            finalNeighbour = bestNeighbour
+        common.G.node[finalNeighbour]['agent'].remember(bestNews)
         return True
 
     def firstAction(self):
@@ -429,7 +449,6 @@ class User(Agent):
         bunch of actions
 
         """
-
         if self.checkActivation(t_inactive=3, p_inactive=0.08) is True:
             self.passiveDiffusion()
             self.activeDiffusion()
@@ -496,6 +515,13 @@ class User(Agent):
         return True
 
     def deleteEdge(self, p=0.1):
+        """
+
+        deletes a random edge with a low probability or the one
+        connected to the agent with lesser distance
+
+        """
+
         if self.listNeighbours() == []:
                 return False
         if np.random.random_sample() < p:
@@ -536,8 +562,9 @@ class User(Agent):
 
         if newsdict == {}:
             return newsdict
-        temp = -1
-        for key in newsdict:
-            if self.distance(newsdict[key]['new']) > temp:
-                temp = self.distance(newsdict[key]['new'])
-        return newsdict[key]
+        tdict = self.findKeyDistanceMinMax(data=newsdict, innerkey='new', minor=False)
+        return tdict
+
+    def debug(self):
+        print(self.number)
+        print(self.database)

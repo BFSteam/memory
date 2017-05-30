@@ -29,8 +29,7 @@ class Agent(SuperAgent):  # Agent must be the partent class of every object. Mus
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.state = np.array([random.random() for i in range(common.dim)])
-        self.state = self.state / self.state.sum()
+        self.state = np.zeros([common.dim])
 
         if graph.getGraph() == 0:
             graph.createGraph()  # if first agent create the graph
@@ -52,8 +51,32 @@ class Agent(SuperAgent):  # Agent must be the partent class of every object. Mus
         self.database = {}
         print("agent", self.agType, "#", self.number, "has been created")
 
+
+    def genState(self, n=1, noise=0.15):
+        # source state
+        # inizializzato a zero
+        # number of relevant topics for the source: 1, 2 or 3
+        # added r number of ones and noise: the noise is 0.15 for one single
+        # topic, 0.1 for 2 and 0.5 for three
+        # the state is shuffled because the topics are not in a partcular
+        # order. then it's normalized
+        self.state = np.zeros([self.state.shape[0]])
+        r = np.random.randint(1, n+1)
+        for i in range(r):
+            self.state[i] = 1
+        for i in range(self.state.shape[0]):
+            self.state[i] += (noise / r) * np.random.random_sample()
+        np.random.shuffle(self.state)
+        self.state = self.state / self.state.sum()
+        return self.state
+        
+
     def getGraph(self):
         return common.G
 
     def hasNews(self, id_source=0, date=1):
         pass
+
+    def debug(self):
+        print(self.number)
+        print(self.database)
