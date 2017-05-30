@@ -1,12 +1,12 @@
 from Tools import *
-from Agent import *
+from WorldAgent import *
 import os
 import sys
 
 
 def do0(address):  # reset in modelActions.txt
     self = address  # if necessary
-    askEachAgentInCollection(address.agentList, Agent.setNewCycleValues)
+    askEachAgentInCollection(address.agentList, WorldAgent.setNewCycleValues)
 
 
 def do1(address):  # move in modelActions.txt
@@ -50,7 +50,7 @@ def createTheAgent(self, line, num, agType):
     # explictly pass self, here we use a function
 
     if len(line.split()) == 1:
-        anAgent = Agent(num, self.worldState, agType=agType)
+        anAgent = WorldAgent(num, self.worldState, agType=agType)
         self.agentList.append(anAgent)
 
     else:

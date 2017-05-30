@@ -1,2 +1,3 @@
 users   User
 sources Source
+logs    MessageScheduler

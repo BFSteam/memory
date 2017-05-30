@@ -1,5 +1,5 @@
 from Tools import *
-from Agent import *
+from WorldAgent import *
 import graph as graph
 import commonVar as common
 import networkx as nx

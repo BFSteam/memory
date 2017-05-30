@@ -1,7 +1,7 @@
 # User.py
 from Tools import *
 from agTools import *
-from Agent import *
+from WorldAgent import *
 import commonVar as common
 import numpy as np
 import sys
@@ -9,18 +9,46 @@ import random
 import usefulFunctions as uf
 
 
-class User(Agent):
+class User(WorldAgent):
+    """
+
+                                                                     ,888888b.
+                                                                  .d888888888b
+                                                              _..-'.`*'_,88888b
+                                                            ,'..-..`"ad88888888b.
+                                                                  ``-. `*Y888888b.
+                                                                      \   `Y888888b.
+    Our Os who art in CPU, LINUX be thy name.                         :     Y8888888b.
+    They program run, thy syscalls done, In Kernel as it is in user.  :      Y88888888b.
+    Give us this day, our daily code.                                 |    _,8ad88888888.
+    And forgive our errors, as we forgive our compilers.              : .d88888888888888b.
+    And lead us not into windows, but deliver us from Bill.           \d888888888888888888
+    For thine is the serverdom, power, and kernel, for ever. Amen     8888;'''`88888888888
+                                                                      888'     Y8888888888
+                                                                      `Y8      :8888888888
+                                                                       |`      '8888888888
+    May GitHub never crash                                             |        8888888888
+    Make this code run flawessly                                       |        8888888888
+                                                                       |        8888888888
+                                                                       |       ,888888888P
+                                                                       :       ;888888888'
+                                                                        \      d88888888'
+                                                                        _.>,    888888P'
+                                                                      <,--''`.._>8888( 
+                                                                       `>__...--' `''`  
+
+    """
 
     def __init__(self, number, myWorldState, agType=""):
-        Agent.__init__(self, number, myWorldState,
-                       agType=agType)  # parent constructor
+        WorldAgent.__init__(self, number, myWorldState,
+                            agType=agType)  # parent constructor
         self.database = {}
         self.active = False
         self.activate()
         self.inactiveTime = 0
         self.activeTime = 0
         self.genState(n=1, noise=0.15)
-        
+
     def activate(self, p=0.5):
         """
 
@@ -298,7 +326,8 @@ class User(Agent):
         if common.G.node[n]['agent'].database == {}:
             return {}
         else:
-            tdata = self.findKeyDistanceMinMax(data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
+            tdata = self.findKeyDistanceMinMax(
+                data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
             return {tdata['id-n']: tdata}
 
     def becomeActive(self, t=7, p=0.08):
@@ -380,7 +409,7 @@ class User(Agent):
     def changeState(self, news, p=0.5):
         """
 
-        
+
 
         """
         if news == {}:
@@ -426,7 +455,8 @@ class User(Agent):
         for neighbour in self.listNeighbours():
             if self.isUser(neighbour) is False:
                 continue
-            if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight:  # add default value
+            # add default value
+            if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight:
                 bestWeight = common.G.get_edge_data(
                     *(self.number, neighbour))['weight']
                 bestNeighbour = neighbour
@@ -498,7 +528,8 @@ class User(Agent):
 
             for secondnode in common.G.node[firstnode]['agent'].listNeighbours():
                 nlist.append(secondnode)
-                dlist.append(self.distance(common.G.node[secondnode]['agent'].state))
+                dlist.append(self.distance(
+                    common.G.node[secondnode]['agent'].state))
         nlist = [x for (y, x) in sorted(zip(dlist, nlist))]
         while True and not nlist:
             n2 = nlist[random.randint(0, 10)]
@@ -523,7 +554,7 @@ class User(Agent):
         """
 
         if self.listNeighbours() == []:
-                return False
+            return False
         if np.random.random_sample() < p:
             self.removeEdge(random.choice(self.listNeighbours()))
             return True
@@ -540,7 +571,7 @@ class User(Agent):
         """
 
         chech if user has a certain news inside
-        overloaded from Agent
+        overloaded from WorldAgent
 
         """
 
@@ -562,7 +593,8 @@ class User(Agent):
 
         if newsdict == {}:
             return newsdict
-        tdict = self.findKeyDistanceMinMax(data=newsdict, innerkey='new', minor=False)
+        tdict = self.findKeyDistanceMinMax(
+            data=newsdict, innerkey='new', minor=False)
         return tdict
 
     def debug(self):

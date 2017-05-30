@@ -1,7 +1,7 @@
 # Source.py
 from Tools import *
 from agTools import *
-from Agent import *
+from WorldAgent import *
 import numpy as np
 import commonVar as common
 import math
@@ -10,7 +10,7 @@ import binascii
 import usefulFunctions as uf
 
 
-class Source(Agent):
+class Source(WorldAgent):
     """
 
     Members:
@@ -38,7 +38,7 @@ class Source(Agent):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        Agent.__init__(self, number, myWorldState, agType=agType)
+        WorldAgent.__init__(self, number, myWorldState, agType=agType)
         self.news = {}
         self.reliability = np.random.random_sample()
 
