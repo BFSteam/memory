@@ -23,6 +23,7 @@ scrivere documentazioni nelle funzioni
 funzione getNews tra utenti e utenti e tra fonti e utenti
 
 
-gestire doppia notizia arrivata
-diffusione utente utente
-diffusione e ricezione
+migliorare esportazioni di log (formati)
+aggiungere chiamata al log per creazione nuova news
+aggiungere log per link
+midifiche pesi
