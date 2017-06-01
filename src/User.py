@@ -7,6 +7,7 @@ import numpy as np
 import sys
 import random
 import usefulFunctions as uf
+import MessageScheduler as ms
 
 
 class User(WorldAgent):
@@ -34,8 +35,8 @@ class User(WorldAgent):
                                                                        :       ;888888888'
                                                                         \      d88888888'
                                                                         _.>,    888888P'
-                                                                      <,--''`.._>8888( 
-                                                                       `>__...--' `''`  
+                                                                      <,--''`.._>8888(
+                                                                       `>__...--' `''`
 
     """
 
@@ -150,7 +151,6 @@ class User(WorldAgent):
         oldest: if memory is 'full' cut the oldest
 
         """
-
         # read anything
         if news == {}:
             return False
@@ -283,22 +283,19 @@ class User(WorldAgent):
 
         """
 
-        temp = {}
+        temp = []
         l = self.listNeighbours()
         for ne in l:
             if self.isUser(ne):
-                temp.update(self.getAllNewsFromUser(ne))
+                if self.getAllNewsFromUser(ne) is False:
+                    continue
+                else:
+                    temp.append(self.getAllNewsFromUser(ne))
             else:
-                temp.update(self.getAllNewsFromSource(ne))
-
-        """
-        # remove old news
-        for key in temp:
-            if common.cycle - temp[key]['date-source'] > old:
-                del temp[key]
-        if temp == {}:
-            temp = {'empty':{}}
-        """
+                if self.getAllNewsFromSource(ne) is False:
+                    continue
+                else:
+                    temp = temp + self.getAllNewsFromSource(ne)
         return temp
 
     def getAllNewsFromSource(self, n):
@@ -311,7 +308,14 @@ class User(WorldAgent):
         n: int, id of the agent
 
         """
-        return common.G.node[n]['agent'].database
+        temp = []
+        if common.G.node[n]['agent'].database == {}:
+            return False
+
+        for key in common.G.node[n]['agent'].database:
+            temp.append((n, common.G.node[n]['agent'].database[key]))
+
+        return temp
 
     def getAllNewsFromUser(self, n):
         """
@@ -324,11 +328,11 @@ class User(WorldAgent):
 
         """
         if common.G.node[n]['agent'].database == {}:
-            return {}
+            return False
         else:
             tdata = self.findKeyDistanceMinMax(
                 data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
-            return {tdata['id-n']: tdata}
+            return (n,  tdata)
 
     def becomeActive(self, t=7, p=0.08):
         """
@@ -395,13 +399,27 @@ class User(WorldAgent):
     def passiveDiffusion(self):
         """
 
-        performs a passive diffuzion of news between 
+        performs a passive diffuzion of news between
         all the nearest neighbours
 
         """
 
+        """
+        newstochoose: list of tuples. the first is a id
+        the second is a dictionary 
+        [ ( 1, {'id-n':dkbjga, ...} ), ... ]
+        """
         newsToChose = self.readNews()
-        iWantToRemember = self.chooseNews(newsToChose)
+        bestNeighbour, iWantToRemember = self.chooseNews(newsToChose)
+        common.log.registerEntry(
+            id_src=iWantToRemember['id-source'],
+            date_creation=iWantToRemember['date-creation'],
+            sender=bestNeighbour,
+            reciver=self.number,
+            id_new=iWantToRemember['id-n'],
+            date=common.cycle,
+            diffusion='p'
+        )
         remembered = self.remember(iWantToRemember)
         self.becomeInactive(tired=remembered)
         self.changeState(iWantToRemember)
@@ -409,7 +427,7 @@ class User(WorldAgent):
     def changeState(self, news, p=0.5):
         """
 
-
+        Changes state of activation of an agent
 
         """
         if news == {}:
@@ -440,6 +458,7 @@ class User(WorldAgent):
         the orher randomly to a neighbour
 
         """
+
         # check if memory is empty
         if len(self.database) == 0:
             return False
@@ -471,6 +490,15 @@ class User(WorldAgent):
         else:
             finalNeighbour = bestNeighbour
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
+        common.log.registerEntry(
+            id_src=bestNews['id-source'],
+            date_creation=bestNews['date-creation'],
+            sender=self.number,
+            reciver=bestNeighbour,
+            id_new=bestNews['id-n'],
+            date=common.cycle,
+            diffusion='a'
+        )
         return True
 
     def firstAction(self):
@@ -479,6 +507,7 @@ class User(WorldAgent):
         bunch of actions
 
         """
+
         if self.checkActivation(t_inactive=3, p_inactive=0.08) is True:
             self.passiveDiffusion()
             self.activeDiffusion()
@@ -591,11 +620,15 @@ class User(WorldAgent):
 
         """
 
-        if newsdict == {}:
-            return newsdict
-        tdict = self.findKeyDistanceMinMax(
-            data=newsdict, innerkey='new', minor=False)
-        return tdict
+        temp = -1
+        tnum = -1
+        tdic = {}
+        for number, entry in newsdict:
+            if self.distance(entry['new']) > temp:
+                temp = self.distance(entry['new'])
+                tnum = number
+                tdic = entry
+        return (tnum, tdic)
 
     def debug(self):
         print(self.number)
