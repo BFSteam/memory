@@ -27,26 +27,10 @@ class MessageScheduler(AgentManager):
 
         self.msgLog = np.zeros([7])
 
-        common.log = self
+        common.msglog = self
 
     def printLog(self):
         print(self.msgLog)
-
-    def addToLog(self, arr):
-        """
-
-        stacks an array under the log
-
-        """
-
-        if arr.shape[0] != 7:
-            return False
-        if any(self.msgLog) is False:
-            self.msgLog = arr
-            return True
-        else:
-            self.msgLog = np.vstack((self.msgLog))
-            return True
 
     def registerEntry(
             self,
@@ -89,33 +73,43 @@ class MessageScheduler(AgentManager):
             ])
         ))
 
-    def writeLog(self, readable=True):
-        f = open('/home/nik/memory/log/log.txt', 'w')
-        if readable is True:
-            for i in self.msgLog:
-                f.write("News ")
-                f.write(str(i[2]))
-                f.write(" created by source ")
-                f.write(str(i[0]))
-                f.write(" at cycle ")
-                f.write(str(i[1]))
-            if i[6] == 'a':
-                f.write(" diffused actively from ")
-                f.write(str(i[3]))
-                f.write(" to ")
-                f.write(str(i[4]))
-                f.write(" at cycle ")
-                f.write(str(i[5]))
-            elif i[6] == 'p':
-                f.write(" diffused passively from ")
-                f.write(str(i[3]))
-                f.write(" to ")
-                f.write(str(i[4]))
-                f.write(" at cycle ")
-                f.write(str(i[5]))
-            f.write("\n")
+    def writeLog(self, ftype='txt'):
+        path = '/home/nik/memory/log/messageLog.' + ftype
+        f = open(path, 'w')
+        if ftype == 'txt':
+            for i in self.msgLog[1:]:  # skip the first
+                if i[6] == 'a':
+                    print("News", str(i[2]),
+                          "created by source", str(i[0]),
+                          "at cycle", str(i[1]),
+                          "diffused passively",
+                          "from", str(i[3]),
+                          "to", str(i[4]),
+                          "at cycle", str(i[5]),
+                          file=f
+                          )
+                elif i[6] == 'p':
+                    print("News", str(i[2]),
+                          "created by source", str(i[0]),
+                          "at cycle", str(i[1]),
+                          "diffused passively",
+                          "from", str(i[3]),
+                          "to", str(i[4]),
+                          "at cycle", str(i[5]),
+                          file=f
+                          )
+                else:
+                    print("News", str(i[2]),
+                          "created by source", str(i[0]),
+                          "at cycle", str(i[1]),
+                          file=f
+                          )
+        elif ftype == 'csv':
+            print("#s", "#tc", "#n", "#1", "#2", "#t", "#@", file=f)
+            for i in self.msgLog[1:]:  # skip the first
+                print(i[0], i[1], i[2], i[3], i[4],
+                      i[5], i[6], sep=",", file=f)
         else:
-            for i in self.msgLog:
-                f.write(str(i))
-                f.write('\n')
-        print("saved log")
+            pass
+        f.close()
+        print("saved memory log")

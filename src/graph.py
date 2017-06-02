@@ -43,10 +43,26 @@ def initializeEdges():
                     if np.random.random_sample() < common.P_a:
                         common.G.add_edge(common.G.nodes()[i], common.G.nodes()[
                                           j], weight=0.3 + 0.7 * np.random.random_sample())
+                        common.conlog.registerEntry(
+                            first=common.G.nodes(data=True)[
+                                i][1]['agent'].number,
+                            second=common.G.nodes(data=True)[
+                                j][1]['agent'].number,
+                            date=common.cycle,
+                            cr='a'
+                        )
                 else:
                     if np.random.random_sample() < common.P_s:
                         common.G.add_edge(common.G.nodes()[i], common.G.nodes()[
                                           j], weight=0.3 + 0.7 * np.random.random_sample())
+                        common.conlog.registerEntry(
+                            first=common.G.nodes(data=True)[
+                                i][1]['agent'].number,
+                            second=common.G.nodes(data=True)[
+                                j][1]['agent'].number,
+                            date=common.cycle,
+                            cr='a'
+                        )
 
 
 # using networkX and matplotlib case
@@ -77,6 +93,7 @@ def getGraph():
     except:
         return 0
 
+
 def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     clearNetworkXdisplay()
     c = []
@@ -99,7 +116,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
                     else:
                         c.append('grey')
                         continue
-    
+
     if spring is True:
         if static is True:
             pos = graphviz_layout(common.G)

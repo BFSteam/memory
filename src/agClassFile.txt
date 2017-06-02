@@ -1,3 +1,4 @@
 users   User
 sources Source
-logs    MessageScheduler
+msglogs MessageScheduler
+conlogs ConnectionScheduler

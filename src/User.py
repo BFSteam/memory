@@ -109,6 +109,12 @@ class User(WorldAgent):
         """
 
         common.G.add_edge(self.number, n, weight=weight)
+        common.conlog.registerEntry(
+            first=self.number,
+            second=n,
+            date=common.cycle,
+            cr='a'
+        )
 
     def removeEdge(self, n):
         """
@@ -118,6 +124,12 @@ class User(WorldAgent):
         """
 
         common.G.remove_edge(self.number, n)
+        common.conlog.registerEntry(
+            first=self.number,
+            second=n,
+            date=common.cycle,
+            cr='r'
+        )
 
     def distance(self, n, a='scalar'):
         """
@@ -411,7 +423,7 @@ class User(WorldAgent):
         """
         newsToChose = self.readNews()
         bestNeighbour, iWantToRemember = self.chooseNews(newsToChose)
-        common.log.registerEntry(
+        common.msglog.registerEntry(
             id_src=iWantToRemember['id-source'],
             date_creation=iWantToRemember['date-creation'],
             sender=bestNeighbour,
@@ -490,7 +502,7 @@ class User(WorldAgent):
         else:
             finalNeighbour = bestNeighbour
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
-        common.log.registerEntry(
+        common.msglog.registerEntry(
             id_src=bestNews['id-source'],
             date_creation=bestNews['date-creation'],
             sender=self.number,

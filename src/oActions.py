@@ -34,5 +34,6 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         nx.write_multiline_adjlist(
             common.G, path=path2, delimiter=',', encoding='UTF-8')
         print("done")
-        common.log.writeLog()
+        common.conlog.writeLog(ftype='csv')
+        common.msglog.writeLog(ftype='csv')
         print("--- %s seconds ---" % (time.time() - start_time))

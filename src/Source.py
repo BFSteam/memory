@@ -94,7 +94,15 @@ class Source(WorldAgent):
             self.database[stringa]['id-source'] = self.number
             self.database[stringa]['date-creation'] = common.cycle
             self.database[stringa]['relevance'] = np.random.random_sample()
-
+            common.msglog.registerEntry(
+                id_src=self.number,
+                date_creation=common.cycle,
+                sender=self.number,
+                reciver=self.number,
+                id_new=stringa,
+                date=common.cycle,
+                diffusion='c'
+            )
         print(self.number, " generateNews ", n)
 
     def hasNews(self, id_source=0, date=1):
