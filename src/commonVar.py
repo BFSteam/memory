@@ -24,8 +24,6 @@ toBeExecuted = "print ('Goodbye')"
 
 dim = 10
 
-path = "/home/nik/memory"
-
-memorySize = 1
+memorySize = 5
 
 verbose = False
