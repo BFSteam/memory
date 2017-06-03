@@ -11,7 +11,7 @@ class Agent(SuperAgent):  # Agent must be the partent class of every object. Mus
     """
 
     Create the parent agent
-    
+
     Father Of All Agents
            |
     --------------------
@@ -22,10 +22,11 @@ class Agent(SuperAgent):  # Agent must be the partent class of every object. Mus
     |        |         |             |
     User     Source    AgentManager  ?
                             |
-                       ------------
-                       |
-          (AgentManager)MsgScheduler
-                     AMMS
+                       -------------------
+                       |                 |
+          (AgentManager)MsgScheduler     ConnScheduler
+                     AMMS                    AMCS
+
     Def. constructor:
     class Agent(SuperAgent):
         def __init__(self, number,myWorldState, xPos, yPos, lX =-20,rX=19, bY=-20,tY=19, agType="")
