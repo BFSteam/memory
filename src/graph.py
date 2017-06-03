@@ -90,6 +90,8 @@ def getGraph():
 
 
 def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
+    plt.close()
+
     clearNetworkXdisplay()
     c = []
     if clrs == 'state':  # draw colors thinking of state
@@ -111,7 +113,6 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
                     else:
                         c.append('grey')
                         continue
-
 
     pos = nx.spring_layout(common.G)
     if n is True:  # draw nodes
