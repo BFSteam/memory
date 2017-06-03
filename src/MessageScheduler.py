@@ -105,7 +105,7 @@ class MessageScheduler(AgentManager):
                           file=f
                           )
         elif ftype == 'csv':
-            print("#s", "#tc", "#n", "#1", "#2", "#t", "#@", file=f)
+            print("#s", "#tc", "#n", "#1", "#2", "#t", "#@", sep=",", file=f)
             for i in self.msgLog[1:]:  # skip the first
                 print(i[0], i[1], i[2], i[3], i[4],
                       i[5], i[6], sep=",", file=f)

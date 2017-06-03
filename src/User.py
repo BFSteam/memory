@@ -423,15 +423,16 @@ class User(WorldAgent):
         """
         newsToChose = self.readNews()
         bestNeighbour, iWantToRemember = self.chooseNews(newsToChose)
-        common.msglog.registerEntry(
-            id_src=iWantToRemember['id-source'],
-            date_creation=iWantToRemember['date-creation'],
-            sender=bestNeighbour,
-            reciver=self.number,
-            id_new=iWantToRemember['id-n'],
-            date=common.cycle,
-            diffusion='p'
-        )
+        if iWantToRemember != {}:
+            common.msglog.registerEntry(
+                id_src=iWantToRemember['id-source'],
+                date_creation=iWantToRemember['date-creation'],
+                sender=bestNeighbour,
+                reciver=self.number,
+                id_new=iWantToRemember['id-n'],
+                date=common.cycle,
+                diffusion='p'
+            )
         remembered = self.remember(iWantToRemember)
         self.becomeInactive(tired=remembered)
         self.changeState(iWantToRemember)
@@ -470,7 +471,6 @@ class User(WorldAgent):
         the orher randomly to a neighbour
 
         """
-
         # check if memory is empty
         if len(self.database) == 0:
             return False

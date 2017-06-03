@@ -1,1 +1,10 @@
-modelStep ask_all ask_one visualizeNet clock 
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all clock
+modelStep ask_all ask_one visualizeNet clock
