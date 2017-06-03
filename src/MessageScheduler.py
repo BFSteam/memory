@@ -74,7 +74,7 @@ class MessageScheduler(AgentManager):
         ))
 
     def writeLog(self, ftype='txt'):
-        path = '/home/nik/memory/log/messageLog.' + ftype
+        path = common.project.replace("src", 'log/messageLog.' + ftype)
         f = open(path, 'w')
         if ftype == 'txt':
             for i in self.msgLog[1:]:  # skip the first

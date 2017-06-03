@@ -55,7 +55,7 @@ class ConnectionScheduler(AgentManager):
         ))
 
     def writeLog(self, ftype='txt'):
-        path = '/home/nik/memory/log/connectionLog.' + ftype
+        path = common.project.replace("src", 'log/connectionLog.' + ftype)
         f = open(path, 'w')
         if ftype == 'txt':
             for i in self.connectionLog[1:]:

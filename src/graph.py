@@ -6,11 +6,6 @@ import numpy as np
 
 
 warnings.filterwarnings("ignore", ".*GUI is implemented.*")
-try:
-    spring = True
-    from networkx.drawing.nx_agraph import graphviz_layout
-except:
-    spring = False
 import usefulFunctions as uf
 #import seaborn as sns
 
@@ -117,13 +112,8 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
                         c.append('grey')
                         continue
 
-    if spring is True:
-        if static is True:
-            pos = graphviz_layout(common.G)
-        else:
-            pos = nx.spring_layout(common.G)
-    else:
-        pos = nx.spring_layout(common.G)
+
+    pos = nx.spring_layout(common.G)
     if n is True:  # draw nodes
         nx.draw_networkx_nodes(common.G, pos, node_size=60, node_color=c)
 
