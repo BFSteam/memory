@@ -52,7 +52,7 @@
 %%% The "real" document content comes below...
 
 \title{Memory effect in news spreading networks}
-\author{Nicola Sella, Francesco Fanchin, Roberto Bertilone}
+\author{Roberto Bertilone, Francesco Fanchin, Nicola Sella}
 %\date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
 
@@ -68,20 +68,23 @@ The goal is to expose a short presentation of the methodologies used in this age
 
 \section{Introduction}
 
-To analyze and model the interactions between users in the context of news spreading is useful talking about of group of autonomous 
-agents linked by friendly ties whose overall views constitute the network.
-The network consist of two breed of agents - {\itshape Sources} and {\itshape Users} - that interacting in time in autonomous approach. The idea is starting from 
-a random connections of the agents and modify this topology in accord to a set of microscopic agent's actions. Our belif is that the natural diffusion
- of news in like-social network interactions is guided by strenght of the news to capture the own individual specific attention, and by the social influence 
-of the neighbourhood. Our hopes are to show the spontaneous emergency of the scale-free regime following the dynamical micro-interactions and if only to reveal 
-the natural segregation behaviour that subjugate a vastity of real social networks.  We wonder if also there is effects in diffusion when the lenght of memory is changed.
-To do it, let's build a framework of agents modelling serving us with a Swarm-like protocol in Python platform named SLAPP\footnote{SLAPP DI PIETRO TERNA BLA BLA USEFUL AND BOH SCARICAILE da github bla bla.}.
+To analyze and model the interactions between users in the context of news spreading is useful to talk about groups of autonomous agents
+linked by friendly ties whose overall views constitute the network.
+The the population of the network consists of two breed of agents: sources and users. These two breeds will interact
+in autonomous approach during the execution of the program.
+The network is initialy a random connections of the agents and modifies this topology following a set of microscopic agent's actions.
+Our belief is that the interactions, due to the natural news' diffusion in a social-like network, are guided by the ability of the news
+to capture each agent's attention, and by the social influence of the agents themselves.
+We hope to observe the spontaneous emergency of the scale-free regime following the dynamical micro-interactions. We also hope to reveal 
+the natural segregation behaviour that subjugate a vastity of real social networks.
+In addition to these questions We wonder if there can be correlation between diffusion and the lenght of the agents' memory.
+To do it, we will build a framework of agents modelling based on a Swarm-like platform named SLAPP\footnote{SLAPP DI PIETRO TERNA BLA BLA USEFUL AND BOH SCARICAILE da github bla bla.}.
 
 \section{Overview}
- The building of the model focus on two tecnics of the science of complex systems: The agent based modelling and the network framework. 
-We blend this two frame considering a network of agents. 
+We have build the model focusing on two cohexisting points of view: its agent based nature and the network framework one. 
+We blended these two frames considering a network of agents. 
 \subsection{Context}
-We focusing in the dynamical process of rumor spreading on the social\footnote{The word {\itshape social} is thinked in a general context} network. Generally, the diffusion of news is studied in a stochastics context, governated by a set of stochastic differetial equations. It arise from a apparent similarity with the epidemiological process. However, the diffusion of epidemies become a viral process when a epidemic threshold is exceeded, instead the rumor spreading process appear a process threshold-less.  The epidemic model of information diffusion is usually a compartimental model in which agents in differents stage coesists in the world.
+We focusing in the dynamical process of rumor spreading on the social\footnote{The word \textit{ social} is thinked in a general context} network. Generally, the diffusion of news is studied in a stochastics context, governated by a set of stochastic differetial equations. It arise from a apparent similarity with the epidemiological process. However, the diffusion of epidemies become a viral process when a epidemic threshold is exceeded, instead the rumor spreading process appear a process threshold-less.  The epidemic model of information diffusion is usually a compartimental model in which agents in differents stage coesists in the world.
 The majority of initial users stay in the compartment of Ignorants whereas minority of them are the Spreader of the news. There is another compartment, the Stifler, the equivalent of recovery in the SIR model\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}. 
 \\ This Spreader-Ignorant-stiffler model (SIs) can to be sketch by a set of simple interactions: one of this is spontanueos indeed the others are binary.
 \begin{itemize}
@@ -102,10 +105,9 @@ This descrition can to be releable with a single viral diffusion of news, but mo
 There are a varietà di papers che evidenziano dei risultati molto interessanti e particolari riguardo l'influenza sociale, il contagio sociale o ad esempio su homophily and the diffusion across the communities- studi di imfuenza che affect the topology. alcuni studiano la diffusione di bufale o di meme o inseriscono utenti che possono fare factchecking o bot che diffondono o ancora inseriscono le sources d'informazione.
 
 \subsection{Why Agents?}
-The agents are very usefull paradigm to modeling the social interactions. 
-
-They can operate in their environment, making decisions and interacting each other. Initially
-there is no comunication protocol between them. They want to maximize their own benefit which is
+The agents are a very useful paradigm to model social interactions. 
+They can operate in their environment, make decisions and interact each other.
+There is no comunication protocol between them. They want to maximize their own benefit which is
 communicate and share news with "friends". \\
 The environment is not deterministic. Every action can produce different effects in a probabilistic
 way, but the single esperiment must to be reproducible.
