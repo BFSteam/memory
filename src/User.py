@@ -524,7 +524,7 @@ class User(WorldAgent):
             self.passiveDiffusion()
             self.activeDiffusion()
 
-    def createEdge(self):
+    def createEdge(self, threshold=0.6):
         """
 
         adds edge between the user and another node in the graph
@@ -555,8 +555,11 @@ class User(WorldAgent):
             n1 = node
         # check if user is not connected to any node and rewire it randomly
         if self.listNeighbours() == []:
-            self.addEdge(n1)
-            return True
+            if d1 > threshold:
+                self.addEdge(n1)
+                return True
+            else:
+                return False
         for firstnode in self.listNeighbours():
             # check if user is connected only to sources
             if self.onlySources() is True:
