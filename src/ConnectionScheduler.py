@@ -54,10 +54,15 @@ class ConnectionScheduler(AgentManager):
             ])
         ))
 
-    def writeLog(self, ftype='txt'):
-        path = common.project.replace("src", 'log/connectionLog.' + ftype)
+    def writeLog(self, path='./defCLog.csv'):
+
+        # try to guess extension
+        extensions = ('.txt', '.csv')
+        ftype = [x for x in extensions if path.endswith(x)][0]
+        if ftype == []:
+            ftype = '.txt'  # extension not guessed. falling back to txt
         f = open(path, 'w')
-        if ftype == 'txt':
+        if ftype == '.txt':
             for i in self.connectionLog[1:]:
                 if i[3] == 'r':
                     print(
@@ -84,7 +89,7 @@ class ConnectionScheduler(AgentManager):
                         i[2],
                         file=f
                     )
-        elif ftype == 'csv':
+        elif ftype == '.csv':
             print("#1", "#2", "#t", "#@", file=f)
             for i in self.connectionLog[1:]:
                 print(i[0], i[1], i[2], i[3], sep=",", file=f)

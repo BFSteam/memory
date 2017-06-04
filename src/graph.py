@@ -90,7 +90,6 @@ def getGraph():
 
 
 def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
-    plt.close()
 
     clearNetworkXdisplay()
     c = []

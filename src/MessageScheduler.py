@@ -73,10 +73,15 @@ class MessageScheduler(AgentManager):
             ])
         ))
 
-    def writeLog(self, ftype='txt'):
-        path = common.project.replace("src", 'log/messageLog.' + ftype)
+    def writeLog(self, path='./defMLog.csv'):
+
+        # try to guess extension
+        extensions = ('.txt', '.csv')
+        ftype = [x for x in extensions if path.endswith(x)][0]
+        if ftype == []:
+            ftype = '.txt'  # extension not guessed. falling back to txt
         f = open(path, 'w')
-        if ftype == 'txt':
+        if ftype == '.txt':
             for i in self.msgLog[1:]:  # skip the first
                 if i[6] == 'a':
                     print("News", str(i[2]),
@@ -104,7 +109,7 @@ class MessageScheduler(AgentManager):
                           "at cycle", str(i[1]),
                           file=f
                           )
-        elif ftype == 'csv':
+        elif ftype == '.csv':
             print("#s", "#tc", "#n", "#1", "#2", "#t", "#@", sep=",", file=f)
             for i in self.msgLog[1:]:  # skip the first
                 print(i[0], i[1], i[2], i[3], i[4],

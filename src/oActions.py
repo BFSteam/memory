@@ -32,6 +32,6 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         path = common.project.replace("src", "log/graph.gml")
         nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
         print("done")
-        common.conlog.writeLog(ftype='csv')
-        common.msglog.writeLog(ftype='csv')
+        common.conlog.writeLog(path='/home/nik/memory/log/connectionLog.csv')
+        common.msglog.writeLog(path='/home/nik/memory/log/messageLog.csv')
         print("--- %s seconds ---" % (time.time() - start_time))
