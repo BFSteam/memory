@@ -5,6 +5,7 @@ def vprint(*args, sep=' ', end='\n', file=None):
     if common.verbose is True:
         print(*args, sep=' ', end='\n', file=None)
 
+
 def digit_input(msg="Enter a number: ", DEFAULT=0):
     """
         prompt the user for a numeric input
@@ -26,3 +27,11 @@ def digit_input(msg="Enter a number: ", DEFAULT=0):
         return float(num_str)
     else:
         return int(num_str)
+
+
+def worldAgentStringsizer(agent):
+    return str({
+        'state': agent.state,
+        'type': agent.agType,
+        'database': agent.database
+    })

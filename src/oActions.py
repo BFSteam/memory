@@ -4,6 +4,7 @@ import graph as graph
 import commonVar as common
 import networkx as nx
 import time
+from usefulFunctions import worldAgentStringsizer
 
 
 def do1b(address):  # visualizeNet in observerActions.txt
@@ -23,7 +24,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
     if cycle == address.nCycles:
         start_time = time.time()
         path = common.project.replace("src", "log/graph.gml")
-        nx.write_gml(common.G, path)
+        nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
         print("done")
         common.conlog.writeLog(ftype='csv')
         common.msglog.writeLog(ftype='csv')
