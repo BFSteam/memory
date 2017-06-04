@@ -2,6 +2,12 @@ import commonVar as common
 
 
 def vprint(*args, sep=' ', end='\n', file=None):
+    """
+
+    print only if common.verbose = True
+
+    """
+
     if common.verbose is True:
         print(*args, sep=' ', end='\n', file=None)
 
@@ -12,6 +18,7 @@ def digit_input(msg="Enter a number: ", DEFAULT=0):
         prompt again if the input is not numeric
         return an integer or a float
     """
+
     while True:
         # strip() removes any leading or trailing whitespace
         num_str = input(msg).strip()
@@ -30,6 +37,12 @@ def digit_input(msg="Enter a number: ", DEFAULT=0):
 
 
 def worldAgentStringsizer(agent):
+    """
+
+    Can convert an agent into a string
+
+    """
+
     return str({
         'state': agent.state,
         'type': agent.agType,

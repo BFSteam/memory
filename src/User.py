@@ -54,6 +54,7 @@ class User(WorldAgent):
         """
 
         activate the agent with a probability p.
+        Used at initialization
 
         """
 

@@ -21,6 +21,12 @@ def do2a(address, cycle):  # ask_all in observerActions.txt
 
 
 def do2b(address, cycle):  # ask_one in observerActions.txt
+    """
+
+    Used to save data periodicaly or at a certain time step
+
+    """
+
     if cycle == address.nCycles:
         start_time = time.time()
         path = common.project.replace("src", "log/graph.gml")
