@@ -2,3 +2,4 @@ users   User
 sources Source
 msglogs MessageScheduler
 conlogs ConnectionScheduler
+memlogs MemoryScheduler

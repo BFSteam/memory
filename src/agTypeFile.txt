@@ -1,1 +1,1 @@
-msglogs conlogs users sources
+msglogs conlogs memlogs users sources

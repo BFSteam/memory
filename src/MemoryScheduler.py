@@ -1,4 +1,4 @@
-# AgentManager Message Scheduler
+# AgentManager Memory Scheduler
 from Tools import *
 from agTools import *
 from AgentManager import *
@@ -8,7 +8,7 @@ import time
 import os
 
 
-class MessageScheduler(AgentManager):
+class MemoryScheduler(AgentManager):
     """
 
     AMMS
@@ -27,13 +27,14 @@ class MessageScheduler(AgentManager):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.msgLog = np.empty((0, 7))
-        print(self.msgLog)
-        common.msglog = self
-        self.filename = '/home/nik/msg_log_temp.%s.txt' % os.getpid()
+        self.memoryLog = np.empty((0, 2 + common.memorySize))
+        print(self.memoryLog)
+
+        common.memlog = self
+        self.filename = '/home/nik/mem_log_temp.%s.txt' % os.getpid()
         temp = open(self.filename, 'w')
         localtime = time.asctime(time.localtime(time.time()))
-        print('# messagelog')
+        print('# memorylog')
         print('#', localtime, file=temp)
         print('#simulation with:', file=temp)
         print('#N_AGENTS', common.N_AGENTS, file=temp)
@@ -42,22 +43,31 @@ class MessageScheduler(AgentManager):
         print('#P_s', common.P_s, file=temp)
         print('#dim', common.dim, file=temp)
         print('#memorySize', common.memorySize, file=temp)
-        print("source", "timec", "news", "ag1", "ag2",
-              "time", "type", sep=',', file=temp)
+        print("agent", "time", sep=',', end="", file=temp)
+        for i in range(common.memorySize):
+            print(",", end="", file=temp)
+            print("news", str(i), sep="", end="", file=temp)
+        print(" ", file=temp)
         temp.close()
 
     def printLog(self):
-        print(self.msgLog)
+        print(self.messageLog)
+
+    def updateLog(self):
+        for node in range(len(common.G.nodes())):
+            e = np.empty([0])
+            e = np.append(e, common.G.node[node]['agent'].number)
+            e = np.append(e, common.cycle)
+            e = np.append(
+                e, [x.decode('utf-8') for x in list(common.G.node[node]['agent'].database.keys())])
+            for i in range(2 + common.memorySize - e.shape[0]):
+                e = np.append(e, 0)
+            print(e)
+            self.registerEntry(e)
 
     def registerEntry(
             self,
-            id_src=-1,
-            date_creation=-1,
-            sender=-1,
-            reciver=-1,
-            id_new='null',
-            date=-1,
-            diffusion='n'
+            entry
     ):
         """
 
@@ -77,34 +87,29 @@ class MessageScheduler(AgentManager):
         ))
 
         """
-        if self.msgLog.shape[0] > 1000:
-            for i in self.msgLog:
+        if self.memoryLog.shape[0] > 1000:
+            for i in self.memoryLog:
                 temp = open(self.filename, 'a')
-                print(i[0], i[1], i[2], i[3], i[4], i[5], i[6],
-                      sep=",", file=temp)
+                print(*i, sep=",", file=temp)
                 temp.close()
-            self.msgLog = np.empty((0, 7))
-        self.msgLog = np.vstack((
-            self.msgLog,
-            np.array([
-                id_src,
-                date_creation,
-                id_new,
-                sender,
-                reciver,
-                date,
-                diffusion
-            ])
+            self.memoryLog = np.empty((0, 2 + common.memorySize))
+
+        tarr = np.empty([0])
+        for i in range(2 + common.memorySize):
+            tarr = np.append(tarr, entry[i])
+        self.memoryLog = np.vstack((
+            self.memoryLog,
+            tarr
         ))
 
     def writeLog(self, path='./defMLog.csv'):
 
         # try to guess extension
-        for i in self.msgLog:
+        for i in self.memoryLog:
             temp = open(self.filename, 'a')
-            print(i[0], i[1], i[2], i[3], i[4], i[5], i[6],
-                  sep=",", file=temp)
+            print(*i, sep=",", file=temp)
             temp.close()
+
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
         os.remove(self.filename)

@@ -18,6 +18,7 @@ def do2a(address, cycle):  # ask_all in observerActions.txt
     self = address  # if necessary
     # ask each agent, without parameters
     print("Time = ", cycle)
+    common.memlog.updateLog()
 
 
 def do2b(address, cycle):  # ask_one in observerActions.txt
@@ -36,4 +37,6 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         common.conlog.writeLog(path=path)
         path = common.project.replace("src", "log/messageLog.csv")
         common.msglog.writeLog(path=path)
+        path = common.project.replace("src", "log/memoryLog.csv")
+        common.memlog.writeLog(path=path)
         print("--- %s seconds ---" % (time.time() - start_time))

@@ -4,6 +4,8 @@ from agTools import *
 from AgentManager import *
 import numpy as np
 import commonVar as common
+import time
+import os
 
 
 class ConnectionScheduler(AgentManager):
@@ -25,9 +27,23 @@ class ConnectionScheduler(AgentManager):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.connectionLog = np.zeros([5])
-
+        self.connectionLog = np.empty((0, 5))
         common.conlog = self
+
+        self.filename = '/home/nik/con_log_temp.%s.txt' % os.getpid()
+        temp = open(self.filename, 'w')
+        localtime = time.asctime(time.localtime(time.time()))
+        print('# connectionlog')
+        print('#', localtime, file=temp)
+        print('#simulation with:', file=temp)
+        print('#N_AGENTS', common.N_AGENTS, file=temp)
+        print('#N_SOURCES', common.N_SOURCES, file=temp)
+        print('#P_a', common.P_a, file=temp)
+        print('#P_s', common.P_s, file=temp)
+        print('#dim', common.dim, file=temp)
+        print('#memorySize', common.memorySize, file=temp)
+        print('ag1', 'ag2', 'time', 'weight', 'type', sep=',', file=temp)
+        temp.close()
 
     def printLog(self):
         print(self.connectionLog)
@@ -45,6 +61,13 @@ class ConnectionScheduler(AgentManager):
         creates an array to stack under the log and does it
 
         """
+        if self.connectionLog.shape[0] > 1000:
+            for i in self.connectionLog:
+                temp = open(self.filename, 'a')
+                print(i[0], i[1], i[2], i[3], i[4],
+                      sep=",", file=temp)
+                temp.close()
+            self.connectionLog = np.empty((0, 5))
         self.connectionLog = np.vstack((
             self.connectionLog,
             np.array([
@@ -57,63 +80,18 @@ class ConnectionScheduler(AgentManager):
         ))
 
     def writeLog(self, path='./defCLog.csv'):
+        """
 
-        # try to guess extension
-        extensions = ('.txt', '.csv')
-        ftype = [x for x in extensions if path.endswith(x)][0]
-        if ftype == []:
-            ftype = '.txt'  # extension not guessed. falling back to txt
-        f = open(path, 'w')
-        if ftype == '.txt':
-            for i in self.connectionLog[1:]:
-                if i[4] == 'u':
-                    print(
-                        "Link",
-                        "updated",
-                        "between agent",
-                        i[0],
-                        "and",
-                        i[1],
-                        "with weight",
-                        i[3],
-                        "at time",
-                        i[2],
-                        file=f
-                    )
-                elif i[4] == 'r':
-                    print(
-                        "Link",
-                        "removed",
-                        "between agent",
-                        i[0],
-                        "and",
-                        i[1],
-                        "with weight",
-                        i[3],
-                        "at time",
-                        i[2],
-                        file=f
-                    )
+        saves the log from temp to path
+        appends the remaining log rows
+        deletes the temp
 
-                else:
-                    print(
-                        "Link",
-                        "added",
-                        "between agent",
-                        i[0],
-                        "and",
-                        i[1],
-                        "with weight",
-                        i[3],
-                        "at time",
-                        i[2],
-                        file=f
-                    )
-        elif ftype == '.csv':
-            print("#1", "#2", "#t", "#w", "#@", sep=",", file=f)
-            for i in self.connectionLog[1:]:
-                print(i[0], i[1], i[2], i[3], i[4], sep=",", file=f)
-        else:
-            pass
-        f.close()
-        print("saved", path)
+        """
+        for i in self.connectionLog:
+            temp = open(self.filename, 'a')
+            print(i[0], i[1], i[2], i[3], i[4],
+                  sep=",", file=temp)
+            temp.close()
+        with open(path, "w") as fw, open(self.filename, 'r') as fr:
+            fw.writelines(l for l in fr)
+        os.remove(self.filename)

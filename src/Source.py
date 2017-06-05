@@ -86,6 +86,7 @@ class Source(WorldAgent):
         """
 
         # the first part is the id-source, id-mittant, time
+        self.database = {}
         for i in range(n):
             stringa = binascii.b2a_hex(os.urandom(8))
             self.database[stringa] = {}

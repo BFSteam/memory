@@ -380,6 +380,7 @@ users 0.1 deleteEdge
 users firstAction
 users 0.1 createEdge
 users 0.1 deleteEdge
+sources generateNews
 # 101
 users firstAction
 users 0.1 createEdge

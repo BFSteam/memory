@@ -29,33 +29,31 @@ def initializeEdges():
 
     """
 
-    for i in range(len(common.G.nodes())):
-        for j in range(len(common.G.nodes())):
+    for i in common.G.nodes():
+        for j in common.G.nodes():
             if j > i:
-                if common.G.nodes()[i] < common.N_SOURCES and common.G.nodes()[j] < common.N_SOURCES:
+                if i < common.N_SOURCES and j < common.N_SOURCES:
                     pass
-                elif common.G.nodes()[i] >= common.N_SOURCES and common.G.nodes()[j] >= common.N_SOURCES:
+                elif i >= common.N_SOURCES and j >= common.N_SOURCES:
                     if np.random.random_sample() < common.P_a:
-                        common.G.add_edge(common.G.nodes()[i], common.G.nodes()[
-                                          j], weight=0.3 + 0.7 * np.random.random_sample())
+                        common.G.add_edge(
+                            i, j, weight=0.3 + 0.7 * np.random.random_sample())
                         common.conlog.registerEntry(
-                            first=common.G.nodes(data=True)[
-                                i][1]['agent'].number,
-                            second=common.G.nodes(data=True)[
-                                j][1]['agent'].number,
+                            first=i,
+                            second=j,
                             date=common.cycle,
+                            weight=common.G.edge[i][j]['weight'],
                             cr='a'
                         )
                 else:
                     if np.random.random_sample() < common.P_s:
-                        common.G.add_edge(common.G.nodes()[i], common.G.nodes()[
-                                          j], weight=0.3 + 0.7 * np.random.random_sample())
+                        common.G.add_edge(
+                            i, j, weight=0.3 + 0.7 * np.random.random_sample())
                         common.conlog.registerEntry(
-                            first=common.G.nodes(data=True)[
-                                i][1]['agent'].number,
-                            second=common.G.nodes(data=True)[
-                                j][1]['agent'].number,
+                            first=i,
+                            second=j,
                             date=common.cycle,
+                            weight=common.G.edge[i][j]['weight'],
                             cr='a'
                         )
 
