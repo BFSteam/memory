@@ -45,12 +45,12 @@ class User(WorldAgent):
                             agType=agType)  # parent constructor
         self.database = {}
         self.active = False
-        self.activate()
         self.inactiveTime = 0
         self.activeTime = 0
+        self.activate()
         self.genState(n=1, noise=0.15)
 
-    def activate(self, p=0.5):
+    def activate(self, p=0.7):
         """
 
         activate the agent with a probability p.
@@ -60,8 +60,10 @@ class User(WorldAgent):
 
         if np.random.random_sample() < p:
             self.active = False
+            self.inactiveTime = np.random.randint(0, 6)
         else:
             self.active = True
+            self.activeTime = np.random.randint(0, 2)
 
     def listNeighbours(self):
         """
@@ -114,6 +116,7 @@ class User(WorldAgent):
             first=self.number,
             second=n,
             date=common.cycle,
+            weight=weight,
             cr='a'
         )
 
@@ -124,13 +127,14 @@ class User(WorldAgent):
 
         """
 
-        common.G.remove_edge(self.number, n)
         common.conlog.registerEntry(
             first=self.number,
             second=n,
             date=common.cycle,
+            weight=common.G.edge[self.number][n]['weight'],
             cr='r'
         )
+        common.G.remove_edge(self.number, n)
 
     def distance(self, n, a='scalar'):
         """
@@ -415,13 +419,12 @@ class User(WorldAgent):
         performs a passive diffuzion of news between
         all the nearest neighbours
 
-        """
+        newstochoose: list of tuples. the first is a id
+        the second is a dictionary
+        [ ( 1, {'id-n':dkbjga, ...} ), ... ]
 
         """
-        newstochoose: list of tuples. the first is a id
-        the second is a dictionary 
-        [ ( 1, {'id-n':dkbjga, ...} ), ... ]
-        """
+
         newsToChose = self.readNews()
         bestNeighbour, iWantToRemember = self.chooseNews(newsToChose)
         if iWantToRemember != {}:
@@ -444,6 +447,7 @@ class User(WorldAgent):
         Changes state of activation of an agent
 
         """
+
         if news == {}:
             return False
         self.state = self.state + p * news['relevance'] * news['new']
@@ -462,7 +466,7 @@ class User(WorldAgent):
         else:
             return False
 
-    def activeDiffusion(self, p=0.1):
+    def activeDiffusion(self, p=0.1, threshold=0.1):
         """
 
         performs active diffusion with the best news in memory
@@ -472,6 +476,7 @@ class User(WorldAgent):
         the orher randomly to a neighbour
 
         """
+
         # check if memory is empty
         if len(self.database) == 0:
             return False
@@ -503,6 +508,29 @@ class User(WorldAgent):
         else:
             finalNeighbour = bestNeighbour
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
+        if common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) < threshold:
+            common.G.edge[self.number][finalNeighbour]['weight'] -= common.G.node[finalNeighbour]['agent'].distance(
+                bestNews['new'])
+            common.conlog.registerEntry(
+                first=self.number,
+                second=finalNeighbour,
+                date=common.cycle,
+                weight=common.G.edge[self.number][finalNeighbour]['weight'],
+                cr='u'
+            )
+            if common.G.edge[self.number][finalNeighbour]['weight'] < 0.3:
+                self.removeEdge(finalNeighbour)
+        elif common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) > 1 - threshold:
+            common.G.edge[self.number][finalNeighbour]['weight'] += common.G.node[finalNeighbour]['agent'].distance(
+                bestNews['new'])
+            common.conlog.registerEntry(
+                first=self.number,
+                second=finalNeighbour,
+                date=common.cycle,
+                weight=common.G.edge[self.number][finalNeighbour]['weight'],
+                cr='u'
+            )
+
         common.msglog.registerEntry(
             id_src=bestNews['id-source'],
             date_creation=bestNews['date-creation'],
@@ -597,7 +625,6 @@ class User(WorldAgent):
         connected to the agent with lesser distance
 
         """
-
         if self.listNeighbours() == []:
             return False
         if np.random.random_sample() < p:

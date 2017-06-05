@@ -25,7 +25,7 @@ class ConnectionScheduler(AgentManager):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.connectionLog = np.zeros([4])
+        self.connectionLog = np.zeros([5])
 
         common.conlog = self
 
@@ -37,6 +37,7 @@ class ConnectionScheduler(AgentManager):
             first=-1,
             second=-1,
             date=-1,
+            weight=-1,
             cr='c',
     ):
         """
@@ -50,6 +51,7 @@ class ConnectionScheduler(AgentManager):
                 first,
                 second,
                 date,
+                weight,
                 cr
             ])
         ))
@@ -64,7 +66,21 @@ class ConnectionScheduler(AgentManager):
         f = open(path, 'w')
         if ftype == '.txt':
             for i in self.connectionLog[1:]:
-                if i[3] == 'r':
+                if i[4] == 'u':
+                    print(
+                        "Link",
+                        "updated",
+                        "between agent",
+                        i[0],
+                        "and",
+                        i[1],
+                        "with weight",
+                        i[3],
+                        "at time",
+                        i[2],
+                        file=f
+                    )
+                elif i[4] == 'r':
                     print(
                         "Link",
                         "removed",
@@ -72,6 +88,8 @@ class ConnectionScheduler(AgentManager):
                         i[0],
                         "and",
                         i[1],
+                        "with weight",
+                        i[3],
                         "at time",
                         i[2],
                         file=f
@@ -85,6 +103,8 @@ class ConnectionScheduler(AgentManager):
                         i[0],
                         "and",
                         i[1],
+                        "with weight",
+                        i[3],
                         "at time",
                         i[2],
                         file=f
@@ -92,7 +112,7 @@ class ConnectionScheduler(AgentManager):
         elif ftype == '.csv':
             print("#1", "#2", "#t", "#@", file=f)
             for i in self.connectionLog[1:]:
-                print(i[0], i[1], i[2], i[3], sep=",", file=f)
+                print(i[0], i[1], i[2], i[3], i[4], sep=",", file=f)
         else:
             pass
         f.close()
