@@ -7,7 +7,7 @@ G_edge_labels = 0
 
 N_TOPICS = 2
 N_USERS = 100
-N_SOURCES = 5
+N_SOURCES = 3
 N_AGENTS = N_USERS + N_SOURCES
 
 STATE_DIMENSION = 6
@@ -24,6 +24,6 @@ toBeExecuted = "print ('Goodbye')"
 
 dim = 10
 
-memorySize = 5
+memorySize = 1
 
 verbose = False

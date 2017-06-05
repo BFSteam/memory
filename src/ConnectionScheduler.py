@@ -110,7 +110,7 @@ class ConnectionScheduler(AgentManager):
                         file=f
                     )
         elif ftype == '.csv':
-            print("#1", "#2", "#t", "#@", file=f)
+            print("#1", "#2", "#t", "#w", "#@", sep=",", file=f)
             for i in self.connectionLog[1:]:
                 print(i[0], i[1], i[2], i[3], i[4], sep=",", file=f)
         else:

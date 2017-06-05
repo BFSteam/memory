@@ -102,7 +102,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
                 c.append('#ff748c')
                 continue
             elif common.G.nodes(data=True)[i][1]['agent'].hasNews(id_source=2, date=1) is True:
-                c.append('38ffc8')
+                c.append('#38ffc8')
                 continue
             else:
                 if common.G.nodes()[i] < common.N_SOURCES:
@@ -116,9 +116,16 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
                         c.append('grey')
                         continue
 
+    node_size = []
+    for i in range(len(common.G.nodes())):
+        if common.G.nodes()[i] < common.N_SOURCES:
+            node_size.append(100)
+        else:
+            node_size.append(60)
     pos = nx.spring_layout(common.G)
     if n is True:  # draw nodes
-        nx.draw_networkx_nodes(common.G, pos, node_size=60, node_color=c)
+        nx.draw_networkx_nodes(
+            common.G, pos, node_size=node_size, node_color=c)
 
     if e is True:  # draw edges
         nx.draw_networkx_edges(common.G, pos, edge_color='black')
