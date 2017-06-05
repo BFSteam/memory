@@ -78,7 +78,7 @@ to capture each agent's attention, and by the social influence of the agents the
 We hope to observe the spontaneous emergency of the scale-free regime following the dynamical micro-interactions. We also hope to reveal 
 the natural segregation behaviour that subjugate a vastity of real social networks.
 In addition to these questions We wonder if there can be correlation between diffusion and the lenght of the agents' memory.
-To do it, we will build a framework of agents modelling based on a Swarm-like platform named SLAPP\footnote{SLAPP DI PIETRO TERNA BLA BLA USEFUL AND BOH SCARICAILE da github bla bla.}.
+To do it, we will build a framework of agents modelling based on a Swarm-like platform named SLAPP\footnote{For reference and download from: https://github.com/terna/SLAPP}.
 
 \section{Overview}
 We have build the model focusing on two cohexisting points of view: its agent based nature and the network framework one. 
@@ -142,18 +142,18 @@ For this reason the agent can act in an unpredictable way and somehow irrational
 \subsection{The network of Agents}
 The network is compose by Agents eventually connected by a weighted and undirected links.
 At the first time, the network is composed by the sum of a fixed number of sources and users. \\The users is linked between them with fixed probability calculated from the average degree desidered and insert by external input. In this way we obtain a random network of users, with exponential trend for the degree distribution in the termodynamic limit.\\ The links are the only possibility to establish a relation between the agent; a random value of weight of the link can to rapresent the previous bias in friendship.\footnote{La tipologia di link scelta evidenzia la bilateralità e l’intensità della comunicazione tra gli agenti.   ....prendendo come esempio uno scambio di informazione tra due persone oppure tra una persona e un giornale, il peso rappresenta il feeling, l’affiatamento pregresso; un segno posto davanti ad esso ne potrebbe specificare l’entità (buono, indifferente, cattivo)..}
- The result of this mechanism of generation of graph not return a real network, because an social real network has the property of scale-free\footnote{The scale free property is described principally by power law degree distribution, sicchè l'andamento per gradi alti tende a zero ma non si annulla. },
- instead random graph have a majority of node-degrees picked around the average-degree. Also, the variance is very large in scale free network and expected the presence of hubs in the network. Though it would be better, we start with a random network with the hope to observe a naturally evolvution in this direction.
+ The result of this mechanism of generation of graph not return a real network, because social real network has the property of scale-free\footnote{The scale free property is described principally by power law degree distribution, sicchè l'andamento per gradi alti tende a zero ma non si annulla. },
+ instead random graph have a majority of node-degrees peaked around the average-degree. Also, the variance is very large in scale free network and expected the existence of hubs in the network. Though it would be better, we start with a random network with the hope to observe a naturally evolvution in this direction.
 \\
 
-The sources are thinkable like a news pool from which the users can to draw news and eventually to spread it. The source are more strongly connected with users that the inner links beween the themeselves users, because we assume that the newspaper are more links that a common user.
+The sources are thinkable like a news pool from which the users can to draw news and eventually to spread it. The source are more strongly connected with users that the inner links beween the themeselves users, because we assume that the newspapers have more links that a common user.
 The sources contain a fixed number of news (usually three), generate at fixed instant of time and dote of different impact. Each single news is modeling like a vector of topics, which components carry the amount of each topics inside the single news. The news is also equipped with an identified code of the source and with the clock in which appear it in the world. 
-Another features of the sources is the innate diversity between them based on the amount of there specific topics in the ''character'' of the source, this ''prevalence of topic'' affect the news at the time of generation. In other words, each news provening by the same source are focused, on average, on the same topics. \\
-We try to reproduce the intrinsec diversity of the taste of the users with a vector corrispond to a {\itshape state-of-mind} with dimensionality equal to the number of topics. The state-of-mind of the users is inizialized at random, although in possible further development to be innest a process to changing the state-of-mind during the dynamic flow of time. This State-of-mind rapresent the personality of the user, his interest, and maybe inflence(haahah) own choses.
+Another features of the sources is the innate diversity between them based on the amount of there specific topics in the ''character'' of the source, this ''prevalence of topic'' affect the news at the time of generation. In other words, each news coming from the same source are focused, on average, on the same topics. \\
+We try to reproduce the intrinsec diversity of the taste of the users with a vector corrispond to a {\itshape state-of-mind} with dimensionality equal to the number of topics. The state-of-mind of the users is inizialized at random, although in possible further development to be innest a process to changing the state-of-mind during the dynamic flow of time. This State-of-mind rapresent the personality of the user, his interest, and may affect his own choices.
 \\
-The users could to diffuse the news in relation to their intention: they have a storage memory and they remember a number of news read and spread in the past.
-The users has a some kind of knowledge of his neighbourhood, with whome can to interact, to spread a news, to influence themselves and to do change the state-of-mind. The sources not receive the news from the network: for easier computation also the links between sources and users is indirect even if the news are only in outcome.
-
+The users could diffuse the news in relation to their intention: they have a storage memory and they remember a number of news read and spread in the past.
+The users has a some kind of knowledge of his neighbourhood, with whome can to interact, to spread a news, to influence themselves and to do change the state-of-mind (campo visivo limitato). The sources not receive the news from the network: for easier computation also the links between sources and users is indirect even if the news are only in outcome.
+\\
 The time is scan by the Observer\\
 Eh
 \\
@@ -163,25 +163,35 @@ con il sistema.
 Ogni fonte genererà nuove notizie tenendo conto lei stessa del
 tempo che passa.
 
-We use the SLAPP platform for agent simulation BLa blalbalallalllciaàcià PERO' BISOGNEREBBE PARLARNE ANCHE ALL'INIZIO PER IL VECCHIO ZOZZONE.
-Il tempo è scandito dall’observer. 
-\section{Model}
 
-Vero e proprio modello
+\section{Our Model}
+We use the SLAPP platform for agent simulation,
+SLAPP3 provides agent based protocoll in Python 3; specifically: 1observer tempo del mondo - Classi agenti e sui breed(classi derivate) - Usiamo superAgent ch disegna i grafici e crea gli agenti. - azioni generiche gia implementate da specificare a seconda della modellizzazione :DO1.. Draw net... 
 \\
-
-
+Schedule: modo per programmare le varie azioni, in ordine temporale esplicitamente dato d noi.  Le azioni possono essere performate con una certa probabilità... removelinks...
+Si interfaccia alle azioni generich sopramenzionate.
+\\
+Le varie Funzioni base (1.2.3.4.5....  9che concatenate costituiscono le azioni vere e proprie degli agenti: Funzioni e metodi delle classi::: SPECCHIETTO
+User/Sources
 La dinamica del sistema sarà determinata dalle azioni degli utenti; i parametri sopra descritti
 influenzeranno le loro decisioni.
+\begin{itemize}
+\item Agent.py   (user/source) 
+\item SkyAgent  (Message scheduler and ConnectionManager ) write the log files...
+\item Graph (Create the Graph/ edges and display the graph)
+\item Souces
+\item Users
 
-
+\item msglog
+\end{itemize}
+Funzioni:
 Una apposita funzione “distanza” permette di confrontare una notizia con lo stato mentale del
 singolo utente; in esso è contenuto un vettore avente come dimensione il numero di topics. Lo stato
 contiene inoltre altri parametri che caratterizzano con maggiore specificità il singolo utente, ad
 esempio la sua propensione a leggere e diffondere notizie.
 
 \section{Tutorial}
-Piccola spiegazione seplificata anche per ebeti
+The basic tutorial 
 
 
 %\begin{figure}[h!]
