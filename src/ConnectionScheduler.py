@@ -96,4 +96,4 @@ class ConnectionScheduler(AgentManager):
         else:
             pass
         f.close()
-        print("saved connection log")
+        print("saved", path)

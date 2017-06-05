@@ -117,4 +117,4 @@ class MessageScheduler(AgentManager):
         else:
             pass
         f.close()
-        print("saved memory log")
+        print("saved", path)
