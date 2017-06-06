@@ -509,7 +509,7 @@ class User(WorldAgent):
             finalNeighbour = bestNeighbour
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
         if common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) < threshold:
-            common.G.edge[self.number][finalNeighbour]['weight'] -= common.G.node[finalNeighbour]['agent'].distance(
+            common.G.edge[self.number][finalNeighbour]['weight'] -= 0.1 * common.G.node[finalNeighbour]['agent'].distance(
                 bestNews['new'])
             common.conlog.registerEntry(
                 first=self.number,
@@ -518,10 +518,10 @@ class User(WorldAgent):
                 weight=common.G.edge[self.number][finalNeighbour]['weight'],
                 cr='u'
             )
-            if common.G.edge[self.number][finalNeighbour]['weight'] < 0.3:
+            if common.G.edge[self.number][finalNeighbour]['weight'] < 0.1:
                 self.removeEdge(finalNeighbour)
         elif common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) > 1 - threshold:
-            common.G.edge[self.number][finalNeighbour]['weight'] += common.G.node[finalNeighbour]['agent'].distance(
+            common.G.edge[self.number][finalNeighbour]['weight'] += 0.1 * common.G.node[finalNeighbour]['agent'].distance(
                 bestNews['new'])
             common.conlog.registerEntry(
                 first=self.number,
@@ -626,6 +626,8 @@ class User(WorldAgent):
 
         """
         if self.listNeighbours() == []:
+            return False
+        if len(self.listNeighbours()) == 1:
             return False
         if np.random.random_sample() < p:
             self.removeEdge(random.choice(self.listNeighbours()))
