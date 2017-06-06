@@ -24,6 +24,6 @@ toBeExecuted = "print ('Goodbye')"
 
 dim = 10
 
-memorySize = 5
+memorySize = 2
 
 verbose = False
