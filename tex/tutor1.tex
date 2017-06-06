@@ -1,4 +1,4 @@
-% !TEX TS-program = pdflatex
+﻿% !TEX TS-program = pdflatex
 % !TEX encoding = UTF-8 Unicode
 
 % This is a simple template for a LaTeX document using the "article" class.
@@ -60,7 +60,7 @@
 \maketitle
 \section*{Abstract}
 Our aim is to analyze the influence of memory in a news spreading dynamic. In order to do that, we have built a framework of agents 
-connected in a network and equipped them with a set of basic functions. we wish to observe a diffusion-like process.
+connected in a network and equipped them with a set of basic functions. We wish to observe a diffusion-like process.
 In this paper we expose the underlying methodology and try to explain it with a simple tutorial.
 
 \section{Introduction}
@@ -81,9 +81,14 @@ From a technical point of view, we have worked with the Swarm-like protocol in p
 We have built our model focusing on two cohexisting points of view: its agent based nature and the network framework one. 
 We have blended these two frames considering a network of agents. 
 \subsection{Context}
-Let's focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{ social} is thinked in a general context} network. News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differetial equations. There is an apparent similarity with the epidemiological process. However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process appears threshold-less. The epidemic model of information diffusion is usually a compartimental model in which agents in differents stages coexists in the world.
-The majority of initial users stay in the compartment of Ignorants whereas minority of them are the Spreader of news. There is another compartment, the Stiffler, the equivalent of Recovery in the SIR model\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}. 
-\\ This Spreader-Ignorant-stiffler model (SIs) can to be sketch by a set of simple interactions: one of this is spontanueos indeed the others are binary.
+Let's focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{ social} is thinked in a general context} network.
+ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differetial equations.
+ There is an apparent similarity with the epidemiological process. 
+However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process seems to be threshold-less.
+ The epidemic model of information diffusion is usually a compartimental model in which agents in differents stages coexists in the world.
+The majority of initial users stays in the compartment of Ignorants whereas minority of them are the Spreader of news.
+ There is another compartment, the Stiffler, the equivalent of Recovery in the SIR model\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}. 
+\\ This Spreader-Ignorant-stiffler model (SIs) can be sketched by a set of simple interactions: one of them is spontanueos indeed the others are binary.
 \begin{itemize}
 \item$ I \longrightarrow S$
 \item $S+I \longrightarrow S + S$
@@ -93,54 +98,70 @@ The majority of initial users stay in the compartment of Ignorants whereas minor
 \item $s + S \longrightarrow  s + s$
 \end{itemize}
 
-Where we indicate with $S$ the Spreader status, with $I$ the Ignorant and with $s$ the Stifler user. The first process correspond to the spontaneous transition from the ignorant compartment to spreader compartment; the second one correspond to the contamination of a ignorant by contact with a spreader user; the third and fourth one interactions rapresent the transition by contact to the Stiffler compartment.  \\
+Where we indicate with $S$ the Spreader status, with $I$ the Ignorant and with $s$ the Stifler user. 
+The first process corresponds to the spontaneous transition from the ignorant compartment to spreader compartment;
+ the second one corresponds to the contamination of an ignorant by contact with a spreader user; 
+the third and fourth interactions rapresent the transition by contact to the Stiffler compartment.  \\
 The development of dynamics is governed by sequences of users transitions from a compartment to another one, until all the users which were spreaders reached the stiffler compartment and the remain ignorant remains in their state.
-This approach is applicable to a network of users to predict the reproductive number\footnote{The reproductive number $R_{0}$ is defined by characteristic parameters that affect the diffusion like ke average degree (in first approximation) and the rate of diffusion. } that enable to estimate the future qualitative behaviour of spreading: if this number is above some epidemic threshold then the virality of diffusion is guaranteed.\\
-This descrition can to be releable with a single viral diffusion of news, but more difficult would result the analisis by a set of different differential equations when happens that a multiple news travel in the network. If the number of news increase, so that the number of equation increase.\\
- An compartmental approach to study the phenomenon of information diffusion has been widely examineted in the last years, futhermore with very different variants of the native models.
- In literature of spreading of news, only a few of models are build on an agent architecture and we report the references in the bibliography.
-There are a varietà di papers che evidenziano dei risultati molto interessanti e particolari riguardo l'influenza sociale, il contagio sociale o ad esempio su homophily and the diffusion across the communities- studi di imfuenza che affect the topology. alcuni studiano la diffusione di bufale o di meme o inseriscono utenti che possono fare factchecking o bot che diffondono o ancora inseriscono le sources d'informazione.
+This approach is applicable to a network of users to predict the reproductive 
+number\footnote{The reproductive number $R_{0}$ is defined by characteristic parameters that affect the diffusion like ke average degree (in first approximation) and the rate of diffusion. } 
+that enable us to estimate the future qualitative behaviour of spreading: 
+if this number is above some epidemic threshold then the virality of diffusion is guaranteed.\\
+This description can be reliable with a single viral diffusion of news, but more difficult would result the analisis by a set of different differential equations when happens that a 
+multiple news travel in the network.  DA RIVEDERE QUESTA PARTE
+ If the number of news increase, so that the number of equation increase.\\
+ A compartmental approach to study the phenomenon of information diffusion has been widely examinated in the last years, futhermore with very different variants of native models.
+There are also several papers underlining interesting results in social science: for example social influence, social infection, homophily or fake news diffusion (factchecking, bot?)
+ In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography.
+
 
 \subsection{Why Agents?}
-The agents are a very useful paradigm to model social interactions. 
+Agents are a very useful paradigm to model social interactions. 
 They can operate in their environment, make decisions and interact each other.
-There is no comunication protocol between them. They want to maximize their own benefit which is
+There is no communication protocol between them. They want to maximize their own benefit which is
 communicate and share news with "friends". \\
-The environment is not deterministic. Every action can produce different effects in a probabilistic
-way, but the single esperiment must to be reproducible.
-
-Also the actions between agents are non deterministic and do not have the complete control over another
-agent; the agents have limited senses and sensors.
+The environment is not deterministic. 
+Every action can produce different effects in a probabilistic way, but the single esperiment must be reproducible.
+Actions between agents are non-deterministic too and they don't have complete control of another
+agent;agents have limited senses and sensors.
 \\
 
-The required characteristics of each agents are: \begin{itemize}
-\item Reactivity: The agents can control the clock and the news spreading around them during the evolution of the system.
+The required characteristics of each agent are: \begin{itemize}
+\item Reactivity: agents can control clock and news spreading around them during the evolution of the system.
 \item Proactiveness: Each agent knows what his goal is and how to reach it.
-\item Social Ability: They know how to send and recive news, to determine sympathy with neighbours.
+\item Social Ability: They know how to send and receive news, to determine sympathy with neighbours.
 \item No mobility is required. 
 
 \end{itemize}
 
-The agents are rationals meaning that they try to reach their goal sympathyzind with their "neighbours"
+Agents are rationals, meaning that they try to reach their goal sympathyzing with their "neighbours"
 Each agent can receive information from the world or from another agent; it can also interact with 
-the world or with an agent, in order to meet own character or objective.
-Their ability to modify the environment is the rimotion of a link in the social network.
+the world or with an agent, in order to meet its own character or objective.
+They can  modify their surrounding environment by means of the insertion or removal of a link in the social network.
 The only accessible variable for each agent is the clock number; they can also access something "near"
-them.
+them.(??) 
 \\
 
 %### (mostly) reactive agents ###
 Each agent makes local fair decisions: global behaviours may emerge.
-When active each agent can control the environment and reacto to the changes. It is possible
-that during his inactive state the environment has changed and the goal of the agent is unreachable.
+When active each agent can control the environment and reacts  to the changes. 
+It is possible that during his inactive state the environment has changed so the goal of the agent is unreachable.
 For this reason the agent can act in an unpredictable way and somehow irrational.
 
 
 \subsection{The network of Agents}
-The network is compose by Agents eventually connected by a weighted and undirected links.
-At the first time, the network is composed by the sum of a fixed number of sources and users. \\The users is linked between them with fixed probability calculated from the average degree desidered and insert by external input. In this way we obtain a random network of users, with exponential trend for the degree distribution in the termodynamic limit.\\ The links are the only possibility to establish a relation between the agent; a random value of weight of the link can to rapresent the previous bias in friendship.\footnote{La tipologia di link scelta evidenzia la bilateralità e l’intensità della comunicazione tra gli agenti.   ....prendendo come esempio uno scambio di informazione tra due persone oppure tra una persona e un giornale, il peso rappresenta il feeling, l’affiatamento pregresso; un segno posto davanti ad esso ne potrebbe specificare l’entità (buono, indifferente, cattivo)..}
- The result of this mechanism of generation of graph not return a real network, because social real network has the property of scale-free\footnote{The scale free property is described principally by power law degree distribution, sicchè l'andamento per gradi alti tende a zero ma non si annulla. },
- instead random graph have a majority of node-degrees peaked around the average-degree. Also, the variance is very large in scale free network and expected the existence of hubs in the network. Though it would be better, we start with a random network with the hope to observe a naturally evolvution in this direction.
+Our network is made of Agents eventually connected by  weighted and undirected links.
+At the first time, the network is composed by the sum of a fixed number of sources and users. \\
+Users are linked between them with fixed probability computed from the desired average degree and inserted by external input.
+ In this way we obtain a random network of users, with exponential trend for the degree distribution in the termodynamic limit.
+\\ Links are the only possibility to establish a relation between the agents; a random value of weight of the link can rapresent a previous bias in 
+friendship.\footnote{This particular choice for our links underlines bilaterality and intensity of communication between agents.
+Taking as an example an exchange of information between two people or between a person and a newspaper, weight represents feeling, previous chemistry;}
+The result of such a  mechanism of graph generation doesn't actually return a real network, because social real networks possess the property of 
+scale-free\footnote{The scale-free property is mainly described by power law degree distribution, ??????????????sicchè l'andamento per gradi alti tende a zero ma non si annulla. },
+ ;instead random graph have a majority of node-degrees peaked around the average-degree. 
+Also, the variance is very large in scale-free network and guarantees the existence of hubs in the network.
+Despite the abovementioned theory, we start with a random network hoping to observe a natural evolution in this direction.
 \\
 
 The sources are thinkable like a news pool from which the users can to draw news and eventually to spread it. The source are more strongly connected with users that the inner links beween the themeselves users, because we assume that the newspapers have more links that a common user.
