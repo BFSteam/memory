@@ -22,8 +22,4 @@ generalizzare funzioni
 scrivere documentazioni nelle funzioni
 funzione getNews tra utenti e utenti e tra fonti e utenti
 
-
-migliorare esportazioni di log (formati)
-aggiungere chiamata al log per creazione nuova news
-aggiungere log per link
-midifiche pesi
+possiamo mettere forget come una funzione esterna a remember??

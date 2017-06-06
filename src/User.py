@@ -49,8 +49,9 @@ class User(WorldAgent):
         self.activeTime = 0
         self.activate()
         self.genState(n=1, noise=0.15)
+        self.tiredness = 1
 
-    def activate(self, p=0.7):
+    def activate(self, p=common.pActivation):
         """
 
         activate the agent with a probability p.
@@ -153,7 +154,14 @@ class User(WorldAgent):
         if a == 'scalar':
             return np.dot(self.state, n)
 
-    def remember(self, news, cutoldest=True, threshold=0.9, rnd=0.1, id_send=-1):
+    def remember(
+            self,
+            news,
+            cutoldest=True,
+            threshold=common.tRemember,
+            rnd=common.pForget,
+            id_send=-1
+    ):
         """
 
         register news in a log file 'memory'.
@@ -216,6 +224,7 @@ class User(WorldAgent):
                 if forgot != news:
                     uf.vprint("Agent", self.number, "forgot", forgot)
                     del(forgot)
+        self.tiredness = self.tiredness * 1.2
         return True
 
     def findKeyMinMax(self, data, innerkey, minor=True):
@@ -286,7 +295,7 @@ class User(WorldAgent):
         self.inactiveTime = 0
         self.activeTime = 0
 
-    def readNews(self, old=24):
+    def readNews(self, old=common.vOld):
         """
 
         read news from node n
@@ -351,7 +360,11 @@ class User(WorldAgent):
                 data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
             return (n,  tdata)
 
-    def becomeActive(self, t=7, p=0.08):
+    def becomeActive(
+            self,
+            t=common.tActivation,
+            p=common.pActivation
+    ):
         """
 
         If user is inactive for some time t
@@ -368,7 +381,12 @@ class User(WorldAgent):
             if np.random.random_sample() < self.inactiveTime * p:
                 self.switchActivation()
 
-    def becomeInactive(self, t=2, p=0.08, tired=False, tiredness=1.5):
+    def becomeInactive(
+            self,
+            t=common.tInactivation,
+            p=common.pInactivation,
+            tired=False
+    ):
         """
 
         If user is actie for some time t
@@ -388,12 +406,21 @@ class User(WorldAgent):
 
         """
         if tired is True:
-            p = p * tiredness
+            p = p * self.tiredness
         if self.activeTime > t:
             if np.random.random_sample() < self.activeTime * p:
                 self.switchActivation()
+                self.tiredness = 1
 
-    def checkActivation(self, t_active=2, t_inactive=7, p_active=0.08, p_inactive=0.08, tired=True, tiredness=1.5):
+    def checkActivation(
+            self,
+            t_inactive=common.tInactivation,
+            t_active=common.tActivation,
+            p_active=common.pActivation,
+            p_inactive=common.pInactivation,
+            tired=True,
+            tiredness=1.5
+    ):
         """
 
         Activates a sleeping node
@@ -406,7 +433,7 @@ class User(WorldAgent):
         if self.active is False:
             uf.vprint("Agent", self.number, "is active")
             self.inactiveTime += 1
-            self.becomeActive(t=t_inactive, p=p_inactive)
+            self.becomeActive(t=t_active, p=p_active)
             return False
         else:
             uf.vprint("Agent", self.number, "is active")
@@ -424,6 +451,8 @@ class User(WorldAgent):
         [ ( 1, {'id-n':dkbjga, ...} ), ... ]
 
         """
+        if self.checkActivation() is False:
+            return False
 
         newsToChose = self.readNews()
         bestNeighbour, iWantToRemember = self.chooseNews(newsToChose)
@@ -441,7 +470,7 @@ class User(WorldAgent):
         self.becomeInactive(tired=remembered)
         self.changeState(iWantToRemember)
 
-    def changeState(self, news, p=0.5):
+    def changeState(self, news, p=common.pChange):
         """
 
         Changes state of activation of an agent
@@ -466,7 +495,13 @@ class User(WorldAgent):
         else:
             return False
 
-    def activeDiffusion(self, p=0.1, threshold=0.1):
+    def activeDiffusion(
+            self,
+            p=common.pActiveDiffusion,
+            threshold=common.tActiveDiffusion,
+            q=common.pWeight,
+            r=common.pRemove
+    ):
         """
 
         performs active diffusion with the best news in memory
@@ -476,6 +511,8 @@ class User(WorldAgent):
         the orher randomly to a neighbour
 
         """
+        if self.checkActivation() is False:
+            return False
 
         # check if memory is empty
         if len(self.database) == 0:
@@ -509,7 +546,7 @@ class User(WorldAgent):
             finalNeighbour = bestNeighbour
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
         if common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) < threshold:
-            common.G.edge[self.number][finalNeighbour]['weight'] -= 0.1 * common.G.node[finalNeighbour]['agent'].distance(
+            common.G.edge[self.number][finalNeighbour]['weight'] -= q * common.G.node[finalNeighbour]['agent'].distance(
                 bestNews['new'])
             common.conlog.registerEntry(
                 first=self.number,
@@ -518,10 +555,10 @@ class User(WorldAgent):
                 weight=common.G.edge[self.number][finalNeighbour]['weight'],
                 cr='u'
             )
-            if common.G.edge[self.number][finalNeighbour]['weight'] < 0.1:
+            if common.G.edge[self.number][finalNeighbour]['weight'] < r:
                 self.removeEdge(finalNeighbour)
         elif common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) > 1 - threshold:
-            common.G.edge[self.number][finalNeighbour]['weight'] += 0.1 * common.G.node[finalNeighbour]['agent'].distance(
+            common.G.edge[self.number][finalNeighbour]['weight'] += q * common.G.node[finalNeighbour]['agent'].distance(
                 bestNews['new'])
             common.conlog.registerEntry(
                 first=self.number,
@@ -540,20 +577,10 @@ class User(WorldAgent):
             date=common.cycle,
             diffusion='a'
         )
+        self.tiredness = self.tiredness * 1.3
         return True
 
-    def firstAction(self):
-        """
-
-        bunch of actions
-
-        """
-
-        if self.checkActivation(t_inactive=3, p_inactive=0.08) is True:
-            self.passiveDiffusion()
-            self.activeDiffusion()
-
-    def createEdge(self, threshold=0.6):
+    def createEdge(self, threshold=common.tCreateEdge):
         """
 
         adds edge between the user and another node in the graph
