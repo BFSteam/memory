@@ -47,7 +47,7 @@ class MemoryScheduler(AgentManager):
         for i in range(common.memorySize):
             print(",", sep="", end="", file=temp)
             print("news", str(i), sep="", end="", file=temp)
-        print(" ", file=temp)
+        print("", file=temp)
         temp.close()
 
     def printLog(self):
