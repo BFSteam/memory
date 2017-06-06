@@ -31,7 +31,7 @@ class MemoryScheduler(AgentManager):
         print(self.memoryLog)
 
         common.memlog = self
-        self.filename = '/home/nik/mem_log_temp.%s.txt' % os.getpid()
+        self.filename = common.project + '/mem_log_temp.%s.txt' % os.getpid()
         temp = open(self.filename, 'w')
         localtime = time.asctime(time.localtime(time.time()))
         print('# memorylog')
@@ -62,7 +62,6 @@ class MemoryScheduler(AgentManager):
                 e, [x.decode('utf-8') for x in list(common.G.node[node]['agent'].database.keys())])
             for i in range(2 + common.memorySize - e.shape[0]):
                 e = np.append(e, 0)
-            print(e)
             self.registerEntry(e)
 
     def registerEntry(

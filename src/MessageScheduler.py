@@ -30,7 +30,7 @@ class MessageScheduler(AgentManager):
         self.msgLog = np.empty((0, 7))
         print(self.msgLog)
         common.msglog = self
-        self.filename = '/home/nik/msg_log_temp.%s.txt' % os.getpid()
+        self.filename = common.project + '/msg_log_temp.%s.txt' % os.getpid()
         temp = open(self.filename, 'w')
         localtime = time.asctime(time.localtime(time.time()))
         print('# messagelog')

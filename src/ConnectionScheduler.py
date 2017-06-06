@@ -30,7 +30,7 @@ class ConnectionScheduler(AgentManager):
         self.connectionLog = np.empty((0, 5))
         common.conlog = self
 
-        self.filename = '/home/nik/con_log_temp.%s.txt' % os.getpid()
+        self.filename = common.project + '/con_log_temp.%s.txt' % os.getpid()
         temp = open(self.filename, 'w')
         localtime = time.asctime(time.localtime(time.time()))
         print('# connectionlog')
