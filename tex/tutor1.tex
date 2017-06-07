@@ -27,6 +27,8 @@
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
+\usepackage{genealogytree}
+\gtruselibrary{all}
 
 %%% HEADERS & FOOTERS
 \usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
@@ -64,10 +66,6 @@
 Our aim is to analyze the influence of memory in a news spreading dynamic. In order to do that, we have built a framework of agents 
 connected in a network and equipped them with a set of basic functions. We wish to observe a diffusion-like process.
 In this paper we expose the underlying methodology and try to explain it with a simple tutorial.
-\begin{figure}[htpb]
-  \centering
-  \includegraphics[width=\columnwidth]{mindMap.pdf}
-\end{figure}
 \section{Introduction}
 
 For the purpose of modeling the interactions between users in the context of news spreading, it is convenient to talk about autonomous agents
@@ -189,6 +187,41 @@ tempo che passa.
 We use the SLAPP platform for agent simulation,
 SLAPP3 provides agent based protocoll in Python 3; specifically: 1observer tempo del mondo - Classi agenti e sui breed(classi derivate) - Usiamo superAgent ch disegna i grafici e crea gli agenti. - azioni generiche gia implementate da specificare a seconda della modellizzazione :DO1.. Draw net... 
 \\
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=\columnwidth]{mindMap.pdf}
+  \label{fig:mindmap}
+  \caption{Mind map of the model}
+\end{figure}
+
+\begin{tikzpicture}
+  \genealogytree[template=signpost]{
+    child{
+      g{Agent}
+      child{
+        g{World Agent}
+        child{
+          g{Users}
+        }
+        c{Sources}
+      }
+      %c[phantom=5em]{aaaaaaa}
+      child{
+        g{Sky Agent}
+        child{
+          g{Agent Manager}
+          child{
+            g{Agent Manager\\Message Scheduler\\AMMS}
+          }
+          c{Agent Manager\\Connection Scheduler\\AMCS}
+          c{Agent Manager\\Memory Scheduler\\AMME}
+        }
+      }
+      
+    }
+  }
+\end{tikzpicture}
+The agents involved are structured in a hierarchy. 
 Schedule: modo per programmare le varie azioni, in ordine temporale esplicitamente dato d noi.  Le azioni possono essere performate con una certa probabilità... removelinks...
 Si interfaccia alle azioni generich sopramenzionate.
 \\
