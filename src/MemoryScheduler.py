@@ -31,7 +31,10 @@ class MemoryScheduler(AgentManager):
         print(self.memoryLog)
 
         common.memlog = self
-        self.filename = common.project + '/mem_log_temp.%s.txt' % os.getpid()
+        if not os.path.exists(common.project.replace("src", "tmp")):
+            os.makedirs(common.project.replace("src", "tmp"))
+        self.filename = common.project.replace(
+            "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
         temp = open(self.filename, 'w')
         localtime = time.asctime(time.localtime(time.time()))
         print('# memorylog')
@@ -108,7 +111,8 @@ class MemoryScheduler(AgentManager):
             temp = open(self.filename, 'a')
             print(*i, sep=",", file=temp)
             temp.close()
-
+        print("sadfadsf")
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
         os.remove(self.filename)
+        print("removed")

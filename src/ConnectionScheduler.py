@@ -29,8 +29,10 @@ class ConnectionScheduler(AgentManager):
 
         self.connectionLog = np.empty((0, 5))
         common.conlog = self
-
-        self.filename = common.project + '/con_log_temp.%s.txt' % os.getpid()
+        if not os.path.exists(common.project.replace("src", "tmp")):
+            os.makedirs(common.project.replace("src", "tmp"))
+        self.filename = common.project.replace(
+            "src", 'tmp/con_log_temp.%s.txt' % os.getpid())
         temp = open(self.filename, 'w')
         localtime = time.asctime(time.localtime(time.time()))
         print('# connectionlog')
