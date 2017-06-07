@@ -68,9 +68,9 @@ In this paper we expose the underlying methodology and try to explain it with a 
 
 For the purpose of modeling the interactions between users in the context of news spreading, it is convenient to talk about autonomous agents
 linked by friendly ties whose overall view constitutes the network.
-The the population of the network consists of two breed of agents: sources and users. These two breeds will interact
+Network population is made of two breeds of agents: sources and users. These two breeds will interact
 in autonomous approach during the execution of the program.
-The network is initially a random connections of agents and modifies its own topology following a set of microscopic agents' actions.
+The network is initially a random connection of agents and modifies its own topology following a set of microscopic agents' actions.
 Our belief is that the interactions, due to the natural news' diffusion in a social-like network, are guided by the ability of the news
 to capture each agent's attention, and by the social influence of the agents themselves.
 We hope to observe the spontaneous emergency of the scale-free regime following the dynamical micro-interactions. We also hope to reveal 
@@ -83,13 +83,13 @@ We have built our model focusing on two cohexisting points of view: its agent ba
 We have blended these two frames considering a network of agents. 
 \subsection{Context}
 Let's focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{ social} is thinked in a general context} network.
- News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differetial equations.
- There is an apparent similarity with the epidemiological process. 
+ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations.
+ There is an apparent similarity with  epidemiological processes. 
 However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process seems to be threshold-less.
  The epidemic model of information diffusion is usually a compartimental model in which agents in differents stages coexists in the world.
 The majority of initial users stays in the compartment of Ignorants whereas minority of them are the Spreader of news.
- There is another compartment, the Stiffler, the equivalent of Recovery in the SIR model\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}. 
-\\ This Spreader-Ignorant-stiffler model (SIs) can be sketched by a set of simple interactions: one of them is spontanueos indeed the others are binary.
+ There is another compartment, the Stifler, the equivalent of Recovery in the SIR model\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}. 
+\\ This Spreader-Ignorant-stifler model (SIs) can be sketched by a set of simple interactions: one of them is spontanueos indeed the others are binary.
 \begin{itemize}
 \item$ I \longrightarrow S$
 \item $S+I \longrightarrow S + S$
@@ -102,17 +102,16 @@ The majority of initial users stays in the compartment of Ignorants whereas mino
 Where we indicate with $S$ the Spreader status, with $I$ the Ignorant and with $s$ the Stifler user. 
 The first process corresponds to the spontaneous transition from the ignorant compartment to spreader compartment;
  the second one corresponds to the contamination of an ignorant by contact with a spreader user; 
-the third and fourth interactions rapresent the transition by contact to the Stiffler compartment.  \\
-The development of dynamics is governed by sequences of users transitions from a compartment to another one, until all the users which were spreaders reached the stiffler compartment and the remain ignorant remains in their state.
+the third and fourth interactions rapresent the transition by contact to the Stifler compartment.  \\
+The development of dynamics is governed by sequences of users transitions from a compartment to another one, until all the users which were spreaders reached the stifler compartment and the remain ignorant remains in their state.
 This approach is applicable to a network of users to predict the reproductive 
 number\footnote{The reproductive number $R_{0}$ is defined by characteristic parameters that affect the diffusion like ke average degree (in first approximation) and the rate of diffusion. } 
 that enable us to estimate the future qualitative behaviour of spreading: 
 if this number is above some epidemic threshold then the virality of diffusion is guaranteed.\\
-This description can be reliable with a single viral diffusion of news, but more difficult would result the analisis by a set of different differential equations when happens that a 
-multiple news travel in the network.  DA RIVEDERE QUESTA PARTE
- If the number of news increase, so that the number of equation increase.\\
- A compartmental approach to study the phenomenon of information diffusion has been widely examinated in the last years, futhermore with very different variants of native models.
-There are also several papers underlining interesting results in social science: for example social influence, social infection, homophily or fake news diffusion (factchecking, bot?)
+This description can be reliable with a single viral diffusion of news, but when a
+multiple news diffusion occurs, the analysis by a set of several differential equations would result more difficult .  
+ A compartmental approach to study the phenomenon of information diffusion has been widely examinated in the last years, with very different variants of naive models.
+There are also several papers underlining interesting results in social science: for example social influence,infection, segregation, homophily or fake news diffusion; or also the effects of fact-checking or bot-agent insertion in a network.
  In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography.
 
 
@@ -128,43 +127,42 @@ agent;agents have limited senses and sensors.
 \\
 
 The required characteristics of each agent are: \begin{itemize}
-\item Reactivity: agents can control clock and news spreading around them during the evolution of the system.
-\item Proactiveness: Each agent knows what his goal is and how to reach it.
-\item Social Ability: They know how to send and receive news, to determine sympathy with neighbours.
-\item No mobility is required. 
+\item Rationality: agents can take choices depending by their own belief and their surrounding environment;
+\item reactivity: agents can check the World clock and news spreading nearby during the dynamic;
+\item proactiveness:  agents can express their own will, taking autonomous initiatives;
+\item social Ability: They know how to send and receive news, to determine sympathy with neighbours;
+\item no mobility is required. 
+
 
 \end{itemize}
 
-Agents are rationals, meaning that they try to reach their goal sympathyzing with their "neighbours"
 Each agent can receive information from the world or from another agent; it can also interact with 
-the world or with an agent, in order to meet its own character or objective.
+the world or with an agent, in order to meet its own character (a.k.a. state of mind) 
 They can  modify their surrounding environment by means of the insertion or removal of a link in the social network.
-The only accessible variable for each agent is the clock number; they can also access something "near"
-them.(??) 
+The only accessible variable for each agent is the clock number; they can also access some neighbours' variables.
 \\
 
-%### (mostly) reactive agents ###
 Each agent makes local fair decisions: global behaviours may emerge.
 When active each agent can control the environment and reacts  to the changes. 
-It is possible that during his inactive state the environment has changed so the goal of the agent is unreachable.
+It is possible that during his inactive state the environment has changed so the previous buffered action cannot be performed.
 For this reason the agent can act in an unpredictable way and somehow irrational.
 
 
 \subsection{The network of Agents}
-Our network is made of Agents eventually connected by  weighted and undirected links.
+Our network is made of Agents eventually connected by weighted and undirected links.
 At the first time, the network is composed by the sum of a fixed number of sources and users. \\
 Users are linked between them with fixed probability computed from the desired average degree and inserted by external input.
  In this way we obtain a random network of users, with exponential trend for the degree distribution in the termodynamic limit.
 \\ Links are the only possibility to establish a relation between the agents; a random value of weight of the link can rapresent a previous bias in 
 friendship.\footnote{This particular choice for our links underlines bilaterality and intensity of communication between agents.
-Taking as an example an exchange of information between two people or between a person and a newspaper, weight represents feeling, previous chemistry;}
-The result of such a  mechanism of graph generation doesn't actually return a real network, because social real networks possess the property of 
-scale-free\footnote{The scale-free property is mainly described by power law degree distribution, ??????????????sicchè l'andamento per gradi alti tende a zero ma non si annulla. },
- ;instead random graph have a majority of node-degrees peaked around the average-degree. 
+Taking as example an exchange of information between two people or between a person and a newspaper, weight represents feeling, previous chemistry;}
+The result of such a mechanism of graph generation doesn't actually return a real network, because social real networks possess the property of 
+scale-free\footnote{The scale-free property is mainly described by power law degree distribution, with a cut-off for high degrees (i.e. hubs). }
+ ;instead random graphs have a majority of node-degrees peaked around the average-degree. 
 Also, the variance is very large in scale-free network and guarantees the existence of hubs in the network.
 Despite the abovementioned theory, we start with a random network hoping to observe a natural evolution in this direction.
 \\
-
+%%%% fin qua correct
 The sources are thinkable like a news pool from which the users can to draw news and eventually to spread it. The source are more strongly connected with users that the inner links beween the themeselves users, because we assume that the newspapers have more links that a common user.
 The sources contain a fixed number of news (usually three), generate at fixed instant of time and dote of different impact. Each single news is modeling like a vector of topics, which components carry the amount of each topics inside the single news. The news is also equipped with an identified code of the source and with the clock in which appear it in the world. 
 Another features of the sources is the innate diversity between them based on the amount of there specific topics in the ''character'' of the source, this ''prevalence of topic'' affect the news at the time of generation. In other words, each news coming from the same source are focused, on average, on the same topics. \\
