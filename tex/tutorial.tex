@@ -14,8 +14,45 @@ At the very beginning, we confirm \textit{memory} path and project. Then, we hav
 In order to simplify our first approach, default values are provided to all previous variables by pressing Enter, and that's it!
 Simulation is running and our network is evolving. A window will appear with the drawing network\footnote{The runtime network is drawn using the libraries networkx and matplotlib.} and in terminal the flowing time is displayed. 
 Nodes of the network are painted with different colours: if they don't spread, grey for inactive state and blue for active one; if they spread, they can be orange, pink or cyan depending on the spreaded news. In detail, every source initially generates a single news, tracked by its colour. Sources are bigger than users and labeled with 0,1 and 2; numbering goes on with users.\\
+\begin{figure}
+  \centering
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0100.pdf} 
+    \caption{100 cycles} \label{fig:100}
+  \end{subfigure}
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0200.pdf} 
+    \caption{200 cycles} \label{fig:200}
+  \end{subfigure}
 
+  \vspace{0cm}
 
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0300.pdf} 
+    \caption{300 cycles} \label{fig:300}
+  \end{subfigure}
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0400.pdf} 
+    \caption{400 cycles} \label{fig:400}
+  \end{subfigure}
+
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0500.pdf} 
+    \caption{500 cycles} \label{fig:500}
+  \end{subfigure}
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0600.pdf} 
+    \caption{600 cycles} \label{fig:600}
+  \end{subfigure}
+  
+  \caption{Plot at different time steps for a simulation with 3 sources, 200 users, initial average degree of users 5 and 600 timesteps. Random seed initialized to 123456789}
+\end{figure}
 
 - common var
 -schedule
