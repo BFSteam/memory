@@ -10,6 +10,8 @@ N_SOURCES = 3  # number of sources
 
 N_AGENTS = N_USERS + N_SOURCES  # do not overwrite
 
+N_CYCLES = 500
+
 averageDegree = 5  # default average degree
 
 prop = 1000.  # proportionality between P_s and P_a

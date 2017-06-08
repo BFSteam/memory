@@ -49,6 +49,7 @@ Of all the classes implemented only five breeds are produced during
 the execution of the program.
 This structure allows easy changes and possible future implementations
 of the code.
+
 \subsection{WorldAgent}
 From this branch sprouts two leafs of the tree: the classes \textit{User}
 and \textit{Source}.
@@ -58,6 +59,7 @@ and as a storage. The common members are trivial.
 Specifically talking, the state of mind is a normalized vector of a
 specified dimension in the variable \texttt{dim} inside
 \textit{commonVar.py}.
+
 \subsubsection{Source}
 Sources have a peaked mind state initializated during construction.
 The initialization is binary with a number of non zero values from one to three:
@@ -66,6 +68,7 @@ Each \textit{Source} has a method, \textit{generateNews}, that can produce
 a news with a vector of topics inside 'near' the state of the source.
 We use near, talking of states, like we talk of geometrical vectors: we will
 measure the mind distance with scalar products of these vectors.
+
 \subsubsection{User}
 The main class of the program is \textit{User}.
 This object contains all the functions to act indipendently in the world.
@@ -82,10 +85,12 @@ Other important actions of users are the way they can diffuse:
 two functions used to spread news. We will talk about them later.
 Finally an agent can choose how and who manage edges with using
 \textit{createEdge} and \textit{deleteEdge}.
+
 \subsection{SkyAgent and AgentManager}
 \textit{SkyAgent} has an only child: \textit{AgentManager}.
 He is responsible of all the logs and the managing of the agent themselves.
 Other skyagents can be implemented but we do not need them for now.
+
 \subsubsection{The Schedulers}
 There are three leafs out of the \textit{AgentManager's} branch:
 \textit{MessageScheduler}, \textit{ConnectionScheduler} and
@@ -105,10 +110,14 @@ respectively \textit{AMMS}, \textit{AMCS} and \textit{AMME}.
 \end{itemize}
 \begin{figure}[htpb]
   \centering
-  \includegraphics[width=\columnwidth]{mindMap.pdf}
+  \includegraphics[width=\columnwidth]{img/pdf/mindMap.pdf}
   \label{fig:mindmap}
   \caption{Mind map of the model}
 \end{figure}
+
+\subsection{Execution}
+
+
 
 The agents involved are structured in a hierarchy. 
 Schedule: modo per programmare le varie azioni, in ordine temporale esplicitamente dato d noi.  Le azioni possono essere performate con una certa probabilità... removelinks...

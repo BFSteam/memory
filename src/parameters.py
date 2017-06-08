@@ -58,5 +58,6 @@ def loadParameters(self):
     common.P_a = common.averageDegree / common.N_USERS
     common.P_s = 10 * common.P_a
     common.N_AGENTS = common.N_USERS + common.N_SOURCES
-    self.nCycles = uf.digit_input(
-        msg="How many cycles? (default 500) ", DEFAULT=500)
+    common.N_CYCLES = uf.digit_input(
+        msg="How many cycles? (default " + str(common.N_CYCLES) + ") ", DEFAULT=common.N_CYCLES)
+    self.nCycles = common.N_CYCLES

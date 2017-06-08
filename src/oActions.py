@@ -4,6 +4,7 @@ import graph as graph
 import commonVar as common
 import networkx as nx
 import time
+import os
 from usefulFunctions import worldAgentStringsizer
 
 
@@ -29,13 +30,17 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
     """
 
     if cycle == address.nCycles:
-        start_time = time.time()
+        if not os.path.exists(common.project.replace("src", "log")):
+            os.makedirs(common.project.replace("src", "log"))
         path = common.project.replace("src", "log/graph.gml")
         nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
-        print("done")
+        print("saved", path)
         path = common.project.replace("src", "log/connectionLog.csv")
         common.conlog.writeLog(path=path)
+        print("saved", path)
         path = common.project.replace("src", "log/messageLog.csv")
         common.msglog.writeLog(path=path)
+        print("saved", path)
         path = common.project.replace("src", "log/memoryLog.csv")
         common.memlog.writeLog(path=path)
+        print("saved", path)

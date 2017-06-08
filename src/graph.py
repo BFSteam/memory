@@ -3,6 +3,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import commonVar as common
 import numpy as np
+import os
 
 
 warnings.filterwarnings("ignore", ".*GUI is implemented.*")
@@ -131,8 +132,13 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     if l is True:  # draw labels
         nx.draw_networkx_labels(common.G, pos, font_size=8)
 
-    plt.show()  # show plot
-
+    # plt.show()  # show plot
+    if not os.path.exists(common.project.replace("src", "log")):
+        os.makedirs(common.project.replace("src", "log"))
+    plotpath = common.project.replace(
+        "src", "log/plot-%04d.pdf" % common.cycle)
+    plt.savefig(plotpath)
+    print("saved plot:", plotpath)
     if common.graphicStatus == "PythonViaTerminal":
         plt.pause(0.1)
     # to show the sequence of the shown images in absence of pauses
