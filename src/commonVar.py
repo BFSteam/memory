@@ -4,6 +4,8 @@ G = 0  # graph address
 G_labels = 0
 G_edge_labels = 0
 
+SEED = 1
+
 N_USERS = 200  # number of users
 
 N_SOURCES = 3  # number of sources

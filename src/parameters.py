@@ -17,6 +17,7 @@ def loadParameters(self):
 
     mySeed = int(uf.digit_input(
         msg="random number seed (1 to get it from the clock) ", DEFAULT=1))
+    common.SEED = mySeed
     if mySeed == 1:
         random.seed()
         np.random.seed()
