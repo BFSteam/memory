@@ -1,0 +1,13 @@
+Tutorial
+Let's see in practice what we  have previously learnt in a simple tutorial: first of all, we need the whole program, available at https://github.com/BFSteam/memory.
+Once we put it in the same folder containing SLAPP3, 
+
+
+
+
+-come far partire il programma
+-cosa scaricare ???????? forse va messo prima... 
+- parametri da inserire
+- common var
+-schedule
+-observerActions.txt
