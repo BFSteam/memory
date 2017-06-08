@@ -64,88 +64,8 @@
 
 \maketitle
 
-\section*{Abstract}
-Our aim is to analyze the influence of memory in a news spreading dynamic. In order to do that, we have built a framework of agents 
-connected in a network and equipped them with a set of basic functions. We wish to observe a diffusion-like process.
-In this paper we expose the underlying methodology and try to explain it with a simple tutorial.
-\section{Introduction}
+\input{Intro.tex}
 
-For the purpose of modeling the interactions between users in the context of news spreading, it is convenient to talk about autonomous agents
-linked by friendly ties whose overall view constitutes the network.
-Network population is made of two breeds of agents: sources and users. These two breeds will interact
-in autonomous approach during the execution of the program.
-The network is initially a random connection of agents and modifies its own topology following a set of microscopic agents' actions.
-Our belief is that the interactions, due to the natural news' diffusion in a social-like network, are guided by the ability of the news
-to capture each agent's attention, and by the social influence of the agents themselves.
-We hope to observe the spontaneous emergency of the scale-free regime following the dynamical micro-interactions. We also hope to reveal 
-the natural segregation behaviour that subjugate a vastity of real social networks.
-In addition to these questions we wonder if there can be correlation between news spreading and the lenght of the agents' memory.
-From a technical point of view, we have worked with the Swarm-like protocol in python 3 named SLAPP\footnote{For reference and download from: https://github.com/terna/SLAPP}.
-
-\section{Overview}
-We have built our model focusing on two cohexisting points of view: its agent based nature and the network framework one. 
-We have blended these two frames considering a network of agents. 
-\subsection{Context}
-Let's focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{ social} is thinked in a general context} network.
- News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations.
- There is an apparent similarity with  epidemiological processes. 
-However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process seems to be threshold-less.
- The epidemic model of information diffusion is usually a compartimental model in which agents in differents stages coexists in the world.
-The majority of initial users stays in the compartment of Ignorants whereas minority of them are the Spreader of news.
- There is another compartment, the Stifler, the equivalent of Recovery in the SIR model\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}. 
-\\ This Spreader-Ignorant-stifler model (SIs) can be sketched by a set of simple interactions: one of them is spontanueos indeed the others are binary.
-\begin{itemize}
-\item$ I \longrightarrow S$
-\item $S+I \longrightarrow S + S$
-
-\item $S + S \longrightarrow s + S$
-
-\item $s + S \longrightarrow  s + s$
-\end{itemize}
-
-Where we indicate with $S$ the Spreader status, with $I$ the Ignorant and with $s$ the Stifler user. 
-The first process corresponds to the spontaneous transition from the ignorant compartment to spreader compartment;
- the second one corresponds to the contamination of an ignorant by contact with a spreader user; 
-the third and fourth interactions rapresent the transition by contact to the Stifler compartment.  \\
-The development of dynamics is governed by sequences of users transitions from a compartment to another one, until all the users which were spreaders reached the stifler compartment and the remain ignorant remains in their state.
-This approach is applicable to a network of users to predict the reproductive 
-number\footnote{The reproductive number $R_{0}$ is defined by characteristic parameters that affect the diffusion like ke average degree (in first approximation) and the rate of diffusion. } 
-that enable us to estimate the future qualitative behaviour of spreading: 
-if this number is above some epidemic threshold then the virality of diffusion is guaranteed.\\
-This description can be reliable with a single viral diffusion of news, but when a
-multiple news diffusion occurs, the analysis by a set of several differential equations would result more difficult .  
- A compartmental approach to study the phenomenon of information diffusion has been widely examinated in the last years, with very different variants of naive models.
-There are also several papers underlining interesting results in social science: for example social influence,infection, segregation, homophily or fake news diffusion; or also the effects of fact-checking or bot-agent insertion in a network.
- In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography.
-
-
-\subsection{Why Agents?}
-Agents are a very useful paradigm to model social interactions. 
-They can operate in their environment, make decisions and interact each other.
-There is no communication protocol between them. They want to maximize their own benefit which is
-communicate and share news with "friends". \\
-The environment is not deterministic. 
-Every action can produce different effects in a probabilistic way, but the single esperiment must be reproducible.
-Actions between agents are non-deterministic too and they don't have complete control of another
-agent;agents have limited senses and sensors.
-\\
-The required characteristics of each agent are: \begin{itemize}
-\item Rationality: agents can take choices depending by their own belief and their surrounding environment;
-\item reactivity: agents can check the World clock and news spreading nearby during the dynamic;
-\item proactiveness:  agents can express their own will, taking autonomous initiatives;
-\item social Ability: They know how to send and receive news, to determine sympathy with neighbours;
-\item no mobility is required. 
-\end{itemize}
-
-Each agent can receive information from the world or from another agent; it can also interact with 
-the world or with an agent, in order to meet its own character (a.k.a. state of mind) 
-They can  modify their surrounding environment by means of the insertion or removal of a link in the social network.
-The only accessible variable for each agent is the clock number; they can also access some neighbours' variables.
-\\
-Each agent makes local fair decisions: global behaviours may emerge.
-When active each agent can control the environment and reacts  to the changes. 
-It is possible that during his inactive state the environment has changed so the previous buffered action cannot be performed.
-For this reason the agent can act in an unpredictable way and somehow irrational.
 \input{networkA.tex}
 
 \input{model.tex}
