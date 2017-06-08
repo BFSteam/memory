@@ -1,4 +1,4 @@
-% !TEX TS-program = pdflatex
+﻿% !TEX TS-program = pdflatex
 % !TEX encoding = UTF-8 Unicode
 
 % This is a simple template for a LaTeX document using the "article" class.
@@ -165,9 +165,12 @@ Also, the variance is very large in scale-free network and guarantees the existe
 Despite the abovementioned theory, we start with a random network hoping to observe a natural evolution in this direction.
 \\
 %%%% fin qua correct
-The sources are thinkable like a news pool from which the users can to draw news and eventually to spread it. The source are more strongly connected with users that the inner links beween the themeselves users, because we assume that the newspapers have more links that a common user.
-The sources contain a fixed number of news (usually three), generate at fixed instant of time and dote of different impact. Each single news is modeling like a vector of topics, which components carry the amount of each topics inside the single news. The news is also equipped with an identified code of the source and with the clock in which appear it in the world. 
-Another features of the sources is the innate diversity between them based on the amount of there specific topics in the ''character'' of the source, this ''prevalence of topic'' affect the news at the time of generation. In other words, each news coming from the same source are focused, on average, on the same topics. \\
+Sources are a news reservoir: users can pick one or more news from them and eventually spread.
+Sources' degree is higher than users' one because we assume that newspapers have more links that a common user.
+Sources can contain a fixed number of news or they can generate them run-time.
+Each single news contains:a unique string which identifies it, a vector of topics, the initial source's identity, creation date, its own relevance (a sort of "impact factor").
+Users have a "state of mind" representing their own personality: a Sources, like users, have a "personality" too:
+Another feature of the sources is the innate diversity between them based on the amount of there specific topics in the ''character'' of the source, this ''prevalence of topic'' affect the news at the time of generation. In other words, each news coming from the same source are focused, on average, on the same topics. \\
 We try to reproduce the intrinsec diversity of the taste of the users with a vector corrispond to a {\itshape state-of-mind} with dimensionality equal to the number of topics. The state-of-mind of the users is inizialized at random, although in possible further development to be innest a process to changing the state-of-mind during the dynamic flow of time. This State-of-mind rapresent the personality of the user, his interest, and may affect his own choices.
 \\
 The users could diffuse the news in relation to their intention: they have a storage memory and they remember a number of news read and spread in the past.

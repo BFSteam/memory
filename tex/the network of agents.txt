@@ -1,0 +1,34 @@
+\subsection{The network of Agents}
+Our network is made of Agents eventually connected by weighted and undirected links.
+At the first time, the network is composed by the sum of a fixed number of sources and users. \\
+Users are linked between them with fixed probability computed from the desired average degree and inserted by external input.
+ In this way we obtain a random network of users, with exponential trend for the degree distribution in the termodynamic limit.
+\\ Links are the only possibility to establish a relation between the agents; a random value of weight of the link can rapresent a previous bias in 
+friendship.\footnote{This particular choice for our links underlines bilaterality and intensity of communication between agents.
+Taking as example an exchange of information between two people or between a person and a newspaper, weight represents feeling, previous chemistry;}
+The result of such a mechanism of graph generation doesn't actually return a real network, because social real networks possess the property of 
+scale-free\footnote{The scale-free property is mainly described by power law degree distribution, with a cut-off for high degrees (i.e. hubs). }
+ ;instead random graphs have a majority of node-degrees peaked around the average-degree. 
+Also, the variance is very large in scale-free network and guarantees the existence of hubs in the network.
+Despite the abovementioned theory, we start with a random network hoping to observe a natural evolution in this direction.
+\\
+%%%% fin qua correct
+Sources are a news reservoir: users can pick one or more news from them and eventually spread.
+Sources' degree is higher than users' one because we assume that newspapers have more links that a common user.
+Sources can contain a fixed number of news or they can generate them run-time.
+Each single news contains:a unique string which identifies it, a vector of topics, the initial source's identity, creation date, its own relevance (a sort of "impact factor").
+Users have a "state of mind" representing their own personality: a Sources, like users, have a "personality" too:
+Another feature of the sources is the innate diversity between them based on the amount of there specific topics in the ''character'' of the source, this ''prevalence of topic'' affect the news at the time of generation. In other words, each news coming from the same source are focused, on average, on the same topics. \\
+We try to reproduce the intrinsec diversity of the taste of the users with a vector corrispond to a {\itshape state-of-mind} with dimensionality equal to the number of topics. The state-of-mind of the users is inizialized at random, although in possible further development to be innest a process to changing the state-of-mind during the dynamic flow of time. This State-of-mind rapresent the personality of the user, his interest, and may affect his own choices.
+\\
+The users could diffuse the news in relation to their intention: they have a storage memory and they remember a number of news read and spread in the past.
+The users has a some kind of knowledge of his neighbourhood, with whome can to interact, to spread a news, to influence themselves and to do change the state-of-mind (campo visivo limitato). The sources not receive the news from the network: for easier computation also the links between sources and users is indirect even if the news are only in outcome.
+\\
+The time is scan by the Observer\\
+Eh
+\\
+L’utente avrà inoltre un tempo di attivazione che sarà regolato attraverso un suo orologio interno
+tenendo conto del tempo che scorre nel mondo: solo mentre è attivo sarà possibile per lui interagire
+con il sistema. 
+Ogni fonte genererà nuove notizie tenendo conto lei stessa del
+tempo che passa.
