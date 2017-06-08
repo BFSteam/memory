@@ -14,12 +14,12 @@ N_CYCLES = 500
 
 averageDegree = 5  # default average degree
 
-prop = 1000.  # proportionality between P_s and P_a
+prop = 10.  # proportionality between P_s and P_a
 
 P_a = float(averageDegree) / N_USERS  # do not overwrite
 P_s = prop * P_a                      # do not overwrite
 
-dim = 10  # state dimension
+dim = 3  # state dimension
 
 memorySize = 1  # memory dimension
 

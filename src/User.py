@@ -59,7 +59,7 @@ class User(WorldAgent):
 
         """
 
-        if np.random.random_sample() < p:
+        if np.random.random_sample() > p:
             self.active = False
             self.inactiveTime = np.random.randint(0, 6)
         else:
