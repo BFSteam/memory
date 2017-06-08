@@ -111,8 +111,6 @@ class MemoryScheduler(AgentManager):
             temp = open(self.filename, 'a')
             print(*i, sep=",", file=temp)
             temp.close()
-        print("sadfadsf")
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
         os.remove(self.filename)
-        print("removed")

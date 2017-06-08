@@ -4,13 +4,13 @@ G = 0  # graph address
 G_labels = 0
 G_edge_labels = 0
 
-N_USERS = 100  # number of users
+N_USERS = 200  # number of users
 
 N_SOURCES = 3  # number of sources
 
 N_AGENTS = N_USERS + N_SOURCES  # do not overwrite
 
-averageDegree = 7  # default average degree
+averageDegree = 5  # default average degree
 
 prop = 1000.  # proportionality between P_s and P_a
 
@@ -19,7 +19,7 @@ P_s = prop * P_a                      # do not overwrite
 
 dim = 10  # state dimension
 
-memorySize = 2  # memory dimension
+memorySize = 1  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 
@@ -60,7 +60,7 @@ pWeight = 0.1  # weight of weight change
 pRemove = 0.1  # value of weight below which there is rimotion
 
 # User -> createEdge
-tCreateEdge = 0.6  # threshold of random creation
+tCreateEdge = 0.6  # threshold of random creation if the node is without connections
 
 # User -> deleteEdge
 pDeleteEdge = 0.1  # probability of removing a random edge

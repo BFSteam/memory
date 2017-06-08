@@ -39,4 +39,3 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         common.msglog.writeLog(path=path)
         path = common.project.replace("src", "log/memoryLog.csv")
         common.memlog.writeLog(path=path)
-        print("--- %s seconds ---" % (time.time() - start_time))

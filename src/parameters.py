@@ -31,15 +31,14 @@ def loadParameters(self):
 
     """
     self.nAgents = 0
-    # print("No 'bland' agents")
 
     # self.worldXSize= input("X size of the world? ")
     self.worldXSize = 50
-    print("X size of the world? ", self.worldXSize)
+    #print("X size of the world? ", self.worldXSize)
 
     # self.worldYSize= input("Y size of the world? ")
     self.worldYSize = 50
-    print("Y size of the world? ", self.worldYSize)
+    #print("Y size of the world? ", self.worldYSize)
     common.N_SOURCES = int(uf.digit_input(
         msg="How many sources? (default = " + str(common.N_SOURCES) + ") ", DEFAULT=common.N_SOURCES))
     file = open(common.project + "/sources.txt", "w")
@@ -60,4 +59,4 @@ def loadParameters(self):
     common.P_s = 10 * common.P_a
     common.N_AGENTS = common.N_USERS + common.N_SOURCES
     self.nCycles = uf.digit_input(
-        msg="How many cycles? (default 5) ", DEFAULT=5)
+        msg="How many cycles? (default 500) ", DEFAULT=500)
