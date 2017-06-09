@@ -1,5 +1,4 @@
-\section{Our Model}
-\begin{wrapfigure}{r}{.5\textwidth}
+\begin{figure}
   \begin{center}
     \resizebox {.5\columnwidth} {!} {
       \begin{tikzpicture}
@@ -32,7 +31,8 @@
   \end{center}
   \caption{Hierarchy of classes}
   \label{fig:hierarchy}
-\end{wrapfigure}
+\end{figure}
+\section{Our Model}
 We use the SLAPP3 platform for agent simulation: this environment provides agent
 based protocol in Python 3.
 We implemented a hierarchy of agents to manage the different abilities of
@@ -96,6 +96,8 @@ There are three leafs out of the \textit{AgentManager's} branch:
 \textit{MessageScheduler}, \textit{ConnectionScheduler} and
 \textit{MemoryScheduler}. They will be called with their initials,
 respectively \textit{AMMS}, \textit{AMCS} and \textit{AMME}.
+The purpose of the logs is to provide a post simulation tool to perform
+a complete statistical analysis of the model. 
 \begin{itemize}
 \item[\textit{AMMS}] This scheduler registers all the spreading during the
   execution. It focuses on the news and registers their creation and
@@ -108,31 +110,96 @@ respectively \textit{AMMS}, \textit{AMCS} and \textit{AMME}.
   this scheduler will print the database of each agent and the activation
   state of anyone.
 \end{itemize}
+
+\subsection{Execution}
+Dynamic is regulated by the scheduled structure of SLAPP. An observer defines
+the time of the world while the model itself provides a finer structure of
+actions. Furthermore, several actions are scripted and interpreted by
+the scheduler.
+
+\subsubsection{Observer}
+The observer actions used, included in the file \texttt{observerActions.txt},
+are \texttt{modelStep}, \texttt{ask\_all}, \texttt{ask\_one},
+\texttt{visualizeNet} and \texttt{clock}.
+\begin{itemize}
+\item[\texttt{modelStep}] is called with its default implementation
+\item[\texttt{ask\_all}] calls the \textit{AMME}
+\item[\texttt{ask\_one}] calls the finalization of the program. It
+  is used in the last line of the file: the line number has to correspond
+  to the final cycle number in order to make the function work.
+  To end the execution, log files have to be written, calling
+  \texttt{writeLog} which is implemented in each of the \textit{AgentManager's}
+  sons. The \texttt{.gml} file of the graph is saved as well as the logs
+  in a folder created ah hoc: \texttt{memory/logs}.
+  If the execution interrupts or, for some reason, \texttt{ask\_one} is not
+  called properly, the files would be saved as well in a temporary folder,
+  \texttt{memory/temp}, and the logs would be saved until the last
+  automatic save (every 1000 lines of log).
+\item[\texttt{visualizeNet}] calls the net visualizzation. The function called
+  is \texttt{drawGraph} contained in the file \texttt{memory/src/graph.py}.
+  From there is possible to draw the net, to save the file or both.
+\item[\texttt{clock}] increments the world time 
+\end{itemize}
+
 \begin{figure}[htpb]
   \centering
   \includegraphics[width=\columnwidth]{img/pdf/mindMap.pdf}
-  \label{fig:mindmap}
   \caption{Mind map of the model}
+  \label{fig:mindmap}
 \end{figure}
 
-\subsection{Execution}
-
-
-
-The agents involved are structured in a hierarchy. 
-Schedule: modo per programmare le varie azioni, in ordine temporale esplicitamente dato d noi.  Le azioni possono essere performate con una certa probabilità... removelinks...
-Si interfaccia alle azioni generich sopramenzionate.
-\\
-Le varie Funzioni base (1.2.3.4.5....  9che concatenate costituiscono le azioni vere e proprie degli agenti: Funzioni e metodi delle classi::: SPECCHIETTO
-User/Sources
-La dinamica del sistema sarà determinata dalle azioni degli utenti; i parametri sopra descritti
-influenzeranno le loro decisioni.
+\subsubsection{Model and Schedule}
+The file \texttt{modelActions.txt} calls for every cycle the script with
+\texttt{read\_script}.
+The \texttt{reset} and \texttt{move} functions are not implemented
+but still called as placeholders.
+The file \texttt{schedule.xls} makes five calls:
 \begin{itemize}
-\item Agent.py   (user/source) 
-\item SkyAgent  (Message scheduler and ConnectionManager ) write the log files...
-\item Graph (Create the Graph/ edges and display the graph)
-\item Souces
-\item Users
-
-\item msglog
+\item[timestep 1] during the first cycle the program generates news
+  contained in the sources;
+\item[timesteps 2 - 10000] after news generation and for all
+  the execution, users make passive and active diffusion;
+\item[timesteps 10 - 10000] after some time of diffusion the agents start
+  to modify the net structure, adding and removing edges with a probability
+  of 0.03.
 \end{itemize}
+
+\subsection{Overview on simulation: technical difficulties}
+Focus on a complete cycle of simulation, dealing with some
+practical details, while the overview of the main process is given to be
+clear to the reader. The figure~\ref{fig:mindmap} explains the main program
+workflow during a generic simulation.
+From left to right: the schedule runs the main blocks, then the logs start
+the acquisition of data, finally we see the actions of a generic agent
+during one time step.
+
+\subsubsection{The problem of 'log calling' and 'memory unload'}
+The breed order creation is log first, then users and finally sources.
+We will discuss how and where to call a log during the execution of the program.
+As we previously said, logs are agents themselves, not external functions
+or tools. The problem is how to call a log at runtime; this is solved
+only when a single instance of every \textit{AgentManager's} son is
+created. Each scheduler, automatically builds himself, during
+initialization, inside the commonVar.py file. It is obvious how this trick
+would not work for more than one log for breed.
+The agent nature of the log is not a bad thing at all. All the logs are
+able to manage the memory autonomously: they full the memory of the machine
+until a limit value of lines and then autosave, appending all the work done
+in a temporary file. This provides a limited number of access to the disk and
+a reasonable amount of memory used during the simulation.
+
+\subsubsection{How to create a graph of agents:
+  'further implementation issue'}
+The class \textit{WorldAgent} creates the graph during the agent
+initialziation. The trick used is clever but can produce some
+problems in further implementations. The first agent creates the graph
+if he is the first called and if the timestep is the initial; all the
+agents append themselves at initialization and the last one creates the edges
+randomly. This is a problem if we want to implement a feature for adding nodes.
+What we want to avoid is the re-initialization of edges at every new
+\textit{WorldAgent} initialization. If the number of agents does not change the
+simulation works properly.
+
+\subsubsection{Determinism and Random}
+The decision taken by agents are half deterministic and half random.
+Let's take for instance the action \texttt{addEdge}
