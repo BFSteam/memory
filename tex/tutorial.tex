@@ -1,20 +1,23 @@
 \section{Tutorial}
-Let's see in practice what we have previously learnt in a simple tutorial: first of all, we need the whole program, available at \textit{ https://github.com/BFSteam/memory.}
-Once we put it in the same folder containing SLAPP3, we need to connect the two programs inserting memory \textbackslash src path in SLAPP3 \textbackslash project.txt as described in \textit{SLAPP\_Reference\_Handbook.pdf pag20}.
+Let us see in practice what we have previously learnt in a simple tutorial: first of all, we need the whole program, available at \url{https://github.com/BFSteam/memory.}\\
+Once we put it in the same folder containing SLAPP3, we need to connect the two programs inserting \textit{memory \textbackslash src} path in \textit{SLAPP3 \textbackslash project.txt} as described in 
+\\ \textit{SLAPP\_Reference\_Handbook.pdf pag20}.
 Now, inside SLAPP3, we can run the program runShell.py, for example by terminal.
+
 At the very beginning, we confirm \textit{memory} path and project. Then, we have to set all the necessary input variables to start the simulation:
 \begin{itemize}
 \item[\texttt{Random number seed:}] insert the seed to provide the entire reproducibility of a single simulation.
 \item[\texttt{Number of sources:}]insert the number of sources inside the network.
 \item[\texttt{Number of users:}]insert the number of users inside the network.
 \item[\texttt{Average degree for users:}]insert the value of the average degree for users only.
-\item[\texttt{Number of cycles:}]insert the maximum number time can reaches.
+\item[\texttt{Number of cycles:}]insert the maximum number time can reach.
 \end{itemize}
 
-In order to simplify our first approach, default values are provided to all previous variables by pressing Enter, and that's it!
-Simulation is running and our network is evolving. A window will appear with the drawing network\footnote{The runtime network is drawn using the libraries networkx and matplotlib.} and in terminal the flowing time is displayed. 
+In order to simplify our first approach, default values are provided to all previous variables by pressing Enter, and that's it!\\
+Simulation is running and our network is evolving. A window will appear with the drawing network\footnote{The runtime network is drawn using networkx and matplotlib libraries.} and flowing time is displayed in terminal. \\
 Nodes of the network are painted with different colours: if they don't spread, grey for inactive state and blue for active one; if they spread, they can be orange, pink or cyan depending on the spreaded news. In detail, every source initially generates a single news, tracked by its colour. Sources are bigger than users and labeled with 0,1 and 2; numbering goes on with users.\\
-\begin{figure}
+We can show network dynamic in the pictures below:
+\begin{figure}[!h]
   \centering
   \begin{subfigure}[t]{.45\textwidth}
     \centering
@@ -72,7 +75,5 @@ Nodes of the network are painted with different colours: if they don't spread, g
   \caption{Plot at different time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 timesteps. Random seed initialized to 17}
 \end{figure}
 
-- common var
--schedule
--observerActions.txt
-networkx
+
+We can notice that in the fist cycle (fig. a) news have not spreaded yet and the agents are mostly inactive. ......................

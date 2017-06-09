@@ -1,4 +1,4 @@
-\section{Network of Agents}
+\subsection{Network of Agents}
 Our network is made of Agents eventually connected by weighted and undirected links.
 At the first time, the network is composed by the sum of a fixed number of sources and users. \\
 Users are linked between them with fixed probability computed from the desired average degree and inserted by external input.
@@ -13,12 +13,13 @@ Despite the abovementioned theory, we start with a random network hoping to obse
 
 Sources are a news reservoir: users can pick one or more news from them and eventually spread.
 Sources' degree is higher than users' one because we assume that newspapers have more links than a common user.
-Sources contain a fixed number of news and eventually regenerate them run-time. 
+Sources contain a fixed number of news and eventually regenerate them run-time. \\
 Each single news contains: a unique string which identifies it, a vector of topics, the initial source's ID, creation date, its own relevance (a sort of "impact factor").
+
 Users own a vector, the "state of mind", representing their own personality: sources, like users, have a "personality" too (i.e. another vector), which reflects news' content.
 Users can remember a limited number of news, according to the affinity between incoming news and their state of mind.
 Furthermore, affinity also regulates diffusion by users.
 State of mind is not fixed but it is affected by news spreading; links' weights can be modified by users' state of mind.
-Time is externally imposed and, according to it, users can be active or inactive: only when active, they can interact with external world
+Time is externally imposed and, according to it, users can be active or inactive: only when active, they can interact with external world.
 
 
