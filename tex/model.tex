@@ -239,8 +239,21 @@ neighbours in a list, sorted by distance from his state and counted
 with their multiplicity. Then he chooses randomly from the first ten
 elements of the sorted list. In this way we cam model rules for the
 actions but make the behaviour unpredictable adding random.
+Other examples of determinism/random can be found in all the spread
+and diffusion functions, in the link remotion and when remembering a news. 
 
 \subsection{What can this model do?}
+The way this moel is thought allow to study different behaviours of
+communities of agents interacting.
+The first aim is the news spreading ande the emerging phenomena of
+rumor spreading correlated to it.
+The actions of the agent changing state while spreading news let
+us to perform analysis also on segregation in the network.
+All of these results can be studied also depending on the memory
+of the agents. The new point of view is thismemory dependency
+introducted by us as a fundamental part of the agent's structure.
+
+\subsubsection{News Spreading}
 This can be used for simulate the spread of one or more news generated
 by sources at any cycle of time. The news can also be added or regenerated
 every time. It can run for an arbitrary long mind state of agents,
@@ -250,3 +263,20 @@ Other mathematical operations are performed including numpy.
 Furthrtmore it can run very long symulations considering the possibility
 of deciding not to save graphs and only producing logs for post simulation
 analysis.
+
+\subsubsection{Segregation}
+The Force of the model is the generality. It can be used to simulate not
+only news but also everything generalizable like spreading of a positive
+normalized vector.
+We can think about a group of people sending messages or emails or symply
+talking. They spread their own inner news, their inner concepts and we modeled
+the spread of a concept when we used the source as a spreader of something near
+his mind state.
+Now imagine not to share news but impression of himself, not a way of thinking
+but for instance the way of speaking. Everyone has a different acccent, a
+different tone and all things can with proper choices can be represented
+as a normalized vector where each vector can be how someone speaks.
+Now the model is applyable also to comunication, spread of way of talking,
+influence in memory of which country I like the most for instance.
+The model can Be thought as a study of segregationin, a common phenomena
+observed both in agent based models and network theory.
