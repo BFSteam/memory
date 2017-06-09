@@ -99,17 +99,42 @@ respectively \textit{AMMS}, \textit{AMCS} and \textit{AMME}.
 The purpose of the logs is to provide a post simulation tool to perform
 a complete statistical analysis of the model. 
 \begin{itemize}
-\item[\textit{AMMS}] This scheduler registers all the spreading during the
+\item [\textit{AMMS}] This scheduler registers all the spreading during the
   execution. It focuses on the news and registers their creation and
   diffusion, also distinguishing the passive and the active diffusion.
-\item[\textit{AMCS}] With the connection scheduler we can take note of
+\item [\textit{AMCS}] With the connection scheduler we can take note of
   all operations correlated to edges: creation, destruction and weight
   change will be registerd in a log file.
-\item[\textit{AMME}] This is unlike the other logs. The call of this log is
+\item [\textit{AMME}] This is unlike the other logs. The call of this log is
   not from an user but from the observer. For every cycle of the program
   this scheduler will print the database of each agent and the activation
   state of anyone.
 \end{itemize}
+
+\subsection{Modeling Variables}
+It is not easy toi make a decision on modeling human mind. One has to make
+a lot of assumprions. For instance, what is important and what is not.
+As we have said the agents live in a network. The connections are the
+possibility to comunicate and the weight on the edge is like a pregress
+trust.
+
+\subsubsection{Mind State}
+One choice to model mind is to divide it in topics: the number is arbitrary.
+The mind now is a vector where each component is a topic. We chooseto have
+non negative values because we model it as anyone can have some interest in
+something or not. There is no distinction between having a good or a bad
+reputation. One can have or not an opinion.
+The initialization of these mind states is initially binary, the vector starts
+with only zeros or ones as said for the sources before. Then rumor is added
+and the vector is normalized. We chose to have only one peak for users.
+
+\subsubsection{News}
+The news is something that someone ca like or dislike. For this reason
+it has to be something confrontable with the mind state.
+We have built news like  a mind state, near (geometrically speaking)
+the source's one. There are other important variables for the news such as
+the relevance, which measures the impact of the news in the world, the
+date of creation and the source who made it.
 
 \subsection{Execution}
 Dynamic is regulated by the scheduled structure of SLAPP. An observer defines
@@ -122,23 +147,23 @@ The observer actions used, included in the file \texttt{observerActions.txt},
 are \texttt{modelStep}, \texttt{ask\_all}, \texttt{ask\_one},
 \texttt{visualizeNet} and \texttt{clock}.
 \begin{itemize}
-\item[\texttt{modelStep}] is called with its default implementation
-\item[\texttt{ask\_all}] calls the \textit{AMME}
-\item[\texttt{ask\_one}] calls the finalization of the program. It
+\item [\texttt{modelStep}] is called with its default implementation
+\item [\texttt{ask\_all}] calls the \textit{AMME}
+\item [\texttt{ask\_one}] calls the finalization of the program. It
   is used in the last line of the file: the line number has to correspond
   to the final cycle number in order to make the function work.
   To end the execution, log files have to be written, calling
   \texttt{writeLog} which is implemented in each of the \textit{AgentManager's}
   sons. The \texttt{.gml} file of the graph is saved as well as the logs
-  in a folder created ah hoc: \texttt{memory/logs}.
+  in a folder created ah hoc: \texttt{logs}.
   If the execution interrupts or, for some reason, \texttt{ask\_one} is not
   called properly, the files would be saved as well in a temporary folder,
-  \texttt{memory/temp}, and the logs would be saved until the last
+  \texttt{temp}, and the logs would be saved until the last
   automatic save (every 1000 lines of log).
-\item[\texttt{visualizeNet}] calls the net visualizzation. The function called
-  is \texttt{drawGraph} contained in the file \texttt{memory/src/graph.py}.
+\item [\texttt{visualizeNet}] calls the net visualizzation. The function called
+  is \texttt{drawGraph} contained in the file \texttt{graph.py}.
   From there is possible to draw the net, to save the file or both.
-\item[\texttt{clock}] increments the world time 
+\item [\texttt{clock}] increments the world time 
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -155,11 +180,11 @@ The \texttt{reset} and \texttt{move} functions are not implemented
 but still called as placeholders.
 The file \texttt{schedule.xls} makes five calls:
 \begin{itemize}
-\item[timestep 1] during the first cycle the program generates news
+\item [timestep 1] during the first cycle the program generates news
   contained in the sources;
-\item[timesteps 2 - 10000] after news generation and for all
+\item [timesteps 2 - 10000] after news generation and for all
   the execution, users make passive and active diffusion;
-\item[timesteps 10 - 10000] after some time of diffusion the agents start
+\item [timesteps 10 - 10000] after some time of diffusion the agents start
   to modify the net structure, adding and removing edges with a probability
   of 0.03.
 \end{itemize}
@@ -202,4 +227,26 @@ simulation works properly.
 
 \subsubsection{Determinism and Random}
 The decision taken by agents are half deterministic and half random.
-Let's take for instance the action \texttt{addEdge}
+Let's take for instance the action \texttt{addEdge}.
+An agent of the breed user can decide to add a node choosig from the
+other agents in the net.
+He choose between a user chosen randomly in the net and one beween
+his second nearest neighbours.
+The way he choose is making the distance between his mind state and the
+possible future linked agent's mind state. To add a bit of randomness
+in this deterministic choice the agent adds all the second nearest
+neighbours in a list, sorted by distance from his state and counted
+with their multiplicity. Then he chooses randomly from the first ten
+elements of the sorted list. In this way we cam model rules for the
+actions but make the behaviour unpredictable adding random.
+
+\subsection{What can this model do?}
+This can be used for simulate the spread of one or more news generated
+by sources at any cycle of time. The news can also be added or regenerated
+every time. It can run for an arbitrary long mind state of agents,
+for an arbitrary memory length.
+It is written using dictionaries so provides a very small time to process data.
+Other mathematical operations are performed including numpy.
+Furthrtmore it can run very long symulations considering the possibility
+of deciding not to save graphs and only producing logs for post simulation
+analysis.
