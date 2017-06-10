@@ -16,24 +16,24 @@ linked by friendly ties whose overall view constitutes the network.
 Network population is made of two breeds of agents: sources and users. These two breeds will interact
 in an autonomous approach during program execution.
 The network is initially a random connection of agents and modifies its own topology following a set of microscopic agents' actions.
-\\Our belief is that the interactions, due to natural news' diffusion in a social-like network, are guided by news' ability to capture each agent's attention, and by the social influence of agents themselves.
-We hope to observe a spontaneous emergency of scale-free regime following dynamical micro-interactions.\\ We also hope to reveal 
-a natural segregation behaviour that subjugate a vastity of real social networks.
-In addition to these questions we wonder if there can be correlation between news spreading and agents' memory lenght.
+\\In our opinion the interactions, due to natural news diffusion in a social-like network, are guided by news' feature to capture each agent's attention and by the agents social impact.
+We hope to observe a spontaneous growth of scale-free regime starting from dynamical micro-interactions.\\ We also hope to reveal 
+a natural segregation behaviour that subjugate a great deal of real social networks.
+In addition to these items we wonder if there can be correlation between news spreading and agents' memory lenght.
 From a technical point of view, we have worked with the Swarm-like protocol in python 3 named SLAPP.\footnote{For reference and download from: \url{https://github.com/terna/SLAPP}}
 
 \section{Overview}
-We have built our model focusing on two coexisting points of view: its agent based nature and the network framework one. 
+We have built our model focusing on two coexisting points of view: agent based nature and network framework. 
 We have blended these two frames considering a network of agents. 
 \subsection{Context}
 Let us focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{social} can be thought in a general context.} network.
 \\ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations.
  There is an apparent similarity with epidemiological processes. 
 However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process seems to be threshold-less.
- The epidemic model of information diffusion is usually a compartmental model in which agents in different stages coexist in the world.
-The majority of initial users stays in the compartment of Ignorants whereas minority of them are the Spreader of news.
- There is another compartment, the Stifler, the equivalent of Recovery in the SIR model.\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}
-\\ This Spreader-Ignorant-stifler model (SIs) can be sketched by a set of transition interactions between compartments; one of them is spontaneous while the others are induced by contact:
+ The epidemic model of information diffusion is usually a compartmental model in which agents, in different stages, coexist in the world.
+ Most of initial users stay in the compartment of \textit{ignorants} whereas a minority of them stay in the \textit{spreader} compartment.
+ We have also the \textit{stifler} compartment, equivalent to \textit{recovery} in the SIR model.\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}
+\\ This \textit{Spreader-Ignorant-stifler} model (SIs) can be sketched by a set of transition between compartments; one of the transition is spontaneous while the others are induced by contact:
 \begin{itemize}
 \item$ I \longrightarrow S$
 \item $S+I \longrightarrow S + S$
@@ -43,7 +43,7 @@ The majority of initial users stays in the compartment of Ignorants whereas mino
 \item $s + S \longrightarrow  s + s$
 \end{itemize}
 
-Where we indicate with $S$ the Spreader status, with $I$ the Ignorant and with $s$ the Stifler user. 
+$S$ is the Spreader status, $I$ is the Ignorant and $s$ the Stifler. 
 The first process corresponds to the spontaneous transition from the ignorant compartment to spreader compartment;
  the second one corresponds to the contamination of an ignorant by contact with a spreader user; 
 the third and fourth interactions reproduce transitions by contact to the Stifler compartment.
@@ -61,12 +61,11 @@ There are also several papers underlining interesting results in social science:
 
 \subsection{Why Agents?}
 Agents are a very useful paradigm to model social interactions. 
-They can operate in their environment, make decisions and interact each other.
-There is no communication protocol between them. They want to communicate and share news with "friends". \\
+They can operate in their environment, take decisions and interact with each other.
+There is no communication protocol between them but they communicate and share news with "friends". \\
 The environment is not deterministic. 
-Every action can produce different effects with a different probability, but the single experiment must be reproducible.
-Actions between agents are non-deterministic too and they don't have complete control of another
-agent; agents have limited senses and sensors.
+Every action can produce different effects with a different probability, but the simulation must be reproducible.
+Actions between agents are non-deterministic. Agents don't have complete control of another agent; agents have limited senses and sensors.
 \\
 The required characteristics of each agent are: \begin{itemize}
 \item [\textit {Rationality:}] agents can take choices depending on their own belief and their surrounding environment;
