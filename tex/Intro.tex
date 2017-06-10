@@ -6,7 +6,7 @@
 \end{figure}
 
 \section*{Abstract}
-Our aim is to analyze the influence of memory in a news spreading dynamic. In order to do that, we have built a framework of agents 
+Our aim is to analyse the influence of memory in a news spreading dynamic. In order to do that, we have built a framework of agents 
 connected in a network and equipped them with a set of basic functions. We wish to observe a diffusion-like process.
 In this paper we expose the underlying methodology and try to explain it with a simple tutorial.
 \section{Introduction}
@@ -23,17 +23,17 @@ In addition to these questions we wonder if there can be correlation between new
 From a technical point of view, we have worked with the Swarm-like protocol in python 3 named SLAPP.\footnote{For reference and download from: \url{https://github.com/terna/SLAPP}}
 
 \section{Overview}
-We have built our model focusing on two cohexisting points of view: its agent based nature and the network framework one. 
+We have built our model focusing on two coexisting points of view: its agent based nature and the network framework one. 
 We have blended these two frames considering a network of agents. 
 \subsection{Context}
 Let us focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{social} can be thought in a general context.} network.
 \\ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations.
  There is an apparent similarity with epidemiological processes. 
 However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process seems to be threshold-less.
- The epidemic model of information diffusion is usually a compartmental model in which agents in differents stages coexist in the world.
+ The epidemic model of information diffusion is usually a compartmental model in which agents in different stages coexist in the world.
 The majority of initial users stays in the compartment of Ignorants whereas minority of them are the Spreader of news.
  There is another compartment, the Stifler, the equivalent of Recovery in the SIR model.\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}
-\\ This Spreader-Ignorant-stifler model (SIs) can be sketched by a set of transition interactions between compartments; one of them is spontanueos while the others are induced by contact:
+\\ This Spreader-Ignorant-stifler model (SIs) can be sketched by a set of transition interactions between compartments; one of them is spontaneous while the others are induced by contact:
 \begin{itemize}
 \item$ I \longrightarrow S$
 \item $S+I \longrightarrow S + S$
@@ -54,7 +54,7 @@ which enable us to estimate the future qualitative behaviour of spreading:
 if this number is above some epidemic threshold then virality of diffusion is guaranteed.\\
 This description can be reliable with a single viral diffusion of news, but when a
 multiple news diffusion occurs, the analysis by a set of several differential equations would result more difficult.  
- \\ A compartmental approach to study the phenomenon of information diffusion has been widely examinated in the last years, with very different variants of naive models.
+ \\ A compartmental approach to study the phenomenon of information diffusion has been widely examined in the last years, with very different variants of naive models.
 There are also several papers underlining interesting results in social science: for example social influence, infection, segregation, homophily or fake news diffusion; or also the effects of fact-checking or bot-agent insertion in a network.
  In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography.
 
@@ -64,12 +64,12 @@ Agents are a very useful paradigm to model social interactions.
 They can operate in their environment, make decisions and interact each other.
 There is no communication protocol between them. They want to communicate and share news with "friends". \\
 The environment is not deterministic. 
-Every action can produce different effects in a probabilistic way, but the single esperiment must be reproducible.
+Every action can produce different effects with a different probability, but the single experiment must be reproducible.
 Actions between agents are non-deterministic too and they don't have complete control of another
 agent; agents have limited senses and sensors.
 \\
 The required characteristics of each agent are: \begin{itemize}
-\item [\textit {Rationality:}] agents can take choices depending by their own belief and their surrounding environment;
+\item [\textit {Rationality:}] agents can take choices depending on their own belief and their surrounding environment;
 \item [\textit {reactivity:}] agents can check the World clock and news spreading nearby during the dynamic;
 \item [\textit {proactiveness:}] agents can express their own will, taking autonomous initiatives;
 \item [\textit {social Ability:}] They know how to send and receive news, to determine sympathy with neighbours;
@@ -84,4 +84,4 @@ The only accessible variable for each agent is the clock number; they can also a
 Each agent makes local fair decisions: global behaviours may emerge.
 When active each agent can control the environment and reacts to the changes. 
 It is possible that during his inactive state the environment has changed so the previous buffered action cannot be performed.
-For this reason the agent can act in an unpredictable way and somehow irrational.
+For this reason the agent can act unpredictably and somehow irrational.

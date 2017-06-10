@@ -61,29 +61,29 @@ specified dimension in the variable \texttt{dim} inside
 \textit{commonVar.py}.
 
 \subsubsection{Source}
-Sources have a peaked mind state initializated during construction.
-The initialization is binary with a number of non zero values from one to three:
+Sources have a peaked mind state initialized during construction.
+The initialization is binary with a number of non-zero values from one to three:
 after that, noise is added and the vector is normalized.
 Each \textit{Source} has a method, \textit{generateNews}, that can produce
-a news with a vector of topics inside 'near' the state of the source.
+news with a vector of topics inside 'near' the state of the source.
 We use near, talking of states, like we talk of geometrical vectors: we will
 measure the mind distance with scalar products of these vectors.
 
 \subsubsection{User}
 The main class of the program is \textit{User}.
-This object contains all the functions to act indipendently in the world.
+This object contains all the functions to act independently in the world.
 We will provide a description of the most important ones.
-As mentioned before, a user can compute distance, with the homonymous
+As mentioned before, a user can compute distance, with the namesake
 function, between mind states and between a mind state and a
 topic inside news. He can make an opinion of what he sees.
-He has a bunch of function to detect who are his neighbours, if they
+He has a bunch of function to detect who are his neighbors, if they
 are sources or users, and if there are only sources around him.
 A user can also decide to become active or inactive using internal rules.
 He can create or remove an edge between another agent.
 Other important actions of users are the way they can diffuse:
 \textit{activeDiffusion} and \textit{passiveDiffusion} are the
 two functions used to spread news. We will talk about them later.
-Finally an agent can choose how and who manage edges with using
+Finally, an agent can choose how and who manage edges with using
 \textit{createEdge} and \textit{deleteEdge}.
 
 \subsection{SkyAgent and AgentManager}
@@ -112,16 +112,16 @@ a complete statistical analysis of the model.
 \end{itemize}
 
 \subsection{Modeling Variables}
-It is not easy toi make a decision on modeling human mind. One has to make
-a lot of assumprions. For instance, what is important and what is not.
+It is not easy to make a decision on modeling human mind. One has to make
+a lot of assumptions. For instance, what is important and what is not.
 As we have said the agents live in a network. The connections are the
-possibility to comunicate and the weight on the edge is like a pregress
+possibility to communicate and the weight on the edge is like a previous
 trust.
 
 \subsubsection{Mind State}
 One choice to model mind is to divide it in topics: the number is arbitrary.
-The mind now is a vector where each component is a topic. We chooseto have
-non negative values because we model it as anyone can have some interest in
+The mind now is a vector where each component is a topic. We choose to have
+non-negative values because we model it as anyone can have some interest in
 something or not. There is no distinction between having a good or a bad
 reputation. One can have or not an opinion.
 The initialization of these mind states is initially binary, the vector starts
@@ -129,9 +129,9 @@ with only zeros or ones as said for the sources before. Then rumor is added
 and the vector is normalized. We chose to have only one peak for users.
 
 \subsubsection{News}
-The news is something that someone ca like or dislike. For this reason
-it has to be something confrontable with the mind state.
-We have built news like  a mind state, near (geometrically speaking)
+The news is something that someone can like or dislike. For this reason
+it has to be something comparable with the mind state.
+We have built news like a mind state, near (geometrically speaking)
 the source's one. There are other important variables for the news such as
 the relevance, which measures the impact of the news in the world, the
 date of creation and the source who made it.
@@ -160,7 +160,7 @@ are \texttt{modelStep}, \texttt{ask\_all}, \texttt{ask\_one},
   called properly, the files would be saved as well in a temporary folder,
   \texttt{temp}, and the logs would be saved until the last
   automatic save (every 1000 lines of log).
-\item [\texttt{visualizeNet}] calls the net visualizzation. The function called
+\item [\texttt{visualizeNet}] calls the net visualization. The function called
   is \texttt{drawGraph} contained in the file \texttt{graph.py}.
   From there is possible to draw the net, to save the file or both.
 \item [\texttt{clock}] increments the world time 
@@ -202,7 +202,7 @@ during one time step.
 The breed order creation is log first, then users and finally sources.
 We will discuss how and where to call a log during the execution of the program.
 As we previously said, logs are agents themselves, not external functions
-or tools. The problem is how to call a log at runtime; this is solved
+or tools. The problem is how to call a log at run time; this is solved
 only when a single instance of every \textit{AgentManager's} son is
 created. Each scheduler, automatically builds himself, during
 initialization, inside the commonVar.py file. It is obvious how this trick
@@ -216,51 +216,51 @@ a reasonable amount of memory used during the simulation.
 \subsubsection{How to create a graph of agents:
   'further implementation issue'}
 The class \textit{WorldAgent} creates the graph during the agent
-initialziation. The trick used is clever but can produce some
+initializiation. The trick used is clever but can produce some
 problems in further implementations. The first agent creates the graph
 if he is the first called and if the timestep is the initial; all the
 agents append themselves at initialization and the last one creates the edges
 randomly. This is a problem if we want to implement a feature for adding nodes.
 What we want to avoid is the re-initialization of edges at every new
-\textit{WorldAgent} initialization. If the number of agents does not change the
-simulation works properly.
+\textit{WorldAgent} initialization. The simulation works properly if the
+number of the agents does not change.
 
 \subsubsection{Determinism and Random}
 The decision taken by agents are half deterministic and half random.
 Let's take for instance the action \texttt{addEdge}.
-An agent of the breed user can decide to add a node choosig from the
+An agent of the breed user can decide to add a node choosing from the
 other agents in the net.
-He choose between a user chosen randomly in the net and one beween
-his second nearest neighbours.
-The way he choose is making the distance between his mind state and the
+He chooses between a user chosen randomly in the net and one between
+his second nearest neighbors.
+The way he chooses is making the distance between his mind state and the
 possible future linked agent's mind state. To add a bit of randomness
 in this deterministic choice the agent adds all the second nearest
-neighbours in a list, sorted by distance from his state and counted
+neighbors in a list, sorted by distance from his state and counted
 with their multiplicity. Then he chooses randomly from the first ten
 elements of the sorted list. In this way we cam model rules for the
-actions but make the behaviour unpredictable adding random.
+actions but make the behavior unpredictable adding random.
 Other examples of determinism/random can be found in all the spread
-and diffusion functions, in the link remotion and when remembering a news. 
+and diffusion functions, in the link rimotion and when remembering news. 
 
 \subsection{What can this model do?}
-The way this moel is thought allow to study different behaviours of
+The way this model is thought allow to study different behaviors of
 communities of agents interacting.
-The first aim is the news spreading ande the emerging phenomena of
+The first aim is the news spreading and the emerging phenomena of
 rumor spreading correlated to it.
 The actions of the agent changing state while spreading news let
 us to perform analysis also on segregation in the network.
 All of these results can be studied also depending on the memory
-of the agents. The new point of view is thismemory dependency
-introducted by us as a fundamental part of the agent's structure.
+of the agents. The new point of view is this memory dependency
+introduced by us as a fundamental part of the agent's structure.
 
 \subsubsection{News Spreading}
 This can be used for simulate the spread of one or more news generated
 by sources at any cycle of time. The news can also be added or regenerated
 every time. It can run for an arbitrary long mind state of agents,
 for an arbitrary memory length.
-It is written using dictionaries so provides a very small time to process data.
+It is written using dictionaries so provides a very short time to process data.
 Other mathematical operations are performed including numpy.
-Furthrtmore it can run very long symulations considering the possibility
+Furthertmore it can run very long simulations considering the possibility
 of deciding not to save graphs and only producing logs for post simulation
 analysis.
 
@@ -268,15 +268,15 @@ analysis.
 The Force of the model is the generality. It can be used to simulate not
 only news but also everything generalizable like spreading of a positive
 normalized vector.
-We can think about a group of people sending messages or emails or symply
+We can think about a group of people sending messages or emails or simply
 talking. They spread their own inner news, their inner concepts and we modeled
 the spread of a concept when we used the source as a spreader of something near
 his mind state.
 Now imagine not to share news but impression of himself, not a way of thinking
-but for instance the way of speaking. Everyone has a different acccent, a
+but for instance the way of speaking. Everyone has a different accent, a
 different tone and all things can with proper choices can be represented
 as a normalized vector where each vector can be how someone speaks.
-Now the model is applyable also to comunication, spread of way of talking,
+Now the model is applicable also to communication, spread of way of talking,
 influence in memory of which country I like the most for instance.
-The model can Be thought as a study of segregationin, a common phenomena
+The model can Be thought as a study of segregation in, a common phenomenon
 observed both in agent based models and network theory.
