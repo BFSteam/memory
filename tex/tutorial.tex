@@ -5,8 +5,7 @@ first of all, we need the whole program, available at \url{https://github.com/BF
 Once downloaded it is convenient to put \texttt{path\_to/memory/src} inside
 \texttt{path\_to\_SLAPP3/project.txt} as described in \textit{SLAPP\_Reference\_Handbook.pdf pag20}.
 Inside SLAPP3 we can run the program \texttt{runShell.py} from terminal
-or from jupyter notebook using \texttt{iRunShell.py}.
-
+or from jupyter notebook using \texttt{iRunShell.ipynb}.
 The program asks which project we want to run: if we set up the path correctly
 we can confirm \textit{memory} path and project.
 Afterwards we have to set all the necessary input variables to start
@@ -100,11 +99,21 @@ We can show network dynamic in the pictures below:
 \end{figure}
 
 \subsection{After the simulation: what to notice}\label{subsec:after}
-In figure~\ref{fig:1} we see the net at initialization. Users are mostly
-inactive and sources have create one news each. The news are tracked by a
-color during the simulation.
-After five time steps (figure~\ref{fig:5}) some users have changed their state
+We show graphs of a previous run: the parameters used are, seed 17, 3 sources,
+200 users, initial average degree of 3, and 500 time steps.
+In figure~\ref{fig:1} we see the net during initialization. Diffusion
+has not started yet and users are mostly inactive:
+sources have create one news each.
+After five time steps, figure~\ref{fig:5}, some users have changed their state
 to active and started to spread.
+At thenth iteration, in figure~\ref{fig:10}, almost every user
+has a news inside. We have also the first edge creation and remotion.
+Now we jump to the fiftieth iteration, figure~\ref{fig:50},to see that
+all the users except one are involved in the dynamic. There is still no
+clue of segregation.
+After another fifty steps we detect the first symptom of segregation.
+Moving on of a hundred in a hundred time steps, we see how the orange news
+is inclined to disappear.
 
 \subsection{Further implementations}\label{subsec:implementations}
 Some possible future features are:
