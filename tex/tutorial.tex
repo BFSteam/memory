@@ -1,4 +1,5 @@
 \section{Tutorial}
+\subsection{Before the simulation: what to do}
 Let us see in practice what we have previously learnt in a simple tutorial: first of all, we need the whole program, available at \url{https://github.com/BFSteam/memory.}\\
 Once we put it in the same folder containing SLAPP3, we need to connect the two programs inserting \textit{memory \textbackslash src} path in \textit{SLAPP3 \textbackslash project.txt} as described in 
 \\ \textit{SLAPP\_Reference\_Handbook.pdf pag20}.
@@ -14,6 +15,8 @@ At the very beginning, we confirm \textit{memory} path and project. Then, we hav
 \end{itemize}
 
 In order to simplify our first approach, default values are provided to all previous variables by pressing Enter, and that's it!\\
+
+\subsection{During the simulation: where to put the accent}
 Simulation is running and our network is evolving. A window will appear with the drawing network\footnote{The run time network is drawn using networkx and matplotlib libraries.} and flowing time is displayed in terminal. \\
 Nodes of the network are painted with different colors: if they don't spread, gray for inactive state and blue for active one; if they spread, they can be orange, pink or cyan depending on the spread news. In detail, every source initially generates a single news, tracked by its color. Sources are bigger than users and labeled with 0,1 and 2; numbering goes on with users.\\
 We can show network dynamic in the pictures below:
@@ -22,12 +25,14 @@ We can show network dynamic in the pictures below:
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0001.pdf} 
-    \caption{1 cycle} \label{fig:100}
+    \caption{1 cycle}
+    \label{fig:1}
   \end{subfigure}
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0005.pdf} 
-    \caption{5 cycles} \label{fig:200}
+    \caption{5 cycles}
+    \label{fig:5}
   \end{subfigure}
 
   \vspace{0cm}
@@ -35,12 +40,14 @@ We can show network dynamic in the pictures below:
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0010.pdf} 
-    \caption{10 cycles} \label{fig:300}
+    \caption{10 cycles}
+    \label{fig:10}
   \end{subfigure}
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0050.pdf} 
-    \caption{50 cycles} \label{fig:400}
+    \caption{50 cycles}
+    \label{fig:50}
   \end{subfigure}
  
   \caption{Plot at different time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17}
@@ -51,12 +58,14 @@ We can show network dynamic in the pictures below:
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0100.pdf} 
-    \caption{100 cycles} \label{fig:100}
+    \caption{100 cycles}
+    \label{fig:100}
   \end{subfigure}
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0200.pdf} 
-    \caption{200 cycles} \label{fig:200}
+    \caption{200 cycles}
+    \label{fig:200}
   \end{subfigure}
 
   \vspace{0cm}
@@ -64,16 +73,22 @@ We can show network dynamic in the pictures below:
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0400.pdf} 
-    \caption{400 cycles} \label{fig:300}
+    \caption{400 cycles}
+    \label{fig:400}
   \end{subfigure}
   \begin{subfigure}[t]{.45\textwidth}
     \centering
     \includegraphics[trim={1cm .5cm 1cm 1cm}, clip, width=\linewidth]{img/pdf/plot-0500.pdf} 
-    \caption{500 cycles} \label{fig:400}
+    \caption{500 cycles}
+    \label{fig:500}
   \end{subfigure}
  
   \caption{Plot at different time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17}
 \end{figure}
 
+\subsection{After the simulation: what to notice}
+We can notice that in the fist cycle~\ref{fig:1} news have not spread yet and the agents are mostly inactive. ......................
 
-We can notice that in the fist cycle (fig. a) news have not spread yet and the agents are mostly inactive. ......................
+\subsection{Further implementations}
+
+\subsection{Conclusion}

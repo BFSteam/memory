@@ -132,6 +132,13 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     if l is True:  # draw labels
         nx.draw_networkx_labels(common.G, pos, font_size=8)
 
+    plt.title(
+        'seed:', common.SEED,
+        'u:', common.N_USERS,
+        's:', common.N_SOURCES,
+        'av.deg.:', common.averageDegree,
+        't:', common.cycle, "/", common.N_CYCLES
+    )
     # plt.show()  # show plot
     if not os.path.exists(common.project.replace("src", "log")):
         os.makedirs(common.project.replace("src", "log"))
