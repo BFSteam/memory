@@ -35,6 +35,11 @@
 
 \usepackage{wrapfig}
 
+\usepackage{nameref}
+
+\usepackage[backend=bibtex]{biblatex}
+\bibliography{bibliography.bib}
+
 %%% HEADERS & FOOTERS
 \usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
 \pagestyle{fancy} % options: empty , plain , fancy
@@ -49,11 +54,12 @@
 \usepackage{pdfpages}
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-  }
+  colorlinks=true,%activates colors
+  allcolors=blue,%default color
+  linkcolor=blue,
+  filecolor=magenta,      
+  urlcolor=cyan,
+}
   
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
@@ -93,6 +99,10 @@
 \newpage
 
 \input{tutorial.tex}
+
+\newpage
+
+\printbibliography
 
 \end{document}
 

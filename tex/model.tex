@@ -32,7 +32,7 @@
   \caption{Hierarchy of classes}
   \label{fig:hierarchy}
 \end{figure}
-\section{Our Model}
+\section{Our Model}\label{sec:model}
 We use the SLAPP3 platform for agent simulation: this environment provides agent
 based protocol in Python 3.
 We implemented a hierarchy of agents to manage the different abilities of
@@ -50,7 +50,7 @@ the execution of the program.
 This structure allows easy changes and possible future implementations
 of the code.
 
-\subsection{WorldAgent}
+\subsection{WorldAgent}\label{subsec:worldagent}
 Two leafs of the tree sprout from this branch: the classes \textit{User}
 and \textit{Source}.
 The common variables passed by \textit{WorldAgent} are
@@ -60,7 +60,7 @@ Specifically, the state of mind is a normalized vector of a
 specified dimension \texttt{dim} defined inside
 \textit{commonVar.py}.
 
-\subsubsection{Source}
+\subsubsection{Source}\label{subsubsec:source}
 Sources have a peaked mind state initialized during construction.
 The initialization is binary with a number of non-zero values from one to three:
 after that, noise is added and the vector is normalized.
@@ -69,7 +69,7 @@ news described with a vector of topics ``near'' the state of the source.
 We use near, talking of states, like we talk of geometrical vectors: we will
 measure the mind distance with the scalar product of these vectors.
 
-\subsubsection{User}
+\subsubsection{User}\label{subsubsec:user}
 The main class of the program is \textit{User}.
 This object contains all the functions to act independently in the world.
 We will provide a description of the most important ones.
@@ -86,12 +86,12 @@ two functions used to spread news. We will talk about them later.
 Finally, an agent can choose how and who manages edges, using
 \textit{createEdge} and \textit{deleteEdge}.
 
-\subsection{SkyAgent and AgentManager}
+\subsection{SkyAgent and AgentManager}\label{subsec:skyagent}
 \textit{SkyAgent} has an only child: \textit{AgentManager}: he is
 responsible of all the logs.
 Other skyagents can be implemented but they are not needed now.
 
-\subsubsection{The Schedulers}
+\subsubsection{The Schedulers}\label{subsubsec:schedulers}
 There are three leafs out of the \textit{AgentManager's} branch:
 \textit{MessageScheduler}, \textit{ConnectionScheduler} and
 \textit{MemoryScheduler}. We will refer to them with their
@@ -112,14 +112,14 @@ a complete statistical analysis of the model.
   state of anyone.
 \end{itemize}
 
-\subsection{Modeling Variables}
+\subsection{Modeling Variables}\label{subsec:variables}
 It is not easy to infer a good human mind model. One has to make
 a lot of assumptions. For instance, what is important and what is not.
 As we said before, the agents live in a network; the connections are the
 possibility to communicate and the edge's weight represents the previous
 trust.
 
-\subsubsection{Mind State}
+\subsubsection{Mind State}\label{subsubsec:mindstate}
 One way to model mind is to divide it into topics: the number is arbitrary.
 The mind now is a vector: each component is a topic. We have choosen
 non-negative values as if anyone could be interested in some topic or not.
@@ -129,7 +129,7 @@ The initialization of these mind states is binary: the vector starts
 with only zeros or ones as said for the sources before. Then rumor is added
 and the vector is normalized. We chose to have only one peak each user.
 
-\subsubsection{News}
+\subsubsection{News}\label{subsubsec:news}
 The news is a piece of information that an agent can like or dislike.
 For this reason it must be comparable with the mind state.
 We have built news as a vector, like the mind state:
@@ -138,13 +138,13 @@ Other important variables for the news are the relevance,
 which measures the impact of the news in the world, the
 date of creation and the source who made it.
 
-\subsection{Execution}
+\subsection{Execution}\label{subsec:execution}
 Dynamic is regulated by the scheduled structure of SLAPP3. An observer defines
 the world time while the model itself provides for a finer structure of
 actions. Furthermore, several actions are scripted and interpreted by
 the scheduler.
 
-\subsubsection{Observer}
+\subsubsection{Observer}\label{subsubsec:observer}
 The observer actions used, included in the file \texttt{observerActions.txt},
 are \texttt{modelStep}, \texttt{ask\_all}, \texttt{ask\_one},
 \texttt{visualizeNet} and \texttt{clock}.
@@ -175,7 +175,7 @@ are \texttt{modelStep}, \texttt{ask\_all}, \texttt{ask\_one},
   \label{fig:mindmap}
 \end{figure}
 
-\subsubsection{Model and Schedule}
+\subsubsection{Model and Schedule}\label{subsubsec:schedule}
 The file \texttt{modelActions.txt} calls the script with
 \texttt{read\_script} at every cycle.
 The \texttt{reset} and \texttt{move} functions are not implemented
@@ -191,7 +191,7 @@ The file \texttt{schedule.xls} makes three groups of calls:
   of 0.03.
 \end{itemize}
 
-\subsection{Overview on simulation: technical difficulties}
+\subsection{Overview on simulation: technical difficulties}\label{subsec:overview}
 Let us focus on a complete simulation cycle, dealing with some
 practical details, while the overview of the main process is given to be
 clear to the reader. The figure~\ref{fig:mindmap} explains the main program
@@ -200,7 +200,7 @@ From left to right: the schedule runs the main blocks, then the logs start
 the acquisition of data, finally we see the actions of a generic agent
 during one time step.
 
-\subsubsection{The problem of 'log calling' and 'memory unload'}
+\subsubsection{The problem of 'log calling' and 'memory unload'}\label{subsubsec:logcalling}
 The breed order creation is log first, then users and finally sources.
 We will discuss how and where to call a log during the execution of the program.
 As we previously said, logs are agents themselves, not external functions
@@ -216,7 +216,7 @@ in a temporary file. This allows a limited number of accesses to the disk and
 a reasonable amount of memory used during the simulation.
 
 \subsubsection{How to create a graph of agents:
-  'further implementation issue'}
+  'further implementation issue'}\label{subsubsec:furtherissue}
 The class \textit{WorldAgent} creates the graph during the agent
 initializiation. The trick used is clever but can produce some
 problems in further implementations. The first agent creates the graph
@@ -228,7 +228,7 @@ What we want to avoid is the re-initialization of edges at every new
 \textit{WorldAgent} initialization. The simulation works properly if the
 number of the agents does not change.
 
-\subsubsection{Determinism and Random}
+\subsubsection{Determinism and Random}\label{subsubsec:detran}
 Agents' actions are deterministic and random.
 Let us focus on the action \texttt{createEdge}.
 An agent of the breed user can decide to add an edge choosing a node
@@ -244,7 +244,7 @@ maintaining the behavior unpredictable.
 Other examples of determinism/random can be found in all the spread
 and diffusion functions. 
 
-\subsection{What can this model do?}
+\subsection{What can this model do?}\label{subsec:whatcanthismodeldo}
 This model allows to observe different behaviors of agent communities'
 interactions.
 You can notice the news spreading and the emerging phenomenom of rumor
@@ -255,7 +255,7 @@ All of these effects can be studied also altering agents' memory.
 Memory dependency is a new variable introduced as a fundamental
 part of the agent's structure.
 
-\subsubsection{News Spreading}
+\subsubsection{News Spreading}\label{subsec:newsspreading}
 This model can be used to simulate the spread of one or more news generated
 by sources at any cycle of time. The news can also be added or regenerated
 every time. It can run for an arbitrary long mind state of agents,
@@ -265,7 +265,7 @@ Other mathematical operations are performed including numpy.
 Furthertmore it can run very long simulations choosing not to save graphs
 and produce logs only for post simulation analysis.
 
-\subsubsection{Segregation}
+\subsubsection{Segregation}\label{subsec:segregation}
 The strength of this model is its abstraction level: it simulates the
 spread of a positive normalized vector.
 We used it to analyze a group of people sending messages, emails or

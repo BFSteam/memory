@@ -1,5 +1,5 @@
-\section{Tutorial}
-\subsection{Before the simulation: what to do}
+\section{Tutorial}\label{sec:tutorial}
+\subsection{Before the simulation: what to do}\label{subsec:before}
 Let us see in practice what we have previously learnt in a simple tutorial: first of all, we need the whole program, available at \url{https://github.com/BFSteam/memory.}\\
 Once we put it in the same folder containing SLAPP3, we need to connect the two programs inserting \textit{memory \textbackslash src} path in \textit{SLAPP3 \textbackslash project.txt} as described in 
 \\ \textit{SLAPP\_Reference\_Handbook.pdf pag20}.
@@ -16,7 +16,7 @@ At the very beginning, we confirm \textit{memory} path and project. Then, we hav
 
 In order to simplify our first approach, default values are provided to all previous variables by pressing Enter, and that's it!\\
 
-\subsection{During the simulation: where to put the accent}
+\subsection{During the simulation: where to put the accent}\label{subsec:during}
 Simulation is running and our network is evolving. A window will appear with the drawing network\footnote{The run time network is drawn using networkx and matplotlib libraries.} and flowing time is displayed in terminal. \\
 Nodes of the network are painted with different colors: if they don't spread, gray for inactive state and blue for active one; if they spread, they can be orange, pink or cyan depending on the spread news. In detail, every source initially generates a single news, tracked by its color. Sources are bigger than users and labeled with 0,1 and 2; numbering goes on with users.\\
 We can show network dynamic in the pictures below:
@@ -86,9 +86,22 @@ We can show network dynamic in the pictures below:
   \caption{Plot at different time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17}
 \end{figure}
 
-\subsection{After the simulation: what to notice}
+\subsection{After the simulation: what to notice}\label{subsec:after}
 We can notice that in the fist cycle~\ref{fig:1} news have not spread yet and the agents are mostly inactive. ......................
 
-\subsection{Further implementations}
+\subsection{Further implementations}\label{subsec:implementations}
+Some possible future features are:
+\begin{itemize}
+\item [adding and removing nodes during execution] can yield big changes
+  in the process;
+\item [look for emerging network behaviors] as said in \textit{\nameref{sec:introduction}} we hope to point out scale-free regime;
+\item [analyze the activation time] starting from \cite{goh_burstiness_2008}
+\end{itemize}
 
-\subsection{Conclusion}
+\subsection{Conclusion}\label{subsec:conclusion}
+
+
+
+
+
+
