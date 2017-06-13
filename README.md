@@ -1,6 +1,6 @@
 # memory #
 university abm project
-![Image](tex/img/pdf/cover.png)
+<img src="./tex/img/png/cover.png" />
 
 italian description
 # Progetto di econofisica: Effetti della memoria nel *news spreading* #
