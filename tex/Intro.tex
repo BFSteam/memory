@@ -1,10 +1,10 @@
 \begin{figure}[!h]
   \centering
   \includegraphics[trim={2.1cm 2cm 2cm 2cm}, clip, width=\columnwidth]{img/pdf/cover}
-  \caption{Example of a simulation run with: sources: 3, users: 200, cycles:800, average degree: 5, seed: 123456789}
+  \caption{News Spreading Network Simulation\protect\footnotemark}
   \label{fig:abstract}
 \end{figure}
-
+\footnotetext{Simulation run with: sources: 3, users: 200, cycles:800, average degree: 5, seed: 123456789}
 \section*{Abstract}\label{abstract}
 Our aim is to analyse the influence of memory in a news spreading dynamic. In order to do that, we have built a framework of agents 
 connected in a network and equipped them with a set of basic functions. We wish to observe a diffusion-like process.
@@ -27,10 +27,10 @@ We have built our model focusing on two coexisting points of view: agent based n
 We have blended these two frames considering a network of agents. 
 \subsection{Context}
 Let us focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{social} can be thought in a general context.} network.
-\\ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations. \cite{chen2013information}
+\\ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations.\cite{chen2013information}
  There is an apparent similarity with epidemiological processes. 
 However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process seems to be threshold-less.
- The epidemic model of information diffusion is usually a compartmental model in which agents, in different stages, coexist in the world \cite{barrat2008dynamical}.
+ The epidemic model of information diffusion is usually a compartmental model in which agents, in different stages, coexist in the world.\cite{barrat2008dynamical}
  Most of initial users stays in the compartment of \textit{ignorants} whereas a minority of them stays in the \textit{spreader} compartment.
  There is also another compartment, the \textit{stiflers}: users influenced by news who do not spread anymore (equivalent to \textit{recovery} in the SIR model.\footnote{Acronym of Susceptible-Infected-Recovery, most famous model of epidemic spreading.}
 \\ This \textit{Spreader-Ignorant-stifler} model (SIs) can be sketched by a set of transition between compartments; one of the transition is spontaneous while the others are induced by contact:
@@ -54,13 +54,13 @@ which enable us to estimate the future qualitative behaviour of spreading:
 if this number is above some epidemic threshold then virality of diffusion is guaranteed.\\
 This description can be reliable with a single viral diffusion of news, but when a
 multiple news diffusion occurs, the analysis by a set of several differential equations would result more difficult.  
- \\ A compartmental approach to study the phenomenon of information diffusion has been widely examined in the last years, with very different variants of naive models. \cite{fedewa2013spread}\cite{tambuscio2016network}
-There are also several papers underlining interesting results in social science: for example social influence, infection, segregation \cite{henry2011emergence}, homophily \cite{aiello2012friendship} or fake news diffusion \cite{tambuscio2016network} \cite{nekovee2007theory}; or also the effects of fact-checking or bot-agent insertion \cite{aiello2012people} in a network.
- In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography. \cite{liu2011rumor}\cite{serrano2015novel}\cite{seo2012identifying}\cite{de2013simulation}\cite{serrano2016validating}
+ \\ A compartmental approach to study the phenomenon of information diffusion has been widely examined in the last years, with very different variants of naive models.\cite{fedewa2013spread}\cite{tambuscio2016network}
+There are also several papers underlining interesting results in social science: for example social influence, infection, segregation,\cite{henry2011emergence} homophily\cite{aiello2012friendship} or fake news diffusion;\cite{tambuscio2016network}\cite{nekovee2007theory} or also the effects of fact-checking or bot-agent insertion\cite{aiello2012people} in a network.
+ In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography.\cite{liu2011rumor}\cite{serrano2015novel}\cite{seo2012identifying}\cite{de2013simulation}\cite{serrano2016validating}
 
 
 \subsection{Why Agents?}\label{subsec:whyagents}
-Agents are a very useful paradigm to model social interactions. \cite{axtell2000agents}
+Agents are a very useful paradigm to model social interactions.\cite{axtell2000agents}
 They can operate in their environment, take decisions and interact with each other.
 There is no communication protocol between them but they communicate and share news with "friends". \\
 The environment is not deterministic. 
