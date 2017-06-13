@@ -1,9 +1,11 @@
 \section{Tutorial}\label{sec:tutorial}
 \subsection{Before the simulation: what to do}\label{subsec:before}
 Let us see in practice what we have previously learnt in a simple tutorial:
-first of all, we need the whole program, available at \url{https://github.com/BFSteam/memory.}\\
-Once downloaded it is convenient to put \texttt{path\_to/memory/src} inside
-\texttt{path\_to\_SLAPP3/project.txt} as described in \textit{SLAPP\_Reference\_Handbook.pdf pag20}.
+first of all, we need the whole program, available at
+\url{https://github.com/BFSteam/memory.}\\
+Once downloaded, it is convenient to put \texttt{path\_to/memory/src} inside
+\texttt{path\_to\_SLAPP3/project.txt} as described in
+\textit{SLAPP\_Reference\_Handbook.pdf pag20}.
 Inside SLAPP3 we can run the program \texttt{runShell.py} from terminal
 or from jupyter notebook using \texttt{iRunShell.ipynb}.
 The program asks which project we want to run: if we set up the path correctly
@@ -11,13 +13,16 @@ we can confirm \textit{memory} path and project.
 Afterwards we have to set all the necessary input variables to start
 the simulation:
 \begin{itemize}
-\item[\texttt{Random number seed:}] insert the seed to make the simulation reproducible.
-\item[\texttt{Number of sources:}]insert the number of sources inside the network.
-\item[\texttt{Number of users:}]insert the number of users inside the network.
-\item[\texttt{Average degree for users:}]insert the value of the average degree for users only.
+\item[\texttt{Random number seed:}] insert the seed to make the simulation
+  reproducible.
+\item[\texttt{Number of sources:}]insert the number of sources inside
+  the network.
+\item[\texttt{Number of users:}]insert the number of users inside the
+  network.
+\item[\texttt{Average degree for users:}]insert the value of the average
+  degree for users only.
 \item[\texttt{Number of cycles:}]insert the maximum number time can reach.
 \end{itemize}
-
 In order to simplify our first approach, default values are provided:
 answering enter at each line will make the program run, and that's it!\\
 
@@ -27,9 +32,11 @@ with the drawing network\footnote{Graphs drawn using
   \href{https://networkx.github.io/}{networkx} and
   \href{https://matplotlib.org/}{matplotlib}}
 and flowing time is displayed in terminal. \\
-Nodes of the network are painted with different colors: if they don't
-spread, gray for inactive state and blue for active one; if they spread can be orange, pink or cyan depending on the spreaded news.
-In detail, every source initially generates a single news, tracked by its color. The source's size are bigger than users and labeled with 0,1 and 2; numbering goes on with users.\\
+Nodes of the network are painted with different colors. If they don't
+spread: grey for inactive state and blue for active one; if they spread
+can be orange, pink or cyan depending on the spreaded news.
+In detail, every source initially generates a single news, tracked by its
+color. The source's size are bigger than users'one; sources are labeled with 0, 1 and 2. Numbering goes on with users.\\
 We show network dynamic in the pictures below:
 \begin{figure}[!h]
   \centering
@@ -98,37 +105,39 @@ We show network dynamic in the pictures below:
 \end{figure}
 
 \subsection{After the simulation: what to notice}\label{subsec:after}
-We show graphs of a previous run: the parameters used are, seed 17, 3 sources,
+We show graphs of a previous run. Used parameters are: seed 17, 3 sources,
 200 users, initial average degree of 3, and 500 time steps.
-In figure~\ref{fig:1} we see the net during initialization. Diffusion
+In figure~\ref{fig:1} we see the network during initialization. Diffusion
 has not started yet and users are mostly inactive:
-sources have create one news and the few active users are unaware.
+sources have created one news and the few active users are unaware.
 After five time steps, figure~\ref{fig:5}, some users have changed their state
-to active and started to spread. However, a few of blue users uninformed still remain.
-At thenth iteration, in figure~\ref{fig:10}, almost every user
-has a news inside and the whole network might a well be homogeneously mixed. 
-We have also the first edge creation and remotion, 
-consequntly the network's topology start to changing.
-Now we jump to the fiftieth iteration, figure~\ref{fig:50},to see that
-all the users except one are involved in the dynamic. There is still no
+to active and have started to spread.
+However, a few of uninformed users still remain.
+At tenth iteration, in figure~\ref{fig:10}, almost every user
+has a news inside and the whole network might be homogeneously mixed. 
+We have also the first edge creation and removal: 
+consequently, the network's topology starts changing.
+Now we jump to the fiftieth iteration, figure~\ref{fig:50}, to see that
+all the users except one are involved in the dynamic. There might be a
 clue of segregation.
-After another fifty steps we detect the first clear symptom of segregation.
+After fifty steps we detect the first clear symptom of segregation.
 Moving on of a hundred in a hundred time steps, we see how the orange news
-is inclined to disappear and arise a strong segregation in two communities
- due to past influence between users.
+tends to vanish and a strong segregation arise in two main communities
+due to past influence between users.
 
 \subsection{Further implementations}\label{subsec:implementations}
 Some possible future developments are:
+%
 \begin{itemize}
 \item [adding and removing nodes during execution] can yield big changes
   in the process;
-  \item [different algorithm of net generation] at initial clock could be implemented e.g. Barabasi-Albert algorithm or Watts-strogatz algorithm;
-\item [look for emerging network behaviors] as said in \textit{\nameref{sec:introduction}} we hope to point out scale-free regime;
+\item [different algorithm of network generation] e.g. Barabasi-Albert
+  algorithm or Watts-Strogatz algorithm;
 \item [analyze the activation time] starting from microscopic behaviors
   it is possible to reproduce macroscopic phenomena such as bursty
   patterns.\cite{goh_burstiness_2008}
 \end{itemize}
-
+%
 \subsection{Conclusion}\label{subsec:conclusion}
 %
 %We would like to emphasize that our model of spreading of news is not based
@@ -150,8 +159,9 @@ Some possible future developments are:
  several simulations, performed with different parameters, could lead
  us to a proof which decides the conjecture.
  We observed segregation in almost all examples and some parameters might be
- more relevant than others. Two open problems arise: which are the key ones
- and, if we found them out, which their values or their ranges would be.
+ more relevant than others. Two open questons hold: which are the key
+ parameters and, if we found them out, which their values and
+ their ranges would be.
  This is pure speculation on our part but if it were right we could
  state which parameters are crucial.
  A second issue we have previously discussed is the emerging scale
