@@ -27,7 +27,7 @@ We have built our model focusing on two coexisting points of view: agent based n
 We have blended these two frames considering a network of agents. 
 \subsection{Context}
 Let us focus on the dynamical process of rumor spreading in a social\footnote{The word \textit{social} can be thought in a general context.} network.
-\\ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations \cite{chen2013information}.
+\\ News diffusion is generally studied in a stochastic context, ruled by a set of stochastic differential equations. \cite{chen2013information}
  There is an apparent similarity with epidemiological processes. 
 However, while epidemic diffusion becomes a viral process when a threshold is exceeded, rumor spreading process seems to be threshold-less.
  The epidemic model of information diffusion is usually a compartmental model in which agents, in different stages, coexist in the world \cite{barrat2008dynamical}.
@@ -54,20 +54,20 @@ which enable us to estimate the future qualitative behaviour of spreading:
 if this number is above some epidemic threshold then virality of diffusion is guaranteed.\\
 This description can be reliable with a single viral diffusion of news, but when a
 multiple news diffusion occurs, the analysis by a set of several differential equations would result more difficult.  
- \\ A compartmental approach to study the phenomenon of information diffusion has been widely examined in the last years, with very different variants of naive models \cite{barrat2008dynamical} \cite{barrat2008dynamical}\cite{barrat2008dynamical}\cite{barrat2008dynamical}\cite{barrat2008dynamical}.
-There are also several papers underlining interesting results in social science: for example social influence, infection, segregation, homophily or fake news diffusion; or also the effects of fact-checking or bot-agent insertion \cite{aiello2012people} in a network.
- In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography.
+ \\ A compartmental approach to study the phenomenon of information diffusion has been widely examined in the last years, with very different variants of naive models. \cite{fedewa2013spread}\cite{tambuscio2016network}
+There are also several papers underlining interesting results in social science: for example social influence, infection, segregation \cite{henry2011emergence}, homophily \cite{aiello2012friendship} or fake news diffusion \cite{tambuscio2016network} \cite{nekovee2007theory}; or also the effects of fact-checking or bot-agent insertion \cite{aiello2012people} in a network.
+ In news spreading literature, only few models are built on an agent architecture and we report references in the bibliography. \cite{liu2011rumor}\cite{serrano2015novel}\cite{seo2012identifying}\cite{de2013simulation}\cite{serrano2016validating}
 
 
 \subsection{Why Agents?}\label{subsec:whyagents}
-Agents are a very useful paradigm to model social interactions. 
+Agents are a very useful paradigm to model social interactions. \cite{axtell2000agents}
 They can operate in their environment, take decisions and interact with each other.
 There is no communication protocol between them but they communicate and share news with "friends". \\
 The environment is not deterministic. 
 Every action can produce different effects with a different probability, but the simulation must be reproducible.
 Actions between agents are non-deterministic. Agents don't have complete control of another agent; agents have limited senses and sensors.
 \\
-The required characteristics of each agent are: \begin{itemize}
+The required characteristics of each agent are:\cite{wooldridge1995intelligent} \begin{itemize}
 \item [\textit {Rationality:}] agents can take choices depending on their own belief and their surrounding environment;
 \item [\textit {reactivity:}] agents can check the World clock and news spreading nearby during the dynamic;
 \item [\textit {proactiveness:}] agents can express their own will, taking autonomous initiatives;

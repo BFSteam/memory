@@ -1,14 +1,14 @@
 \subsection{Network of Agents}\label{subsec:network}
 Our network is made of Agents eventually connected by weighted and undirected links.
 At the first time, the network is composed by the sum of a fixed number of sources and users. \\
-Users are linked between them with fixed probability computed from the desired average degree and inserted by external input.
+Users are linked with a fixed probability computed from the desired average degree and inserted by external input.
  In this way we obtain a random network of users, with exponential trend for the degree distribution in the termodynamic limit.
 \\ Links are the only possibility to establish a relation between the agents; a random value of weight of the link represents a previous bias in 
 friendship.\footnote{This particular choice for our links underlines bilaterality and intensity of communication between agents.
 Taking as example an exchange of information between two people or between a person and a newspaper, weight represents feeling, previous chemistry;}
 The result of such a mechanism of graph generation doesn't actually return a real network, because social real networks possess the property of 
 scale-free;\footnote{The scale-free property is mainly described by power law degree distribution, with a cut-off for high degrees (i.e. hubs). } instead, random graphs have a majority of node-degrees peaked around the average-degree. 
-Also, the variance is very large in scale-free network and guarantees the existence of hubs in the network.
+Also, the variance is very large in scale-free network and guarantees the existence of hubs in the network.\cite{newman1963introduction}
 Despite the abovementioned theory, we start with a random network hoping to observe a natural evolution in this direction.
 
 Sources are a news reservoir: users can pick one or more news from them and eventually spread.
