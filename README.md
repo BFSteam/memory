@@ -1,7 +1,7 @@
 # memory #
 university abm project
 <img src="./tex/img/png/cover.png" />
-
+![img](tex/img/png/cover.png)
 italian description
 # Progetto di econofisica: Effetti della memoria nel *news spreading* #
 ## Roberto Bertilone, Francesco Fanchin, Nicola Sella ##
