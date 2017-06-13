@@ -1,6 +1,7 @@
 # memory #
 university abm project
 <img src="https://github.com/BFSteam/memory/blob/master/tex/img/png/cover.png" />
+[[https://github.com/BFSteam/memory/blob/master/tex/img/png/cover.png]]
 ![img](tex/img/png/cover.png)
 italian description
 # Progetto di econofisica: Effetti della memoria nel *news spreading* #
