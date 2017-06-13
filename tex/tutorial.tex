@@ -19,7 +19,7 @@ the simulation:
 \end{itemize}
 
 In order to simplify our first approach, default values are provided:
-answering enter at each line will mak the program run, and that's it!\\
+answering enter at each line will make the program run, and that's it!\\
 
 \subsection{During the simulation: where to put the accent}\label{subsec:during}
 Simulation is running and our network is evolving. A window will appear
@@ -28,10 +28,9 @@ with the drawing network\footnote{Graphs drawn using
   \href{https://matplotlib.org/}{matplotlib}}
 and flowing time is displayed in terminal. \\
 Nodes of the network are painted with different colors: if they don't
-spread, gray for inactive state and blue for active one; if they spread,
-they can be orange, pink or cyan depending on the spread news.
-In detail, every source initially generates a single news, tracked by its color. Sources are bigger than users and labeled with 0,1 and 2; numbering goes on with users.\\
-We can show network dynamic in the pictures below:
+spread, gray for inactive state and blue for active one; if they spread can be orange, pink or cyan depending on the spreaded news.
+In detail, every source initially generates a single news, tracked by its color. The source's size are bigger than users and labeled with 0,1 and 2; numbering goes on with users.\\
+We show network dynamic in the pictures below:
 \begin{figure}[!h]
   \centering
   \begin{subfigure}[t]{.45\textwidth}
@@ -62,7 +61,7 @@ We can show network dynamic in the pictures below:
     \label{fig:50}
   \end{subfigure}
  
-  \caption{Plot at different time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17}
+  \caption{Plot at different initial time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17.}
 \end{figure}
 
 \begin{figure}
@@ -95,7 +94,7 @@ We can show network dynamic in the pictures below:
     \label{fig:500}
   \end{subfigure}
  
-  \caption{Plot at different time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17}
+  \caption{Plot at different final time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17.}
 \end{figure}
 
 \subsection{After the simulation: what to notice}\label{subsec:after}
@@ -103,34 +102,49 @@ We show graphs of a previous run: the parameters used are, seed 17, 3 sources,
 200 users, initial average degree of 3, and 500 time steps.
 In figure~\ref{fig:1} we see the net during initialization. Diffusion
 has not started yet and users are mostly inactive:
-sources have create one news each.
+sources have create one news and the few active users are unaware.
 After five time steps, figure~\ref{fig:5}, some users have changed their state
-to active and started to spread.
+to active and started to spread. However, a few of blue users uninformed still remain.
 At thenth iteration, in figure~\ref{fig:10}, almost every user
-has a news inside. We have also the first edge creation and remotion.
+has a news inside and the whole network might a well be homogeneously mixed. 
+We have also the first edge creation and remotion, 
+consequntly the network's topology start to changing.
 Now we jump to the fiftieth iteration, figure~\ref{fig:50},to see that
 all the users except one are involved in the dynamic. There is still no
 clue of segregation.
-After another fifty steps we detect the first symptom of segregation.
+After another fifty steps we detect the first clear symptom of segregation.
 Moving on of a hundred in a hundred time steps, we see how the orange news
-is inclined to disappear.
+is inclined to disappear and arise a strong segregation in two communities
+ due to past influence between users.
 
 \subsection{Further implementations}\label{subsec:implementations}
-Some possible future features are:
+Some possible future developments are:
 \begin{itemize}
 \item [adding and removing nodes during execution] can yield big changes
   in the process;
+  \item [different algorithm of net generation] at initial clock could be implemented e.g. Barabasi-Albert algorithm or Watts-strogatz algorithm;
 \item [look for emerging network behaviors] as said in \textit{\nameref{sec:introduction}} we hope to point out scale-free regime;
 \item [analyze the activation time] starting from microscopic behaviors
   it is possible to reproduce macroscopic phenomena such as bursty
-  patterns\cite{goh_burstiness_2008}
+  patterns\cite{goh_burstiness_2008}.
 \end{itemize}
 
 \subsection{Conclusion}\label{subsec:conclusion}
 
+We would like to emphasize that our model of spreading of news is not based on some epidemic model
+ e.g. SIR or another version governed by differential equations. The model instead can be to see like an 
+ intersection between a theshold method and a cascade model, founded on microscopic actions made available to agents 
+  and based on the common sense and the social realities, for example the RICH PHENOMENON .. mancanza smetto quas
 
 
-
+La particolarità del modello puo' essere svelata da semplici osservazioni: più notizie possono diffondersi nella rete e coesistere nella
+ dinamica di diffusione; le notizie sono generate da sources che sono parte integrante della rete; si modellizza una memoria individuale
+  di ogni agente che gli consente di ricordare un certo numero di news diffuse; si modellizza l'influenza sociale che modifica lo stato mentale;
+\\ Crediamo che la variazione della lunghezza della memoia abbia degli effetti misurabili nella dinamica macroscopica del modello, 
+ed è questo che intenderemo indagare d'ora in avanti. Procederemo facendo un gran numero di simulazioni variando i parametri 
+determinanti del modello in modo da generare una statistica di osservazioni.
+ Vorremmo capire se in certe condizioni si verifica l'evoluzione della rete verso un regime scale free. Potremmo fissare i parametri
+  critici entro cui ciò succiede, oppure determinare i valori dei parametri superati i quali non si verifica più segregazione nella rete o spreading virale. 
 
 
 
