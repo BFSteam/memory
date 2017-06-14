@@ -5,7 +5,7 @@ import commonVar as common
 import networkx as nx
 import time
 import os
-from usefulFunctions import worldAgentStringsizer
+from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer
 
 
 def do1b(address):  # visualizeNet in observerActions.txt
@@ -34,6 +34,9 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
             os.makedirs(common.project.replace("src", "log"))
         path = common.project.replace("src", "log/graph.gml")
         nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
+        print("saved", path)
+        path = common.project.replace("src", "log/graphN.gml")
+        nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
         print("saved", path)
         path = common.project.replace("src", "log/connectionLog.csv")
         common.conlog.writeLog(path=path)

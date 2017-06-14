@@ -48,3 +48,13 @@ def worldAgentStringsizer(agent):
         'type': agent.agType,
         'database': agent.database
     })
+
+
+def singleNewsStringsizer(agent):
+    """
+
+    print the memory of the agent
+
+    """
+
+    return str([agent.database[key]['id-n'] for key in agent.database])
