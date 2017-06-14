@@ -38,7 +38,11 @@ can be orange, pink or cyan depending on the spreaded news.
 In detail, every source initially generates a single news, tracked by its
 color. The source's size are bigger than users'one; sources are labeled with 0, 1 and 2. Numbering goes on with users.\\
 We show network dynamic in the pictures below:
-\begin{figure}[!h]
+
+\subsection{After the simulation: what to notice}\label{subsec:after}
+We show graphs of a previous run. Used parameters are: seed 17, 3 sources,
+200 users, initial average degree of 3, and 500 time steps.\\
+\begin{figure}[htpb]
   \centering
   \begin{subfigure}[t]{.45\textwidth}
     \centering
@@ -52,8 +56,6 @@ We show network dynamic in the pictures below:
     \caption{5 cycles}
     \label{fig:5}
   \end{subfigure}
-
-  \vspace{0cm}
 
   \begin{subfigure}[t]{.45\textwidth}
     \centering
@@ -70,8 +72,17 @@ We show network dynamic in the pictures below:
  
   \caption{Plot at different initial time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17.}
 \end{figure}
-
-\begin{figure}
+In figure~\ref{fig:1} we see the network during initialization. Diffusion
+has not started yet and users are mostly inactive:
+sources have created one news and the few active users are unaware.\\
+After five time steps, figure~\ref{fig:5}, some users have changed their state
+to active and have started to spread.
+However, a few of uninformed users still remain.
+At tenth iteration, in figure~\ref{fig:10}, almost every user
+has a news inside and the whole network might be homogeneously mixed. 
+We have also the first edge creation and removal: 
+consequently, the network's topology starts changing.\\
+\begin{figure}[htpb]
   \centering
   \begin{subfigure}[t]{.45\textwidth}
     \centering
@@ -85,8 +96,6 @@ We show network dynamic in the pictures below:
     \caption{200 cycles}
     \label{fig:200}
   \end{subfigure}
-
-  \vspace{0cm}
 
   \begin{subfigure}[t]{.45\textwidth}
     \centering
@@ -102,21 +111,7 @@ We show network dynamic in the pictures below:
   \end{subfigure}
  
   \caption{Plot at different final time steps for a simulation with 3 sources, 200 users, initial average degree of users 3 and 500 time steps. Random seed initialized to 17.}
-\end{figure}
-
-\subsection{After the simulation: what to notice}\label{subsec:after}
-We show graphs of a previous run. Used parameters are: seed 17, 3 sources,
-200 users, initial average degree of 3, and 500 time steps.
-In figure~\ref{fig:1} we see the network during initialization. Diffusion
-has not started yet and users are mostly inactive:
-sources have created one news and the few active users are unaware.
-After five time steps, figure~\ref{fig:5}, some users have changed their state
-to active and have started to spread.
-However, a few of uninformed users still remain.
-At tenth iteration, in figure~\ref{fig:10}, almost every user
-has a news inside and the whole network might be homogeneously mixed. 
-We have also the first edge creation and removal: 
-consequently, the network's topology starts changing.
+\end{figure}\\
 Now we jump to the fiftieth iteration, figure~\ref{fig:50}, to see that
 all the users except one are involved in the dynamic. There might be a
 clue of segregation.
@@ -124,7 +119,6 @@ After fifty steps we detect the first clear symptom of segregation.
 Moving on of a hundred in a hundred time steps, we see how the orange news
 tends to vanish and a strong segregation arise in two main communities
 due to past influence between users.
-
 \subsection{Further implementations}\label{subsec:implementations}
 Some possible future developments are:
 %
@@ -139,32 +133,29 @@ Some possible future developments are:
 \end{itemize}
 %
 \subsection{Conclusion}\label{subsec:conclusion}
-%
-%We would like to emphasize that our model of spreading of news is not based
-%on some epidemic model e.g. SIR or another version governed by differential
-%equations. The model instead can be to see like an intersection between
-%a theshold method and a cascade model, founded on microscopic actions made
-%available to agents  and based on the common sense and the social realities,
-%for example the RICH PHENOMENON .. mancanza smetto quas
-%
-%
-%La particolarità del modello puo' essere svelata da semplici osservazioni: più notizie possono diffondersi nella rete e coesistere nella
-% dinamica di diffusione; le notizie sono generate da sources che sono parte integrante della rete; si modellizza una memoria individuale
-% di ogni agente che gli consente di ricordare un certo numero di news diffuse; si modellizza l'influenza sociale che modifica lo stato mentale;
-%
-% \\
- We expect that memory length will lead to measurable macroscopic
- dynamical effects: this is what we would like to investigate.
- This project will advance our understanding on this hypotesis:
- several simulations, performed with different parameters, could lead
- us to a proof which decides the conjecture.
- We observed segregation in almost all examples and some parameters might be
- more relevant than others. Two open questons hold: which are the key
- parameters and, if we found them out, which their values and
- their ranges would be.
- This is pure speculation on our part but if it were right we could
- state which parameters are crucial.
- A second issue we have previously discussed is the emerging scale
- free dynamic: the authenticity of our guess will be validated
- through statistical observations.
+Despite the vast and growing literature on rumor spreading based on
+SIR model we have built agents' microscopic actions establishing on
+common human behaviour and social rules.
+Furthermore the environment is a random network and the edges
+change dynamically.
+Agents alter their mind state interacting with neighbors.
+The diffusion process takes into account from one to several news.
+Sources are agent themselves: they are part of the network
+and are not external.\\
+The originality of our model lies in the brand new variable memory
+which strongly affects agent's actions and decisions. 
+We expect that memory length will lead to measurable macroscopic
+dynamical effects: this is what we would like to investigate.
+This project will advance our understanding on this hypotesis:
+several simulations, performed with different parameters, could lead
+us to a proof which decides the conjecture.\\
+We observed segregation in almost all examples and some parameters might be
+more relevant than others. Two open questons hold: which are the key
+parameters and, if we found them out, which their values and
+their ranges would be.
+This is pure speculation on our part but if it were right we could
+state which parameters are crucial.
+A second issue we have previously discussed is the emerging scale
+free dynamic: the authenticity of our guess will be validated
+through statistical observations.
  
