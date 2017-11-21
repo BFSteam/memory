@@ -43,7 +43,7 @@ def initializeEdges():
                             first=i,
                             second=j,
                             date=common.cycle,
-                            weight=common.G.edge[i][j]['weight'],
+                            weight=common.G[i][j]['weight'],
                             cr='a'
                         )
                 else:
@@ -54,7 +54,7 @@ def initializeEdges():
                             first=i,
                             second=j,
                             date=common.cycle,
-                            weight=common.G.edge[i][j]['weight'],
+                            weight=common.G[i][j]['weight'],
                             cr='a'
                         )
 

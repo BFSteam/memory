@@ -132,7 +132,7 @@ class User(WorldAgent):
             first=self.number,
             second=n,
             date=common.cycle,
-            weight=common.G.edge[self.number][n]['weight'],
+            weight=common.G[self.number][n]['weight'],
             cr='r'
         )
         common.G.remove_edge(self.number, n)
@@ -546,25 +546,25 @@ class User(WorldAgent):
             finalNeighbour = bestNeighbour
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
         if common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) < threshold:
-            common.G.edge[self.number][finalNeighbour]['weight'] -= q * common.G.node[finalNeighbour]['agent'].distance(
+            common.G[self.number][finalNeighbour]['weight'] -= q * common.G.node[finalNeighbour]['agent'].distance(
                 bestNews['new'])
             common.conlog.registerEntry(
                 first=self.number,
                 second=finalNeighbour,
                 date=common.cycle,
-                weight=common.G.edge[self.number][finalNeighbour]['weight'],
+                weight=common.G[self.number][finalNeighbour]['weight'],
                 cr='u'
             )
-            if common.G.edge[self.number][finalNeighbour]['weight'] < r:
+            if common.G[self.number][finalNeighbour]['weight'] < r:
                 self.removeEdge(finalNeighbour)
         elif common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) > 1 - threshold:
-            common.G.edge[self.number][finalNeighbour]['weight'] += q * common.G.node[finalNeighbour]['agent'].distance(
+            common.G[self.number][finalNeighbour]['weight'] += q * common.G.node[finalNeighbour]['agent'].distance(
                 bestNews['new'])
             common.conlog.registerEntry(
                 first=self.number,
                 second=finalNeighbour,
                 date=common.cycle,
-                weight=common.G.edge[self.number][finalNeighbour]['weight'],
+                weight=common.G[self.number][finalNeighbour]['weight'],
                 cr='u'
             )
 
