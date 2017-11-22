@@ -97,7 +97,7 @@ modelStep ask_all clock
 modelStep ask_all clock
 modelStep ask_all clock
 modelStep ask_all clock
-modelStep ask_all clock
+modelStep ask_all visualizeNet clock
 modelStep ask_all clock
 modelStep ask_all clock
 modelStep ask_all clock

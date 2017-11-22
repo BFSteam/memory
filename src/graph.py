@@ -94,22 +94,24 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     clearNetworkXdisplay()
     c = []
     if clrs == 'state':  # draw colors thinking of state
-        for i in range(len(common.G.nodes())):
-            if common.G.nodes(data=True)[i][1]['agent'].hasNews(id_source=0, date=1) is True:
+        print(common.G.node[0]['agent'].hasNews(id_source=0, date=1))
+        
+        for i in list(common.G.nodes()):
+            if common.G.node[i]['agent'].hasNews(id_source=0, date=1) is True:
                 c.append('#ffa500')
                 continue
-            elif common.G.nodes(data=True)[i][1]['agent'].hasNews(id_source=1, date=1) is True:
+            elif common.G.node[i]['agent'].hasNews(id_source=1, date=1) is True:
                 c.append('#ff748c')
                 continue
-            elif common.G.nodes(data=True)[i][1]['agent'].hasNews(id_source=2, date=1) is True:
+            elif common.G.node[i]['agent'].hasNews(id_source=2, date=1) is True:
                 c.append('#38ffc8')
                 continue
             else:
-                if common.G.nodes()[i] < common.N_SOURCES:
+                if common.G.nodes()[i]['agent'].number < common.N_SOURCES:
                     c.append('red')
                     continue
                 else:
-                    if common.G.nodes(data=True)[i][1]['agent'].active is True:
+                    if common.G.nodes[i]['agent'].active is True:
                         c.append('blue')
                         continue
                     else:
@@ -117,8 +119,8 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
                         continue
 
     node_size = []
-    for i in range(len(common.G.nodes())):
-        if common.G.nodes()[i] < common.N_SOURCES:
+    for i in list(common.G.nodes()):
+        if common.G.nodes()[i]['agent'].number < common.N_SOURCES:
             node_size.append(100)
         else:
             node_size.append(60)
@@ -134,11 +136,11 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
         nx.draw_networkx_labels(common.G, pos, font_size=8)
 
     plt.title(
-        'seed:', common.SEED,
-        'u:', common.N_USERS,
-        's:', common.N_SOURCES,
-        'av.deg.:', common.averageDegree,
-        't:', common.cycle, "/", common.N_CYCLES
+        'seed:'+ str(common.SEED) +
+        'u:' + str(common.N_USERS) +
+        's:' + str(common.N_SOURCES) +
+        'av.deg.:' + str(common.averageDegree) +
+        't:' + str(common.cycle) +"/" + str(common.N_CYCLES)
     )
     # plt.show()  # show plot
     if not os.path.exists(common.project.replace("src", "log")):
