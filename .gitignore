@@ -192,3 +192,6 @@ venv.bak/
 *.out
 *.synctex.gz
 *.pdf
+
+## Project Gitignore ##
+tmp/*
