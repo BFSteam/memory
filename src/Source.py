@@ -8,6 +8,7 @@ import math
 import os
 import binascii
 import usefulFunctions as uf
+import random
 
 
 class Source(WorldAgent):
@@ -40,7 +41,7 @@ class Source(WorldAgent):
     def __init__(self, number, myWorldState, agType=""):
         WorldAgent.__init__(self, number, myWorldState, agType=agType)
         self.news = {}
-        self.reliability = np.random.random_sample()
+        self.reliability = random.random()
 
         self.genState(n=3, noise=0.15)
 
@@ -58,7 +59,7 @@ class Source(WorldAgent):
 
         tmp = self.state
         for j in range(common.dim):
-            tmp[j] += 0.1 * np.random.random_sample()
+            tmp[j] += 0.1 * random.random()
         tmp = tmp / tmp.sum()
         return tmp
 
@@ -94,7 +95,7 @@ class Source(WorldAgent):
             self.database[stringa]['new'] = self.createNews()
             self.database[stringa]['id-source'] = self.number
             self.database[stringa]['date-creation'] = common.cycle
-            self.database[stringa]['relevance'] = np.random.random_sample()
+            self.database[stringa]['relevance'] = random.random()
             common.msglog.registerEntry(
                 id_src=self.number,
                 date_creation=common.cycle,

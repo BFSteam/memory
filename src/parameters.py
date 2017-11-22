@@ -20,10 +20,10 @@ def loadParameters(self):
     common.SEED = mySeed
     if mySeed == 1:
         random.seed()
-        np.random.seed()
+        
     else:
         random.seed(mySeed)
-        np.random.seed(mySeed)
+        
 
     """
 

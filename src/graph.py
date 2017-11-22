@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import commonVar as common
 import numpy as np
 import os
+import random
 
 
 warnings.filterwarnings("ignore", ".*GUI is implemented.*")
@@ -36,9 +37,9 @@ def initializeEdges():
                 if i < common.N_SOURCES and j < common.N_SOURCES:
                     pass
                 elif i >= common.N_SOURCES and j >= common.N_SOURCES:
-                    if np.random.random_sample() < common.P_a:
+                    if random.random() < common.P_a:
                         common.G.add_edge(
-                            i, j, weight=0.3 + 0.7 * np.random.random_sample())
+                            i, j, weight=0.3 + 0.7 * random.random())
                         common.conlog.registerEntry(
                             first=i,
                             second=j,
@@ -47,9 +48,9 @@ def initializeEdges():
                             cr='a'
                         )
                 else:
-                    if np.random.random_sample() < common.P_s:
+                    if random.random() < common.P_s:
                         common.G.add_edge(
-                            i, j, weight=0.3 + 0.7 * np.random.random_sample())
+                            i, j, weight=0.3 + 0.7 * random.random())
                         common.conlog.registerEntry(
                             first=i,
                             second=j,

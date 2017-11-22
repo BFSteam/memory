@@ -59,12 +59,12 @@ class User(WorldAgent):
 
         """
 
-        if np.random.random_sample() > p:
+        if random.random() > p:
             self.active = False
-            self.inactiveTime = np.random.randint(0, 6)
+            self.inactiveTime = random.randint(0, 5)
         else:
             self.active = True
-            self.activeTime = np.random.randint(0, 2)
+            self.activeTime = random.randint(0, 1)
 
     def listNeighbours(self):
         """
@@ -105,7 +105,7 @@ class User(WorldAgent):
 
         return common.G.nodes(data=True)[n][1]['agent'].state
 
-    def addEdge(self, n, weight=0.3 + 0.7 * np.random.random_sample()):
+    def addEdge(self, n, weight=0.3 + 0.7 * random.random()):
         """
 
         create link with a node with id a
@@ -216,7 +216,7 @@ class User(WorldAgent):
                 del(self.database[kmin])
 
         # random forget
-        if np.random.random_sample() < rnd:
+        if random.random() < rnd:
             if self.database == {}:
                 pass
             else:
@@ -378,7 +378,7 @@ class User(WorldAgent):
         """
 
         if self.inactiveTime > t:
-            if np.random.random_sample() < self.inactiveTime * p:
+            if random.random() < self.inactiveTime * p:
                 self.switchActivation()
 
     def becomeInactive(
@@ -408,7 +408,7 @@ class User(WorldAgent):
         if tired is True:
             p = p * self.tiredness
         if self.activeTime > t:
-            if np.random.random_sample() < self.activeTime * p:
+            if random.random() < self.activeTime * p:
                 self.switchActivation()
                 self.tiredness = 1
 
@@ -540,7 +540,7 @@ class User(WorldAgent):
             if self.isUser(shuffledNeighbour) is True:
                 break
         # common.G.node[shuffledNeighbour]['agent'].remember(bestNews)
-        if np.random.random_sample() < p:
+        if random.random() < p:
             finalNeighbour = shuffledNeighbour
         else:
             finalNeighbour = bestNeighbour
@@ -641,9 +641,9 @@ class User(WorldAgent):
                 break
         d2 = self.distance(common.G.node[n2]['agent'].state)
         if d1 > d2:
-            self.addEdge(n1, weight=0.3 + 0.7 * np.random.random_sample())
+            self.addEdge(n1, weight=0.3 + 0.7 * random.random())
         else:
-            self.addEdge(n2, weight=0.3 + 0.7 * np.random.random_sample())
+            self.addEdge(n2, weight=0.3 + 0.7 * random.random())
         return True
 
     def deleteEdge(self, p=0.1):
@@ -657,7 +657,7 @@ class User(WorldAgent):
             return False
         if len(self.listNeighbours()) == 1:
             return False
-        if np.random.random_sample() < p:
+        if random.random() < p:
             self.removeEdge(random.choice(self.listNeighbours()))
             return True
         d = 1
