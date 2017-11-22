@@ -68,3 +68,5 @@ tCreateEdge = 0.6  # threshold of random creation if the node is without connect
 
 # User -> deleteEdge
 pDeleteEdge = 0.1  # probability of removing a random edge
+
+debug = True

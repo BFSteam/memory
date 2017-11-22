@@ -1,0 +1,12 @@
+# Wed Nov 22 11:37:35 2017
+#simulation with:
+#SEED 1
+#N_AGENTS 203
+#N_USERS 200
+#N_SOURCES 3
+#P_a 0.025
+#P_s 0.25
+#dim 3
+#time 100
+#memorySize 1
+agent,time,news0

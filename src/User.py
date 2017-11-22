@@ -73,7 +73,7 @@ class User(WorldAgent):
 
         """
 
-        return common.G.neighbors(self.number)
+        return list(common.G.neighbors(self.number))
 
     def listNeighboursNode(self, n):
         """
@@ -595,7 +595,7 @@ class User(WorldAgent):
         d2 = -1
 
         # random choice
-        shuf = common.G.nodes()
+        shuf = list(common.G.nodes())
         random.shuffle(shuf)
         for node in shuf:
             # if nodes are not connected pick another one
@@ -638,11 +638,11 @@ class User(WorldAgent):
                 continue
             else:
                 break
-        d2 = self.distance(common.G.node[n2]['agent'].state)
+        d2 = self.distance(common.G.node[n2['agent'].number]['agent'].state)
         if d1 > d2:
             self.addEdge(n1, weight=0.3 + 0.7 * np.random.random_sample())
         else:
-            self.addEdge(n2, weight=0.3 + 0.7 * np.random.random_sample())
+            self.addEdge(n2['agent'].number, weight=0.3 + 0.7 * np.random.random_sample())
         return True
 
     def deleteEdge(self, p=0.1):
