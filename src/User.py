@@ -587,8 +587,9 @@ class User(WorldAgent):
 
         """
 
-        n1 = random.choice(common.G.nodes())
-        n2 = random.choice(common.G.nodes())
+        n1 = random.choice(list(common.G.nodes()))
+        n2 = random.choice(list(common.G.nodes()))
+
         nlist = []
         dlist = []
         d1 = -1
@@ -638,11 +639,11 @@ class User(WorldAgent):
                 continue
             else:
                 break
-        d2 = self.distance(common.G.node[n2['agent'].number]['agent'].state)
+        d2 = self.distance(common.G.node[n2]['agent'].state)
         if d1 > d2:
             self.addEdge(n1, weight=0.3 + 0.7 * np.random.random_sample())
         else:
-            self.addEdge(n2['agent'].number, weight=0.3 + 0.7 * np.random.random_sample())
+            self.addEdge(n2, weight=0.3 + 0.7 * np.random.random_sample())
         return True
 
     def deleteEdge(self, p=0.1):

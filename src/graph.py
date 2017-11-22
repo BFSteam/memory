@@ -30,8 +30,8 @@ def initializeEdges():
 
     """
 
-    for i in common.G.nodes():
-        for j in common.G.nodes():
+    for i in list(common.G.nodes()):
+        for j in list(common.G.nodes()):
             if j > i:
                 if i < common.N_SOURCES and j < common.N_SOURCES:
                     pass
