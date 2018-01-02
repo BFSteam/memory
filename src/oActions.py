@@ -18,7 +18,8 @@ def do1b(address):  # visualizeNet in observerActions.txt
 def do2a(address, cycle):  # ask_all in observerActions.txt
     self = address  # if necessary
     # ask each agent, without parameters
-    print("Time = ", cycle)
+    #if cycle % 25 == 0 :
+    #    print("Time =", cycle)
     common.memlog.updateLog()
 
 

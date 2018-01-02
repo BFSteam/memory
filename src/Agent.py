@@ -42,4 +42,4 @@ class Agent(SuperAgent):  # Agent must be the partent class of every object. Mus
 
         if myWorldState != 0:
             self.myWorldState = myWorldState
-        self.agType = agType
+            self.agType = agType

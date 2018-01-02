@@ -27,7 +27,7 @@ class MemoryScheduler(AgentManager):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.memoryLog = np.empty((0, 2 + common.memorySize))
+        self.memoryLog = np.empty((0, 3 + common.memorySize))
         print(self.memoryLog)
 
         common.memlog = self
@@ -49,7 +49,7 @@ class MemoryScheduler(AgentManager):
         print('#dim', common.dim, file=temp)
         print('#time', common.N_CYCLES, file=temp)
         print('#memorySize', common.memorySize, file=temp)
-        print("agent", "time", sep=',', end="", file=temp)
+        print("agent", "time", "state",sep=',', end="", file=temp)
         for i in range(common.memorySize):
             print(",", sep="", end="", file=temp)
             print("news", str(i), sep="", end="", file=temp)
@@ -64,9 +64,16 @@ class MemoryScheduler(AgentManager):
             e = np.empty([0])
             e = np.append(e, common.G.node[node]['agent'].number)
             e = np.append(e, common.cycle)
-            e = np.append(
-                e, [x.decode('utf-8') for x in list(common.G.node[node]['agent'].database.keys())])
-            for i in range(2 + common.memorySize - e.shape[0]):
+            if(common.G.node[node]['agent'].number < common.N_SOURCES) :
+                e = np.append(e, "x")
+            else:
+                if(common.G.node[node]['agent'].active) :
+                    e = np.append(e, "u")
+                else:
+                    e = np.append(e, "d")
+                    
+            e = np.append(e, [x.decode('utf-8') for x in list(common.G.node[node]['agent'].database.keys())])
+            for i in range(3 + common.memorySize - e.shape[0]):
                 e = np.append(e, 0)
             self.registerEntry(e)
 
@@ -97,10 +104,10 @@ class MemoryScheduler(AgentManager):
                 temp = open(self.filename, 'a')
                 print(*i, sep=",", file=temp)
                 temp.close()
-            self.memoryLog = np.empty((0, 2 + common.memorySize))
+            self.memoryLog = np.empty((0, 3 + common.memorySize))
 
         tarr = np.empty([0])
-        for i in range(2 + common.memorySize):
+        for i in range(3 + common.memorySize):
             tarr = np.append(tarr, entry[i])
         self.memoryLog = np.vstack((
             self.memoryLog,
