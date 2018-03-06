@@ -4,8 +4,8 @@ from agTools import *
 from AgentManager import *
 import numpy as np
 import commonVar as common
-import time
 import os
+from usefulFunctions import printHeader
 
 class ConnectionScheduler(AgentManager):
     """
@@ -33,19 +33,8 @@ class ConnectionScheduler(AgentManager):
         self.filename = common.project.replace(
             "src", 'tmp/con_log_temp.%s.txt' % os.getpid())
         temp = open(self.filename, 'w')
-        localtime = time.asctime(time.localtime(time.time()))
-        print('# connectionlog')
-        print('#', localtime, file=temp)
-        print('#simulation with:', file=temp)
-        print('#SEED', common.SEED, file=temp)
-        print('#N_AGENTS', common.N_AGENTS, file=temp)
-        print('#N_USERS', common.N_USERS, file=temp)
-        print('#N_SOURCES', common.N_SOURCES, file=temp)
-        print('#P_a', common.P_a, file=temp)
-        print('#P_s', common.P_s, file=temp)
-        print('#dim', common.dim, file=temp)
-        print('#time', common.N_CYCLES, file=temp)
-        print('#memorySize', common.memorySize, file=temp)
+        print('# connectionlog', file=temp)
+        printHeader(file=temp)
         print('ag1', 'ag2', 'time', 'weight', 'type', sep=',', file=temp)
         temp.close()
 

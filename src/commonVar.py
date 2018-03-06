@@ -1,3 +1,8 @@
+import time
+
+localtime = time.asctime(time.localtime(time.time()))
+
+
 # commonVar.py
 
 G = 0  # graph address

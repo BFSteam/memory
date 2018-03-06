@@ -7,7 +7,7 @@ import time
 import os
 import csv
     
-from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer
+from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer, printHeader
 
 
 def do1b(address):  # visualizeNet in observerActions.txt
@@ -56,23 +56,30 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         common.memlog.writeLog(path=path, write=common.writeMemories)
         print("saved", path)
 
-        path = common.project.replace("src", "log/degree_distr.csv")        
-        w = csv.writer(open(path, "w"))
-        w.writerow(["#header"])
+        path = common.project.replace("src", "log/degree_distr.csv")
+        outfile = open(path, "w")
+        printHeader(file=outfile)
+        outfile.close()
+        w = csv.writer(open(path, "a"))
         w.writerow(["node", "degree"])
         for key, val in dict(common.G.degree()).items():
             w.writerow([key, val])
 
         path = common.project.replace("src", "log/clustering.csv")
         clus = nx.clustering(common.G)
+        outfile = open(path, "w")
+        printHeader(file=outfile)
+        outfile.close()
         w = csv.writer(open(path, "w"))
-        w.writerow(["#header"])
         w.writerow(["node", "clustering coeff"])
         for key, val in clus.items():
             w.writerow([key, val])
 
         path = common.project.replace("src", "log/diameter.csv")
         diam = nx.diameter(max(nx.connected_component_subgraphs(common.G), key=len))
+        outfile = open(path, "w")
+        printHeader(file=outfile)
+        outfile.close()
         w = csv.writer(open(path, "w"))
-        w.writerow(["#header"])
-        w.writerow([diam])
+        w.writerow(["diameter", "memorysize"])
+        w.writerow([diam, common.memorySize])
