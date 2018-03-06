@@ -6,7 +6,7 @@ import numpy as np
 import commonVar as common
 import os
 import csv
-from usefulFunctions import printHeader
+from usefulFunctions import printHeader, vprint
 
 class ConnectionScheduler(AgentManager):
     """
@@ -33,11 +33,10 @@ class ConnectionScheduler(AgentManager):
             os.makedirs(common.project.replace("src", "tmp"))
         self.filename = common.project.replace(
             "src", 'tmp/con_log_temp.%s.txt' % os.getpid())
-        temp = open(self.filename, 'w')
-        print('# connectionlog', file=temp)
-        printHeader(file=temp)
-        print('ag1', 'ag2', 'time', 'weight', 'type', sep=',', file=temp)
-        temp.close()
+        with open(self.filename, 'w') as ff:
+            w = csv.writer(ff)
+            printHeader(w, firstline=['#connectionlog'],
+                        lastline=['ag1', 'ag2', 'time', 'weight', 'type'])
 
     def printLog(self):
         print(self.connectionLog)
@@ -83,7 +82,8 @@ class ConnectionScheduler(AgentManager):
 
         """
         if write == False:
-            print("ConnectionScheduler->writeLog called but not enabled: no file written")
+            vprint("ConnectionScheduler -> writeLog called but not enabled: no file written")
+            os.remove(self.filename)
             return
         with open(self.filename, 'a') as cl:
             w = csv.writer(cl)
@@ -92,4 +92,6 @@ class ConnectionScheduler(AgentManager):
 
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
+        vprint("ConnectionScheduler -> writeLog file written at", path)
         os.remove(self.filename)
+        vprint("ConnectionScheduler -> writeLog tmp file", self.filename, "removed")

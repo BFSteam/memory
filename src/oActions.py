@@ -22,7 +22,7 @@ def do2a(address, cycle):  # ask_all in observerActions.txt
     # ask each agent, without parameters
     #if cycle % 25 == 0 :
     #    print("Time =", cycle)
-    common.memlog.updateLog()
+    #common.memlog.updateLog()
 
 
 def do2b(address, cycle):  # ask_one in observerActions.txt
@@ -46,40 +46,31 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
 
         path = common.project.replace("src", "log/connectionLog.csv")
         common.conlog.writeLog(path=path, write=common.writeConnectons)
-        print("saved", path)
 
         path = common.project.replace("src", "log/messageLog.csv")
         common.msglog.writeLog(path=path, write=common.writeMessages)
-        print("saved", path)
 
         path = common.project.replace("src", "log/memoryLog.csv")
         common.memlog.writeLog(path=path, write=common.writeMemories)
-        print("saved", path)
 
         path = common.project.replace("src", "log/degree_distr.csv")
-        outfile = open(path, "w")
-        printHeader(file=outfile)
-        outfile.close()
-        w = csv.writer(open(path, "a"))
-        w.writerow(["node", "degree"])
-        for key, val in dict(common.G.degree()).items():
-            w.writerow([key, val])
+        with open(path, "w") as ff:
+            w = csv.writer(ff)
+            printHeader(w, firstline=['#degree distribution'], lastline=['node', 'degree'])
+            for key, val in dict(common.G.degree()).items():
+                w.writerow([key, val])
 
         path = common.project.replace("src", "log/clustering.csv")
         clus = nx.clustering(common.G)
-        outfile = open(path, "w")
-        printHeader(file=outfile)
-        outfile.close()
-        w = csv.writer(open(path, "a"))
-        w.writerow(["node", "clustering coeff"])
-        for key, val in clus.items():
-            w.writerow([key, val])
+        with open(path, "w") as ff:
+            w = csv.writer(ff)
+            printHeader(w, firstline=['#clustering per node'], lastline=['node', 'clustering coeff'])
+            for key, val in clus.items():
+                w.writerow([key, val])
 
         path = common.project.replace("src", "log/diameter.csv")
         diam = nx.diameter(max(nx.connected_component_subgraphs(common.G), key=len))
-        outfile = open(path, "w")
-        printHeader(file=outfile)
-        outfile.close()
-        w = csv.writer(open(path, "a"))
-        w.writerow(["diameter", "memorysize"])
-        w.writerow([diam, common.memorySize])
+        with open(path, "w") as ff:
+            w = csv.writer(ff)
+            printHeader(w, firstline=['#diameter'], lastline=['diameter', 'memsize'])
+            w.writerow([diam, common.memorySize])

@@ -6,7 +6,6 @@ import commonVar as common
 import numpy as np
 import sys
 import random
-import usefulFunctions as uf
 import MessageScheduler as ms
 
 
@@ -203,7 +202,7 @@ class User(WorldAgent):
         self.database[ii]['date-creation'] = news['date-creation']
         self.database[ii]['relevance'] = news['relevance']
 
-        uf.vprint("Agent", self.number, "remembered", self.database)
+        #uf.vprint("Agent", self.number, "remembered", self.database)
 
         # cut memory
         if cutoldest is True:
@@ -224,7 +223,7 @@ class User(WorldAgent):
             else:
                 forgot = self.database[random.choice(list(self.database))]
                 if forgot != news:
-                    uf.vprint("Agent", self.number, "forgot", forgot)
+                    #uf.vprint("Agent", self.number, "forgot", forgot)
                     del(forgot)
         self.tiredness = self.tiredness * 1.2
         return True
@@ -433,12 +432,12 @@ class User(WorldAgent):
         """
 
         if self.active is False:
-            uf.vprint("Agent", self.number, "is active")
+            #uf.vprint("Agent", self.number, "is active")
             self.inactiveTime += 1
             self.becomeActive(t=t_active, p=p_active)
             return False
         else:
-            uf.vprint("Agent", self.number, "is active")
+            #uf.vprint("Agent", self.number, "is active")
             self.activeTime += 1
             return True
 

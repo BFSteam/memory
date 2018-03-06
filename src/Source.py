@@ -103,7 +103,8 @@ class Source(WorldAgent):
                 reciver=self.number,
                 id_new=stringa,
                 date=common.cycle,
-                diffusion='c'
+                diffusion='c',
+                write=common.writeMessages
             )
         print(self.number, " generateNews ", n)
 
