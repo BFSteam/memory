@@ -70,3 +70,12 @@ tCreateEdge = 0.6  # threshold of random creation if the node is without connect
 pDeleteEdge = 0.1  # probability of removing a random edge
 
 debug = True
+
+##################################
+#
+#             Logs
+#
+##################################
+writeConnectons = False
+writeMessages   = False
+writeMemories   = False

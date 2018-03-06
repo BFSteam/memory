@@ -63,7 +63,8 @@ class MessageScheduler(AgentManager):
             reciver=-1,
             id_new='null',
             date=-1,
-            diffusion='n'
+            diffusion='n',
+            write = True
     ):
         """
 
@@ -83,6 +84,7 @@ class MessageScheduler(AgentManager):
         ))
 
         """
+        if write == False: return
         if self.msgLog.shape[0] > 1000:
             for i in self.msgLog:
                 temp = open(self.filename, 'a')
@@ -103,8 +105,10 @@ class MessageScheduler(AgentManager):
             ])
         ))
 
-    def writeLog(self, path='./defMLog.csv'):
+    def writeLog(self, path='./defMLog.csv', write=True):
 
+        if write == False:
+            print("MessageScheduler->writeLog called but not enabled: no file written")
         # try to guess extension
         for i in self.msgLog:
             temp = open(self.filename, 'a')

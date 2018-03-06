@@ -79,7 +79,8 @@ class MemoryScheduler(AgentManager):
 
     def registerEntry(
             self,
-            entry
+            entry,
+            write=True
     ):
         """
 
@@ -99,6 +100,7 @@ class MemoryScheduler(AgentManager):
         ))
 
         """
+        if write == False: return
         if self.memoryLog.shape[0] > 1000:
             for i in self.memoryLog:
                 temp = open(self.filename, 'a')
@@ -114,8 +116,11 @@ class MemoryScheduler(AgentManager):
             tarr
         ))
 
-    def writeLog(self, path='./defMLog.csv'):
+    def writeLog(self, path='./defMLog.csv', write=True):
 
+        if write == False:
+            print("MemoryScheduler->writeLog called but not enabled: no file written")
+            return
         # try to guess extension
         for i in self.memoryLog:
             temp = open(self.filename, 'a')

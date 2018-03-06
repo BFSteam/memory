@@ -118,7 +118,8 @@ class User(WorldAgent):
             second=n,
             date=common.cycle,
             weight=weight,
-            cr='a'
+            cr='a',
+            write=common.writeConnectons
         )
 
     def removeEdge(self, n):
@@ -133,7 +134,8 @@ class User(WorldAgent):
             second=n,
             date=common.cycle,
             weight=common.G[self.number][n]['weight'],
-            cr='r'
+            cr='r',
+            write=common.writeConnectons
         )
         common.G.remove_edge(self.number, n)
 
@@ -464,7 +466,8 @@ class User(WorldAgent):
                 reciver=self.number,
                 id_new=iWantToRemember['id-n'],
                 date=common.cycle,
-                diffusion='p'
+                diffusion='p',
+                write=common.writeMessages
             )
         remembered = self.remember(iWantToRemember)
         self.becomeInactive(tired=remembered)
@@ -553,7 +556,8 @@ class User(WorldAgent):
                 second=finalNeighbour,
                 date=common.cycle,
                 weight=common.G[self.number][finalNeighbour]['weight'],
-                cr='u'
+                cr='u',
+                write=common.writeConnectons
             )
             if common.G[self.number][finalNeighbour]['weight'] < r:
                 self.removeEdge(finalNeighbour)
@@ -565,7 +569,8 @@ class User(WorldAgent):
                 second=finalNeighbour,
                 date=common.cycle,
                 weight=common.G[self.number][finalNeighbour]['weight'],
-                cr='u'
+                cr='u',
+                write=common.writeConnectons
             )
 
         common.msglog.registerEntry(
@@ -575,7 +580,8 @@ class User(WorldAgent):
             reciver=bestNeighbour,
             id_new=bestNews['id-n'],
             date=common.cycle,
-            diffusion='a'
+            diffusion='a',
+            write=common.writeMessages
         )
         self.tiredness = self.tiredness * 1.3
         return True

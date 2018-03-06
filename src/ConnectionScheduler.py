@@ -60,12 +60,14 @@ class ConnectionScheduler(AgentManager):
             date=-1,
             weight=-1,
             cr='c',
+            write=True
     ):
         """
 
         creates an array to stack under the log and does it
 
         """
+        if write == False: return
         if self.connectionLog.shape[0] > 1000:
             for i in self.connectionLog:
                 temp = open(self.filename, 'a')
@@ -84,7 +86,7 @@ class ConnectionScheduler(AgentManager):
             ])
         ))
 
-    def writeLog(self, path='./defCLog.csv'):
+    def writeLog(self, path='./defCLog.csv', write=True):
         """
 
         saves the log from temp to path
@@ -92,6 +94,9 @@ class ConnectionScheduler(AgentManager):
         deletes the temp
 
         """
+        if write == False:
+            print("ConnectionScheduler->writeLog called but not enabled: no file written")
+            return
         for i in self.connectionLog:
             temp = open(self.filename, 'a')
             print(i[0], i[1], i[2], i[3], i[4],
