@@ -1,10 +1,14 @@
 # AgentManager Message Scheduler
+import os
+import csv
+
+import numpy as np
+
 from Tools import *
 from agTools import *
 from AgentManager import *
-import numpy as np
+
 import commonVar as common
-import os, csv
 from usefulFunctions import printHeader, vprint
 
 class MessageScheduler(AgentManager):
