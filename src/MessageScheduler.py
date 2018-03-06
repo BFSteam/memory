@@ -4,7 +4,7 @@ from agTools import *
 from AgentManager import *
 import numpy as np
 import commonVar as common
-import os
+import os, csv
 from usefulFunctions import printHeader
 
 class MessageScheduler(AgentManager):
@@ -33,12 +33,10 @@ class MessageScheduler(AgentManager):
             os.makedirs(common.project.replace("src", "tmp"))
         self.filename = common.project.replace(
             "src", 'tmp/msg_log_temp.%s.txt' % os.getpid())
-        temp = open(self.filename, 'w')
-        print('# messagelog', file=temp)
-        printHeader(file=temp)
-        print("source", "timec", "news", "ag1", "ag2",
-              "time", "type", sep=',', file=temp)
-        temp.close()
+        with open(self.filename, 'w') as ff:
+            w = csv.writer(ff)    
+            printHeader(w, firstline=['#messagelog'],
+                        lastline=["source", "timec", "news", "ag1", "ag2", "time", "type"])
 
     def printLog(self):
         print(self.msgLog)
@@ -74,11 +72,11 @@ class MessageScheduler(AgentManager):
         """
         if write == False: return
         if self.msgLog.shape[0] > 1000:
-            for i in self.msgLog:
-                temp = open(self.filename, 'a')
-                print(i[0], i[1], i[2], i[3], i[4], i[5], i[6],
-                      sep=",", file=temp)
-                temp.close()
+            with open(self.filename, 'a') as ff:
+                w = csv.writer(ff)
+                for i in self.msgLog:
+                    w.writerow(i[0:7])
+
             self.msgLog = np.empty((0, 7))
         self.msgLog = np.vstack((
             self.msgLog,
@@ -98,11 +96,11 @@ class MessageScheduler(AgentManager):
         if write == False:
             print("MessageScheduler->writeLog called but not enabled: no file written")
         # try to guess extension
-        for i in self.msgLog:
-            temp = open(self.filename, 'a')
-            print(i[0], i[1], i[2], i[3], i[4], i[5], i[6],
-                  sep=",", file=temp)
-            temp.close()
+        with open(self.filename, 'a') as ff:
+            w = csv.writer(ff)
+            for i in self.msgLog:
+                w.writerow(i[0:7])
+
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
         os.remove(self.filename)

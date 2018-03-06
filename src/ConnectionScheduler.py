@@ -33,11 +33,10 @@ class ConnectionScheduler(AgentManager):
             os.makedirs(common.project.replace("src", "tmp"))
         self.filename = common.project.replace(
             "src", 'tmp/con_log_temp.%s.txt' % os.getpid())
-        temp = open(self.filename, 'w')
-        print('# connectionlog', file=temp)
-        printHeader(file=temp)
-        print('ag1', 'ag2', 'time', 'weight', 'type', sep=',', file=temp)
-        temp.close()
+        with open(self.filename, 'w') as ff:
+            w = csv.writer(ff)
+            printHeader(w, firstline=['#connectionlog'],
+                        lastline=['ag1', 'ag2', 'time', 'weight', 'type'])
 
     def printLog(self):
         print(self.connectionLog)

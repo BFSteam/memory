@@ -1,5 +1,6 @@
 import commonVar as common
 import sys
+import csv
 
 def vprint(*args, sep=' ', end='\n', file=None):
     """
@@ -29,7 +30,7 @@ def digit_input(msg="Enter a number: ", DEFAULT=0):
             break
         else:
             return DEFAULT
-    # a float contains a period (US)
+        # a float contains a period (US)
     if '.' in num_str:
         return float(num_str)
     else:
@@ -59,15 +60,17 @@ def singleNewsStringsizer(agent):
 
     return str([agent.database[key]['id-n'] for key in agent.database])
 
-def printHeader(file=sys.stdout):
-    print('#', common.localtime, file=file)
-    print('#simulation with:', file=file)
-    print('#SEED', common.SEED, file=file)
-    print('#N_AGENTS', common.N_AGENTS, file=file)
-    print('#N_USERS', common.N_USERS, file=file)
-    print('#N_SOURCES', common.N_SOURCES, file=file)
-    print('#P_a', common.P_a, file=file)
-    print('#P_s', common.P_s, file=file)
-    print('#dim', common.dim, file=file)
-    print('#time', common.N_CYCLES, file=file)
-    print('#memorySize', common.memorySize, file=file)
+def printHeader(w = csv.writer(open("temp.txt", "w")), firstline="#FIRST_LINE", lastline="#LAST_LINE"):
+    w.writerow(firstline)
+    w.writerow(['#'])
+    w.writerow(['#simulation with:'])
+    w.writerow(['#SEED'])
+    w.writerow(['#N_AGENTS'])
+    w.writerow(['#N_USERS'])
+    w.writerow(['#N_SOURCES'])
+    w.writerow(['#P_a'])
+    w.writerow(['#P_s'])
+    w.writerow(['#dim'])
+    w.writerow(['#time'])
+    w.writerow(['#memorySize'])
+    w.writerow(lastline)
