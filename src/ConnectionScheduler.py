@@ -6,7 +6,7 @@ import numpy as np
 import commonVar as common
 import os
 import csv
-from usefulFunctions import printHeader
+from usefulFunctions import printHeader, vprint
 
 class ConnectionScheduler(AgentManager):
     """
@@ -82,7 +82,8 @@ class ConnectionScheduler(AgentManager):
 
         """
         if write == False:
-            print("ConnectionScheduler->writeLog called but not enabled: no file written")
+            vprint("ConnectionScheduler -> writeLog called but not enabled: no file written")
+            os.remove(self.filename)
             return
         with open(self.filename, 'a') as cl:
             w = csv.writer(cl)
@@ -91,4 +92,6 @@ class ConnectionScheduler(AgentManager):
 
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
+        vprint("ConnectionScheduler -> writeLog file written at", path)
         os.remove(self.filename)
+        vprint("ConnectionScheduler -> writeLog tmp file", self.filename, "removed")

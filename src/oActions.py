@@ -46,15 +46,12 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
 
         path = common.project.replace("src", "log/connectionLog.csv")
         common.conlog.writeLog(path=path, write=common.writeConnectons)
-        print("saved", path)
 
         path = common.project.replace("src", "log/messageLog.csv")
         common.msglog.writeLog(path=path, write=common.writeMessages)
-        print("saved", path)
 
         path = common.project.replace("src", "log/memoryLog.csv")
         common.memlog.writeLog(path=path, write=common.writeMemories)
-        print("saved", path)
 
         path = common.project.replace("src", "log/degree_distr.csv")
         with open(path, "w") as ff:

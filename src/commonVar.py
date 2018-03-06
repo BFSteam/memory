@@ -81,6 +81,6 @@ debug = True
 #             Logs
 #
 ##################################
-writeConnectons = False
-writeMessages   = False
-writeMemories   = False
+writeConnectons = True
+writeMessages   = True
+writeMemories   = True

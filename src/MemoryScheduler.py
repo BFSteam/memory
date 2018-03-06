@@ -6,7 +6,7 @@ import numpy as np
 import commonVar as common
 import os
 import csv
-from usefulFunctions import printHeader
+from usefulFunctions import printHeader, vprint
 
 
 class MemoryScheduler(AgentManager):
@@ -104,7 +104,8 @@ class MemoryScheduler(AgentManager):
     def writeLog(self, path='./defMLog.csv', write=True):
 
         if write == False:
-            print("MemoryScheduler->writeLog called but not enabled: no file written")
+            vprint("MemoryScheduler -> writeLog called but not enabled: no file written")
+            os.remove(self.filename)
             return
         # try to guess extension
         with open(self.filename, 'a') as ff:
@@ -114,4 +115,6 @@ class MemoryScheduler(AgentManager):
 
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
+        vprint("MemoryScheduler -> writeLog file written at", path)
         os.remove(self.filename)
+        vprint("MemoryScheduler -> writeLog tmp file", self.filename, "removed")
