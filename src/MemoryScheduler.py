@@ -4,8 +4,8 @@ from agTools import *
 from AgentManager import *
 import numpy as np
 import commonVar as common
-import time
 import os
+from usefulFunctions import printHeader
 
 
 class MemoryScheduler(AgentManager):
@@ -36,19 +36,8 @@ class MemoryScheduler(AgentManager):
         self.filename = common.project.replace(
             "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
         temp = open(self.filename, 'w')
-        localtime = time.asctime(time.localtime(time.time()))
-        print('# memorylog')
-        print('#', localtime, file=temp)
-        print('#simulation with:', file=temp)
-        print('#SEED', common.SEED, file=temp)
-        print('#N_AGENTS', common.N_AGENTS, file=temp)
-        print('#N_USERS', common.N_USERS, file=temp)
-        print('#N_SOURCES', common.N_SOURCES, file=temp)
-        print('#P_a', common.P_a, file=temp)
-        print('#P_s', common.P_s, file=temp)
-        print('#dim', common.dim, file=temp)
-        print('#time', common.N_CYCLES, file=temp)
-        print('#memorySize', common.memorySize, file=temp)
+        print('# memorylog', file=temp)
+        printHeader(file=temp)
         print("agent", "time", "state",sep=',', end="", file=temp)
         for i in range(common.memorySize):
             print(",", sep="", end="", file=temp)
@@ -79,7 +68,8 @@ class MemoryScheduler(AgentManager):
 
     def registerEntry(
             self,
-            entry
+            entry,
+            write=True
     ):
         """
 
@@ -99,6 +89,7 @@ class MemoryScheduler(AgentManager):
         ))
 
         """
+        if write == False: return
         if self.memoryLog.shape[0] > 1000:
             for i in self.memoryLog:
                 temp = open(self.filename, 'a')
@@ -114,8 +105,11 @@ class MemoryScheduler(AgentManager):
             tarr
         ))
 
-    def writeLog(self, path='./defMLog.csv'):
+    def writeLog(self, path='./defMLog.csv', write=True):
 
+        if write == False:
+            print("MemoryScheduler->writeLog called but not enabled: no file written")
+            return
         # try to guess extension
         for i in self.memoryLog:
             temp = open(self.filename, 'a')

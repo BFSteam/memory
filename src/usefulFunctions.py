@@ -1,5 +1,5 @@
 import commonVar as common
-
+import sys
 
 def vprint(*args, sep=' ', end='\n', file=None):
     """
@@ -58,3 +58,16 @@ def singleNewsStringsizer(agent):
     """
 
     return str([agent.database[key]['id-n'] for key in agent.database])
+
+def printHeader(file=sys.stdout):
+    print('#', common.localtime, file=file)
+    print('#simulation with:', file=file)
+    print('#SEED', common.SEED, file=file)
+    print('#N_AGENTS', common.N_AGENTS, file=file)
+    print('#N_USERS', common.N_USERS, file=file)
+    print('#N_SOURCES', common.N_SOURCES, file=file)
+    print('#P_a', common.P_a, file=file)
+    print('#P_s', common.P_s, file=file)
+    print('#dim', common.dim, file=file)
+    print('#time', common.N_CYCLES, file=file)
+    print('#memorySize', common.memorySize, file=file)

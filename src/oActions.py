@@ -5,7 +5,9 @@ import commonVar as common
 import networkx as nx
 import time
 import os
-from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer
+import csv
+    
+from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer, printHeader
 
 
 def do1b(address):  # visualizeNet in observerActions.txt
@@ -33,18 +35,51 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
     if cycle == address.nCycles:
         if not os.path.exists(common.project.replace("src", "log")):
             os.makedirs(common.project.replace("src", "log"))
-        path = common.project.replace("src", "log/graph.gml")
-        nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
-        print("saved", path)
-        path = common.project.replace("src", "log/graphN.gml")
-        nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
-        print("saved", path)
+
+        #path = common.project.replace("src", "log/graph.gml")
+        #nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
+        #print("saved", path)
+
+        #path = common.project.replace("src", "log/graphN.gml")
+        #nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
+        #print("saved", path)
+
         path = common.project.replace("src", "log/connectionLog.csv")
-        common.conlog.writeLog(path=path)
+        common.conlog.writeLog(path=path, write=common.writeConnectons)
         print("saved", path)
+
         path = common.project.replace("src", "log/messageLog.csv")
-        common.msglog.writeLog(path=path)
+        common.msglog.writeLog(path=path, write=common.writeMessages)
         print("saved", path)
+
         path = common.project.replace("src", "log/memoryLog.csv")
-        common.memlog.writeLog(path=path)
+        common.memlog.writeLog(path=path, write=common.writeMemories)
         print("saved", path)
+
+        path = common.project.replace("src", "log/degree_distr.csv")
+        outfile = open(path, "w")
+        printHeader(file=outfile)
+        outfile.close()
+        w = csv.writer(open(path, "a"))
+        w.writerow(["node", "degree"])
+        for key, val in dict(common.G.degree()).items():
+            w.writerow([key, val])
+
+        path = common.project.replace("src", "log/clustering.csv")
+        clus = nx.clustering(common.G)
+        outfile = open(path, "w")
+        printHeader(file=outfile)
+        outfile.close()
+        w = csv.writer(open(path, "a"))
+        w.writerow(["node", "clustering coeff"])
+        for key, val in clus.items():
+            w.writerow([key, val])
+
+        path = common.project.replace("src", "log/diameter.csv")
+        diam = nx.diameter(max(nx.connected_component_subgraphs(common.G), key=len))
+        outfile = open(path, "w")
+        printHeader(file=outfile)
+        outfile.close()
+        w = csv.writer(open(path, "a"))
+        w.writerow(["diameter", "memorysize"])
+        w.writerow([diam, common.memorySize])

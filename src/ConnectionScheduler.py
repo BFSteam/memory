@@ -4,9 +4,9 @@ from agTools import *
 from AgentManager import *
 import numpy as np
 import commonVar as common
-import time
 import os
-
+import csv
+from usefulFunctions import printHeader
 
 class ConnectionScheduler(AgentManager):
     """
@@ -34,19 +34,8 @@ class ConnectionScheduler(AgentManager):
         self.filename = common.project.replace(
             "src", 'tmp/con_log_temp.%s.txt' % os.getpid())
         temp = open(self.filename, 'w')
-        localtime = time.asctime(time.localtime(time.time()))
-        print('# connectionlog')
-        print('#', localtime, file=temp)
-        print('#simulation with:', file=temp)
-        print('#SEED', common.SEED, file=temp)
-        print('#N_AGENTS', common.N_AGENTS, file=temp)
-        print('#N_USERS', common.N_USERS, file=temp)
-        print('#N_SOURCES', common.N_SOURCES, file=temp)
-        print('#P_a', common.P_a, file=temp)
-        print('#P_s', common.P_s, file=temp)
-        print('#dim', common.dim, file=temp)
-        print('#time', common.N_CYCLES, file=temp)
-        print('#memorySize', common.memorySize, file=temp)
+        print('# connectionlog', file=temp)
+        printHeader(file=temp)
         print('ag1', 'ag2', 'time', 'weight', 'type', sep=',', file=temp)
         temp.close()
 
@@ -60,18 +49,19 @@ class ConnectionScheduler(AgentManager):
             date=-1,
             weight=-1,
             cr='c',
+            write=True
     ):
         """
 
         creates an array to stack under the log and does it
 
         """
+        if write == False: return
         if self.connectionLog.shape[0] > 1000:
-            for i in self.connectionLog:
-                temp = open(self.filename, 'a')
-                print(i[0], i[1], i[2], i[3], i[4],
-                      sep=",", file=temp)
-                temp.close()
+            with open(self.filename, 'a') as ff: # open file ff at path self.filepath
+                w = csv.writer(ff)               # open csv writer 
+                for i in self.connectionLog:
+                    w.writerow(i[0:5])           # write what you need -> file closes at end of with
             self.connectionLog = np.empty((0, 5))
         self.connectionLog = np.vstack((
             self.connectionLog,
@@ -84,7 +74,7 @@ class ConnectionScheduler(AgentManager):
             ])
         ))
 
-    def writeLog(self, path='./defCLog.csv'):
+    def writeLog(self, path='./defCLog.csv', write=True):
         """
 
         saves the log from temp to path
@@ -92,11 +82,14 @@ class ConnectionScheduler(AgentManager):
         deletes the temp
 
         """
-        for i in self.connectionLog:
-            temp = open(self.filename, 'a')
-            print(i[0], i[1], i[2], i[3], i[4],
-                  sep=",", file=temp)
-            temp.close()
+        if write == False:
+            print("ConnectionScheduler->writeLog called but not enabled: no file written")
+            return
+        with open(self.filename, 'a') as cl:
+            w = csv.writer(cl)
+            for i in self.connectionLog:
+                w.writerow(i[0:5])
+
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
         os.remove(self.filename)
