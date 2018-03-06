@@ -7,7 +7,6 @@ import commonVar as common
 import time
 import os
 
-
 class ConnectionScheduler(AgentManager):
     """
 
