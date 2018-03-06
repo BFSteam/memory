@@ -11,13 +11,13 @@ G_edge_labels = 0
 
 SEED = 1
 
-N_USERS = 200  # number of users
+N_USERS = 10000  # number of users
 
-N_SOURCES = 3  # number of sources
+N_SOURCES = 6  # number of sources
 
 N_AGENTS = N_USERS + N_SOURCES  # do not overwrite
 
-N_CYCLES = 500
+N_CYCLES = 1000
 
 averageDegree = 5  # default average degree
 
@@ -28,7 +28,7 @@ P_s = prop * P_a                      # do not overwrite
 
 dim = 3  # state dimension
 
-memorySize = 10  # memory dimension
+memorySize = 1  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 
@@ -46,7 +46,7 @@ pActivation = 0.7  # probability of first activation of users
 
 # User -> remember
 tRemember = 0.9  # threshold above that a news is beautiful
-pForget = 0.1  # probability to forget a news
+pForget = 0.05  # probability to forget a news
 
 # User -> readNews
 vOld = 24  # value of an old news

@@ -22,7 +22,7 @@ def do2a(address, cycle):  # ask_all in observerActions.txt
     # ask each agent, without parameters
     #if cycle % 25 == 0 :
     #    print("Time =", cycle)
-    common.memlog.updateLog()
+    #common.memlog.updateLog()
 
 
 def do2b(address, cycle):  # ask_one in observerActions.txt
