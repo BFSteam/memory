@@ -11,7 +11,7 @@ G_edge_labels = 0
 
 SEED = 1
 
-N_USERS = 10000  # number of users
+N_USERS = 500  # number of users
 
 N_SOURCES = 6  # number of sources
 
@@ -28,11 +28,11 @@ P_s = prop * P_a                      # do not overwrite
 
 dim = 3  # state dimension
 
-memorySize = 1  # memory dimension
+memorySize = 3  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 
-verbose = False
+verbose = True
 
 projectVersion = 0.0  # useless
 
@@ -81,6 +81,6 @@ debug = True
 #             Logs
 #
 ##################################
-writeConnectons = True
-writeMessages   = True
+writeConnectons = False
+writeMessages   = False
 writeMemories   = True

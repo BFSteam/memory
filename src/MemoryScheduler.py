@@ -37,7 +37,7 @@ class MemoryScheduler(AgentManager):
             "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
         with open(self.filename, 'w') as ff:
             w = csv.writer(ff)
-            printHeader(w, firstline=['# messagelog'],
+            printHeader(w, firstline=['# memorylog'],
                         lastline=["agent", "time", "state"] + ["news" + str(i) for i in range(common.memorySize)])
 
     def printLog(self):
