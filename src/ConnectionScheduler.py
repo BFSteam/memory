@@ -5,6 +5,7 @@ from AgentManager import *
 import numpy as np
 import commonVar as common
 import os
+import csv
 from usefulFunctions import printHeader
 
 class ConnectionScheduler(AgentManager):
@@ -57,11 +58,10 @@ class ConnectionScheduler(AgentManager):
         """
         if write == False: return
         if self.connectionLog.shape[0] > 1000:
-            for i in self.connectionLog:
-                temp = open(self.filename, 'a')
-                print(i[0], i[1], i[2], i[3], i[4],
-                      sep=",", file=temp)
-                temp.close()
+            with open(self.filename, 'a') as ff: # open file ff at path self.filepath
+                w = csv.writer(ff)               # open csv writer 
+                for i in self.connectionLog:
+                    w.writerow(i[0:5])           # write what you need -> file closes at end of with
             self.connectionLog = np.empty((0, 5))
         self.connectionLog = np.vstack((
             self.connectionLog,
@@ -85,11 +85,11 @@ class ConnectionScheduler(AgentManager):
         if write == False:
             print("ConnectionScheduler->writeLog called but not enabled: no file written")
             return
-        for i in self.connectionLog:
-            temp = open(self.filename, 'a')
-            print(i[0], i[1], i[2], i[3], i[4],
-                  sep=",", file=temp)
-            temp.close()
+        with open(self.filename, 'a') as cl:
+            w = csv.writer(cl)
+            for i in self.connectionLog:
+                w.writerow(i[0:5])
+
         with open(path, "w") as fw, open(self.filename, 'r') as fr:
             fw.writelines(l for l in fr)
         os.remove(self.filename)

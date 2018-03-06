@@ -70,7 +70,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         outfile = open(path, "w")
         printHeader(file=outfile)
         outfile.close()
-        w = csv.writer(open(path, "w"))
+        w = csv.writer(open(path, "a"))
         w.writerow(["node", "clustering coeff"])
         for key, val in clus.items():
             w.writerow([key, val])
@@ -80,6 +80,6 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         outfile = open(path, "w")
         printHeader(file=outfile)
         outfile.close()
-        w = csv.writer(open(path, "w"))
+        w = csv.writer(open(path, "a"))
         w.writerow(["diameter", "memorysize"])
         w.writerow([diam, common.memorySize])
