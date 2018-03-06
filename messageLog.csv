@@ -1,0 +1,13 @@
+#messagelog
+#
+#simulation with:
+#SEED
+#N_AGENTS
+#N_USERS
+#N_SOURCES
+#P_a
+#P_s
+#dim
+#time
+#memorySize
+source,timec,news,ag1,ag2,time,type
