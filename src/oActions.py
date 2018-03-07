@@ -1,13 +1,14 @@
-from Tools import *
-from WorldAgent import *
-import graph as graph
-import commonVar as common
-import networkx as nx
-import time
-import os
 import csv
+import os
+import time
     
+import commonVar as common
+import graph as graph
+import networkx as nx
+
+from Tools import *
 from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer, printHeader
+from WorldAgent import *
 
 
 def do1b(address):  # visualizeNet in observerActions.txt

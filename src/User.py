@@ -1,13 +1,14 @@
 # User.py
-from Tools import *
-from agTools import *
-from WorldAgent import *
-import commonVar as common
-import numpy as np
 import sys
 import random
-import MessageScheduler as ms
 
+import commonVar as common
+import MessageScheduler as ms
+import numpy as np
+
+from agTools import *
+from Tools import *
+from WorldAgent import *
 
 class User(WorldAgent):
     """

@@ -1,10 +1,11 @@
 # parameters.py
-from Tools import *
+import random
+
 import commonVar as common
 import numpy as np
-import random
 import usefulFunctions as uf
 
+from Tools import *
 
 def loadParameters(self):
 

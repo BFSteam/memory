@@ -1,7 +1,7 @@
 # SkyAgent
-from Tools import *
-from agTools import *
 from Agent import *
+from agTools import *
+from Tools import *
 
 
 class SkyAgent(Agent):

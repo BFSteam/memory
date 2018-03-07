@@ -3,7 +3,6 @@ from Tools import *
 from agTools import *
 from SkyAgent import *
 
-
 class AgentManager(SkyAgent):
     """
 
