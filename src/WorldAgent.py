@@ -1,11 +1,13 @@
 # WorldAgent.py
+import random
+
+import commonVar as common
+import graph as graph
+import numpy as np
+
 from Tools import *
 from agTools import *
-import graph as graph
-import commonVar as common
-import numpy as np
 from Agent import *
-import random
 
 
 # Agent must be the partent class of every object. Must inherit from SuperAgent

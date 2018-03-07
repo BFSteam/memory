@@ -1,10 +1,11 @@
-import warnings
-import networkx as nx
-import matplotlib.pyplot as plt
-import commonVar as common
-import numpy as np
 import os
 import random
+import warnings
+
+import commonVar as common
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
 
 
 warnings.filterwarnings("ignore", ".*GUI is implemented.*")

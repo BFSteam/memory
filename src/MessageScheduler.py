@@ -2,14 +2,14 @@
 import os
 import csv
 
+import commonVar as common
 import numpy as np
 
-from Tools import *
-from agTools import *
 from AgentManager import *
-
-import commonVar as common
+from agTools import *
+from Tools import *
 from usefulFunctions import printHeader, vprint
+
 
 class MessageScheduler(AgentManager):
     """

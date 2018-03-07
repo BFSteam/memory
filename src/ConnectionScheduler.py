@@ -1,11 +1,13 @@
 # AgentManager Connection Scheduler
-from Tools import *
-from agTools import *
-from AgentManager import *
-import numpy as np
-import commonVar as common
-import os
 import csv
+import os
+
+import commonVar as common
+import numpy as np
+
+from AgentManager import *
+from agTools import *
+from Tools import *
 from usefulFunctions import printHeader, vprint
 
 class ConnectionScheduler(AgentManager):

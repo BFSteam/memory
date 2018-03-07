@@ -1,14 +1,16 @@
 # Source.py
-from Tools import *
-from agTools import *
-from WorldAgent import *
-import numpy as np
-import commonVar as common
+import binascii
 import math
 import os
-import binascii
-import usefulFunctions as uf
 import random
+
+import commonVar as common
+import numpy as np
+import usefulFunctions as uf
+
+from agTools import *
+from Tools import *
+from WorldAgent import *
 
 
 class Source(WorldAgent):

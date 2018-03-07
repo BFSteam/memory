@@ -1,10 +1,11 @@
 # Agent.py
-from Tools import *
-from agTools import *
-import graph as graph
-import commonVar as common
 import numpy as np
 
+import commonVar as common
+import graph as graph
+
+from agTools import *
+from Tools import *
 
 class Agent(SuperAgent):  # Agent must be the partent class of every object. Must inherit from SuperAgent
 

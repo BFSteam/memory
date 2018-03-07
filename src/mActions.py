@@ -1,8 +1,8 @@
-from Tools import *
-from WorldAgent import *
 import os
 import sys
 
+from Tools import *
+from WorldAgent import *
 
 def do0(address):  # reset in modelActions.txt
     self = address  # if necessary
