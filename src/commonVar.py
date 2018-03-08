@@ -26,7 +26,7 @@ P_s = prop * P_a                      # do not overwrite
 
 dim = 3  # state dimension
 
-memorySize = 1  # memory dimension
+memorySize = 6  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 
