@@ -9,9 +9,9 @@ G_edge_labels = 0
 
 SEED = 1
 
-N_USERS = 500  # number of users
+N_USERS = 1000  # number of users
 
-N_SOURCES = 6  # number of sources
+N_SOURCES = 20  # number of sources
 
 N_AGENTS = N_USERS + N_SOURCES  # do not overwrite
 
@@ -26,7 +26,7 @@ P_s = prop * P_a                      # do not overwrite
 
 dim = 3  # state dimension
 
-memorySize = 6  # memory dimension
+memorySize = 20  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 
