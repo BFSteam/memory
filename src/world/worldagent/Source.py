@@ -10,7 +10,7 @@ import usefulFunctions as uf
 
 from agTools import *
 from Tools import *
-from WorldAgent import *
+from world.WorldAgent import *
 
 
 class Source(WorldAgent):

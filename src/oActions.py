@@ -1,3 +1,4 @@
+import binascii
 import csv
 import os
 import time
@@ -8,8 +9,7 @@ import networkx as nx
 
 from Tools import *
 from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer, printHeader
-from WorldAgent import *
-
+from world.WorldAgent import *
 
 def do1b(address):  # visualizeNet in observerActions.txt
 
@@ -45,23 +45,23 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
         #print("saved", path)
 
-        path = common.project.replace("src", "log/connectionLog.csv")
+        path = common.project.replace("src", "log/connectionLog" + str(common.localtime) + ".csv")
         common.conlog.writeLog(path=path, write=common.writeConnectons)
 
-        path = common.project.replace("src", "log/messageLog.csv")
+        path = common.project.replace("src", "log/messageLog" + str(common.localtime) + ".csv")
         common.msglog.writeLog(path=path, write=common.writeMessages)
 
-        path = common.project.replace("src", "log/memoryLog.csv")
+        path = common.project.replace("src", "log/memoryLog" + str(common.localtime) + ".csv")
         common.memlog.writeLog(path=path, write=common.writeMemories)
 
-        path = common.project.replace("src", "log/degree_distr.csv")
+        path = common.project.replace("src", "log/degree_distr" + str(common.localtime) + ".csv")
         with open(path, "w") as ff:
             w = csv.writer(ff)
             printHeader(w, firstline=['#degree distribution'], lastline=['node', 'degree'])
             for key, val in dict(common.G.degree()).items():
                 w.writerow([key, val])
 
-        path = common.project.replace("src", "log/clustering.csv")
+        path = common.project.replace("src", "log/clustering" + str(common.localtime) + ".csv")
         clus = nx.clustering(common.G)
         with open(path, "w") as ff:
             w = csv.writer(ff)
@@ -69,7 +69,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
             for key, val in clus.items():
                 w.writerow([key, val])
 
-        path = common.project.replace("src", "log/diameter.csv")
+        path = common.project.replace("src", "log/diameter" + str(common.localtime) + ".csv")
         diam = nx.diameter(max(nx.connected_component_subgraphs(common.G), key=len))
         with open(path, "w") as ff:
             w = csv.writer(ff)

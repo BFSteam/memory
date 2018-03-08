@@ -1,5 +1,5 @@
-users   User
-sources Source
-msglogs MessageScheduler
-conlogs ConnectionScheduler
-memlogs MemoryScheduler
+users   world.worldagent.User
+sources world.worldagent.Source
+msglogs sky.skyagent.agentmanager.MessageScheduler
+conlogs sky.skyagent.agentmanager.ConnectionScheduler
+memlogs sky.skyagent.agentmanager.MemoryScheduler

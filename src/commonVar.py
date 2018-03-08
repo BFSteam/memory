@@ -1,8 +1,6 @@
-import time
+import datetime
 
-localtime = time.asctime(time.localtime(time.time()))
-
-
+localtime = datetime.datetime.now().strftime("%Y_%d_%m_%H_%M_%S")
 # commonVar.py
 
 G = 0  # graph address
@@ -28,7 +26,7 @@ P_s = prop * P_a                      # do not overwrite
 
 dim = 3  # state dimension
 
-memorySize = 3  # memory dimension
+memorySize = 2  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 

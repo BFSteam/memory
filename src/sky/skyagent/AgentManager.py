@@ -1,7 +1,7 @@
 # AgentManager
 from Tools import *
 from agTools import *
-from SkyAgent import *
+from sky.SkyAgent import *
 
 class AgentManager(SkyAgent):
     """

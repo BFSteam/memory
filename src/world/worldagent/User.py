@@ -3,12 +3,12 @@ import sys
 import random
 
 import commonVar as common
-import MessageScheduler as ms
+import sky.skyagent.agentmanager.MessageScheduler as ms
 import numpy as np
 
 from agTools import *
 from Tools import *
-from WorldAgent import *
+from world.WorldAgent import *
 
 class User(WorldAgent):
     """
