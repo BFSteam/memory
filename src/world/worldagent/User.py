@@ -119,7 +119,7 @@ class User(WorldAgent):
             date=common.cycle,
             weight=weight,
             cr='a',
-            write=common.writeConnectons
+            write=common.writeConnections
         )
 
     def removeEdge(self, n):
@@ -135,7 +135,7 @@ class User(WorldAgent):
             date=common.cycle,
             weight=common.G[self.number][n]['weight'],
             cr='r',
-            write=common.writeConnectons
+            write=common.writeConnections
         )
         common.G.remove_edge(self.number, n)
 
@@ -557,7 +557,7 @@ class User(WorldAgent):
                 date=common.cycle,
                 weight=common.G[self.number][finalNeighbour]['weight'],
                 cr='u',
-                write=common.writeConnectons
+                write=common.writeConnections
             )
             if common.G[self.number][finalNeighbour]['weight'] < r:
                 self.removeEdge(finalNeighbour)
@@ -570,7 +570,7 @@ class User(WorldAgent):
                 date=common.cycle,
                 weight=common.G[self.number][finalNeighbour]['weight'],
                 cr='u',
-                write=common.writeConnectons
+                write=common.writeConnections
             )
 
         common.msglog.registerEntry(

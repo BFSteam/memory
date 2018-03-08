@@ -1,6 +1,7 @@
 # AgentManager Message Scheduler
 import os
 import csv
+import shutil
 
 import commonVar as common
 import numpy as np
@@ -30,20 +31,16 @@ class MessageScheduler(AgentManager):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.msgLog = np.empty((0, 7))
-        print(self.msgLog)
+        #self.msgLog = np.empty((0, 7))
         common.msglog = self
         if not os.path.exists(common.project.replace("src", "tmp")):
             os.makedirs(common.project.replace("src", "tmp"))
         self.filename = common.project.replace(
             "src", 'tmp/msg_log_temp.%s.txt' % os.getpid())
-        with open(self.filename, 'w') as ff:
-            w = csv.writer(ff)    
-            printHeader(w, firstline=['#messagelog'],
-                        lastline=["source", "timec", "news", "ag1", "ag2", "time", "type"])
-
-    def printLog(self):
-        print(self.msgLog)
+        self.ff = open(self.filename, 'w')
+        self.w = csv.writer(self.ff)
+        printHeader(self.w, firstline=['#messagelog'],
+                    lastline=["source", "timec", "news", "ag1", "ag2", "time", "type"])
 
     def registerEntry(
             self,
@@ -75,40 +72,24 @@ class MessageScheduler(AgentManager):
 
         """
         if write == False: return
-        if self.msgLog.shape[0] > common.lineBuffer:
-            with open(self.filename, 'a') as ff:
-                w = csv.writer(ff)
-                for i in self.msgLog:
-                    w.writerow(i[0:7])
 
-            self.msgLog = np.empty((0, 7))
-        self.msgLog = np.vstack((
-            self.msgLog,
-            np.array([
+        self.w.writerow([
                 id_src,
                 date_creation,
                 id_new,
                 sender,
                 reciver,
                 date,
-                diffusion
-            ])
-        ))
+                diffusion])
 
     def writeLog(self, path='./defMLog.csv', write=True):
-
+        self.ff.close()
         if write == False:
             vprint("MessageScheduler -> writeLog called but not enabled: no file written")
             os.remove(self.filename)
             return
-        # try to guess extension
-        with open(self.filename, 'a') as ff:
-            w = csv.writer(ff)
-            for i in self.msgLog:
-                w.writerow(i[0:7])
 
-        with open(path, "w") as fw, open(self.filename, 'r') as fr:
-            fw.writelines(l for l in fr)
+        shutil.copy(self.filename, path)
         vprint("MessageScheduler -> writeLog file written at", path)
         os.remove(self.filename)
         vprint("MessageScheduler -> writeLog tmp file", self.filename, "removed")

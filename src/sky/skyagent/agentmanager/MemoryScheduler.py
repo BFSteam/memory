@@ -1,6 +1,7 @@
 # AgentManager Memory Scheduler
 import csv
 import os
+import shutil
 
 import commonVar as common
 import numpy as np
@@ -30,17 +31,17 @@ class MemoryScheduler(AgentManager):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.memoryLog = np.empty((0, 3 + common.memorySize))
+        #self.memoryLog = np.empty((0, 3 + common.memorySize))
 
         common.memlog = self
         if not os.path.exists(common.project.replace("src", "tmp")):
             os.makedirs(common.project.replace("src", "tmp"))
         self.filename = common.project.replace(
             "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
-        with open(self.filename, 'w') as ff:
-            w = csv.writer(ff)
-            printHeader(w, firstline=['# memorylog'],
-                        lastline=["agent", "time", "state"] + ["news" + str(i) for i in range(common.memorySize)])
+        self.ff = open(self.filename, 'w')
+        self.w = csv.writer(self.ff)
+        printHeader(self.w, firstline=['# memorylog'],
+                    lastline=["agent", "time", "state"] + ["news" + str(i) for i in range(common.memorySize)])
 
     def printLog(self):
         print(self.messageLog)
@@ -88,36 +89,16 @@ class MemoryScheduler(AgentManager):
         """
         if write == False:
             return
-        if self.memoryLog.shape[0] > common.lineBuffer:
-            print(self.memoryLog.shape[0])
-            with open(self.filename, 'a') as ff:
-                w = csv.writer(ff)
-                for i in self.memoryLog:
-                    w.writerow(i)
-                self.memoryLog = np.empty((0, 3 + common.memorySize))
-
-        tarr = np.empty([0])
-        for i in range(3 + common.memorySize):
-            tarr = np.append(tarr, entry[i])
-        self.memoryLog = np.vstack((
-            self.memoryLog,
-            tarr
-        ))
+        self.w.writerow(entry)
 
     def writeLog(self, path='./defMLog.csv', write=True):
-
+        self.ff.close()
         if write == False:
             vprint("MemoryScheduler -> writeLog called but not enabled: no file written")
             os.remove(self.filename)
             return
-        # try to guess extension
-        with open(self.filename, 'a') as ff:
-            w = csv.writer(ff)
-            for i in self.memoryLog:
-                w.writerow(i)
-
-        with open(path, "w") as fw, open(self.filename, 'r') as fr:
-            fw.writelines(l for l in fr)
+        
+        shutil.copy(self.filename, path)
         vprint("MemoryScheduler -> writeLog file written at", path)
         os.remove(self.filename)
         vprint("MemoryScheduler -> writeLog tmp file", self.filename, "removed")

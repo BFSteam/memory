@@ -79,8 +79,8 @@ debug = True
 #             Logs
 #
 ##################################
-writeConnectons = False
-writeMessages   = False
+writeConnections = True
+writeMessages   = True
 writeMemories   = True
 
 lineBuffer = 1000

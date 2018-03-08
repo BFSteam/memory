@@ -46,7 +46,8 @@ def initializeEdges():
                             second=j,
                             date=common.cycle,
                             weight=common.G[i][j]['weight'],
-                            cr='a'
+                            cr='a',
+                            write=common.writeConnections
                         )
                 else:
                     if random.random() < common.P_s:
@@ -57,7 +58,8 @@ def initializeEdges():
                             second=j,
                             date=common.cycle,
                             weight=common.G[i][j]['weight'],
-                            cr='a'
+                            cr='a',
+                            write=common.writeConnections
                         )
 
 

@@ -46,7 +46,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         print("saved", path)
 
         path = common.project.replace("src", "log/connectionLog" + str(common.localtime) + ".csv")
-        common.conlog.writeLog(path=path, write=common.writeConnectons)
+        common.conlog.writeLog(path=path, write=common.writeConnections)
 
         path = common.project.replace("src", "log/messageLog" + str(common.localtime) + ".csv")
         common.msglog.writeLog(path=path, write=common.writeMessages)

@@ -1,6 +1,7 @@
 # AgentManager Connection Scheduler
 import csv
 import os
+import shutil
 
 import commonVar as common
 import numpy as np
@@ -29,19 +30,16 @@ class ConnectionScheduler(AgentManager):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        self.connectionLog = np.empty((0, 5))
+        #self.connectionLog = np.empty((0, 5))
         common.conlog = self
         if not os.path.exists(common.project.replace("src", "tmp")):
             os.makedirs(common.project.replace("src", "tmp"))
         self.filename = common.project.replace(
             "src", 'tmp/con_log_temp.%s.txt' % os.getpid())
-        with open(self.filename, 'w') as ff:
-            w = csv.writer(ff)
-            printHeader(w, firstline=['#connectionlog'],
-                        lastline=['ag1', 'ag2', 'time', 'weight', 'type'])
-
-    def printLog(self):
-        print(self.connectionLog)
+        self.ff = open(self.filename, 'w')
+        self.w = csv.writer(self.ff)
+        printHeader(self.w, firstline=['#connectionlog'],
+                    lastline=['ag1', 'ag2', 'time', 'weight', 'type'])
 
     def registerEntry(
             self,
@@ -58,22 +56,11 @@ class ConnectionScheduler(AgentManager):
 
         """
         if write == False: return
-        if self.connectionLog.shape[0] > common.lineBuffer:
-            with open(self.filename, 'a') as ff: # open file ff at path self.filepath
-                w = csv.writer(ff)               # open csv writer 
-                for i in self.connectionLog:
-                    w.writerow(i[0:5])           # write what you need -> file closes at end of with
-            self.connectionLog = np.empty((0, 5))
-        self.connectionLog = np.vstack((
-            self.connectionLog,
-            np.array([
-                first,
-                second,
-                date,
-                weight,
-                cr
-            ])
-        ))
+        self.w.writerow([first,
+                         second,
+                         date,
+                         weight,
+                         cr])
 
     def writeLog(self, path='./defCLog.csv', write=True):
         """
@@ -83,17 +70,13 @@ class ConnectionScheduler(AgentManager):
         deletes the temp
 
         """
+        self.ff.close()
         if write == False:
             vprint("ConnectionScheduler -> writeLog called but not enabled: no file written")
             os.remove(self.filename)
             return
-        with open(self.filename, 'a') as cl:
-            w = csv.writer(cl)
-            for i in self.connectionLog:
-                w.writerow(i[0:5])
 
-        with open(path, "w") as fw, open(self.filename, 'r') as fr:
-            fw.writelines(l for l in fr)
+        shutil.copy(self.filename, path)
         vprint("ConnectionScheduler -> writeLog file written at", path)
         os.remove(self.filename)
         vprint("ConnectionScheduler -> writeLog tmp file", self.filename, "removed")
