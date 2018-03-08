@@ -58,7 +58,7 @@ class ConnectionScheduler(AgentManager):
 
         """
         if write == False: return
-        if self.connectionLog.shape[0] > 1000:
+        if self.connectionLog.shape[0] > common.lineBuffer:
             with open(self.filename, 'a') as ff: # open file ff at path self.filepath
                 w = csv.writer(ff)               # open csv writer 
                 for i in self.connectionLog:

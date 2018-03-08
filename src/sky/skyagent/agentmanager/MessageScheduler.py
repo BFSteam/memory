@@ -75,7 +75,7 @@ class MessageScheduler(AgentManager):
 
         """
         if write == False: return
-        if self.msgLog.shape[0] > 1000:
+        if self.msgLog.shape[0] > common.lineBuffer:
             with open(self.filename, 'a') as ff:
                 w = csv.writer(ff)
                 for i in self.msgLog:

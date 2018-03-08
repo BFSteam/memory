@@ -88,7 +88,8 @@ class MemoryScheduler(AgentManager):
         """
         if write == False:
             return
-        if self.memoryLog.shape[0] > 1000:
+        if self.memoryLog.shape[0] > common.lineBuffer:
+            print(self.memoryLog.shape[0])
             with open(self.filename, 'a') as ff:
                 w = csv.writer(ff)
                 for i in self.memoryLog:
