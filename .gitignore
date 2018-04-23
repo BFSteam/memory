@@ -201,6 +201,7 @@ tmp/*
 ## Exclude .gml and .csv from log dir
 log/*.gml
 log/*.csv
-
+log/*
+jup/*/*.csv
 *.gml
 

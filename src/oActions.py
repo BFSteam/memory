@@ -41,9 +41,9 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
         print("saved", path)
 
-        path = common.project.replace("src", "log/graphN" + str(common.localtime) + ".gml")
-        nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
-        print("saved", path)
+        #path = common.project.replace("src", "log/graphN" + str(common.localtime) + ".gml")
+        #nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
+        #print("saved", path)
 
         path = common.project.replace("src", "log/connectionLog" + str(common.localtime) + ".csv")
         common.conlog.writeLog(path=path, write=common.writeConnections)
