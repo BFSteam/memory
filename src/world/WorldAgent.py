@@ -76,12 +76,16 @@ class WorldAgent(Agent):
         # the state is shuffled because the topics are not in a partcular
         # order. then it's normalized
         self.state = np.zeros([self.state.shape[0]])
-        r = random.randint(1, n)
-        for i in range(r):
-            self.state[i] = 1
-        for i in range(self.state.shape[0]):
-            self.state[i] += (noise / r) * np.random.random_sample()
-        random.shuffle(self.state)
+        if n > 0:
+            r = random.randint(1, n)
+            for i in range(r):
+                self.state[i] = 1
+            for i in range(self.state.shape[0]):
+                self.state[i] += (noise / r) * np.random.random_sample()
+            random.shuffle(self.state)
+        else:
+            for i in range(self.state.shape[0]):
+                self.state[i] += np.random.random_sample()
         self.state = self.state / self.state.sum()
         return self.state
 
