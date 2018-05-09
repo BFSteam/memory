@@ -48,7 +48,7 @@ class User(WorldAgent):
         self.inactiveTime = 0
         self.activeTime = 0
         self.activate()
-        self.genState(n=1, noise=0.15)
+        self.genState(n=0, noise=0.15)
         self.tiredness = 1
 
     def activate(self, p=common.pActivation):

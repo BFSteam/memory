@@ -193,6 +193,7 @@ venv.bak/
 *.synctex.gz
 *.pdf
 *.xml
+*blx.bib
 
 
 ## Project Gitignore ##
