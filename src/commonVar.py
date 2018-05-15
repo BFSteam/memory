@@ -24,9 +24,9 @@ prop = 10.  # proportionality between P_s and P_a
 P_a = float(averageDegree) / N_USERS  # do not overwrite
 P_s = prop * P_a                      # do not overwrite
 
-dim = 4  # state dimension
+dim = 100  # state dimension
 
-memorySize = 20  # memory dimension
+memorySize = 3  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 
