@@ -1,0 +1,57 @@
+\section{gini_index}
+Memory selects the amount of news can be remembered: this could affect news' distribution among users.
+Indeed, if we insert in the network a certain number of news (i.e. launching a simulation with many news), they will reach a fraction of users (FOUR, fraction of users reached) at a fixed time.
+News spreading over time, in general, starts with a fluctuating transient and then reaches a stationary state: from a ``microscopic'' point of view, users' identity might vary but the fraction is pretty much the same. 
+It is statistically correct to compute, for every news, the average FOUR over time, with a certain threshold in order to neglect the transient ( the end time and the threshold are experimentally determined by free trials).
+We obtain in this  way a distribution of average FOURs, one for each news.
+Gini index measures the inequality of a distribution. Values of 0 and 1 stand for, respectively, the maximum homogeneity and the maximum heterogeneity.
+However, this index is a function of random values: mean and error have to be estimated.
+A certain number of samples is created by sampling with replacement of the average FOUR distribution: Gini index is computed for each one of them.
+Now we have a population of Gini indexes, and we can extract mean and error (The whole process is known as bootstrap...SI POTREBBE INSERIRE IN UN APPENDICE COME ABBIAMO RICAVATO L'ERRORE).
+In practical terms, for every level of  memory, a simulation with twenty news is run out: Gini index' mean and error are computed like before.
+The Gini index-memory plot shows a highly non-linear behaviour: sigmoid and gaussian seem to better represent data . In order to select the best-fit function, Chi-square is computed for both of them. 
+Because of asymmetric error bars, the optimization function is slightly different from the standard one, used for weighted interpolation; more details in appendix 2...
+
+Result...
+
+
+
+appendix 1: error bars for Gini index
+
+Bootstrap method is used to compute Gini index' mean and error: while for the former the process is pretty straigthforward, this is not the case for the latter.
+Average FOUR distribution is asymmetrical and, in general, non-normal. We consider two different types of error  and, in a conservative approach, we pick the largest for every datapoint.
+Standard deviation is ....
+
+Quantile Standard Error ....
+
+
+
+
+
+appendix 2: Asymmetric error bars fitting.
+
+The usual optimization function for weighted interpolation is:
+
+formula ... (sum (f(xi)-yi/...)     1)
+
+with f(xi),sigma_i
+
+However, this formula is only applicable for gaussian errors, expressed by the standard deviation: in addition, errorbars are not even symmetric.
+We have developed an approximate optimization function which counts in this asymmetry.
+In a weighted interpolation, the weight is the square inverse of the standard deviation: the ``shortest'' the errorbar, the closest will be f(xi) to yi.
+It might be an idea to split the error in two contributions, to be ``activated'' if the function value is greater or lower than the experimental value (sostituire con f(xi), yi):
+Let a and b be, respectively, the ``upside'' and ``downside'' errorbars: the optimization function for asymmetric errobars interpolation is:
+
+sum (f(xi)-yi)/2a^2 H +2b^2 H)
+
+
+f(xi) ``sees'' an error of 2a if over yi, or 2b if down. (The factor 2 ``reconstruct's' the whole errorbar like in 1).
+
+
+ 
+
+
+
+
+
+ 
