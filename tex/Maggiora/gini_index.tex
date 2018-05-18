@@ -2,6 +2,7 @@
 Memory selects the amount of news can be remembered: this could affect news' distribution among users.
 Indeed, if we insert in the network a certain number of news (i.e. launching a simulation with many news), they will reach a fraction of users (FOUR, fraction of users reached) at a fixed time.\\
 News spreading over time, in general, starts with a fluctuating transient and then reaches a stationary state: from a ``microscopic'' point of view, users' identity might vary but the fraction is pretty much the same. \\
+News spreading over time, in general, starts with a fluctuating transient and then reaches a stationary state: from a ``microscopic'' point of view, users' identity might vary but the fraction is pretty much the same.
 It is statistically correct to compute, for every news, the average FOUR over time, with a certain threshold in order to neglect the transient ( the end time and the threshold are experimentally determined by free trials).
 We obtain in this  way a distribution of average FOURs, one for each news.\\
 Gini index measures the inequality of a distribution. Values of 0 and 1 stand for, respectively, the maximum homogeneity and the maximum heterogeneity.
@@ -31,8 +32,8 @@ immagini esplicative appendix2
 
 Bootstrap method is used to compute Gini index' mean and error: while for the former the process is pretty straigthforward, this is not the case for the latter.
 Average FOUR distribution is asymmetrical and, in general, non-normal; we consider two different types of error.
-Given N samples ${x_1,...,x_N}$ whose mean is $\mu$, correct standard deviation is: 
- 
+Given N samples ${x_1,...,x_N}$ whose mean is $\mu$, correct standard deviation is:
+
 $$
 \sigma=\sqrt{\frac{\sum_{i=1}^{i=N}(x_i - \mu)^2}{N-1}}
 $$
@@ -41,7 +42,7 @@ $$
 Quantile Standard Error (	QSE), instead, estimates the error by considering the fraction of samples falling within a certain interval: the whole distribution is divided in equal parts by a certain amount of ``quantiles''.\\
 For example, in a Normal distribution, the interval $[\mu -\sigma, \mu +\sigma]$ ``covers'' approximately 68\% of the samples(figura...).
 In ``quantiles'' terms (percentiles in this case), our errorbar starts from the $17^{th}$ percentile and ends in the $68^{th}$ percentile.\\
-For non-normal distributions, standard deviation in general does not follow this property: to preserve it, we can compute QSE with the previous choice of quantiles, just by looking at the cumulative distribution, when values 0.17 and 0.68 are reached. 
+For non-normal distributions, standard deviation in general does not follow this property: to preserve it, we can compute QSE with the previous choice of quantiles, just by looking at the cumulative distribution, when values 0.17 and 0.68 are reached.
 
 Immagini di gaussiana con 1 e 2 sigma e cumulativa della gaussiana...
 
@@ -74,12 +75,3 @@ $$
 H(x) is the Heaviside function, which gives an ouput of 1 for $x>0$, 0 otherwise.\\
 $f(x_i)$ ``sees'' an error of a if over $y_i$, or b if down.
 The optimization is performed by specific R packages.
-
-
- 
-
-
-
-
-
- 
