@@ -66,11 +66,7 @@ We have developed an approximate optimization function which counts in this asym
 In a weighted interpolation, the weight is the square inverse of the standard deviation: the ``shortest'' the errorbar, the closest will be $f(x_i)$ to $y_i$.
 It might be an idea to split the error in two contributions, to be ``activated'' if the function value is greater or lower than the experimental value.
 Let a and b be, respectively, the errorbars ``over'' and ``down'' the mean point: the optimization function for asymmetric errobars interpolation is:
-
-$$
-E= \sum_{i=1}^{N} \frac{(f(x_i)-y_i)^2}{a^{2}H(f(x_i)-y_i)+b^{2}H(y_i-f(x_i))}
-$$
-
-H(x) is the Heaviside function, which gives an ouput of 1 for $x>0$, 0 otherwise.\\
-$f(x_i)$ ``sees'' an error of a if over $y_i$, or b if down.
-The optimization is performed by specific R packages.
+$$ E= \sum_{i=1}^{N} \frac{(f(x_i)-y_i)^2}{a^{2}\mathcal{H}(f(x_i)-y_i)+b^{2}\mathcal{H}(y_i-f(x_i))} $$
+$\mathcal{H}(x)$ is the Heaviside function, whose value is zero for negative argument and one for positive argument.\\
+\hl{$f(x_i)$ ``sees'' an error of a if over $y_i$, or b if down.}
+ The optimization \hl{is performed by specific R packages}.
