@@ -1,1 +1,12 @@
 \subsection{Clustering}
+Clustering is the tendency of a network to cluster, i.e. to divide itself into highly connected groups of nodes.
+For unweighted graphs, the clustering of a node u is the fraction of possible triangles over all possible triplets  through that node that exist,
+
+$$
+c_u = \frac{2 T(u)}{deg(u)(deg(u)-1)}
+$$
+where T(u) is the number of triangles through node u and deg(u) is the degree of u.
+Hence, the average clustering coefficient is:
+$$
+C = \frac{1}{n}\sum_{v \in G} c_v
+$$
