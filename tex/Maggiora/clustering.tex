@@ -1,12 +1,18 @@
 \subsection{Clustering}
 Clustering is the tendency of a network to cluster, i.e. to divide itself into highly connected groups of nodes.
-For unweighted graphs, the clustering of a node u is the fraction of possible triangles over all possible triplets  through that node that exist,
+For unweighted graphs, the clustering of a node $u$ is the fraction of possible triangles over all possible triplets  through that node that exist,
 
 $$
 c_u = \frac{2 T(u)}{deg(u)(deg(u)-1)}
 $$
-where T(u) is the number of triangles through node u and deg(u) is the degree of u.
-Hence, the average clustering coefficient is:
+where $T(u)$ is the number of triangles through node $u$ and $deg(u)$ is the degree of $u$.
+Hence, the average clustering coefficient  is:
 $$
-C = \frac{1}{n}\sum_{v \in G} c_v
+ACC = \frac{1}{n}\sum_{v \in G} c_v
 $$
+We ask wether memory, previously considered in section 1, could affect the average clustering coefficient.
+To answer the question, the following experiment was designed:
+for every memory level, a simulation was run out until a fixed amount of time; ACC was computed afterwards.\\
+Finally, via regression,  ACC-memory plot will show possible correlations. 
+
+Results, cite networkx paper...
