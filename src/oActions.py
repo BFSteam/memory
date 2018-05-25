@@ -54,6 +54,9 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         path = common.project.replace("src", "log/memoryLog" + str(common.localtime) + ".csv")
         common.memlog.writeLog(path=path, write=common.writeMemories)
 
+        path = common.project.replace("src", "log/activationLog" + str(common.localtime) + ".csv")
+        common.actlog.writeLog(path=path, write=common.writeMemories)
+
         path = common.project.replace("src", "log/degree_distr" + str(common.localtime) + ".csv")
         with open(path, "w") as ff:
             w = csv.writer(ff)

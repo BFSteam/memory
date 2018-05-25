@@ -1,4 +1,5 @@
 import datetime
+from usefulFunctions import hill
 
 localtime = datetime.datetime.now().strftime("%Y_%d_%m_%H_%M_%S")
 # commonVar.py
@@ -24,7 +25,7 @@ prop = 10.  # proportionality between P_s and P_a
 P_a = float(averageDegree) / N_USERS  # do not overwrite
 P_s = prop * P_a                      # do not overwrite
 
-dim = 100  # state dimension
+dim = 3  # state dimension
 
 memorySize = 3  # memory dimension
 
@@ -50,7 +51,7 @@ pForget = 0.05  # probability to forget a news
 vOld = 24  # value of an old news
 
 # User -> becomeActive
-tActivation = 7  # cutoff of inactivation
+tActivation = 3  # cutoff of inactivation
 pActivation = 0.08  # probability of 'first' activation
 
 # User -> becomeInactive
@@ -80,7 +81,10 @@ debug = True
 #
 ##################################
 writeConnections = True
-writeMessages   = True
-writeMemories   = True
-
+writeMessages    = True
+writeMemories    = True
+writeActivations = True
 lineBuffer = 1000
+
+timeActiveArray = [hill(x+1, pActivation, tActivation, 3) for x in range(100)]
+timeInactiveArray = [hill(x+1, pInactivation, tInactivation, 3) for x in range(100)]

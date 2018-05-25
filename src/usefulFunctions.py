@@ -74,3 +74,6 @@ def printHeader(w = csv.writer(open("temp.txt", "w")), firstline="#FIRST_LINE", 
     w.writerow(['#time', common.localtime])
     w.writerow(['#memorySize', common.memorySize])
     w.writerow(lastline)
+
+def hill(x, p, k, n):
+    return ( -0.5 +( 1 / (1 + (k/x)**n)) ) * (1-p)*2 + p
