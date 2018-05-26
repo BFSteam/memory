@@ -191,7 +191,9 @@ venv.bak/
 *.mtc1
 *.out
 *.synctex.gz
-*.pdf
+tex/Terna/*/*.pdf
+tex/Terna/*.pdf
+tex/Maggiora/*.pdf
 *.xml
 *blx.bib
 
@@ -203,6 +205,8 @@ tmp/*
 log/*.gml
 log/*.csv
 log/*
+jup/*.pdf
 jup/*/*.csv
 *.gml
-
+./*.pdf
+*.svg
