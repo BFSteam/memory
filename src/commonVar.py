@@ -35,11 +35,7 @@ verbose = True
 
 projectVersion = 0.0  # useless
 
-try:
-    toBeExecuted = "from pybeep.pybeep import PyVibrate, PyBeep; PyBeep().beep()"
-except:
-    toBeExecuted = "print ('Goodbye')"  # useless
-
+toBeExecuted = "print ('Goodbye')"  # useless
 
 # during execution ##
 
