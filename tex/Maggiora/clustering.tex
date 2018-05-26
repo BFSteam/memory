@@ -1,18 +1,25 @@
-\subsection{Clustering}
-\textit{Clustering} is the tendency of a network to cluster, i.e. to divide itself into highly connected groups of nodes.
-For unweighted graphs, the \textit{clustering} of a node $u$ is the fraction of possible triangles over all possible triplets  through that node that exist,
+\subsection{Clustering} \label{clustering}
+A large number of networks show a tendency for link formation between neighboring vertices, i.e., the network topology deviates from uncorrelated random networks: this tendency is called \textit{clustering}.(\hl{citare $http://jponnela.com/webdocuments/a9.pdf$}) 
+For unweighted graphs, the clustering of a node $u$ is the fraction of possible triangles over all possible triplets  through that node that exist,
 
-$$
+\begin{equation}
+\label{eq:clustering}
 c_u = \frac{2 T(u)}{deg(u)(deg(u)-1)}
-$$
+\end{equation}
 where $T(u)$ is the number of triangles through node $u$ and $deg(u)$ is the degree of $u$.
 Hence, the \textit{average clustering coefficient}  is:
-$$
+\begin{equation}
+\label{eq:average_clustering}
 ACC = \frac{1}{n}\sum_{v \in G} c_v
-$$
-We ask wether memory, previously considered in section 1, could affect the \textit{average clustering coefficient}.
+\end{equation}
+We ask wether memory, previously considered in section \ref{introduction}, could affect the average clustering coefficient.
 To answer the question, the following experiment was designed:
-for every memory level, a certain number of simulations was run out until a fixed amount of time; ACC's mean and standard deviation were computed afterwards.\\
-Finally, via weighted interpolation,  ACC's mean-memory plot will show possible correlations. 
-
+for every memory size, five simulations were run over a thousand iterations; $ACC$'s mean and standard deviation were computed afterwards.\\
+Finally, via weighted interpolation, a plot of $ACC$'s mean over memory size will show possible correlations. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/clustering.pdf}
+  \caption{$ACC$'s mean-memory size linear weighted fit: five simulations per point}
+  \label{fig:clustering}
+\end{figure}
 Results, cite networkx paper...

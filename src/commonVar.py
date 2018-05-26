@@ -27,7 +27,7 @@ P_s = prop * P_a                      # do not overwrite
 
 dim = 3  # state dimension
 
-memorySize = 3  # memory dimension
+memorySize = 20  # memory dimension
 
 overwrite = True  # sources overwrite old news when creating newer
 
@@ -35,7 +35,10 @@ verbose = True
 
 projectVersion = 0.0  # useless
 
-toBeExecuted = "print ('Goodbye')"  # useless
+try:
+    toBeExecuted = "from pybeep.pybeep import PyVibrate, PyBeep; PyBeep().beep()"
+except:
+    toBeExecuted = "print ('Goodbye')"  # useless
 
 
 # during execution ##
