@@ -81,7 +81,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
 
         try:
             from pybeep.pybeep import PyVibrate, PyBeep
-             PyBeep().beep()
+            PyBeep().beep()
         except:
              pass
 
