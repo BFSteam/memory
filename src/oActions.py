@@ -78,3 +78,10 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
             w = csv.writer(ff)
             printHeader(w, firstline=['#diameter'], lastline=['diameter', 'memsize'])
             w.writerow([diam, common.memorySize])
+
+        try:
+            from pybeep.pybeep import PyVibrate, PyBeep
+            PyBeep().beep()
+        except:
+             pass
+
