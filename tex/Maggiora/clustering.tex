@@ -15,10 +15,12 @@ ACC = \frac{1}{n}\sum_{v \in G} c_v
 We ask wether memory, previously considered in section \ref{introduction}, could affect the average clustering coefficient.
 To answer the question, the following experiment was designed:
 for every memory size, five simulations were run over a thousand iterations; $ACC$'s mean and standard deviation were computed afterwards.\\
-Finally, via weighted interpolation, a plot of $ACC$'s mean over memory size will show possible correlations. 
+Finally, via weighted interpolation, a plot of $ACC$'s mean over memory size will show possible correlations.
 \begin{figure}[h]
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/clustering.pdf}
+  \def\svgwidth{\columnwidth}
+  \input{img/clustering.pdf_tex}
+  %\includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/clustering.pdf}
   \caption{$ACC$'s mean-memory size linear weighted fit: five simulations per point.}
   \label{fig:clustering}
 \end{figure}

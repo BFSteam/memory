@@ -20,7 +20,7 @@
 %%   \import{<path to file>}{<filename>.pdf_tex}
 %% Alternatively, one can specify
 %%   \graphicspath{{<path to file>/}}
-%% 
+%%
 %% For more information, please see info/svg-inkscape on CTAN:
 %%   http://tug.ctan.org/tex-archive/info/svg-inkscape
 %%
@@ -53,6 +53,6 @@
   \begin{picture}(1,0.8)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{clustering.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{img/clustering.pdf}}%
   \end{picture}%
 \endgroup%
