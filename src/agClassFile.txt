@@ -3,3 +3,4 @@ sources world.worldagent.Source
 msglogs sky.skyagent.agentmanager.MessageScheduler
 conlogs sky.skyagent.agentmanager.ConnectionScheduler
 memlogs sky.skyagent.agentmanager.MemoryScheduler
+actlogs sky.skyagent.agentmanager.ActivationScheduler

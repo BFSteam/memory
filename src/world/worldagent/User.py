@@ -9,6 +9,7 @@ import numpy as np
 from agTools import *
 from Tools import *
 from world.WorldAgent import *
+from usefulFunctions import hill
 
 class User(WorldAgent):
     """
@@ -50,6 +51,7 @@ class User(WorldAgent):
         self.activate()
         self.genState(n=0, noise=0.15)
         self.tiredness = 1
+        self.prevDiff = 'a' if random.random() < 0.5 else 'p'
 
     def activate(self, p=common.pActivation):
         """
@@ -292,8 +294,18 @@ class User(WorldAgent):
 
         if self.active is True:
             self.active = False
+            common.actlog.registerEntry(
+                agent=self.number,
+                date=common.cycle,
+                atype='u',
+                atime=self.activeTime)
         else:
             self.active = True
+            common.actlog.registerEntry(
+                agent=self.number,
+                date=common.cycle,
+                atype='d',
+                atime=self.inactiveTime)
         self.inactiveTime = 0
         self.activeTime = 0
 
@@ -379,8 +391,9 @@ class User(WorldAgent):
 
         """
 
-        if self.inactiveTime > t:
-            if random.random() < self.inactiveTime * p:
+        if self.inactiveTime >= t:
+            if random.random() < common.timeActiveArray[self.inactiveTime - 1]:
+            #if random.random() < 1 - p * np.exp(-self.inactiveTime):
                 self.switchActivation()
 
     def becomeInactive(
@@ -410,7 +423,7 @@ class User(WorldAgent):
         if tired is True:
             p = p * self.tiredness
         if self.activeTime > t:
-            if random.random() < self.activeTime * p:
+            if random.random() < common.timeInactiveArray[self.activeTime - 1]:
                 self.switchActivation()
                 self.tiredness = 1
 
@@ -712,3 +725,30 @@ class User(WorldAgent):
     def debug(self):
         print(self.number)
         print(self.database)
+
+
+    def diffusion(self):
+        if random.random() < 0.5:
+            self.passiveDiffusion()
+            self.prevDiff = 'p'
+        else:
+            self.activeDiffusion(
+                p=common.pActiveDiffusion,
+                threshold=common.tActiveDiffusion,
+                q=common.pWeight,
+                r=common.pRemove
+            )
+            self.prevDiff = 'a'
+
+
+    def otherDiffusion(self):
+        if self.prevDiff == 'p':
+            self.activeDiffusion(
+                p=common.pActiveDiffusion,
+                threshold=common.tActiveDiffusion,
+                q=common.pWeight,
+                r=common.pRemove
+            )
+        else:
+            self.passiveDiffusion()
+        
