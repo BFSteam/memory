@@ -1,12 +1,24 @@
 \subsection{Diameter} \label{diameter}
-In graph theory, \textit{shortest path} (SP) between node $a$ and $b$ of a graph is the minimum number of edges connecting them (i.e. the minimum number of ``steps'' to go from $a$ to $b$).
+In graph theory, \textit{shortest path} (SP) between node $a$ and $b$ of a graph is the minimum number of edges connecting them (i.e. the minimum number of ``steps'' to go from $a$ to $b$).\\
 After computing SP for every couple of nodes in a graph, we can define \textit{diameter} as the maximum of the shortest paths.\\
 As with clustering, we ran five  simulations for every memory size, obtaining a plot of diameter's mean over memory size with errors. Final regression will point out possible correlations.
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/diameter.pdf}
-  \caption{diameter's mean-memory size linear weighted fit: five simulations per point}
+  \caption{diameter's mean-memory size linear weighted fit: five simulations per point.}
   \label{fig:diameter}
 \end{figure}
-
+\begin{table}[h] 
+\label{tab:clustering_diameter}
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+& Slope & Intercept & $R^2$ & $\rho_{xy}$ \\
+\midrule
+\textit{Clustering} & $(3 \pm 6) \cdot 10^{-4}$ &$(2.8 \pm 0.2) \cdot 10^{-2}$ &$6.8 \cdot 10^{-2}$ & $2.5 \cdot 10^{-1}$ \\
+\textit{Diameter} & $(0.3 \pm 1.2) \cdot 10^{-1}$ & $8.2 \pm 0.4$ & $1.8 \cdot 10^{-2}$ & $1.8 \cdot 10^{-1}$  \\
+\bottomrule
+\end{tabular}
+\caption{Fitting results for clustering and diameter.}
+\end{table}
 
