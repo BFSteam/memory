@@ -20,7 +20,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{graphicx, xcolor} % support the \includegraphics command and options
-
+\usepackage{siunitx}
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
 %%% PACKAGES
@@ -62,7 +62,6 @@
   filecolor=magenta,
   urlcolor=cyan,
 }
-
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
 \usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
@@ -116,5 +115,9 @@
 \newpage
 
 \input{appendix.tex}
+
+\newpage
+
+\printbibliography
 
 \end{document}

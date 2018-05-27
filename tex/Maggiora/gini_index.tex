@@ -31,3 +31,22 @@ immagini esplicative appendix2
   \caption{Gini index on memory size.}
   \label{fig:gini}
 \end{figure}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{rSSSS}
+    \toprule
+    & \multicolumn{2}{c}{\textit{Gaussian Fit}} & \multicolumn{2}{c}{\textit{Sigmoid Fit}}\\
+     & {$\chi^2$} & {p-value} & {$\chi^2$} & {p-value} \\ \midrule
+    stde & 0.0013260 & 0.97195 & 0.00080793 & 0.97732 \\
+    qant & 0.0037563 & 0.95113 & 0.0012997  & 0.97124 \\
+    asym & 0.0013576 & 0.97061 & 0.00084281 & 0.97684 \\ \bottomrule
+  \end{tabular}
+  \caption{Reduced $\chi^2$ and respective p-value for Gaussian
+    and Sigmoid fit with different non-linear optimization
+    strategies.\\
+    Optimization using the standard error of the Gini index
+    is denoted as std, quantile bootstrap optimization\cite{doi:10.1177/1471082X14561155} as
+    quant and asymmetric error bar fitting optimization as asym.}
+  \label{tab:gini}
+\end{table}
