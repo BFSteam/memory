@@ -10,7 +10,7 @@ G_edge_labels = 0
 
 SEED = 1
 
-N_USERS = 10000  # number of users
+N_USERS = 1000  # number of users
 
 N_SOURCES = 20  # number of sources
 
