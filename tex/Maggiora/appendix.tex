@@ -1,7 +1,7 @@
 \appendix
 \section{Errorbars for Gini index}
 
-\textit{Bootstrap} method is used to compute \textit{Gini index}' mean and error: while for the former the process is pretty straigthforward, this is not the case for the latter.
+\textit{Bootstrap} method \cite{bootstrap} is used to compute \textit{Gini index}' mean and error: while for the former the process is pretty straigthforward, this is not the case for the latter.
 Average \textit{FOUR} distribution is asymmetrical and, in general, non-normal; we consider two different types of error.
 Given N samples ${x_1,...,x_N}$ whose mean is $\mu$, \textit{correct standard deviation} is:
 
@@ -10,7 +10,7 @@ $$
 $$
 
 
-\textit{Quantile Standard Error} (	QSE), instead, estimates the error by considering the fraction of samples falling within a certain interval: the whole distribution is divided in equal parts by a certain amount of ``quantiles''.\\
+\textit{Quantile Standard Error} (	QSE) \cite{quantile}, instead, estimates the error by considering the fraction of samples falling within a certain interval: the whole distribution is divided in equal parts by a certain amount of ``quantiles''.\\
 For example, in a Normal distribution, the interval $[\mu -\sigma, \mu +\sigma]$ ``covers'' approximately 68\% of the samples(figura...).
 In ``quantiles'' terms (percentiles in this case), our errorbar starts from the $17^{th}$ percentile and ends in the $68^{th}$ percentile.\\
 For non-normal distributions, standard deviation in general does not follow this property: to preserve it, we can compute QSE with the previous choice of quantiles, just by looking at the cumulative distribution, when values 0.17 and 0.68 are reached.
@@ -26,7 +26,7 @@ The overall error is divided twofold, ``rightmost'' and ``leftmost''  the mean. 
 The aim of a standard fitting problem is to find a function which reproduces experimental observations.
 Let $f_{\theta}$ be the candidate function: $\theta=(\theta_1,...,\theta_m)$ is a vector of m parameters which completely determines function's values.
 The optimization is performed with respect to $\theta$ parameters.\\
-Given N datapoints with coordinates ${(x_i,y_i)}$ and y-errorbars $\sigma_i$, $i$=1,...,N, the usual optimization function for \textit{weighted interpolation} is:
+Given N datapoints with coordinates ${(x_i,y_i)}$ and y-errorbars $\sigma_i$, $i$=1,...,N, the usual optimization function for \textit{weighted interpolation}\cite{interpolation} is:
 
 $$
 E(\theta)= \sum_{i=1}^{N} \frac{(f_{\theta}(x_i)-y_i)^2}{\sigma_{i}^2}
