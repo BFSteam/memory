@@ -1,12 +1,26 @@
 \subsection{Gini Index}
-\textit{Gini index} \cite{ginindex} measures the inequality of a distribution. Values of 0 and 1 stand for, respectively, the maximum homogeneity and the maximum heterogeneity.
-However, this index is a function of random values: mean and error have to be estimated.\\
-A certain number of samples is created by sampling with replacement of the average FOUR distribution: Gini index is computed for each one of them.
-Now we have a population of Gini indexes, and we can extract mean and error: the whole process is known as \textit{bootstrap} \cite{bootstrap} (see Appendix 1 for error estimation).\\
-In practical terms, for every level of  memory, a simulation with twenty news is run out: Gini index' mean and error are computed like before.
-The Gini index-memory plot shows a highly non-linear behaviour: sigmoid and gaussian seem to better represent data.\\
- In order to select the best-fit function, \textit{Chi-square} is computed for both of them. \\
-Because of asymmetric error bars, the optimization function is slightly different from the standard one, used for weighted interpolation: see Appendix 2 for more details.
+\textit{Gini index}\cite{ginindex} measures the inequality of a
+distribution. Values of 0 and 1 stand for, respectively, the
+maximum homogeneity and the maximum heterogeneity.
+However, this index is a function of random values: mean and
+error have to be estimated.\\
+A certain number of samples is created by sampling with replacement
+of the average FOUR distribution: Gini index is computed for each
+one of them.
+Now we have a population of Gini indexes, and we can extract
+mean and error: the whole process is known as
+\textit{bootstrap}\cite{bootstrap}
+(see \hl{Appendix 1} for error estimation).\\
+In practical terms, for every level of  memory, a simulation with
+twenty news is run out: Gini index' mean and error are computed
+like before.
+The Gini index-memory plot shows a highly non-linear behaviour:
+sigmoid and gaussian seem to better represent data.\\
+In order to select the best-fit function, \textit{Chi-square} is
+computed for both of them. \\
+Because of asymmetric error bars, the optimization function is
+slightly different from the standard one, used for weighted
+interpolation: see \hl{Appendix 2} for more details.
 Interpolation results are shown below:
 
 %\begin{figure}[!h]
@@ -48,5 +62,3 @@ Interpolation results are shown below:
 We can notice that, for every type of errorbar, sigmoid's $\chi^2$ is slightly lower than gaussian one; p-value is higher instead.
 Null hypothesis, for both measures, is far from being rejected: goodness-of-fit is solidly validated.
 Hence, sigmoid is our best-fit function for gini index-memory length plot.
-
-
