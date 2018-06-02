@@ -1,9 +1,4 @@
-
-Memory selects the amount of news can be remembered: this could affect news' distribution among users.
-Indeed, if we insert in the network a certain number of news (i.e. launching a simulation with many news), they will reach a fraction of users (\textit{FOUR}, fraction of users reached) at a fixed time.\\
-News spreading over time, in general, starts with a fluctuating transient and then reaches a stationary state: from a ``microscopic'' point of view, users' identity might vary but the fraction is pretty much the same. \\
-It is statistically correct to compute, for every news, the average \textit{FOUR} over time, with a certain threshold in order to neglect the transient ( the end time and the threshold are experimentally determined by free trials).
-We obtain in this  way a distribution of average \textit{FOURs}, one for each news.\\
+\subsection{Gini Index}
 \textit{Gini index} \cite{ginindex} measures the inequality of a distribution. Values of 0 and 1 stand for, respectively, the maximum homogeneity and the maximum heterogeneity.
 However, this index is a function of random values: mean and error have to be estimated.\\
 A certain number of samples is created by sampling with replacement of the average \textit{FOUR} distribution: \textit{Gini index} is computed for each one of them.
