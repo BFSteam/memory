@@ -39,7 +39,7 @@ In a weighted interpolation, the weight is the square inverse of the standard de
 It might be an idea to split the error in two contributions, to be ``activated'' if the function value is greater or lower than the experimental value.
 Let a and b be, respectively, the errorbars ``over'' and ``down'' the mean point: the optimization function for \textit{asymmetric errobars interpolation} is:
 $$ E= \sum_{i=1}^{N} \frac{(f(x_i)-y_i)^2}{a^{2}\mathcal{H}(f(x_i)-y_i)+b^{2}\mathcal{H}(y_i-f(x_i))} $$
-\hl{computazionalmente pi\`u eff. calcolare solo H(x) cambiando il segno all'interno?}
 $\mathcal{H}(x)$ is the \textit{Heaviside function},
 $$\mathcal{H}(x):=\frac{\mathrm{d}}{\mathrm{d}x}\mathrm{max}\{x,0\}:=\int_{-\infty}^x \delta (s) \mathrm{d}s$$whose value is zero for negative argument and one for positive argument.\\
-The optimization \hl{is performed by specific R packages}.
+The optimization is performed by an R implementation \cite{Roptim} of textit{Nelder-Mead algorithm} \cite{neldermeadoriginal}, also known as textit{downhill simplex method} or textit{amoeba} \cite{neldermeadnumrec}.\\
+This algorithm is particularly appropriate for non-linear optimization with many local minima.
