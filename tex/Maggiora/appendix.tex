@@ -8,12 +8,7 @@ Average \textit{FOUR} distribution is asymmetrical and, in general,
 non-normal; we consider two different types of error.
 Given N samples ${x_1,...,x_N}$ whose mean is $\mu$,
 \textit{correct standard deviation} is:
-
-$$
-\sigma=\sqrt{\frac{\sum_{i=1}^{i=N}(x_i - \mu)^2}{N-1}}
-$$
-
-
+$$\sigma=\sqrt{\frac{\sum_{i=1}^{i=N}(x_i - \mu)^2}{N-1}}$$
 \textit{Quantile Standard Error} (QSE)\cite{quantile}, instead,
 estimates the error by considering the fraction of samples
 falling within a certain interval: the whole distribution is
@@ -30,7 +25,19 @@ the previous choice of quantiles, just by looking at the cumulative
 distribution, when values 0.17 and 0.68 are reached.
 
 \hl{Immagini di gaussiana con 1 e 2 sigma e cumulativa della gaussiana...}
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=.8\columnwidth]{img/bootstrap.pdf}
+  \caption{Bootstrap}
+  \label{fig:bootstrap}
+\end{figure}
 
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=.8\columnwidth]{img/appendix.pdf}
+  \caption{errors gauss sigma}
+  \label{fig:gauss_sigma}
+\end{figure}
 The overall error is divided twofold, ``rightmost'' and ``leftmost''
 the mean. For every part of the interval, we pick the ``largest''
 between standard deviation and QSE: this conservative approach avoids
@@ -74,3 +81,9 @@ also known as textit{downhill simplex method} or
 textit{amoeba}\cite{neldermeadnumrec}.\\
 This algorithm is particularly appropriate for non-linear
 optimization with many local minima.
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=.4\columnwidth]{img/err.pdf}
+  \caption{error bars}
+  \label{fig:errors}
+\end{figure}
