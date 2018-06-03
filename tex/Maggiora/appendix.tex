@@ -8,7 +8,7 @@ Average \textit{FOUR} distribution is asymmetrical and, in general,
 non-normal; we consider two different types of error.
 Given N samples ${x_1,...,x_N}$ whose mean is $\mu$,
 \textit{correct standard deviation} is:
-$$\sigma=\sqrt{\frac{\sum_{i=1}^{i=N}(x_i - \mu)^2}{N-1}}$$
+$\sigma=\sqrt{\frac{\sum_{i=1}^{i=N}(x_i - \mu)^2}{N-1}}$.\\
 \textit{Quantile Standard Error} (QSE)\cite{quantile}, instead,
 estimates the error by considering the fraction of samples
 falling within a certain interval: the whole distribution is
@@ -26,12 +26,14 @@ distribution, when values 0.17 and 0.68 are reached.
 \hl{Immagini di gaussiana con 1 e 2 sigma e cumulativa della gaussiana...}
 \begin{table}[htpb]
   \centering
-  \begin{tabular}{rcccc}
+  \begin{tabular}{ccc}
     \toprule
-    Bootstrap number & $10$ & $10^3$ & $10^5$ & $10^7$ \\
+    \textit{quantile} & $16\%$ & $84\%$ \\
     \midrule
-    \textit{quantile $2.5\%$}  & 0.4811 & 0.5436 & 0.5414 & 0.5413 \\
-    \textit{quantile $97.5\%$} & 0.5997 & 0.6105 & 0.6100 & 0.6099 \\
+    $10$   & 0.0130 & 0.00857 \\
+    $10^3$ & 0.0239 & 0.00564 \\
+    $10^5$ & 0.0236 & 0.00522 \\
+    $10^7$ & 0.0236 & 0.00534 \\
     \bottomrule
   \end{tabular}
   \caption{quantile errors}
@@ -43,7 +45,6 @@ distribution, when values 0.17 and 0.68 are reached.
   \caption{Bootstrap}
   \label{fig:bootstrap}
 \end{figure}
-
 \begin{figure}[htpb]
   \centering
   \includegraphics[width=.8\columnwidth]{img/appendix.pdf}
@@ -52,7 +53,7 @@ distribution, when values 0.17 and 0.68 are reached.
 \end{figure}
 The overall error is divided twofold, ``rightmost'' and ``leftmost''
 the mean. For every part of the interval, we pick the ``largest''
-between standard deviation and QSE: this conservative approach avoids
+between standard deviation and QSE, see figure (\ref{fig:gauss_sigma}): this conservative approach avoids
 underestimations in both directions.
 
 \section{Asymmetric errorbars fitting}
@@ -88,9 +89,9 @@ $$\mathcal{H}(x):=\frac{\mathrm{d}}{\mathrm{d}x}\mathrm{max}
 \{x,0\}:=\int_{-\infty}^x \delta (s) \mathrm{d}s$$ whose value
 is zero for negative argument and one for positive argument.\\
 The optimization is performed by an R implementation\cite{Roptim}
-of textit{Nelder-Mead algorithm}\cite{neldermeadoriginal},
+of textit{Nelder-Mead algorithm},\cite{neldermeadoriginal}
 also known as textit{downhill simplex method} or
-textit{amoeba}\cite{neldermeadnumrec}.\\
+textit{amoeba}.\cite{neldermeadnumrec}\\
 This algorithm is particularly appropriate for non-linear
 optimization with many local minima.
 \begin{figure}[htpb]
