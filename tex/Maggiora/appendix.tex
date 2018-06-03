@@ -23,8 +23,20 @@ For non-normal distributions, standard deviation in general does
 not follow this property: to preserve it, we can compute QSE with
 the previous choice of quantiles, just by looking at the cumulative
 distribution, when values 0.17 and 0.68 are reached.
-
 \hl{Immagini di gaussiana con 1 e 2 sigma e cumulativa della gaussiana...}
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{rcccc}
+    \toprule
+    Bootstrap number & $10$ & $10^3$ & $10^5$ & $10^7$ \\
+    \midrule
+    \textit{quantile $2.5\%$}  & 0.4811 & 0.5436 & 0.5414 & 0.5413 \\
+    \textit{quantile $97.5\%$} & 0.5997 & 0.6105 & 0.6100 & 0.6099 \\
+    \bottomrule
+  \end{tabular}
+  \caption{quantile errors}
+  \label{tab:quantile}
+\end{table}
 \begin{figure}[htpb]
   \centering
   \includegraphics[width=.8\columnwidth]{img/bootstrap.pdf}
