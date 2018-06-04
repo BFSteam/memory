@@ -56,14 +56,16 @@
 %\date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed
 \begin{document}
-
 \maketitle
 \input{abstract.tex}
+\thispagestyle{empty}
 \newpage
+\thispagestyle{empty}
 \tableofcontents
 \listoffigures
 \listoftables
 \newpage
+\pagenumbering{arabic}
 \input{intro.tex}
 \newpage
 \input{effects_network.tex}
