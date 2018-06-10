@@ -29,26 +29,25 @@ Interpolation results are shown below:
   %\caption{Gini index-memory plot with errorbars}
   %\label{fig:ginimem}
 %\end{figure}
-
-
-
-
+%
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/gini.pdf}
   \caption{Gini index on memory size.}
   \label{fig:gini}
 \end{figure}
-
+%
 \begin{table}[h]
   \centering
-  \begin{tabular}{rSSSS}
+  \begin{tabular}{lcccc}
     \toprule
     & \multicolumn{2}{c}{\textit{Gaussian Fit}} & \multicolumn{2}{c}{\textit{Sigmoid Fit}}\\
      & {$\chi^2$} & {p-value} & {$\chi^2$} & {p-value} \\ \midrule
-    stde & 0.0013260 & 0.97195 & 0.00080793 & 0.97732 \\
-    qant & 0.0037563 & 0.95113 & 0.0012997  & 0.97124 \\
-    asym & 0.0013576 & 0.97061 & 0.00084281 & 0.97684 \\ \bottomrule
+    \textit{std. err.} & \SI{1.3e-3}{} & \SI{9.7e-1}{} & \SI{8.1e-4}{} & \SI{9.8e-1}{} \\
+    %\midrule[0.01em]
+    \cmidrule(lr{0.01em}){2-5}
+    \textit{quant. err.} & \SI{3.7e-3}{} & \SI{9.5e-1}{} & \SI{1.3e-3}{}  & \SI{9.7e-1}{} \\
+    \textit{asym. err.} & \SI{1.4e-3}{} & \SI{9.7e-1}{} & \SI{8.4e-4}{} & \SI{9.8e-1}{} \\ \bottomrule
   \end{tabular}
   \caption{Reduced $\chi^2$ and respective p-value for Gaussian
     and Sigmoid fit with different non-linear optimization
@@ -58,7 +57,8 @@ Interpolation results are shown below:
     quant and asymmetric error bar fitting optimization as asym.}
   \label{tab:gini}
 \end{table}
-\hl{3 cifre????}
+%
+\hl{didascalia}
 We can notice that, for every type of errorbar, sigmoid's
 $\chi^2$ is slightly lower than gaussian one; p-value is
 higher instead.

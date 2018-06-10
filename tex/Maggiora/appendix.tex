@@ -26,14 +26,14 @@ distribution, when values 0.17 and 0.68 are reached.
 \hl{Immagini di gaussiana con 1 e 2 sigma e cumulativa della gaussiana...}
 \begin{table}[htpb]
   \centering
-  \begin{tabular}{ccc}
+  \begin{tabular}{rc|cc}
     \toprule
-    \textit{quantile} & $16\%$ & $84\%$ \\
+    \multicolumn{2}{c}{\textit{quantile}} & $16\%$ & $84\%$ \\
     \midrule
-    $10$   & 0.0130 & 0.00857 \\
-    $10^3$ & 0.0239 & 0.00564 \\
-    $10^5$ & 0.0236 & 0.00522 \\
-    $10^7$ & 0.0236 & 0.00534 \\
+    Number & \SI{10}{} & \SI{1.3e-2}{}  & \SI{8.57e-3}{} \\
+    of & \SI{e3}{} & \SI{2.39e-2}{} & \SI{5.64e-3}{} \\
+    boot & \SI{e5}{} & \SI{2.36e-2}{} & \SI{5.22e-3}{} \\
+    samples & \SI{e7}{} & \SI{2.36e-2}{} & \SI{5.34e-3}{} \\
     \bottomrule
   \end{tabular}
   \caption{quantile errors}
