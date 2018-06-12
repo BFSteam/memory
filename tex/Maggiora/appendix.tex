@@ -1,5 +1,5 @@
 \appendix
-\section{Errorbars for Gini index}
+\section{Errorbars for Gini index}\label{Appendix A}
 
 \textit{Bootstrap} method\cite{bootstrap} is used to compute
 \textit{Gini index}' mean and error: while for the former the process
@@ -9,7 +9,7 @@ non-normal; we consider two different types of error.
 Given N samples ${x_1,...,x_N}$ whose mean is $\mu$,
 \textit{correct standard deviation} is:
 $\sigma=\sqrt{\frac{\sum_{i=1}^{i=N}(x_i - \mu)^2}{N-1}}$.\\
-\textit{Quantile Standard Error} (QSE)\cite{quantile}, instead,
+\textit{Quantile Standard Error}\cite{quantile} (QSE), instead,
 estimates the error by considering the fraction of samples
 falling within a certain interval: the whole distribution is
 divided in equal parts by a certain amount of ``quantiles''.\\
@@ -56,7 +56,7 @@ the mean. For every part of the interval, we pick the ``largest''
 between standard deviation and QSE, see figure (\ref{fig:gausssigma}): this conservative approach avoids
 underestimations in both directions.
 
-\section{Asymmetric errorbars fitting}
+\section{Asymmetric errorbars fitting}\label{Appendix B}
 The aim of a standard fitting problem is to find a function which
 reproduces experimental observations.
 Let $f_{\theta}$ be the candidate function:
@@ -80,7 +80,7 @@ be $f(x_i)$ to $y_i$.
 It might be an idea to split the error in two contributions,
 to be ``activated'' if the function value is greater or lower
 than the experimental value.
-Let a and b be, respectively, the errorbars \hl{``over'' and ``down''}
+Let a and b be, respectively, the portions of errorbar ``up'' and ``down''
 the mean point: the optimization function for \textit{asymmetric
   errobars interpolation} is:
 $$ E= \sum_{i=1}^{N} \frac{(f(x_i)-y_i)^2}{a^{2}\mathcal{H}(f(x_i)-y_i)+b^{2}\mathcal{H}(y_i-f(x_i))} $$
