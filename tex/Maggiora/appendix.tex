@@ -80,8 +80,9 @@ be $f(x_i)$ to $y_i$.
 It might be an idea to split the error in two contributions,
 to be ``activated'' if the function value is greater or lower
 than the experimental value.
-Let a and b be, respectively, the portions of errorbar ``up'' and ``down''
-the mean point: the optimization function for \textit{asymmetric
+Let a and b be, respectively, the upper and lower portion of errorbars
+compared to the mean point:
+the optimization function for \textit{asymmetric
   errobars interpolation} is:
 $$ E= \sum_{i=1}^{N} \frac{(f(x_i)-y_i)^2}{a^{2}\mathcal{H}(f(x_i)-y_i)+b^{2}\mathcal{H}(y_i-f(x_i))} $$
 $\mathcal{H}(x)$ is the \textit{Heaviside function},
