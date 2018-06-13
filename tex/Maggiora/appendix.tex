@@ -36,19 +36,19 @@ distribution, when values 0.17 and 0.68 are reached.
     samples & \SI{e7}{} & \SI{2.36e-2}{} & \SI{5.34e-3}{} \\
     \bottomrule
   \end{tabular}
-  \caption{quantile errors}
+  \caption{Quantile errors.}
   \label{tab:quantile}
 \end{table}
-\begin{figure}[htpb]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=.8\columnwidth]{img/bootstrap.pdf}
-  \caption{Bootstrap}
+  \caption{Several bootstraps with different size are performed. Average Gini Index is computed.}
   \label{fig:bootstrap}
 \end{figure}
-\begin{figure}[htpb]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=.8\columnwidth]{img/appendix.pdf}
-  \caption{errors gauss sigma}
+  \caption{Three different regressions are shown for gini index-memory length plot: with standard deviation, quantiles and asymmetric errorbars.}
   \label{fig:gausssigma}
 \end{figure}
 The overall error is divided twofold, ``rightmost'' and ``leftmost''
@@ -90,14 +90,14 @@ $$\mathcal{H}(x):=\frac{\mathrm{d}}{\mathrm{d}x}\mathrm{max}
 \{x,0\}:=\int_{-\infty}^x \delta (s) \mathrm{d}s$$ whose value
 is zero for negative argument and one for positive argument.\\
 The optimization is performed by an R implementation\cite{Roptim}
-of textit{Nelder-Mead algorithm},\cite{neldermeadoriginal}
-also known as textit{downhill simplex method} or
-textit{amoeba}.\cite{neldermeadnumrec}\\
+of \textit{Nelder-Mead algorithm},\cite{neldermeadoriginal}
+also known as \textit{downhill simplex method} or
+\textit{amoeba}.\cite{neldermeadnumrec}\\
 This algorithm is particularly appropriate for non-linear
 optimization with many local minima.
-\begin{figure}[htpb]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=.4\columnwidth]{img/err.pdf}
-  \caption{error bars}
+  \caption{Asymmetric errorbars.}
   \label{fig:errors}
 \end{figure}
