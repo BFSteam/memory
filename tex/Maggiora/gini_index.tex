@@ -21,7 +21,7 @@ Because of asymmetric error bars, the optimization function is
 slightly different from the standard one, used for weighted
 interpolation.\footnote{See \nameref{Appendix B} for more details.}
 The overall results are shown below:
-
+%
 %\begin{figure}[!h]
   %\centering
   %\includegraphics[width=.7\columnwidth]{img/gini_memory.png}
@@ -32,7 +32,10 @@ The overall results are shown below:
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/gini.pdf}
-  \caption{Gini index on memory size.}
+  \caption[Gini index on memory size]
+  {Gini index of fraction of users reached on memory size
+    fitted with Gaussian and Sigmoid.
+  }
   \label{fig:gini}
 \end{figure}
 %
@@ -48,7 +51,8 @@ The overall results are shown below:
     \textit{quant. err.} & \SI{3.7e-3}{} & \SI{9.5e-1}{} & \SI{1.3e-3}{}  & \SI{9.7e-1}{} \\
     \textit{asym. err.} & \SI{1.4e-3}{} & \SI{9.7e-1}{} & \SI{8.4e-4}{} & \SI{9.8e-1}{} \\ \bottomrule
   \end{tabular}
-  \caption{Reduced $\chi^2$ and respective p-value for Gaussian
+  \caption[Reduced $\chi^2$ and p-value for Gaussian and Sigmoid fit]
+  {Reduced $\chi^2$ and respective p-value for Gaussian
     and Sigmoid fit with different non-linear optimization
     strategies.\\
     Optimization using the standard error of the Gini index
@@ -57,7 +61,6 @@ The overall results are shown below:
   \label{tab:gini}
 \end{table}
 %
-\hl{didascalia}
 We can notice that, for every type of errorbar, sigmoid's
 $\chi^2$ is slightly lower than gaussian one; p-value is
 higher instead.
