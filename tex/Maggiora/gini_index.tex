@@ -66,5 +66,10 @@ $\chi^2$ is slightly lower than gaussian one; p-value is
 higher instead.
 Null hypothesis, for both measures, is far from being rejected:
 goodness-of-fit is solidly validated.
-Hence, sigmoid is our best-fit function for gini index-memory
+Furthermore, sigmoid function would suggest a phase transition in news' distribution.
+This behaviour is not new in network science:  the presence of a giant component in random graphs exhibits a sharp dependence from average degree $\langle k \rangle$.
+A giant component is defined as a connected component of a random graph that contains a finite fraction of nodes.\cite{giantwiki}
+There are three regimes: subcritical ( $\langle k \rangle <1$), supercritical ( $\langle k \rangle >1$), and connected ( $\langle k \rangle >> ln(N)$, N the total number of nodes).\cite{giantbar} If we start from zero and gradually increase value of $\langle k \rangle$, giant component arises at the critical point $\langle k \rangle =1$.
+Analogously, memory length could select different regimes for news' distribution, although further studies would be necessary.
+For these reasons, sigmoid is our best-fit function for gini index-memory
 length plot.
