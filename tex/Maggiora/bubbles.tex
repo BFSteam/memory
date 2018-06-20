@@ -1,20 +1,37 @@
 \subsection{Echo chambers}
 In news media, \textit{echo chamber} is a metaphorical description
 of a situation in which beliefs are amplified or reinforced by
-communication and repetition inside a closed system.\cite{echochamwiki,echocham}\\
-We qualitatively investigated the presence of echo chambers in our network.
-First of all, our agents have a ``mental  state'', i.e. a vector of preferences: its components represent the amount of interest toward a certain topic.\\
- News have the same dimension of \textit{mental state vector} (MSVD) in order to establish a ``matching'' between news' topics and users' preferences.
- Mental state is highly involved in news' dynamics and network topology.\footnote{See section~\nameref{introduction} for more details on the previous work.}\\
- In the images below, for MSVD=3,5,7, we extracted main clusters from our network.
- Memory length is twelve for all the simulations.\\
- \textit{Modularity} is a measure for detecting community structure in graphs.\cite{modulwiki}
- To provide a comparison, nodes were painted with modularity class and the most recent news in memory.
- In case of news' homogeneity inside a single cluster, we are observing an echo chamber.\\
-We can notice that number of clusters equals MSVD basically.
-News' situation is more heterogenous: altough some clusters still exist, there is not a clear separation among users with different news.
-
-
+communication and repetition inside a closed
+system.\cite{echochamwiki,echocham}\\
+With respect to quality, we studied the presence of echo chambers
+in our network.
+First of all, our agents have a ``mental  state'', i.e. a vector of
+preferences: its components represent the amount of interests toward
+a certain topic.\\
+News have the same dimension of \textit{mental state vector} (MSV)
+in order to establish a ``matching'' between news' topics and users'
+preferences.
+\textit{MSV} is highly involved in news' dynamics and network
+topology.
+\footnote{See section~\nameref{introduction} for more
+  details on the previous work.}\\
+In the images below we extracted main clusters from our network using
+\textit{MSV} dimension of three, five and seven.
+Memory length was set to twelve for all the simulations.\\
+\textit{Modularity} is a measure for detecting community
+structure in graphs.\cite{modulwiki}
+To exhibit a comparison between the tree runs,
+nodes were painted with colors representing modularity class
+(figures~\ref{fig:bubble3mod},~\ref{fig:bubble5mod} and~\ref{fig:bubble7mod})
+and the most recent news in memory
+(figures~\ref{fig:bubble3news},~\ref{fig:bubble5news} and~\ref{fig:bubble7news}).
+When news are homogeneous inside a single cluster, we observe
+an echo chamber.\\
+We point out that the number of clusters is the \textit{MSV} dimension.
+Concerning news, the state is more heterogenous:
+altough some clusters still exist, there is not a clear separation
+among users with different news.
+%
 \begin{figure}
   \centering
   \begin{subfigure}[t]{0.25\textwidth}
