@@ -1,20 +1,22 @@
 \subsection{Gini Index}
 \textit{Gini index}\cite{ginindex} measures the inequality of a
-distribution. Values of 0 and 1 stand for, respectively, the
-maximum homogeneity and the maximum heterogeneity.
+distribution. Values of 0 and 1 stand for the
+maximum homogeneity and the maximum heterogeneity respectively.
 However, this index is a function of random values: mean and
 error have to be estimated.\\
 A certain number of samples is created by sampling with replacement
-of the average FOUR distribution: Gini index is computed for each
-one of them.
-Now we have a population of Gini indexes, and we can extract
+of the average \textit{FOUR} distribution: \hl{Gini index is
+computed for each one of them.}
+Now we have a population of Gini indexes, and we can estimare
 mean and error: the whole process is known as
-\textit{bootstrap}.\footnote{See \nameref{Appendix A} for error estimation.}\cite{bootstrap}\\
+\textit{bootstrap}.
+\footnote{See \nameref{Appendix A} for error estimation.}
+\cite{bootstrap}\\
 In practical terms, for every level of  memory, a simulation with
-twenty news is run out: Gini index' mean and error are computed
-like before.
-The Gini index-memory plot shows a highly non-linear behaviour:
-sigmoid and gaussian seem to better represent data.\\
+twenty news is run: Gini index' mean and error are computed
+as before.
+The Gini index over memory size plot shows a highly non-linear
+behaviour: sigmoid and gaussian seem to better represent data.\\
 In order to select the best-fit function, \textit{Chi-square} is
 computed for both of them. \\
 Because of asymmetric error bars, the optimization function is
@@ -61,15 +63,24 @@ The overall results are shown below:
   \label{tab:gini}
 \end{table}
 %
-We can notice that, for every type of errorbar, sigmoid's
-$\chi^2$ is slightly lower than gaussian one; p-value is
-higher instead.
+We observe, sigmoid's $\chi^2$ is slightly lower than gaussian one,
+for every error; p-value is higher instead.
 Null hypothesis, for both measures, is far from being rejected:
 goodness-of-fit is solidly validated.
-Furthermore, sigmoid function would suggest a phase transition in news' distribution.
-This behaviour is not new in network science:  the presence of a giant component in random graphs exhibits a sharp dependence from average degree $\langle k \rangle$.
-A giant component is defined as a connected component of a random graph that contains a finite fraction of nodes.\cite{giantwiki}
-There are three regimes: subcritical ( $\langle k \rangle <1$), supercritical ( $\langle k \rangle >1$), and connected ( $\langle k \rangle >> ln(N)$, N the total number of nodes).\cite{giantbar} If we start from zero and gradually increase value of $\langle k \rangle$, giant component arises at the critical point $\langle k \rangle =1$.
-Analogously, memory length could select different regimes for news' distribution, although further studies would be necessary.
-For these reasons, sigmoid is our best-fit function for gini index-memory
-length plot.
+Furthermore, sigmoid function would suggest a phase transition
+in news' distribution. This behaviour is not new in network science:
+the presence of a giant component
+\footnote{A giant component is defined as a connected component
+  of a random graph that contains a finite fraction of nodes.
+\cite{giantwiki}}
+in random graphs exhibits a sharp dependence from average degree
+$\langle k \rangle$. There are three regimes: subcritical
+($\langle k \rangle <1$), supercritical ($\langle k \rangle >1$),
+and connected ($\langle k \rangle >> ln(N)$,
+N the total number of nodes).\cite{giantbar} If we start from
+zero and gradually increase value of $\langle k \rangle$,
+giant component arises at the critical point $\langle k \rangle =1$.
+In a similar way, memory length could select different regimes
+for news' distribution, although further studies would be necessary.
+For these reasons, sigmoid is our best-fit function for gini
+index-memory length plot.
