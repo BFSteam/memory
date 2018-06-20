@@ -2,7 +2,7 @@
 In graph theory, \textit{shortest path}\cite{diameter} (SP)
 between node $a$ and $b$ of a graph is the minimum number of
 edges connecting them (i.e. the minimum number of ``steps'' to go
-from $a$ to $b$).\\
+from node $a$ to $b$).\\
 After computing SP for every couple of nodes in a graph, we can
 define \textit{diameter}\cite{diameter} as the maximum of the
 shortest paths.\\
@@ -28,11 +28,12 @@ errors. Final regression will point out possible correlations.
 \end{tabular}
 \caption{Fitting results for clustering and diameter.}
 \end{table}
-We can visually notice that both measures are weakly correlated with
+\\
+We observe that both measures are weakly correlated with
 memory length: low values of correlation indexes
 $\rho_{xy}$ give us a confirmation.\\
-$R^2s$ are close to zero too: the reason lies in the  formula
-of $R^2$.\footnote{Let us suppose to have N datapoints
+Moreover $R^2$s are close to zero too: the reason lies in the  formula
+of $R^2$.\hl{bisogna posrtare fuori dalla nota alcuni commenti?}\footnote{Let us suppose to have N datapoints
 $(x_i,y_i)$ and $f_i$ be the
 value of fitting function in the x-axis. Coefficent of determination
 $R^2s$ is: $R^{2}= 1-{\frac {SS_{ res}}  {SS_{ tot}}}$
