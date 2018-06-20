@@ -1,5 +1,5 @@
 \subsection{Clustering} \label{clustering}
-A large number of networks show a tendency for link formation
+Many networks show a tendency for link formation
 between neighboring vertices, i.e., the network topology deviates
 from uncorrelated random networks: this tendency is called
 \textit{clustering}.\cite{clusterarticle}\\
@@ -8,16 +8,16 @@ of possible triangles over all possible triplets
 through that node that exist,\cite{clustersite}
 
 \begin{equation}
-\label{eq:clustering}
-c_u = \frac{2 T(u)}{deg(u)(deg(u)-1)}
+  \label{eq:clustering}
+  c_u = \frac{2 T(u)}{deg(u)(deg(u)-1)}
 \end{equation}
 where $T(u)$ is the number of triangles through node $u$ and $deg(u)$ is the degree of $u$.
 Hence, the \textit{average clustering coefficient}  is:
 \begin{equation}
-\label{eq:averageclustering}
-ACC = \frac{1}{n}\sum_{v \in G} c_v
+  \label{eq:averageclustering}
+  ACC = \frac{1}{n}\sum_{v \in G} c_v
 \end{equation}
-We ask wether memory size, previously considered in
+We ask whether memory size, previously considered in
 \nameref{introduction}, could affect the average clustering coefficient.
 To answer this question, the following experiment was designed:
 five simulations were run, for five sizes of memory, over a thousand
