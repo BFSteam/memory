@@ -6,9 +6,9 @@ from node $a$ to $b$).\\
 After computing SP for every couple of nodes in a graph, we can
 define \textit{diameter}\cite{diameter} as the maximum of the
 shortest paths.\\
-As with clustering, we ran five  simulations for every memory
-size, obtaining a plot of diameter's mean over memory size with
-errors. Final regression will point out possible correlations.
+As with clustering, we ran five simulations for every memory
+size, obtaining a plot of diameter's mean with errors.
+Final regression will point out possible correlations.
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/diameter.pdf}
@@ -33,7 +33,7 @@ We observe that both measures are weakly correlated with
 memory length: low values of correlation indexes
 $\rho_{xy}$ give us a confirmation.\\
 Moreover $R^2$s are close to zero too: the reason lies in the  formula
-of $R^2$.\hl{bisogna posrtare fuori dalla nota alcuni commenti?}\footnote{Let us suppose to have N datapoints
+of $R^2$.\footnote{Let us suppose to have N datapoints
 $(x_i,y_i)$ and $f_i$ be the
 value of fitting function in the x-axis. Coefficent of determination
 $R^2s$ is: $R^{2}= 1-{\frac {SS_{ res}}  {SS_{ tot}}}$
