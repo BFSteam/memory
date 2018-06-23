@@ -9,15 +9,15 @@ of the average FOUR distribution: Gini index is
 computed afterwards.
 Now we have a population of Gini indexes, and we can estimate
 mean and error: the whole process is known as
-\textit{bootstrap}.
-\footnote{See \nameref{Appendix A} for error estimation.}
-\cite{bootstrap}\\
+\textit{bootstrap}.\footnote{
+  See \nameref{Appendix A} for error estimation.
+}\cite{bootstrap}\\
 In practical terms, for every level of  memory, a simulation with
 twenty news is run: Gini index' mean and error are computed
 as before.
 The Gini index-memory size plot shows a highly non-linear
-behavior: Sigmoid and Gaussian
-\footnote{Sigmoid as
+behavior: Sigmoid and Gaussian\footnote{
+  Sigmoid as
   $S(x;y_0, A, b, \tau) = y_0 + \frac{A}{b + e^{\tau x}}$ and
   Gaussian as
   $G(x; y_0, A, \mu, \sigma) = y_0 + A\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
@@ -40,9 +40,10 @@ The overall results are shown below:
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 1cm},clip,width=.8\columnwidth]{img/gini.pdf}
-  \caption[Gini index on memory size]
-  {Gini index of fraction of users reached on memory size
+  \caption[Gini index over memory size]
+  {Gini index of fraction of users reached over memory size
     fitted with Gaussian and Sigmoid.
+    Both interpolations were performed with asymmetric errorbars.
   }
   \label{fig:gini}
 \end{figure}
@@ -59,13 +60,11 @@ The overall results are shown below:
     \textit{quant. err.} & \SI{3.7e-3}{} & \SI{9.5e-1}{} & \SI{1.3e-3}{}  & \SI{9.7e-1}{} \\
     \textit{asym. err.} & \SI{1.4e-3}{} & \SI{9.7e-1}{} & \SI{8.4e-4}{} & \SI{9.8e-1}{} \\ \bottomrule
   \end{tabular}
-  \caption[Reduced $\chi^2$ and p-value for Gaussian and Sigmoid fit]
+  \caption[Reduced $\chi^2$ and p-value for Gaussian and Sigmoid fit.]
   {Reduced $\chi^2$ and respective p-value for Gaussian
     and Sigmoid fit with different non-linear optimization
-    strategies.\\
-    Optimization using the standard error of the Gini index
-    is denoted as std, quantile bootstrap optimization\cite{quantile} as
-    quant and asymmetric error bar fitting optimization as asym.}
+    strategies: standard error, quantile bootstrap
+    optimization\cite{quantile} and asymmetric errorbar fitting.}
   \label{tab:gini}
 \end{table}
 %
@@ -75,13 +74,13 @@ Null hypothesis, for both measures, is far from being rejected:
 goodness-of-fit is solidly validated.
 Furthermore, sigmoid function would suggest a phase transition
 in news' distribution. This behaviour is not new in network science:
-the presence of a giant component
-\footnote{A giant component is defined as a connected component
+the presence of a giant component\footnote{
+  A giant component is defined as a connected component
   of a random graph that contains a finite fraction of
   nodes\cite{giantwiki, giantbar}.}
 in random graphs exhibits a sharp dependence from average degree
-$\langle k \rangle$
-\footnote{There are three regimes: subcritical
+$\langle k \rangle$\footnote{
+  There are three regimes: subcritical
 ($\langle k \rangle <1$), supercritical ($\langle k \rangle >1$),
 and connected ($\langle k \rangle >> ln(N)$,
 N the total number of nodes).}.

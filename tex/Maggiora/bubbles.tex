@@ -1,5 +1,5 @@
 \subsection{Echo chambers}
-In news media, \textit{echo chamber} is a metaphorical description
+Dealing with news media, \textit{echo chamber} is a metaphorical description
 of a situation in which beliefs are amplified or reinforced by
 communication and repetition inside a closed
 system.\cite{echochamwiki,echocham}\\
@@ -11,8 +11,8 @@ a certain topic.\\
 News have the same dimension of \textit{mental state vector} (MSV)
 in order to establish a ``matching'' between news' topics and users'
 preferences.
-MSV is highly involved in news' dynamics and network topology.
-\footnote{See section~\nameref{introduction} for more
+MSV is highly involved in news' dynamics and network
+topology.\footnote{See section~\nameref{introduction} for more
   details on the previous work.}\\
 In the images below we extracted main clusters from our network using
 MSV size of three, five and seven.
@@ -35,53 +35,54 @@ among users with different news.
   \centering
   \begin{subfigure}[t]{0.25\textwidth}
     \includegraphics[width=\textwidth]{img/dim3_mod.pdf}
-    \caption{State vector dimension 3, higlight
-      three different states}
+    \caption{State vector dimension: 3.
+      Modularity class highlighted.}
     \label{fig:bubble3mod}
   \end{subfigure}
   ~
   \begin{subfigure}[t]{0.35\textwidth}
     \includegraphics[width=\textwidth]{img/dim5_mod.pdf}
-    \caption{State vector dimension 5, higlight
-      five different states}
+    \caption{State vector dimension: 5.
+      Modularity class highlighted.}
     \label{fig:bubble5mod}
   \end{subfigure}
   ~
   \begin{subfigure}[t]{0.35\textwidth}
     \includegraphics[width=\textwidth]{img/dim7_mod.pdf}
-    \caption{State vector dimension 7, higlight
-      seven different states}
+    \caption{State vector dimension: 7.
+      Modularity class highlighted.}
     \label{fig:bubble7mod}
   \end{subfigure}
   \\
   \begin{subfigure}[t]{0.25\textwidth}
     \includegraphics[width=\textwidth]{img/dim3_news.pdf}
-    \caption{State vector dimension 3, higlight
-     latest news}
+    \caption{State vector dimension: 3.
+      Latest news highlighted.}
     \label{fig:bubble3news}
   \end{subfigure}
   ~
   \begin{subfigure}[t]{0.35\textwidth}
     \includegraphics[width=\textwidth]{img/dim5_news.pdf}
-    \caption{State vector dimension 5, higlight
-     latest news}
+    \caption{State vector dimension: 5.
+      Latest news highlighted.}
     \label{fig:bubble5news}
   \end{subfigure}
   ~
   \begin{subfigure}[t]{0.35\textwidth}
     \includegraphics[width=\textwidth]{img/dim7_news.pdf}
-    \caption{State vector dimension 7, higlight
-     latest news}
+    \caption{State vector dimension: 7.
+      Latest news highlighted.}
     \label{fig:bubble7news}
   \end{subfigure}
-  \caption[Network results: bubble chamber]{Simulations for 1000 users and 20 sources after 1000
+  \caption[Network results: bubble chambers]{Simulations for 1000 users and 20 sources after 1000
     iterations. (\subref{fig:bubble3mod}), (\subref{fig:bubble5mod}) and
-    (\subref{fig:bubble7mod}) highlights state vector.
-    (\subref{fig:bubble3news}), (\subref{fig:bubble5news}) and
-    (\subref{fig:bubble7news}) highlitghts different news.
-    Cleary  clusters depends on state dimension rather than memory
-    size. There is not a clear relation on how the news behave during
-    the dynamic.
+    (\subref{fig:bubble7mod}) highlights different modularity classes.
+    The number of clusters equals the state vector dimension.
+    (\subref{fig:bubble3news}), (\subref{fig:bubble5news})
+    (\subref{fig:bubble7news}) highlitghts latest news.
+    Clusters clearly depends on state dimension rather than memory
+    size. There is not an evident relation with news' behavior
+    during the dynamic.
   }
   \label{fig:test}
 \end{figure}
