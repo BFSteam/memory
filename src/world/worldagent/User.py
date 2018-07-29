@@ -45,6 +45,7 @@ class User(WorldAgent):
         WorldAgent.__init__(self, number, myWorldState,
                             agType=agType)  # parent constructor
         self.database = {}
+        self.spreadState = 'i'
         self.active = False
         self.inactiveTime = 0
         self.activeTime = 0
@@ -158,10 +159,47 @@ class User(WorldAgent):
         if a == 'scalar':
             return np.dot(self.state, n)
 
+    def ifBeautifulForgetWorse(self, threshold=common.tRemember):
+        if len(self.database) == common.memorySize:
+            if self.distance(news['new']) > threshold:
+                tmin = 1
+                for key in self.database:
+                    if self.distance(self.database[key]['new']) < tmin:
+                        tmin = self.distance(self.database[key]['new'])
+                del(self.database[key])
+                return True
+        return False
+
+    def cutOldestNews(self):
+        # while len memory > size of memory cut first element
+        while len(self.database) > common.memorySize:
+            tdate = sys.maxsize
+            kmin = 0
+            for key in self.database:
+                if self.database[key]['date-creation'] < tdate:
+                    tdate = self.database[key]['date-creation']
+                    kmin = key
+                del(self.database[kmin])
+            return True
+
+    def forgetRandomNews(self, news, rnd=common.pForget):
+        # random forget
+        if random.random() < rnd:
+            if self.database == {}:
+                return False
+            else:
+                forgot = self.database[random.choice(list(self.database))]
+                if forgot != news:
+                    #uf.vprint("Agent", self.number, "forgot", forgot)
+                    del(forgot)
+                    return True
+
     def remember(
             self,
             news,
-            cutoldest=True,
+            cutoldest=common.flags['toggleCutOldest'],
+            forgetNews=common.flags['toggleForgetNews'],
+            tiredness=common.flags['toggleTiredness'],
             threshold=common.tRemember,
             rnd=common.pForget,
             id_send=-1
@@ -188,13 +226,7 @@ class User(WorldAgent):
             return False
 
         # if a news is beautiful forget the worse
-        if len(self.database) == common.memorySize:
-            if self.distance(news['new']) > threshold:
-                tmin = 1
-                for key in self.database:
-                    if self.distance(self.database[key]['new']) < tmin:
-                        tmin = self.distance(self.database[key]['new'])
-                del(self.database[key])
+        self.ifBeautifulForgetWorse(threshold=threshold)
         # add element to memory
         # else append new
         ii = news['id-n']
@@ -207,28 +239,15 @@ class User(WorldAgent):
 
         #uf.vprint("Agent", self.number, "remembered", self.database)
 
-        # cut memory
         if cutoldest is True:
-            # while len memory > size of memory cut first element
-            while len(self.database) > common.memorySize:
-                tdate = sys.maxsize
-                kmin = 0
-                for key in self.database:
-                    if self.database[key]['date-creation'] < tdate:
-                        tdate = self.database[key]['date-creation']
-                        kmin = key
-                del(self.database[kmin])
+            self.cutOldestNews()
 
-        # random forget
-        if random.random() < rnd:
-            if self.database == {}:
-                pass
-            else:
-                forgot = self.database[random.choice(list(self.database))]
-                if forgot != news:
-                    #uf.vprint("Agent", self.number, "forgot", forgot)
-                    del(forgot)
-        self.tiredness = self.tiredness * 1.2
+        if forgetNews is True:
+            self.forgetRandomNews(news=news, rnd=rnd)
+
+        if tiredness is True:
+            self.tiredness = self.tiredness * 1.2
+
         return True
 
     def findKeyMinMax(self, data, innerkey, minor=True):

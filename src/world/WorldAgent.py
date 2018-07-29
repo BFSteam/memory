@@ -65,6 +65,7 @@ class WorldAgent(Agent):
                              'id-recive',
                              'date-recive']
         self.database = {}
+        self.spreadState = 'r'
         print("agent", self.agType, "#", self.number, "has been created")
 
     def genState(self, n=1, noise=0.15):

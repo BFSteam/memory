@@ -74,6 +74,12 @@ pDeleteEdge = 0.1  # probability of removing a random edge
 
 debug = True
 
+flags = {
+    'toggleForgetNews' : True,
+    'toggleTiredness'  : True,
+    'toggleCutOldest'  : True
+}
+
 ##################################
 #
 #             Logs

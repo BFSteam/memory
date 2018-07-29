@@ -44,7 +44,7 @@ class Source(WorldAgent):
         WorldAgent.__init__(self, number, myWorldState, agType=agType)
         self.news = {}
         self.reliability = random.random()
-
+        self.spreadState = 's'
         self.genState(n=3, noise=0.15)
 
         print(self.state)
