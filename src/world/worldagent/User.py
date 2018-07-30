@@ -455,7 +455,7 @@ class User(WorldAgent):
             self,
             t=common.tInactivation,
             p=common.pInactivation,
-            tired=False,
+            tiredness=common.flags['toggleTiredness'],
             probabilityFunction=0
     ):
         """
@@ -491,8 +491,7 @@ class User(WorldAgent):
             t_active=common.tActivation,
             p_active=common.pActivation,
             p_inactive=common.pInactivation,
-            tired=True,
-            tiredness=1.5,
+            tiredness=common.flags['toggleTiredness'],
             probabilityFunction=0
     ):
         """
@@ -554,7 +553,7 @@ class User(WorldAgent):
         remembered = self.remember(iWantToRemember)
         #
         # tries to become inactive
-        self.becomeInactive(tired=remembered)
+        self.becomeInactive()
         #
         # update state with news just recived
         self.changeState(iWantToRemember)
@@ -612,29 +611,36 @@ class User(WorldAgent):
         if self.onlySources() is True:
             return False
         #
-        #
+        # 
         bestNews = self.findKeyDistanceMinMax(
             self.database, 'new', minor=False)
         bestWeight = 0
         bestNeighbour = self.number
         for neighbour in self.listNeighbours():
+            #
+            # d not diffuse to source
             if self.isUser(neighbour) is False:
                 continue
-            # add default value
+            #
+            # look for bestweight
             if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight:
                 bestWeight = common.G.get_edge_data(
                     *(self.number, neighbour))['weight']
                 bestNeighbour = neighbour
-        # common.G.node[bestNeighbour]['agent'].remember(bestNews)
+        
+        # find random user neighbor
         while True:
             shuffledNeighbour = random.choice(self.listNeighbours())
             if self.isUser(shuffledNeighbour) is True:
                 break
-        # common.G.node[shuffledNeighbour]['agent'].remember(bestNews)
+        #
+        # chose random neighbor with proba p
         if random.random() < p:
             finalNeighbour = shuffledNeighbour
         else:
             finalNeighbour = bestNeighbour
+        #
+        #
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
         if common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) < threshold:
             common.G[self.number][finalNeighbour]['weight'] -= q * common.G.node[finalNeighbour]['agent'].distance(
@@ -675,21 +681,20 @@ class User(WorldAgent):
         return True
 
     def createEdge(self, threshold=common.tCreateEdge):
-        """
+        """Preferential creation of edge
 
         adds edge between the user and another node in the graph
 
         """
-
+        #
         n1 = random.choice(list(common.G.nodes()))
         n2 = random.choice(list(common.G.nodes()))
-
         nlist = []
         dlist = []
         d1 = -1
         d2 = -1
-
-        # random choice
+        #
+        # select first with a random choice
         shuf = list(common.G.nodes())
         random.shuffle(shuf)
         for node in shuf:
@@ -699,11 +704,12 @@ class User(WorldAgent):
             # if picked node is itself pick another one
             if node == self.number:
                 continue
-            # if picked node is inactive pick another one
+            # if picked node is inactive pick another one ############ can change in the future
             if common.G.node[node]['agent'].active is False:
                 continue
             d1 = self.distance(common.G.node[node]['agent'].state)
             n1 = node
+        #
         # check if user is not connected to any node and rewire it randomly
         if self.listNeighbours() == []:
             if d1 > threshold:
@@ -712,15 +718,16 @@ class User(WorldAgent):
             else:
                 return False
         for firstnode in self.listNeighbours():
+            #
             # check if user is connected only to sources
             if self.onlySources() is True:
                 return False
-
+            #
             # skip adding connection from source
             if self.isUser(firstnode) is False:
                 d2 = -1
                 continue
-
+            #
             for secondnode in common.G.node[firstnode]['agent'].listNeighbours():
                 nlist.append(secondnode)
                 dlist.append(self.distance(
@@ -741,19 +748,29 @@ class User(WorldAgent):
         return True
 
     def deleteEdge(self, p=0.1):
-        """
+        """Preferential delete
 
         deletes a random edge with a low probability or the one
         connected to the agent with lesser distance
 
         """
+        #
+        # if empty neighbors
         if self.listNeighbours() == []:
             return False
+        #
+        # if only one neighbor
         if len(self.listNeighbours()) == 1:
             return False
+        #
+        # remove edge randomly
         if random.random() < p:
             self.removeEdge(random.choice(self.listNeighbours()))
             return True
+        #
+        # or
+        #
+        # remove the most distant neighbor
         d = 1
         n = self.number
         for node in self.listNeighbours():
