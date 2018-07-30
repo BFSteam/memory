@@ -101,6 +101,11 @@ class User(WorldAgent):
         else:
             return True
 
+    def isMemoryEmpty(self):
+        """return True if memory empty
+        """
+        return True if len(self.database) == 0 else False
+
     def getStateFromNode(self, n):
         """
 
@@ -143,6 +148,23 @@ class User(WorldAgent):
             write=common.writeConnections
         )
         common.G.remove_edge(self.number, n)
+
+    def updateWeight(self, neighbor, value, r=common.pRemove):
+        """ Takes two nodes, the weight to update
+        and comunicates the changes to the conlog
+        """
+        common.G[self.number][neighbor]['weight'] += value
+        if common.G[self.number][neighbor]['weight'] < r:
+            self.removeEdge(neighbor)
+
+        common.conlog.registerEntry(
+            first=self.number,
+            second=neighbor,
+            date=common.cycle,
+            weight=common.G[self.number][neighbor]['weight'],
+            cr='u',
+            write=common.writeConnections
+        )
 
     def distance(self, n, a='scalar'):
         """
@@ -478,7 +500,7 @@ class User(WorldAgent):
         """
         if probabilityFunction != 0:
             return True
-        if tired is True:
+        if tiredness is True:
             p = p * self.tiredness
         if self.activeTime > t:
             if random.random() < common.timeInactiveArray[self.activeTime - 1]:
@@ -587,7 +609,8 @@ class User(WorldAgent):
             p=common.pActiveDiffusion,
             threshold=common.tActiveDiffusion,
             q=common.pWeight,
-            r=common.pRemove
+            r=common.pRemove,
+            tiredness=common.flags['toggleTiredness']
     ):
         """Active diffusion
 
@@ -603,7 +626,7 @@ class User(WorldAgent):
             return False
         #
         # check if memory is empty
-        if len(self.database) == 0:
+        if self.isMemoryEmpty():
             return False
         #
         # check if user is connected only to sources
@@ -642,31 +665,6 @@ class User(WorldAgent):
         #
         #
         common.G.node[finalNeighbour]['agent'].remember(bestNews)
-        if common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) < threshold:
-            common.G[self.number][finalNeighbour]['weight'] -= q * common.G.node[finalNeighbour]['agent'].distance(
-                bestNews['new'])
-            common.conlog.registerEntry(
-                first=self.number,
-                second=finalNeighbour,
-                date=common.cycle,
-                weight=common.G[self.number][finalNeighbour]['weight'],
-                cr='u',
-                write=common.writeConnections
-            )
-            if common.G[self.number][finalNeighbour]['weight'] < r:
-                self.removeEdge(finalNeighbour)
-        elif common.G.node[finalNeighbour]['agent'].distance(bestNews['new']) > 1 - threshold:
-            common.G[self.number][finalNeighbour]['weight'] += q * common.G.node[finalNeighbour]['agent'].distance(
-                bestNews['new'])
-            common.conlog.registerEntry(
-                first=self.number,
-                second=finalNeighbour,
-                date=common.cycle,
-                weight=common.G[self.number][finalNeighbour]['weight'],
-                cr='u',
-                write=common.writeConnections
-            )
-
         common.msglog.registerEntry(
             id_src=bestNews['id-source'],
             date_creation=bestNews['date-creation'],
@@ -677,7 +675,22 @@ class User(WorldAgent):
             diffusion='a',
             write=common.writeMessages
         )
-        self.tiredness = self.tiredness * 1.3
+
+        dist = common.G.node[finalNeighbour]['agent'].distance(bestNews['new'])
+        #
+        # bad news
+        if dist < threshold:
+            self.updateWeight(neighbor=finalNeighbour,
+                              value=-q*dist, r=r)
+        elif dist > 1 - threshold:
+            self.updateWeight(neighbor=finalNeighbour,
+                              value=q*dist, r=r)
+        else:
+            pass
+            
+        if tiredness is True:
+            self.tiredness = self.tiredness * 1.3
+
         return True
 
     def createEdge(self, threshold=common.tCreateEdge):
