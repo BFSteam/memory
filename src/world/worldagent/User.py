@@ -682,10 +682,13 @@ class User(WorldAgent):
         if dist < threshold:
             self.updateWeight(neighbor=finalNeighbour,
                               value=-q*dist, r=r)
+        #
+        # good news
         elif dist > 1 - threshold:
             self.updateWeight(neighbor=finalNeighbour,
                               value=q*dist, r=r)
         else:
+            # they are still... friends... I guess?
             pass
             
         if tiredness is True:
@@ -796,7 +799,7 @@ class User(WorldAgent):
     def hasNews(self, id_source=0, date=1):
         """
 
-        chech if user has a certain news inside
+        chech if user has a certain news inside his memory
         overloaded from WorldAgent
 
         """
