@@ -7,6 +7,7 @@ import sky.skyagent.agentmanager.MessageScheduler as ms
 import numpy as np
 
 from agTools import *
+from numpy import linalg as LA
 from Tools import *
 from world.WorldAgent import *
 from usefulFunctions import hill
@@ -55,43 +56,44 @@ class User(WorldAgent):
         self.prevDiff = 'a' if random.random() < 0.5 else 'p'
 
     def activate(self, p=common.pActivation):
-        """
+        """Initial activity initialization
 
         activate the agent with a probability p.
         Used at initialization
 
         """
-
-        if random.random() > p:
+        if p == 1:
+            self.active=True
+            self.inactiveTime=random.randint(0,5)
+        elif random.random() > p:
             self.active = False
             self.inactiveTime = random.randint(0, 5)
         else:
             self.active = True
             self.activeTime = random.randint(0, 1)
 
+    def norm(self, x, ord=None, axis=None, keepdims=False):
+        """
+        return norm of vector.
+        different norms can be chosen
+
+        """
+        return x / np.sum(x)
+        #return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
+
     def listNeighbours(self):
+        """return neighbour list. call with no arguments
         """
-
-        return neighbour list. call with no arguments
-
-        """
-
         return list(common.G.neighbors(self.number))
 
-    def listNeighboursNode(self, n):
+    def listActiveNeighbors(self):#################################### NOT TESTED YET
+        """return a list of only active neighbors
         """
-
-        return list of neughbours of a node n
-
-        """
-
-        return common.G.neighbors(n)
+        n = list(common.G.neighbors(self.number))
+        return [x for x in n if common.G.node[x].active == True]    
 
     def isUser(self, n):
-        """
-
-        return True if node n is a user
-
+        """return True if node n is a user
         """
 
         if n < common.N_SOURCES:
@@ -160,6 +162,11 @@ class User(WorldAgent):
             return np.dot(self.state, n)
 
     def ifBeautifulForgetWorse(self, threshold=common.tRemember):
+        """
+
+        forget worse news if one is very near to threshold
+
+        """
         if len(self.database) == common.memorySize:
             if self.distance(news['new']) > threshold:
                 tmin = 1
@@ -171,28 +178,43 @@ class User(WorldAgent):
         return False
 
     def cutOldestNews(self):
-        # while len memory > size of memory cut first element
-        while len(self.database) > common.memorySize:
-            tdate = sys.maxsize
-            kmin = 0
-            for key in self.database:
-                if self.database[key]['date-creation'] < tdate:
-                    tdate = self.database[key]['date-creation']
-                    kmin = key
-                del(self.database[kmin])
-            return True
+        """
 
-    def forgetRandomNews(self, news, rnd=common.pForget):
+        forget oldest news
+
+        """
+        tdate = sys.maxsize
+        kmin = 0
+        for key in self.database:
+            if self.database[key]['date-creation'] < tdate:
+                tdate = self.database[key]['date-creation']
+                kmin = key
+            del(self.database[kmin])
+        return True
+
+    def forgetRandomNews(self, news=0, rnd=common.pForget):
+        """
+
+        forget random news different from 'news' with probability rnd 
+        if no argument is provided, forget randomly
+
+        """
         # random forget
         if random.random() < rnd:
             if self.database == {}:
                 return False
             else:
                 forgot = self.database[random.choice(list(self.database))]
-                if forgot != news:
+                if news == 0:
+                    del(forgot)
+                    return True
+
+                elif forgot != news:
                     #uf.vprint("Agent", self.number, "forgot", forgot)
                     del(forgot)
                     return True
+                else:
+                    return False
 
     def remember(
             self,
@@ -218,13 +240,18 @@ class User(WorldAgent):
         oldest: if memory is 'full' cut the oldest
 
         """
+        #
         # read anything
         if news == {}:
             return False
-
+        #
+        # do not remember if it's already present
+        #
+        ############################################################## TODO implement here stifler mode???
+        #
         if news['id-n'] in self.database:
             return False
-
+        #
         # if a news is beautiful forget the worse
         self.ifBeautifulForgetWorse(threshold=threshold)
         # add element to memory
@@ -236,25 +263,31 @@ class User(WorldAgent):
         self.database[ii]['id-source'] = news['id-source']
         self.database[ii]['date-creation'] = news['date-creation']
         self.database[ii]['relevance'] = news['relevance']
-
-        #uf.vprint("Agent", self.number, "remembered", self.database)
-
-        if cutoldest is True:
-            self.cutOldestNews()
-
+        #
+        # while len memory > size of memory cut an element
+        # chose between oldest or random news
+        while len(self.database) > common.memorySize:
+            if cutoldest is True:
+                self.cutOldestNews()
+            else:
+                self.forgetRandomNews(news=0, rnd=1.)
+        #
+        # forget random news but not the one just remembered
         if forgetNews is True:
             self.forgetRandomNews(news=news, rnd=rnd)
-
+        #
+        # tiredness switch
         if tiredness is True:
             self.tiredness = self.tiredness * 1.2
-
+        #
+        # if everything went fine return True
         return True
 
     def findKeyMinMax(self, data, innerkey, minor=True):
         """
 
-        Given a dict of dict and an innerkey 'findKeyMinMax' returns the
-        key of the minimum innerkey
+        Given a dict of dict and an innerkey 'findKeyMinMax' returns
+        the key of the minimum innerkey
 
         minor: minimum if True, else, maximum
 
@@ -305,14 +338,14 @@ class User(WorldAgent):
             return data[kmax]
 
     def switchActivation(self):
-        """
+        """ Switch active state of an agent
 
         switches activation of the user and resets the counters
-
         """
 
         if self.active is True:
-            self.active = False
+            self.active=False
+            self.tiredness=1
             common.actlog.registerEntry(
                 agent=self.number,
                 date=common.cycle,
@@ -396,7 +429,8 @@ class User(WorldAgent):
     def becomeActive(
             self,
             t=common.tActivation,
-            p=common.pActivation
+            p=common.pActivation,
+            probabilityFunction=0
     ):
         """
 
@@ -410,6 +444,8 @@ class User(WorldAgent):
 
         """
 
+        if probabilityFunction == 0:
+            pass
         if self.inactiveTime >= t:
             if random.random() < common.timeActiveArray[self.inactiveTime - 1]:
             #if random.random() < 1 - p * np.exp(-self.inactiveTime):
@@ -419,7 +455,8 @@ class User(WorldAgent):
             self,
             t=common.tInactivation,
             p=common.pInactivation,
-            tired=False
+            tired=False,
+            probabilityFunction=0
     ):
         """
 
@@ -439,12 +476,14 @@ class User(WorldAgent):
         tiredness: how much he is tired
 
         """
+        if probabilityFunction != 0:
+            return True
         if tired is True:
             p = p * self.tiredness
         if self.activeTime > t:
             if random.random() < common.timeInactiveArray[self.activeTime - 1]:
                 self.switchActivation()
-                self.tiredness = 1
+                #self.tiredness = 1
 
     def checkActivation(
             self,
@@ -453,7 +492,8 @@ class User(WorldAgent):
             p_active=common.pActivation,
             p_inactive=common.pInactivation,
             tired=True,
-            tiredness=1.5
+            tiredness=1.5,
+            probabilityFunction=0
     ):
         """
 
@@ -463,7 +503,9 @@ class User(WorldAgent):
         Possibly changeable in the future
 
         """
-
+        if probabilityFunction!=0:
+            return True
+        
         if self.active is False:
             #uf.vprint("Agent", self.number, "is active")
             self.inactiveTime += 1
@@ -477,7 +519,7 @@ class User(WorldAgent):
     def passiveDiffusion(self):
         """
 
-        performs a passive diffuzion of news between
+        performs a passive diffusion of news between
         all the nearest neighbours
 
         newstochoose: list of tuples. the first is a id
@@ -488,8 +530,14 @@ class User(WorldAgent):
         if self.checkActivation() is False:
             return False
 
+        #
+        # read news
         newsToChose = self.readNews()
+        #
+        # find best neighbor and news to remember
         bestNeighbour, iWantToRemember = self.chooseNews(newsToChose)
+        #
+        # register log entry
         if iWantToRemember != {}:
             common.msglog.registerEntry(
                 id_src=iWantToRemember['id-source'],
@@ -501,21 +549,26 @@ class User(WorldAgent):
                 diffusion='p',
                 write=common.writeMessages
             )
+        #
+        # register news in memory
         remembered = self.remember(iWantToRemember)
+        #
+        # tries to become inactive
         self.becomeInactive(tired=remembered)
+        #
+        # update state with news just recived
         self.changeState(iWantToRemember)
 
     def changeState(self, news, p=common.pChange):
-        """
+        """ Change state with news content
 
         Changes state of activation of an agent
-
         """
 
         if news == {}:
             return False
         self.state = self.state + p * news['relevance'] * news['new']
-        self.state = self.state / self.state.sum()
+        self.state = self.norm(self.state)
         return True
 
     def onlySources(self):
@@ -537,26 +590,29 @@ class User(WorldAgent):
             q=common.pWeight,
             r=common.pRemove
     ):
-        """
+        """Active diffusion
 
         performs active diffusion with the best news in memory
         the spread goes in two directions
 
         one to the neighbour with highest weight
         the orher randomly to a neighbour
-
         """
+        #
+        # cannot diffuse if is inactive
         if self.checkActivation() is False:
             return False
-
+        #
         # check if memory is empty
         if len(self.database) == 0:
             return False
-
+        #
         # check if user is connected only to sources
+        # active diffusion is performed with users
         if self.onlySources() is True:
             return False
-
+        #
+        #
         bestNews = self.findKeyDistanceMinMax(
             self.database, 'new', minor=False)
         bestWeight = 0
@@ -770,4 +826,3 @@ class User(WorldAgent):
             )
         else:
             self.passiveDiffusion()
-        
