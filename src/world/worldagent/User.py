@@ -834,7 +834,6 @@ class User(WorldAgent):
         print(self.number)
         print(self.database)
 
-
     def diffusion(self):
         if random.random() < 0.5:
             self.passiveDiffusion()
@@ -847,7 +846,6 @@ class User(WorldAgent):
                 r=common.pRemove
             )
             self.prevDiff = 'a'
-
 
     def otherDiffusion(self):
         if self.prevDiff == 'p':

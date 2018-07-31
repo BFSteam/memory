@@ -209,4 +209,9 @@ jup/*/*.csv
 *.gml
 ./*.pdf
 *.svg
+
+# virtualenvwrapper ?
 src/temp.txt
+
+# libre office temporary files
+.~lock.*
