@@ -3,7 +3,7 @@ university abm project
 <img src="https://github.com/BFSteam/memory/blob/master/tex/img/png/cover.png" />
 [[https://github.com/BFSteam/memory/blob/master/tex/img/png/cover.png]]
 ![img](tex/img/png/cover.png)
-italian description
+####italian description
 # Progetto di econofisica: Effetti della memoria nel *news spreading* #
 ## Roberto Bertilone, Francesco Fanchin, Nicola Sella ##
 In una rete reale ci chiediamo se la memoria di notizie lette possa influenzare la dinamica ed
