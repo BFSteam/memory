@@ -1,0 +1,3055 @@
+{
+  "name": "classes_memory",
+  "directed": true,
+  "strict": false,
+  "_draw_": 
+  [
+    {
+      "op": "c",
+      "grad": "none",
+      "color": "#fffffe00"
+    },
+    {
+      "op": "C",
+      "grad": "none",
+      "color": "#ffffff"
+    },
+    {
+      "op": "P",
+      "points": [[0.000,0.000],[0.000,1348.000],[2300.000,1348.000],[2300.000,0.000]]
+    }
+  ],
+  "bb": "0,0,2300,1348",
+  "charset": "utf-8",
+  "rankdir": "BT",
+  "xdotversion": "1.7",
+  "_subgraph_cnt": 0,
+  "objects": [
+    {
+      "_gvid": 0,
+      "name": "0",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1132.000,1233.500],[1132.000,1347.500],[1306.000,1347.500],[1306.000,1233.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1132.000,1324.500],[1306.000,1324.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1132.000,1256.500],[1306.000,1256.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1219.000,1332.300],
+          "align": "c",
+          "width": 91.000,
+          "text": "Agent.Agent"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1140.000,1309.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1140.000,1294.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1140.000,1279.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1140.000,1264.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1219.000,1241.300],
+          "align": "c",
+          "width": 5.000,
+          "text": " "
+        }
+      ],
+      "height": "1.5972",
+      "label": "{Agent.Agent|agOperatingSets : list\\lagType : str\\lmyWorldState\\lnumber\\l|}",
+      "pos": "1219,1290.5",
+      "rects": "1132,1324.5,1306,1347.5 1132,1256.5,1306,1324.5 1132,1233.5,1306,1256.5",
+      "shape": "record",
+      "width": "2.4167"
+    },
+    {
+      "_gvid": 1,
+      "name": "1",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[2106.000,60.500],[2106.000,144.500],[2300.000,144.500],[2300.000,60.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[2106.000,121.500],[2300.000,121.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[2106.000,98.500],[2300.000,98.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [2203.000,129.300],
+          "align": "c",
+          "width": 167.000,
+          "text": "WorldState.WorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [2114.000,106.300],
+          "align": "l",
+          "width": 175.000,
+          "text": "generalMovingProb : int"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [2114.000,83.300],
+          "align": "l",
+          "width": 178.000,
+          "text": "getGeneralMovingProb()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [2114.000,68.300],
+          "align": "l",
+          "width": 176.000,
+          "text": "setGeneralMovingProb()"
+        }
+      ],
+      "height": "1.1806",
+      "label": "{WorldState.WorldState|generalMovingProb : int\\l|getGeneralMovingProb()\\lsetGeneralMovingProb()\\l}",
+      "pos": "2203,102.5",
+      "rects": "2106,121.5,2300,144.5 2106,98.5,2300,121.5 2106,60.5,2300,98.5",
+      "shape": "record",
+      "width": "2.6944"
+    },
+    {
+      "_gvid": 2,
+      "name": "2",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1010.000,1022.500],[1010.000,1136.500],[1198.000,1136.500],[1198.000,1022.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1010.000,1113.500],[1198.000,1113.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1010.000,1045.500],[1198.000,1045.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1104.000,1121.300],
+          "align": "c",
+          "width": 172.000,
+          "text": "sky.SkyAgent.SkyAgent"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1018.000,1098.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1018.000,1083.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1018.000,1068.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1018.000,1053.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1104.000,1030.300],
+          "align": "c",
+          "width": 5.000,
+          "text": " "
+        }
+      ],
+      "height": "1.5972",
+      "label": "{sky.SkyAgent.SkyAgent|agOperatingSets : list\\lagType : str\\lmyWorldState\\lnumber\\l|}",
+      "pos": "1104,1079.5",
+      "rects": "1010,1113.5,1198,1136.5 1010,1045.5,1198,1113.5 1010,1022.5,1198,1045.5",
+      "shape": "record",
+      "width": "2.6111"
+    },
+    {
+      "_gvid": 3,
+      "name": "3",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[900.000,526.500],[900.000,640.500],[1230.000,640.500],[1230.000,526.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[900.000,617.500],[1230.000,617.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[900.000,549.500],[1230.000,549.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1065.000,625.300],
+          "align": "c",
+          "width": 314.000,
+          "text": "sky.skyagent.AgentManager.AgentManager"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [908.000,602.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [908.000,587.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [908.000,572.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [908.000,557.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1065.000,534.300],
+          "align": "c",
+          "width": 5.000,
+          "text": " "
+        }
+      ],
+      "height": "1.5972",
+      "label": "{sky.skyagent.AgentManager.AgentManager|agOperatingSets : list\\lagType : str\\lmyWorldState\\lnumber\\l|}",
+      "pos": "1065,583.5",
+      "rects": "900,617.5,1230,640.5 900,549.5,1230,617.5 900,526.5,1230,549.5",
+      "shape": "record",
+      "width": "4.5833"
+    },
+    {
+      "_gvid": 4,
+      "name": "4",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[0.000,15.500],[0.000,189.500],[516.000,189.500],[516.000,15.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[0.000,166.500],[516.000,166.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[0.000,53.500],[516.000,53.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [258.000,174.300],
+          "align": "c",
+          "width": 500.000,
+          "text": "sky.skyagent.agentmanager.ActivationScheduler.ActivationScheduler"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,151.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,136.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,121.300],
+          "align": "l",
+          "width": 11.000,
+          "text": "ff"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,106.300],
+          "align": "l",
+          "width": 62.000,
+          "text": "filename"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,91.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,76.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,61.300],
+          "align": "l",
+          "width": 13.000,
+          "text": "w"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,38.300],
+          "align": "l",
+          "width": 109.000,
+          "text": "registerEntry()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [8.000,23.300],
+          "align": "l",
+          "width": 76.000,
+          "text": "writeLog()"
+        }
+      ],
+      "height": "2.4306",
+      "label": "{sky.skyagent.agentmanager.ActivationScheduler.ActivationScheduler|agOperatingSets : list\\lagType : str\\lff\\lfilename\\lmyWorldState\\lnumber\\lw\\l|registerEntry()\\lwriteLog()\\l}",
+      "pos": "258,102.5",
+      "rects": "0,166.5,516,189.5 0,53.5,516,166.5 0,15.5,516,53.5",
+      "shape": "record",
+      "width": "7.1667"
+    },
+    {
+      "_gvid": 5,
+      "name": "5",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[534.500,15.500],[534.500,189.500],[1067.500,189.500],[1067.500,15.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[534.500,166.500],[1067.500,166.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[534.500,53.500],[1067.500,53.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [801.000,174.300],
+          "align": "c",
+          "width": 517.000,
+          "text": "sky.skyagent.agentmanager.ConnectionScheduler.ConnectionScheduler"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,151.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,136.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,121.300],
+          "align": "l",
+          "width": 11.000,
+          "text": "ff"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,106.300],
+          "align": "l",
+          "width": 62.000,
+          "text": "filename"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,91.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,76.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,61.300],
+          "align": "l",
+          "width": 13.000,
+          "text": "w"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,38.300],
+          "align": "l",
+          "width": 109.000,
+          "text": "registerEntry()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [542.500,23.300],
+          "align": "l",
+          "width": 76.000,
+          "text": "writeLog()"
+        }
+      ],
+      "height": "2.4306",
+      "label": "{sky.skyagent.agentmanager.ConnectionScheduler.ConnectionScheduler|agOperatingSets : list\\lagType : str\\lff\\lfilename\\lmyWorldState\\lnumber\\lw\\l|registerEntry()\\lwriteLog()\\l}",
+      "pos": "801,102.5",
+      "rects": "534.5,166.5,1067.5,189.5 534.5,53.5,1067.5,166.5 534.5,15.5,1067.5,53.5",
+      "shape": "record",
+      "width": "7.4028"
+    },
+    {
+      "_gvid": 6,
+      "name": "6",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1086.000,0.500],[1086.000,204.500],[1574.000,204.500],[1574.000,0.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1086.000,181.500],[1574.000,181.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1086.000,68.500],[1574.000,68.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1330.000,189.300],
+          "align": "c",
+          "width": 472.000,
+          "text": "sky.skyagent.agentmanager.MemoryScheduler.MemoryScheduler"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,166.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,151.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,136.300],
+          "align": "l",
+          "width": 11.000,
+          "text": "ff"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,121.300],
+          "align": "l",
+          "width": 62.000,
+          "text": "filename"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,106.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,91.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,76.300],
+          "align": "l",
+          "width": 13.000,
+          "text": "w"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,53.300],
+          "align": "l",
+          "width": 73.000,
+          "text": "printLog()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,38.300],
+          "align": "l",
+          "width": 109.000,
+          "text": "registerEntry()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,23.300],
+          "align": "l",
+          "width": 88.000,
+          "text": "updateLog()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1094.000,8.300],
+          "align": "l",
+          "width": 76.000,
+          "text": "writeLog()"
+        }
+      ],
+      "height": "2.8472",
+      "label": "{sky.skyagent.agentmanager.MemoryScheduler.MemoryScheduler|agOperatingSets : list\\lagType : str\\lff\\lfilename\\lmyWorldState\\lnumber\\lw\\l|printLog()\\lregisterEntry()\\lupdateLog()\\lwriteLog()\\l}",
+      "pos": "1330,102.5",
+      "rects": "1086,181.5,1574,204.5 1086,68.5,1574,181.5 1086,0.5,1574,68.5",
+      "shape": "record",
+      "width": "6.7778"
+    },
+    {
+      "_gvid": 7,
+      "name": "7",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1592.500,15.500],[1592.500,189.500],[2087.500,189.500],[2087.500,15.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1592.500,166.500],[2087.500,166.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1592.500,53.500],[2087.500,53.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1840.000,174.300],
+          "align": "c",
+          "width": 479.000,
+          "text": "sky.skyagent.agentmanager.MessageScheduler.MessageScheduler"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,151.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,136.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,121.300],
+          "align": "l",
+          "width": 11.000,
+          "text": "ff"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,106.300],
+          "align": "l",
+          "width": 62.000,
+          "text": "filename"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,91.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,76.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,61.300],
+          "align": "l",
+          "width": 13.000,
+          "text": "w"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,38.300],
+          "align": "l",
+          "width": 109.000,
+          "text": "registerEntry()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1600.500,23.300],
+          "align": "l",
+          "width": 76.000,
+          "text": "writeLog()"
+        }
+      ],
+      "height": "2.4306",
+      "label": "{sky.skyagent.agentmanager.MessageScheduler.MessageScheduler|agOperatingSets : list\\lagType : str\\lff\\lfilename\\lmyWorldState\\lnumber\\lw\\l|registerEntry()\\lwriteLog()\\l}",
+      "pos": "1840,102.5",
+      "rects": "1592.5,166.5,2087.5,189.5 1592.5,53.5,2087.5,166.5 1592.5,15.5,2087.5,53.5",
+      "shape": "record",
+      "width": "6.875"
+    },
+    {
+      "_gvid": 8,
+      "name": "8",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1255.500,962.500],[1255.500,1196.500],[1492.500,1196.500],[1492.500,962.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1255.500,1173.500],[1492.500,1173.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1255.500,1030.500],[1492.500,1030.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1374.000,1181.300],
+          "align": "c",
+          "width": 221.000,
+          "text": "world.WorldAgent.WorldAgent"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1158.300],
+          "align": "l",
+          "width": 88.000,
+          "text": "active : bool"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1143.300],
+          "align": "l",
+          "width": 158.000,
+          "text": "agOperatingSets : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1128.300],
+          "align": "l",
+          "width": 87.000,
+          "text": "agType : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1113.300],
+          "align": "l",
+          "width": 106.000,
+          "text": "database : dict"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1098.300],
+          "align": "l",
+          "width": 133.000,
+          "text": "databaseCols : list"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1083.300],
+          "align": "l",
+          "width": 103.000,
+          "text": "myWorldState"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1068.300],
+          "align": "l",
+          "width": 56.000,
+          "text": "number"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1053.300],
+          "align": "l",
+          "width": 121.000,
+          "text": "spreadState : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1038.300],
+          "align": "l",
+          "width": 37.000,
+          "text": "state"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1015.300],
+          "align": "l",
+          "width": 55.000,
+          "text": "debug()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,1000.300],
+          "align": "l",
+          "width": 76.000,
+          "text": "genState()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,985.300],
+          "align": "l",
+          "width": 79.000,
+          "text": "getGraph()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1263.500,970.300],
+          "align": "l",
+          "width": 76.000,
+          "text": "hasNews()"
+        }
+      ],
+      "height": "3.2639",
+      "label": "{world.WorldAgent.WorldAgent|active : bool\\lagOperatingSets : list\\lagType : str\\ldatabase : dict\\ldatabaseCols : list\\lmyWorldState\\lnumber\\lspreadState : str\\lstate\\l|debug()\\lgenState()\\lgetGraph()\\lhasNews()\\l}",
+      "pos": "1374,1079.5",
+      "rects": "1255.5,1173.5,1492.5,1196.5 1255.5,1030.5,1492.5,1173.5 1255.5,962.5,1492.5,1030.5",
+      "shape": "record",
+      "width": "3.2917"
+    },
+    {
+      "_gvid": 9,
+      "name": "9",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1248.000,504.000],[1248.000,663.000],[1500.000,663.000],[1500.000,504.000]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1248.000,640.000],[1500.000,640.000]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1248.000,572.000],[1500.000,572.000]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1374.000,647.800],
+          "align": "c",
+          "width": 236.000,
+          "text": "world.worldagent.Source.Source"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,624.800],
+          "align": "l",
+          "width": 106.000,
+          "text": "database : dict"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,609.800],
+          "align": "l",
+          "width": 79.000,
+          "text": "news : dict"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,594.800],
+          "align": "l",
+          "width": 70.000,
+          "text": "reliability"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,579.800],
+          "align": "l",
+          "width": 121.000,
+          "text": "spreadState : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,556.800],
+          "align": "l",
+          "width": 97.000,
+          "text": "createNews()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,541.800],
+          "align": "l",
+          "width": 55.000,
+          "text": "debug()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,526.800],
+          "align": "l",
+          "width": 115.000,
+          "text": "generateNews()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1256.000,511.800],
+          "align": "l",
+          "width": 76.000,
+          "text": "hasNews()"
+        }
+      ],
+      "height": "2.2222",
+      "label": "{world.worldagent.Source.Source|database : dict\\lnews : dict\\lreliability\\lspreadState : str\\l|createNews()\\ldebug()\\lgenerateNews()\\lhasNews()\\l}",
+      "pos": "1374,583.5",
+      "rects": "1248,640,1500,663 1248,572,1500,640 1248,504,1500,572",
+      "shape": "record",
+      "width": "3.5"
+    },
+    {
+      "_gvid": 10,
+      "name": "10",
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1518.500,241.500],[1518.500,925.500],[1737.500,925.500],[1737.500,241.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1518.500,902.500],[1737.500,902.500]]
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "L",
+          "points": [[1518.500,774.500],[1737.500,774.500]]
+        }
+      ],
+      "_ldraw_": 
+      [
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1628.000,910.300],
+          "align": "c",
+          "width": 203.000,
+          "text": "world.worldagent.User.User"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,887.300],
+          "align": "l",
+          "width": 88.000,
+          "text": "active : bool"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,872.300],
+          "align": "l",
+          "width": 113.000,
+          "text": "activeTime : int"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,857.300],
+          "align": "l",
+          "width": 106.000,
+          "text": "database : dict"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,842.300],
+          "align": "l",
+          "width": 127.000,
+          "text": "inactiveTime : int"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,827.300],
+          "align": "l",
+          "width": 93.000,
+          "text": "prevDiff : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,812.300],
+          "align": "l",
+          "width": 121.000,
+          "text": "spreadState : str"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,797.300],
+          "align": "l",
+          "width": 37.000,
+          "text": "state"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,782.300],
+          "align": "l",
+          "width": 142.000,
+          "text": "tiredness : int, float"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,759.300],
+          "align": "l",
+          "width": 69.000,
+          "text": "activate()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,744.300],
+          "align": "l",
+          "width": 119.000,
+          "text": "activeDiffusion()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,729.300],
+          "align": "l",
+          "width": 74.000,
+          "text": "addEdge()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,714.300],
+          "align": "l",
+          "width": 112.000,
+          "text": "becomeActive()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,699.300],
+          "align": "l",
+          "width": 125.000,
+          "text": "becomeInactive()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,684.300],
+          "align": "l",
+          "width": 101.000,
+          "text": "changeState()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,669.300],
+          "align": "l",
+          "width": 127.000,
+          "text": "checkActivation()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,654.300],
+          "align": "l",
+          "width": 101.000,
+          "text": "chooseNews()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,639.300],
+          "align": "l",
+          "width": 94.000,
+          "text": "createEdge()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,624.300],
+          "align": "l",
+          "width": 122.000,
+          "text": "cutOldestNews()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,609.300],
+          "align": "l",
+          "width": 55.000,
+          "text": "debug()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,594.300],
+          "align": "l",
+          "width": 92.000,
+          "text": "deleteEdge()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,579.300],
+          "align": "l",
+          "width": 73.000,
+          "text": "diffusion()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,564.300],
+          "align": "l",
+          "width": 72.000,
+          "text": "distance()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,549.300],
+          "align": "l",
+          "width": 187.000,
+          "text": "findKeyDistanceMinMax()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,534.300],
+          "align": "l",
+          "width": 124.000,
+          "text": "findKeyMinMax()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,519.300],
+          "align": "l",
+          "width": 154.000,
+          "text": "forgetRandomNews()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,504.300],
+          "align": "l",
+          "width": 183.000,
+          "text": "getAllNewsFromSource()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,489.300],
+          "align": "l",
+          "width": 167.000,
+          "text": "getAllNewsFromUser()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,474.300],
+          "align": "l",
+          "width": 149.000,
+          "text": "getStateFromNode()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,459.300],
+          "align": "l",
+          "width": 76.000,
+          "text": "hasNews()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,444.300],
+          "align": "l",
+          "width": 178.000,
+          "text": "ifBeautifulForgetWorse()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,429.300],
+          "align": "l",
+          "width": 130.000,
+          "text": "isMemoryEmpty()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,414.300],
+          "align": "l",
+          "width": 58.000,
+          "text": "isUser()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,399.300],
+          "align": "l",
+          "width": 154.000,
+          "text": "listActiveNeighbors()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,384.300],
+          "align": "l",
+          "width": 118.000,
+          "text": "listNeighbours()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,369.300],
+          "align": "l",
+          "width": 49.000,
+          "text": "norm()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,354.300],
+          "align": "l",
+          "width": 99.000,
+          "text": "onlySources()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,339.300],
+          "align": "l",
+          "width": 114.000,
+          "text": "otherDiffusion()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,324.300],
+          "align": "l",
+          "width": 129.000,
+          "text": "passiveDiffusion()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,309.300],
+          "align": "l",
+          "width": 84.000,
+          "text": "readNews()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,294.300],
+          "align": "l",
+          "width": 85.000,
+          "text": "remember()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,279.300],
+          "align": "l",
+          "width": 101.000,
+          "text": "removeEdge()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,264.300],
+          "align": "l",
+          "width": 132.000,
+          "text": "switchActivation()"
+        },
+        {
+          "op": "F",
+          "size": 14.000,
+          "face": "Times-Roman"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "T",
+          "pt": [1526.500,249.300],
+          "align": "l",
+          "width": 111.000,
+          "text": "updateWeight()"
+        }
+      ],
+      "height": "9.5139",
+      "label": "{world.worldagent.User.User|active : bool\\lactiveTime : int\\ldatabase : dict\\linactiveTime : int\\lprevDiff : str\\lspreadState : str\\lstate\\ltiredness : int, float\\l|activate()\\lactiveDiffusion()\\laddEdge()\\lbecomeActive()\\lbecomeInactive()\\lchangeState()\\lcheckActivation()\\lchooseNews()\\lcreateEdge()\\lcutOldestNews()\\ldebug()\\ldeleteEdge()\\ldiffusion()\\ldistance()\\lfindKeyDistanceMinMax()\\lfindKeyMinMax()\\lforgetRandomNews()\\lgetAllNewsFromSource()\\lgetAllNewsFromUser()\\lgetStateFromNode()\\lhasNews()\\lifBeautifulForgetWorse()\\lisMemoryEmpty()\\lisUser()\\llistActiveNeighbors()\\llistNeighbours()\\lnorm()\\lonlySources()\\lotherDiffusion()\\lpassiveDiffusion()\\lreadNews()\\lremember()\\lremoveEdge()\\lswitchActivation()\\lupdateWeight()\\l}",
+      "pos": "1628,583.5",
+      "rects": "1518.5,902.5,1737.5,925.5 1518.5,774.5,1737.5,902.5 1518.5,241.5,1737.5,774.5",
+      "shape": "record",
+      "width": "3.0417"
+    }
+  ],
+  "edges": [
+    {
+      "_gvid": 0,
+      "tail": 2,
+      "head": 0,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[1135.120,1136.600],[1149.890,1163.690],[1167.620,1196.220],[1182.960,1224.380]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1180.000,1226.250],[1187.850,1233.350],[1186.140,1222.900]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1187.9,1233.4 1135.1,1136.6 1149.9,1163.7 1167.6,1196.2 1183,1224.4"
+    },
+    {
+      "_gvid": 1,
+      "tail": 3,
+      "head": 2,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[1069.510,640.880],[1076.760,733.120],[1090.980,913.930],[1098.700,1012.140]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1095.230,1012.560],[1099.500,1022.250],[1102.200,1012.010]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1099.5,1022.3 1069.5,640.88 1076.8,733.12 1091,913.93 1098.7,1012.1"
+    },
+    {
+      "_gvid": 2,
+      "tail": 4,
+      "head": 3,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[404.140,189.610],[564.750,285.330],[818.720,436.710],[960.490,521.210]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[958.870,524.320],[969.250,526.430],[962.450,518.300]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,969.25,526.43 404.14,189.61 564.75,285.33 818.72,436.71 960.49,521.21"
+    },
+    {
+      "_gvid": 3,
+      "tail": 5,
+      "head": 3,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[848.810,189.610],[900.620,284.000],[982.120,432.490],[1028.850,517.630]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1025.800,519.350],[1033.680,526.430],[1031.930,515.980]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1033.7,526.43 848.81,189.61 900.62,284 982.12,432.49 1028.8,517.63"
+    },
+    {
+      "_gvid": 4,
+      "tail": 6,
+      "head": 3,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[1261.120,204.560],[1253.460,216.720],[1245.930,229.050],[1239.000,241.000],[1184.630,334.720],[1129.190,447.420],[1095.940,517.270]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1092.730,515.880],[1091.600,526.410],[1099.050,518.880]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1091.6,526.41 1261.1,204.56 1253.5,216.72 1245.9,229.05 1239,241 1184.6,334.72 1129.2,447.42 1095.9,517.27"
+    },
+    {
+      "_gvid": 5,
+      "tail": 7,
+      "head": 3,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[1636.150,189.620],[1618.370,195.440],[1600.490,200.690],[1583.000,205.000],[1508.380,223.410],[1302.330,197.440],[1239.000,241.000],[1145.200,305.520],[1099.130,436.280],[1078.840,516.250]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1075.370,515.680],[1076.370,526.230],[1082.170,517.360]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1076.4,526.23 1636.1,189.62 1618.4,195.44 1600.5,200.69 1583,205 1508.4,223.41 1302.3,197.44 1239,241 1145.2,305.52 1099.1,436.28 1078.8,516.25"
+    },
+    {
+      "_gvid": 6,
+      "tail": 8,
+      "head": 0,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[1287.890,1196.720],[1280.740,1206.460],[1273.690,1216.050],[1266.990,1225.180]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1264.030,1223.280],[1260.930,1233.420],[1269.680,1227.430]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1260.9,1233.4 1287.9,1196.7 1280.7,1206.5 1273.7,1216.1 1267,1225.2"
+    },
+    {
+      "_gvid": 7,
+      "tail": 9,
+      "head": 8,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[1374.000,663.190],[1374.000,741.060],[1374.000,860.830],[1374.000,951.950]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1370.500,952.080],[1374.000,962.080],[1377.500,952.080]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1374,962.08 1374,663.19 1374,741.06 1374,860.83 1374,951.95"
+    },
+    {
+      "_gvid": 8,
+      "tail": 10,
+      "head": 8,
+      "_draw_": 
+      [
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "b",
+          "points": [[1518.310,909.410],[1515.280,915.030],[1512.170,920.560],[1509.000,926.000],[1503.530,935.390],[1497.430,944.730],[1490.940,953.900]]
+        }
+      ],
+      "_hdraw_": 
+      [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "op": "c",
+          "grad": "none",
+          "color": "#000000"
+        },
+        {
+          "op": "p",
+          "points": [[1487.910,952.110],[1484.870,962.260],[1493.570,956.220]]
+        }
+      ],
+      "arrowhead": "empty",
+      "arrowtail": "none",
+      "pos": "e,1484.9,962.26 1518.3,909.41 1515.3,915.03 1512.2,920.56 1509,926 1503.5,935.39 1497.4,944.73 1490.9,953.9"
+    }
+  ]
+}
