@@ -1,0 +1,2 @@
+#!/usr/bin/python
+pyreverse -my -A -o json -p memory **/**.py
