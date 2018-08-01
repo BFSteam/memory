@@ -7,14 +7,15 @@ import sky.skyagent.agentmanager.MessageScheduler as ms
 import numpy as np
 
 from agTools import *
+from cumulativeFunctions import exponentialF, paretoF, powerF
 from numpy import linalg as LA
 from Tools import *
 from world.WorldAgent import *
 from usefulFunctions import hill
 
+
 class User(WorldAgent):
     """
-
                                                                      ,888888b.
                                                                   .d888888888b
                                                               _..-'.`*'_,88888b
@@ -63,8 +64,8 @@ class User(WorldAgent):
 
         """
         if p == 1:
-            self.active=True
-            self.inactiveTime=random.randint(0,5)
+            self.active = True
+            self.inactiveTime = random.randint(0, 5)
         elif random.random() > p:
             self.active = False
             self.inactiveTime = random.randint(0, 5)
@@ -79,18 +80,18 @@ class User(WorldAgent):
 
         """
         return x / np.sum(x)
-        #return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
+        # return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
 
     def listNeighbours(self):
         """return neighbour list. call with no arguments
         """
         return list(common.G.neighbors(self.number))
 
-    def listActiveNeighbors(self):#################################### NOT TESTED YET
+    def listActiveNeighbors(self):  # NOT TESTED YET
         """return a list of only active neighbors
         """
         n = list(common.G.neighbors(self.number))
-        return [x for x in n if common.G.node[x].active == True]    
+        return [x for x in n if common.G.node[x].active == True]
 
     def isUser(self, n):
         """return True if node n is a user
@@ -217,7 +218,7 @@ class User(WorldAgent):
     def forgetRandomNews(self, news=0, rnd=common.pForget):
         """
 
-        forget random news different from 'news' with probability rnd 
+        forget random news different from 'news' with probability rnd
         if no argument is provided, forget randomly
 
         """
@@ -226,7 +227,8 @@ class User(WorldAgent):
             if self.database == {}:
                 return False
             else:
-                forgot = self.database[random.choice(list(self.database))]
+                forgot = self.database[random.choice(
+                    list(self.database))]
                 if news == 0:
                     del(forgot)
                     return True
@@ -269,7 +271,7 @@ class User(WorldAgent):
         #
         # do not remember if it's already present
         #
-        ############################################################## TODO implement here stifler mode???
+        # TODO implement here stifler mode???
         #
         if news['id-n'] in self.database:
             return False
@@ -332,7 +334,8 @@ class User(WorldAgent):
                     kmax = key
             return data[kmax]
 
-    def findKeyDistanceMinMax(self, data, innerkey, minor=True, a='scalar'):
+    def findKeyDistanceMinMax(
+            self, data, innerkey, minor=True, a='scalar'):
         """
 
         Given a dict of dict and an innerkey 'findKeyMinMax' returns the
@@ -366,8 +369,8 @@ class User(WorldAgent):
         """
 
         if self.active is True:
-            self.active=False
-            self.tiredness=1
+            self.active = False
+            self.tiredness = 1
             common.actlog.registerEntry(
                 agent=self.number,
                 date=common.cycle,
@@ -382,6 +385,26 @@ class User(WorldAgent):
                 atime=self.inactiveTime)
         self.inactiveTime = 0
         self.activeTime = 0
+
+    def continueActivation(self):
+        """The agents stays in its active or inactive state
+
+        Increments the correct active or inactive time of the agent
+        """
+        if self.active is True:
+            self.activeTime += 1
+        else:
+            self.inactiveTime += 1
+
+    def probaActivation(self, function, x, *args):
+        """Uses a function defined in commonVar to determine
+        the  probability of activation
+        """
+        if random.random() < function(x, *args):
+            self.continueActivation()
+            return True
+        self.switchActivation()
+        return False
 
     def readNews(self, old=common.vOld):
         """
@@ -446,7 +469,7 @@ class User(WorldAgent):
         else:
             tdata = self.findKeyDistanceMinMax(
                 data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
-            return (n,  tdata)
+            return (n, tdata)
 
     def becomeActive(
             self,
@@ -469,8 +492,10 @@ class User(WorldAgent):
         if probabilityFunction == 0:
             pass
         if self.inactiveTime >= t:
-            if random.random() < common.timeActiveArray[self.inactiveTime - 1]:
-            #if random.random() < 1 - p * np.exp(-self.inactiveTime):
+            if random.random(
+            ) < common.timeActiveArray[self.inactiveTime - 1]:
+                # if random.random() < 1 - p *
+                # np.exp(-self.inactiveTime):
                 self.switchActivation()
 
     def becomeInactive(
@@ -503,7 +528,8 @@ class User(WorldAgent):
         if tiredness is True:
             p = p * self.tiredness
         if self.activeTime > t:
-            if random.random() < common.timeInactiveArray[self.activeTime - 1]:
+            if random.random(
+            ) < common.timeInactiveArray[self.activeTime - 1]:
                 self.switchActivation()
                 #self.tiredness = 1
 
@@ -514,7 +540,6 @@ class User(WorldAgent):
             p_active=common.pActivation,
             p_inactive=common.pInactivation,
             tiredness=common.flags['toggleTiredness'],
-            probabilityFunction=0
     ):
         """
 
@@ -524,9 +549,7 @@ class User(WorldAgent):
         Possibly changeable in the future
 
         """
-        if probabilityFunction!=0:
-            return True
-        
+
         if self.active is False:
             #uf.vprint("Agent", self.number, "is active")
             self.inactiveTime += 1
@@ -599,7 +622,8 @@ class User(WorldAgent):
 
         """
 
-        if any([self.isUser(x) for x in self.listNeighbours()]) is False:
+        if any([self.isUser(x)
+                for x in self.listNeighbours()]) is False:
             return True
         else:
             return False
@@ -634,7 +658,7 @@ class User(WorldAgent):
         if self.onlySources() is True:
             return False
         #
-        # 
+        #
         bestNews = self.findKeyDistanceMinMax(
             self.database, 'new', minor=False)
         bestWeight = 0
@@ -646,11 +670,12 @@ class User(WorldAgent):
                 continue
             #
             # look for bestweight
-            if common.G.get_edge_data(*(self.number, neighbour))['weight'] > bestWeight:
+            if common.G.get_edge_data(
+                    *(self.number, neighbour))['weight'] > bestWeight:
                 bestWeight = common.G.get_edge_data(
                     *(self.number, neighbour))['weight']
                 bestNeighbour = neighbour
-        
+
         # find random user neighbor
         while True:
             shuffledNeighbour = random.choice(self.listNeighbours())
@@ -676,21 +701,24 @@ class User(WorldAgent):
             write=common.writeMessages
         )
 
-        dist = common.G.node[finalNeighbour]['agent'].distance(bestNews['new'])
+        dist = common.G.node[finalNeighbour]['agent'].distance(
+            bestNews['new'])
         #
         # bad news
         if dist < threshold:
+            value = -q * dist
             self.updateWeight(neighbor=finalNeighbour,
-                              value=-q*dist, r=r)
+                              value=value, r=r)
         #
         # good news
         elif dist > 1 - threshold:
+            value = q * dist
             self.updateWeight(neighbor=finalNeighbour,
-                              value=q*dist, r=r)
+                              value=value, r=r)
         else:
             # they are still... friends... I guess?
             pass
-            
+
         if tiredness is True:
             self.tiredness = self.tiredness * 1.3
 
@@ -720,13 +748,15 @@ class User(WorldAgent):
             # if picked node is itself pick another one
             if node == self.number:
                 continue
-            # if picked node is inactive pick another one ############ can change in the future
+            # if picked node is inactive pick another one ############
+            # can change in the future
             if common.G.node[node]['agent'].active is False:
                 continue
             d1 = self.distance(common.G.node[node]['agent'].state)
             n1 = node
         #
-        # check if user is not connected to any node and rewire it randomly
+        # check if user is not connected to any node and rewire it
+        # randomly
         if self.listNeighbours() == []:
             if d1 > threshold:
                 self.addEdge(n1)
@@ -744,7 +774,8 @@ class User(WorldAgent):
                 d2 = -1
                 continue
             #
-            for secondnode in common.G.node[firstnode]['agent'].listNeighbours():
+            for secondnode in common.G.node[firstnode]['agent'].listNeighbours(
+            ):
                 nlist.append(secondnode)
                 dlist.append(self.distance(
                     common.G.node[secondnode]['agent'].state))

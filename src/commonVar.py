@@ -25,7 +25,7 @@ prop = 10.  # proportionality between P_s and P_a
 P_a = float(averageDegree) / N_USERS  # do not overwrite
 P_s = prop * P_a                      # do not overwrite
 
-dim =3  # state dimension
+dim = 3  # state dimension
 
 memorySize = 12  # memory dimension
 
@@ -75,9 +75,9 @@ pDeleteEdge = 0.1  # probability of removing a random edge
 debug = True
 
 flags = {
-    'toggleForgetNews' : True,
-    'toggleTiredness'  : True,
-    'toggleCutOldest'  : True
+    'toggleForgetNews': True,
+    'toggleTiredness': True,
+    'toggleCutOldest': True
 }
 
 ##################################
@@ -86,10 +86,20 @@ flags = {
 #
 ##################################
 writeConnections = True
-writeMessages    = True
-writeMemories    = True
+writeMessages = True
+writeMemories = True
 writeActivations = True
 lineBuffer = 1000
 
-timeActiveArray = [hill(x+1, pActivation, tActivation, 3) for x in range(100)]
-timeInactiveArray = [hill(x+1, pInactivation, tInactivation, 3) for x in range(100)]
+timeActiveArray = [
+    hill(
+        x + 1,
+        pActivation,
+        tActivation,
+        3) for x in range(100)]
+timeInactiveArray = [
+    hill(
+        x + 1,
+        pInactivation,
+        tInactivation,
+        3) for x in range(100)]
