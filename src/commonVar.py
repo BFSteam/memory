@@ -1,4 +1,7 @@
 import datetime
+
+import cumulativeFunctions as cf
+
 from usefulFunctions import hill
 
 localtime = datetime.datetime.now().strftime("%Y_%d_%m_%H_%M_%S")
@@ -77,8 +80,12 @@ debug = True
 flags = {
     'toggleForgetNews': True,
     'toggleTiredness': True,
-    'toggleCutOldest': True
+    'toggleCutOldest': True,
+    'toggleActivateWithProba': True
 }
+
+cumulative = cf.exponentialF
+argCumulative = 1.  # , second argumet for pareto
 
 ##################################
 #

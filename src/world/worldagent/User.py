@@ -7,7 +7,6 @@ import sky.skyagent.agentmanager.MessageScheduler as ms
 import numpy as np
 
 from agTools import *
-from cumulativeFunctions import exponentialF, paretoF, powerF
 from numpy import linalg as LA
 from Tools import *
 from world.WorldAgent import *
@@ -386,6 +385,14 @@ class User(WorldAgent):
         self.inactiveTime = 0
         self.activeTime = 0
 
+    def timeStateActivation(self):
+        """If active return active state
+        If inactive inactiveState
+        """
+        if self.activate is True:
+            return self.activeTime
+        return self.inactiveTime
+
     def continueActivation(self):
         """The agents stays in its active or inactive state
 
@@ -396,11 +403,11 @@ class User(WorldAgent):
         else:
             self.inactiveTime += 1
 
-    def probaActivation(self, function, x, *args):
+    def probaActivation(self, x, function, par):
         """Uses a function defined in commonVar to determine
         the  probability of activation
         """
-        if random.random() < function(x, *args):
+        if random.random() < function(x, par):
             self.continueActivation()
             return True
         self.switchActivation()
@@ -571,8 +578,16 @@ class User(WorldAgent):
         [ ( 1, {'id-n':dkbjga, ...} ), ... ]
 
         """
-        if self.checkActivation() is False:
-            return False
+        if common.flags['toggleActivateWithProba'] is True:
+            active = self.probaActivation(
+                x=self.timeStateActivation(),
+                function=common.cumulative,
+                par=common.argCumulative)
+            if active is False:
+                return False
+        else:
+            if self.checkActivation() is False:
+                return False
 
         #
         # read news
