@@ -2,7 +2,7 @@ import binascii
 import csv
 import os
 import time
-    
+
 import commonVar as common
 import graph as graph
 import networkx as nx
@@ -10,6 +10,7 @@ import networkx as nx
 from Tools import *
 from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer, printHeader
 from world.WorldAgent import *
+
 
 def do1b(address):  # visualizeNet in observerActions.txt
 
@@ -21,7 +22,7 @@ def do1b(address):  # visualizeNet in observerActions.txt
 def do2a(address, cycle):  # ask_all in observerActions.txt
     self = address  # if necessary
     # ask each agent, without parameters
-    #if cycle % 25 == 0 :
+    # if cycle % 25 == 0 :
     #    print("Time =", cycle)
     common.memlog.updateLog()
 
@@ -36,12 +37,12 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
     if cycle == address.nCycles:
         if not os.path.exists(common.project.replace("src", "log")):
             os.makedirs(common.project.replace("src", "log"))
-        #-------------------------------------------------------------
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # GML's
         #
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # GML
         #
@@ -50,21 +51,21 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
             "log/graph" + str(common.localtime) + ".gml")
         nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
         print("saved", path)
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # GML different stringsizer
         #
-        #path = common.project.replace(
+        # path = common.project.replace(
         #    "src",
         #    "log/graphN" + str(common.localtime) + ".gml")
-        #nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
-        #print("saved", path)
-        #-------------------------------------------------------------
-        #-------------------------------------------------------------
+        # nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
+        # print("saved", path)
+        # -------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # AGENT MANAGERS
         #
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # CONNECTION LOG
         #
@@ -74,9 +75,9 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         common.conlog.writeLog(
             path=path,
             write=common.writeConnections)
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
-        # MESSAGE LOG 
+        # MESSAGE LOG
         #
         path = common.project.replace(
             "src",
@@ -84,7 +85,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         common.msglog.writeLog(
             path=path,
             write=common.writeMessages)
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # MEMORY LOG
         #
@@ -94,7 +95,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         common.memlog.writeLog(
             path=path,
             write=common.writeMemories)
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # ACTIVATION LOG
         #
@@ -104,12 +105,12 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         common.actlog.writeLog(
             path=path,
             write=common.writeMemories)
-        #-------------------------------------------------------------
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # NETWORK MEASURES
         #
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # DEGREE DISTRIBUTION
         #
@@ -123,7 +124,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
                         lastline=['node', 'degree'])
             for key, val in dict(common.G.degree()).items():
                 w.writerow([key, val])
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # CLUSTERING COEFFICIENT
         #
@@ -138,7 +139,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
                         lastline=['node', 'clustering coeff'])
             for key, val in clus.items():
                 w.writerow([key, val])
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # DIAMETER
         #
@@ -153,7 +154,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
                         firstline=['#diameter'],
                         lastline=['diameter', 'memsize'])
             w.writerow([diam, common.memorySize])
-        #-------------------------------------------------------------
+        # -------------------------------------------------------------
         #
         # K - CORE
         #
@@ -169,11 +170,38 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
                         lastline=['node', 'k-core'])
             for key, val in dict(kcore).items():
                 w.writerow([key, val])
-        #-------------------------------------------------------------
-        try:
-            from pybeep.pybeep import PyVibrate, PyBeep
-            PyBeep().beep()
-        except:
-             pass
+        # -------------------------------------------------------------
+        import errno
+        import shutil
+        from os import listdir
+        from os.path import isfile, join
 
-## TODO implement single string replacement
+        try:
+            os.makedirs(common.project.replace(
+                "src",
+                "log/" + str(common.localtime)))
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+        sourceDir = common.project.replace(
+            "src",
+            "log/")
+        destDir = common.project.replace(
+            "src",
+            "log/" + str(common.localtime) + "/")
+        files = [
+            f for f in listdir(sourceDir) if isfile(
+                join(
+                    sourceDir,
+                    f))]
+        files = [f for f in files if str(common.localtime) in f]
+        for f in files:
+            shutil.move(sourceDir + f, destDir)
+
+        try:
+            from pybeep.pybeep import PyBeep
+            PyBeep().beep()
+        except BaseException:
+            pass
+
+# TODO implement single string replacement
