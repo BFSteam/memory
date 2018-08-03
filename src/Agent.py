@@ -21,14 +21,14 @@ class Agent(
     |                  |
     WorldAgent         SkyAgent
         |                 |
-    ----------         -------------------------------
-    |        |         |                             |
-    User     Source    AgentManager(AgentScheduler)  AgentParameterHandler
-                            |                             |
-                       -------------------              ----------
-                       |                 |              |        |
-          (AgentManager)MsgScheduler     ConnScheduler  ?        ?
-                     AMMS                    AMCS
+    ----------         -------------------------
+    |        |         |                       |
+    User     Source    AgentScheduler  AgentParameterHandler
+                            |                       |
+                       -------------------       ----------
+                       |                 |       |        |
+                 MsgScheduler     ConnScheduler  ?        ?
+                     AMMS               AMCS
 
     Def. constructor:
     class Agent(SuperAgent):
