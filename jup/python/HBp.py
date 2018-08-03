@@ -17,7 +17,7 @@ def setup_options(argv):
     arggg = {
         'inputpath': './',
         'outputpath': './out.csv',
-        'strmatch': '',
+        'strmatch': '2018',
     }
     functions = []
     try:
@@ -29,9 +29,17 @@ def setup_options(argv):
         sys.exit(42)
     for opt, arg in opts:
         if opt == '-h':
-            print('HBp.py -i <inputfile> -o <outputfile> -s <stringmatch> -a -n')
             print(
-                'HBp.py --ifile=<inputfile> \\\n --ofile=<outputfile> \\\n --strmatch=<stringmatch>')
+                './HBp.py -i <inputdir> -o <outputfile> -s <stringmatch> -a -n')
+            print(
+                './HBp.py --ifile=<inputdir> \\\n'
+                + '--ofile=<outputfile> \\\n'
+                + '--strmatch=<stringmatch> \\\n'
+                + '-a -n \n\n'
+                + 'example:\n'
+                + './HBp.py -i ../../log/2018_folfer_etc'
+                + ' -o ./file.csv -s 2018 -a -n'
+            )
             sys.exit()
         elif opt in ("-i", "--ifile"):
             arggg['inputpath'] = arg
