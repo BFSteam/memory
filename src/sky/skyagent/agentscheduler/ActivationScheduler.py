@@ -1,4 +1,4 @@
-# AgentManager Connection Scheduler
+# AgentScheduler Activation Scheduler
 import csv
 import os
 import shutil
@@ -6,12 +6,13 @@ import shutil
 import commonVar as common
 import numpy as np
 
-from sky.skyagent.AgentManager import *
+from sky.skyagent.AgentScheduler import *
 from agTools import *
 from Tools import *
 from usefulFunctions import printHeader, vprint
 
-class ActivationScheduler(AgentManager):
+
+class ActivationScheduler(AgentScheduler):
     """
 
     AMMS
@@ -19,7 +20,8 @@ class ActivationScheduler(AgentManager):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        AgentManager.__init__(self, number, myWorldState, agType=agType)
+        AgentScheduler.__init__(
+            self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
         self.number = number
@@ -54,7 +56,8 @@ class ActivationScheduler(AgentManager):
         creates an array to stack under the log and does it
 
         """
-        if write == False: return
+        if write == False:
+            return
         self.w.writerow([agent,
                          date,
                          atype,
@@ -70,11 +73,15 @@ class ActivationScheduler(AgentManager):
         """
         self.ff.close()
         if write == False:
-            vprint("ActivationScheduler -> writeLog called but not enabled: no file written")
+            vprint(
+                "ActivationScheduler -> writeLog called but not enabled: no file written")
             os.remove(self.filename)
             return
 
         shutil.copy(self.filename, path)
         vprint("ActivationScheduler -> writeLog file written at", path)
         os.remove(self.filename)
-        vprint("ActivationScheduler -> writeLog tmp file", self.filename, "removed")
+        vprint(
+            "ActivationScheduler -> writeLog tmp file",
+            self.filename,
+            "removed")

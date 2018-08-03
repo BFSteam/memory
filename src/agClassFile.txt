@@ -1,6 +1,6 @@
 users   world.worldagent.User
 sources world.worldagent.Source
-msglogs sky.skyagent.agentmanager.MessageScheduler
-conlogs sky.skyagent.agentmanager.ConnectionScheduler
-memlogs sky.skyagent.agentmanager.MemoryScheduler
-actlogs sky.skyagent.agentmanager.ActivationScheduler
+msglogs sky.skyagent.agentscheduler.MessageScheduler
+conlogs sky.skyagent.agentscheduler.ConnectionScheduler
+memlogs sky.skyagent.agentscheduler.MemoryScheduler
+actlogs sky.skyagent.agentscheduler.ActivationScheduler

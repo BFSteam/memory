@@ -1,4 +1,4 @@
-# AgentManager Message Scheduler
+# AgentScheduler Message Scheduler
 import os
 import csv
 import shutil
@@ -6,13 +6,13 @@ import shutil
 import commonVar as common
 import numpy as np
 
-from sky.skyagent.AgentManager import *
+from sky.skyagent.AgentScheduler import *
 from agTools import *
 from Tools import *
 from usefulFunctions import printHeader, vprint
 
 
-class MessageScheduler(AgentManager):
+class MessageScheduler(AgentScheduler):
     """
 
     AMMS
@@ -20,7 +20,8 @@ class MessageScheduler(AgentManager):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        AgentManager.__init__(self, number, myWorldState, agType=agType)
+        AgentScheduler.__init__(
+            self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
         self.number = number
@@ -51,7 +52,7 @@ class MessageScheduler(AgentManager):
             id_new='null',
             date=-1,
             diffusion='n',
-            write = True
+            write=True
     ):
         """
 
@@ -71,25 +72,30 @@ class MessageScheduler(AgentManager):
         ))
 
         """
-        if write == False: return
+        if write == False:
+            return
 
         self.w.writerow([
-                id_src,
-                date_creation,
-                id_new,
-                sender,
-                reciver,
-                date,
-                diffusion])
+            id_src,
+            date_creation,
+            id_new,
+            sender,
+            reciver,
+            date,
+            diffusion])
 
     def writeLog(self, path='./defMLog.csv', write=True):
         self.ff.close()
         if write == False:
-            vprint("MessageScheduler -> writeLog called but not enabled: no file written")
+            vprint(
+                "MessageScheduler -> writeLog called but not enabled: no file written")
             os.remove(self.filename)
             return
 
         shutil.copy(self.filename, path)
         vprint("MessageScheduler -> writeLog file written at", path)
         os.remove(self.filename)
-        vprint("MessageScheduler -> writeLog tmp file", self.filename, "removed")
+        vprint(
+            "MessageScheduler -> writeLog tmp file",
+            self.filename,
+            "removed")

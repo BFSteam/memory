@@ -7,7 +7,9 @@ import graph as graph
 from agTools import *
 from Tools import *
 
-class Agent(SuperAgent):  # Agent must be the partent class of every object. Must inherit from SuperAgent
+
+class Agent(
+        SuperAgent):  # Agent must be the partent class of every object. Must inherit from SuperAgent
 
     """
 
@@ -19,13 +21,13 @@ class Agent(SuperAgent):  # Agent must be the partent class of every object. Mus
     |                  |
     WorldAgent         SkyAgent
         |                 |
-    ----------         ---------------
-    |        |         |             |
-    User     Source    AgentManager  ?
-                            |
-                       -------------------
-                       |                 |
-          (AgentManager)MsgScheduler     ConnScheduler
+    ----------         -------------------------------
+    |        |         |                             |
+    User     Source    AgentManager(AgentScheduler)  AgentParameterHandler
+                            |                             |
+                       -------------------              ----------
+                       |                 |              |        |
+          (AgentManager)MsgScheduler     ConnScheduler  ?        ?
                      AMMS                    AMCS
 
     Def. constructor:

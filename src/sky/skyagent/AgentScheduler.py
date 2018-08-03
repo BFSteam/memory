@@ -1,13 +1,14 @@
-# AgentManager
+# AgentScheduler
 from Tools import *
 from agTools import *
 from sky.SkyAgent import *
 
-class AgentManager(SkyAgent):
+
+class AgentScheduler(SkyAgent):
     """
 
-    AgentManager
-    Class of all the managers for the agents
+    AgentScheduler
+    Class of all the Schedulers for the agents
 
     """
 

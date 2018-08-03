@@ -1,4 +1,4 @@
-# AgentManager Memory Scheduler
+# AgentScheduler Memory Scheduler
 import csv
 import os
 import shutil
@@ -6,13 +6,13 @@ import shutil
 import commonVar as common
 import numpy as np
 
-from sky.skyagent.AgentManager import *
+from sky.skyagent.AgentScheduler import *
 from agTools import *
 from Tools import *
 from usefulFunctions import printHeader, vprint
 
 
-class MemoryScheduler(AgentManager):
+class MemoryScheduler(AgentScheduler):
     """
 
     AMMS
@@ -20,7 +20,8 @@ class MemoryScheduler(AgentManager):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        AgentManager.__init__(self, number, myWorldState, agType=agType)
+        AgentScheduler.__init__(
+            self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
         self.number = number
@@ -59,7 +60,8 @@ class MemoryScheduler(AgentManager):
                 else:
                     e = np.append(e, "d")
 
-            e = np.append(e, [x.decode('utf-8') for x in list(common.G.node[node]['agent'].database.keys())])
+            e = np.append(e, [x.decode(
+                'utf-8') for x in list(common.G.node[node]['agent'].database.keys())])
             for i in range(3 + common.memorySize - e.shape[0]):
                 e = np.append(e, 0)
             self.registerEntry(e)
@@ -94,11 +96,15 @@ class MemoryScheduler(AgentManager):
     def writeLog(self, path='./defMLog.csv', write=True):
         self.ff.close()
         if write == False:
-            vprint("MemoryScheduler -> writeLog called but not enabled: no file written")
+            vprint(
+                "MemoryScheduler -> writeLog called but not enabled: no file written")
             os.remove(self.filename)
             return
-        
+
         shutil.copy(self.filename, path)
         vprint("MemoryScheduler -> writeLog file written at", path)
         os.remove(self.filename)
-        vprint("MemoryScheduler -> writeLog tmp file", self.filename, "removed")
+        vprint(
+            "MemoryScheduler -> writeLog tmp file",
+            self.filename,
+            "removed")
