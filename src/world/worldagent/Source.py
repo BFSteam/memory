@@ -1,12 +1,9 @@
 # Source.py
 import binascii
-import math
 import os
 import random
 
 import commonVar as common
-import numpy as np
-import usefulFunctions as uf
 
 from agTools import *
 from Tools import *

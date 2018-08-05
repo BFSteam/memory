@@ -3,16 +3,18 @@ import random
 
 import commonVar as common
 import numpy as np
-import usefulFunctions as uf
+import usefulfunctions.useful_functions as uf
+from usefulfunctions.config_reader import *
 
 from Tools import *
+
 
 def loadParameters(self):
 
     # Projct version: contained in commonVariables.py
     try:
         projectVersion = str(common.projectVersion)
-    except:
+    except BaseException:
         projectVersion = "Unknown"
     print("\nProject version " + projectVersion)
 
@@ -21,11 +23,11 @@ def loadParameters(self):
     common.SEED = mySeed
     if mySeed == 1:
         random.seed()
-        
     else:
         random.seed(mySeed)
-        
 
+    config_file_path = input("config file ")
+    config_file_path = '/home/nik/Documents/memory/src/confg.ini' if config_file_path == "" else config_file_path
     """
 
     nAgents, worldXSize, worldYSize are variables from the object ModelSwarm in ModelSwarm.py
@@ -41,6 +43,8 @@ def loadParameters(self):
     # self.worldYSize= input("Y size of the world? ")
     self.worldYSize = 50
     #print("Y size of the world? ", self.worldYSize)
+
+    """
     common.N_SOURCES = int(uf.digit_input(
         msg="How many sources? (default = " + str(common.N_SOURCES) + ") ", DEFAULT=common.N_SOURCES))
     file = open(common.project + "/sources.txt", "w")
@@ -62,4 +66,9 @@ def loadParameters(self):
     common.N_AGENTS = common.N_USERS + common.N_SOURCES
     common.N_CYCLES = uf.digit_input(
         msg="How many cycles? (default " + str(common.N_CYCLES) + ") ", DEFAULT=common.N_CYCLES)
+    """
+
+    common.configreader = ConfigReader()
+    common.configreader.readConfigFile(config_file_path)
+    common.configreader.setCommonVars()
     self.nCycles = common.N_CYCLES

@@ -9,7 +9,7 @@ import numpy as np
 
 
 warnings.filterwarnings("ignore", ".*GUI is implemented.*")
-import usefulFunctions as uf
+import usefulfunctions.useful_functions as uf
 #import seaborn as sns
 
 
@@ -88,7 +88,7 @@ def getGraph():
 
     try:
         return common.G
-    except:
+    except BaseException:
         return 0
 
 
@@ -98,9 +98,10 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     c = []
     if clrs == 'state':  # draw colors thinking of state
         print(common.G.node[0]['agent'].hasNews(id_source=0, date=1))
-        
+
         for i in list(common.G.nodes()):
-            if common.G.node[i]['agent'].hasNews(id_source=0, date=1) is True:
+            if common.G.node[i]['agent'].hasNews(
+                    id_source=0, date=1) is True:
                 c.append('#ffa500')
                 continue
             elif common.G.node[i]['agent'].hasNews(id_source=1, date=1) is True:
@@ -110,7 +111,8 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
                 c.append('#38ffc8')
                 continue
             else:
-                if common.G.nodes()[i]['agent'].number < common.N_SOURCES:
+                if common.G.nodes()[
+                        i]['agent'].number < common.N_SOURCES:
                     c.append('red')
                     continue
                 else:
@@ -139,11 +141,11 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
         nx.draw_networkx_labels(common.G, pos, font_size=8)
 
     plt.title(
-        'seed:'+ str(common.SEED) +
+        'seed:' + str(common.SEED) +
         'u:' + str(common.N_USERS) +
         's:' + str(common.N_SOURCES) +
         'av.deg.:' + str(common.averageDegree) +
-        't:' + str(common.cycle) +"/" + str(common.N_CYCLES)
+        't:' + str(common.cycle) + "/" + str(common.N_CYCLES)
     )
     # plt.show()  # show plot
     if not os.path.exists(common.project.replace("src", "log")):

@@ -22,7 +22,7 @@ class Agent(
     WorldAgent         SkyAgent
         |                 |
     ----------         -------------------------
-    |        |         |                       |
+     |        |         |                       |
     User     Source    AgentScheduler  AgentParameterHandler
                             |                       |
                        -------------------       ----------

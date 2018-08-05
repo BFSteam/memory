@@ -8,7 +8,7 @@ import graph as graph
 import networkx as nx
 
 from Tools import *
-from usefulFunctions import worldAgentStringsizer, singleNewsStringsizer, printHeader
+from usefulfunctions.useful_functions import worldAgentStringsizer, singleNewsStringsizer, printHeader
 from world.WorldAgent import *
 
 

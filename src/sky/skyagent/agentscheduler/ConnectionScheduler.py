@@ -9,7 +9,7 @@ import numpy as np
 from sky.skyagent.AgentScheduler import *
 from agTools import *
 from Tools import *
-from usefulFunctions import printHeader, vprint
+from usefulfunctions.useful_functions import printHeader, vprint
 
 
 class ConnectionScheduler(AgentScheduler):

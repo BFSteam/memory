@@ -1,7 +1,9 @@
 import numpy as np
 
 
-def exponentialF(x, b):
+def exponential_cumulative(x, b):
+    """
+    """
     if b < 0:
         raise Exception('Parameter b cannot be < 0')
     if x >= 0:
@@ -9,7 +11,7 @@ def exponentialF(x, b):
     return 0
 
 
-def paretoF(x, a, m):
+def pareto_cumulative(x, a, m):
     if a < 0:
         raise Exception('Parameter a cannot be < 0')
     if x >= m:
@@ -17,7 +19,7 @@ def paretoF(x, a, m):
     return 0
 
 
-def powerF(x, a):
+def power_cumulative(x, a):
     if a < 0:
         raise Exception('Parameter a cannot be < 0')
     if x >= 0 and x <= 1:

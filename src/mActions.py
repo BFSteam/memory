@@ -4,9 +4,12 @@ import sys
 from Tools import *
 from world.WorldAgent import *
 
+
 def do0(address):  # reset in modelActions.txt
     self = address  # if necessary
-    askEachAgentInCollection(address.agentList, WorldAgent.setNewCycleValues)
+    askEachAgentInCollection(
+        address.agentList,
+        WorldAgent.setNewCycleValues)
 
 
 def do1(address):  # move in modelActions.txt
@@ -78,10 +81,10 @@ def createTheAgent_Class(self, line, num, agType, agClass):
         except BaseException:
             print("Missing file " + agClass + ".py")
             os.sys.exit(1)
-            
-    agClassFile = agClass        
-    if agClass.find('.') >= 0: agClassFile = agClass.split('.')[-1]
 
+    agClassFile = agClass
+    if agClass.find('.') >= 0:
+        agClassFile = agClass.split('.')[-1]
 
     if len(line.split()) == 1:
         # try:
@@ -89,7 +92,7 @@ def createTheAgent_Class(self, line, num, agType, agClass):
             # self.worldState,random.randint(leftX,rightX),random.randint(bottomY,topY),leftX,rightX,bottomY,topY,agType=agType)")
 
         exec("from " + agClass + " import *;" +
-        "anAgent = " + agClassFile + "(num, self.worldState,agType=agType)")
+             "anAgent = " + agClassFile + "(num, self.worldState,agType=agType)")
         self.agentList.append(locals()['anAgent'])
         # except:
         #    print

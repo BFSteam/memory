@@ -7,10 +7,9 @@ import commonVar as common
 import numpy as np
 
 from agTools import *
-from numpy import linalg as LA
+#from numpy import linalg as LA
 from Tools import *
 from world.WorldAgent import *
-from usefulFunctions import hill
 
 
 class User(WorldAgent):
