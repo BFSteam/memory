@@ -9,6 +9,9 @@ UNSAFE FOR DUPLICATE VARIABLES! USE AgentConfigReader
 import datetime
 import usefulfunctions.cumulative_functions as cf
 from usefulfunctions.useful_functions import hill
+#
+configFile = "config.ini"
+
 # ---------------------------------------------------------------------
 #
 # Initial parameters initialization

@@ -197,6 +197,8 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         files = [f for f in files if str(common.localtime) in f]
         for f in files:
             shutil.move(sourceDir + f, destDir)
+        shutil.copyfile(common.configFile, destDir +
+                        'config' + str(common.localtime) + '.ini')
 
         try:
             from pybeep.pybeep import PyBeep

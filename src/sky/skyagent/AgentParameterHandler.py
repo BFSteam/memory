@@ -2,6 +2,8 @@ from Tools import *
 from agTools import *
 from sky.SkyAgent import *
 
+from configparser import ConfigParser
+
 
 class AgentParameterHandler(SkyAgent):
     """
@@ -18,3 +20,10 @@ class AgentParameterHandler(SkyAgent):
         if myWorldState != 0:
             self.myWorldState = myWorldState
         self.agType = agType
+        self.configFile = ""
+        self.config = ConfigParser()
+
+    def readConfigFile(self, configFile):
+        self.configFile = configFile
+        self.config.read(self.configFile)
+        print(self.configFile)
