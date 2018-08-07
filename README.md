@@ -33,7 +33,7 @@ Check with `pyenv versions`
 
 Now create a project `mkdir myproject; cd myproject`
 
-Install `virtualenv inside`
+Install `virtualenv` inside
 
 ```
 pyenv virtualenv 3.6.3 venv
