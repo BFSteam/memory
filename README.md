@@ -1,5 +1,11 @@
 # memory #
 
+### the model
+
+![class](docs/classes_memory.png)
+
+![packages](docs/packages_memory.png)
+
 ### run memory
 *Memory* runs under `python 3.6.3`
 
