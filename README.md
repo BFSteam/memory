@@ -1,4 +1,56 @@
 # memory #
+
+### run memory
+*Memory* runs under `python 3.6.3`
+
+I personally use pyenv and virtualenv to run this project. 
+
+Install pyenv
+
+```
+cd
+git clone git://github.com/yyuu/pyenv.git .pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Install virtualenv under pyenv
+
+```
+git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+source ~/.bashrc
+```
+
+Install python version `3.6.3` (check the ![requirements](https://github.com/pyenv/pyenv/wiki))
+
+```
+pyenv install 3.6.3
+```
+
+Check with `pyenv versions`
+
+Now create a project `mkdir myproject; cd myproject`
+
+Install `virtualenv inside`
+
+```
+pyenv virtualenv 3.6.3 venv
+pyenv activate venv
+git clone https://github.com/BFSteam/memory.git
+git clone https://github.com/terna/SLAPP3
+pip install -r memory/requirements.txt
+cp memory/run.py .
+echo "../../memory/src" > SLAPP3/project.txt
+```
+
+Now run with `python run.py`
+
+
+
+
+
 university abm project
 <img src="https://github.com/BFSteam/memory/blob/master/tex/img/png/cover.png" />
 [[https://github.com/BFSteam/memory/blob/master/tex/img/png/cover.png]]
