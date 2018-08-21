@@ -45,6 +45,8 @@ class User(WorldAgent):
         WorldAgent.__init__(self, number, myWorldState,
                             agType=agType)  # parent constructor
         self.database = {}
+        self.blacklist = {}
+        self.debunker = False
         self.spreadState = 'i'
         self.active = False
         self.inactiveTime = 0
@@ -54,7 +56,18 @@ class User(WorldAgent):
         self.tiredness = 1
         self.prevDiff = 'a' if random.random() < 0.5 else 'p'
 
-    def activate(self, p=common.pActivation):
+    def debunker(self, p=common.pInitDebunker):
+        """Initial debunking initialization
+
+        """
+        if p == 1:
+            self.debunker = True
+        elif random.random() > p:
+            self.debunker = False
+        else:
+            self.debunker = True
+
+    def activate(self, p=common.pInitActivation):
         """Initial activity initialization
 
         activate the agent with a probability p.
@@ -305,6 +318,27 @@ class User(WorldAgent):
         # if everything went fine return True
         return True
 
+    def blacklist(
+            self,
+            news,
+            t=common.blacklistOld,
+            e=common.blacklistError
+    ):
+        """Blacklist news
+
+        Blacklist is ordered from past to present
+
+        If blacklistOld == -1 noesn't matter if news is old
+
+        """
+        pass
+
+    def isBlacklisted(self, news):
+        """Boolean function
+        True if news is blacklisted
+        """
+        pass
+
     def findKeyMinMax(self, data, innerkey, minor=True):
         """
 
@@ -314,7 +348,6 @@ class User(WorldAgent):
         minor: minimum if True, else, maximum
 
         """
-
         if minor is True:
             tdist = sys.maxsize
             kmin = 0
@@ -609,6 +642,7 @@ class User(WorldAgent):
             )
         #
         # register news in memory
+        print(iWantToRemember)
         remembered = self.remember(iWantToRemember)
         #
         # tries to become inactive

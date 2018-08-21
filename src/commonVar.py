@@ -50,6 +50,12 @@ dim = 3
 # memory dimension
 memorySize = 12
 
+blacklistSize = 10
+
+blacklistOld = 1000
+
+blacklistError = 0.1
+
 # ---------------------------------------------------------------------
 #
 # Sources initialization
@@ -61,6 +67,11 @@ overwrite = True
 #
 # during execution
 #
+# User -> debunker #
+
+# probability of being a debunker
+pInitDebunker = 0.
+
 # User -> activate #
 
 # probability of first activation of users
