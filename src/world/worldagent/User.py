@@ -645,7 +645,6 @@ class User(WorldAgent):
             )
         #
         # register news in memory
-        print(iWantToRemember)
         remembered = self.remember(iWantToRemember)
         #
         # tries to become inactive
