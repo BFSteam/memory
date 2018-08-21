@@ -337,7 +337,9 @@ class User(WorldAgent):
         """Boolean function
         True if news is blacklisted
         """
-        pass
+        if news in self.blacklist:
+            return True
+        return False
 
     def findKeyMinMax(self, data, innerkey, minor=True):
         """
@@ -445,7 +447,8 @@ class User(WorldAgent):
         self.switchActivation()
         return False
 
-    def readNews(self, old=common.vOld):
+    def readNews(self,
+                 old=common.vOld):
         """
 
         read news from node n

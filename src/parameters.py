@@ -27,7 +27,7 @@ def loadParameters(self):
         random.seed(mySeed)
 
     common.configFile = input("config file ")
-    common.configFile = '/home/nik/Documents/memory/src/confg.ini' if common.configFile == "" else common.configFile
+    common.configFile = '../../memory/src/confg.ini' if common.configFile == "" else common.configFile
     """
 
     nAgents, worldXSize, worldYSize are variables from the object ModelSwarm in ModelSwarm.py
