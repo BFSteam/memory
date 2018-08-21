@@ -440,6 +440,7 @@ class User(WorldAgent):
     def probaActivation(self, x, function, par):
         """Uses a function defined in commonVar to determine
         the  probability of activation
+
         """
         if random.random() < function(x, par):
             self.continueActivation()
