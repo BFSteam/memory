@@ -45,7 +45,7 @@ class User(WorldAgent):
         WorldAgent.__init__(self, number, myWorldState,
                             agType=agType)  # parent constructor
         self.database = {}
-        self.blacklist = {}
+        self.dblacklist = {}
         self.debunker = False
         self.spreadState = 'i'
         self.active = False
@@ -318,6 +318,14 @@ class User(WorldAgent):
         # if everything went fine return True
         return True
 
+    def isBlacklisted(self, news):
+        """Boolean function
+        True if news is blacklisted
+        """
+        if news['id-n'] in self.dblacklist:
+            return True
+        return False
+
     def blacklist(
             self,
             news,
@@ -331,15 +339,16 @@ class User(WorldAgent):
         If blacklistOld == -1 noesn't matter if news is old
 
         """
-        pass
-
-    def isBlacklisted(self, news):
-        """Boolean function
-        True if news is blacklisted
-        """
-        if news in self.blacklist:
-            return True
-        return False
+        # news already blacklisted
+        if self.isBlacklisted(news) in self.dblacklist:
+            return False
+        ii = news['id-n']
+        self.dblacklist[ii] = {}
+        self.dblacklist[ii]['id-n'] = news['id-n']
+        self.dblacklist[ii]['new'] = news['new']
+        self.dblacklist[ii]['id-source'] = news['id-source']
+        self.dblacklist[ii]['date-creation'] = news['date-creation']
+        self.dblacklist[ii]['relevance'] = news['relevance']
 
     def findKeyMinMax(self, data, innerkey, minor=True):
         """
