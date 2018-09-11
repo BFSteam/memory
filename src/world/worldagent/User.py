@@ -919,6 +919,7 @@ class User(WorldAgent):
                 tdic = entry
         return (tnum, tdic)
 
+    
     def debug(self):
         print(self.number)
         print(self.database)
