@@ -56,9 +56,8 @@ class User(WorldAgent):
         self.tiredness = 1
         self.prevDiff = 'a' if random.random() < 0.5 else 'p'
 
-    def debunker(self, p=common.pInitDebunker):
+    def activate_debunker(self, p=common.pInitDebunker):
         """Initial debunking initialization
-
         """
         if p == 1:
             self.debunker = True
@@ -518,10 +517,9 @@ class User(WorldAgent):
         """
         if common.G.node[n]['agent'].database == {}:
             return False
-        else:
-            tdata = self.findKeyDistanceMinMax(
-                data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
-            return (n, tdata)
+        tdata = self.findKeyDistanceMinMax(
+            data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
+        return (n, tdata)
 
     def becomeActive(
             self,
