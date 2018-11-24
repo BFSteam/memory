@@ -5,6 +5,8 @@ import random
 import commonVar as common
 #import sky.skyagent.agentscheduler.MessageScheduler as ms
 import numpy as np
+import database as db
+import news as n
 
 from agTools import *
 #from numpy import linalg as LA

@@ -13,7 +13,7 @@ class news(dict):
 
     def __setitem__(self, key, item):
         print('setitem')
-        if key not in self._news_parameters:
+        if key not in news._news_parameters:
             return
         self.__dict__[key] = item
 
