@@ -19,9 +19,8 @@ class ActivationScheduler(AgentScheduler):
 
     """
 
-    def __init__(self, number, myWorldState, agType=""):
-        super(ActivationScheduler, self).__init__(
-            self, number, myWorldState, agType=agType)
+    def __init__(self, number, myWorldState, agType, *args, **kwargs):
+        super().__init__(number, myWorldState, agType, *args, **kwargs)
         # the environment
         self.agOperatingSets = []
         self.number = number

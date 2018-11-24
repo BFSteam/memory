@@ -43,9 +43,8 @@ class User(WorldAgent):
 
     """
 
-    def __init__(self, number, myWorldState, agType=""):
-        super(User, self).__init__(
-            self, number, myWorldState, agType=agType)  # parent constructor
+    def __init__(self, number, myWorldState, agType):
+        super().__init__(number, myWorldState, agType)  # parent constructor
 
         self.database = {}
         self.dblacklist = {}

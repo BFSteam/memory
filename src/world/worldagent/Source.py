@@ -37,8 +37,8 @@ class Source(WorldAgent):
 
     """
 
-    def __init__(self, number, myWorldState, agType=""):
-        super(Source, self).__init__(self, number, myWorldState, agType=agType)
+    def __init__(self, number, myWorldState, agType):
+        super().__init__(number, myWorldState, agType)
         self.news = {}
         self.reliability = random.random()
         self.spreadState = 's'

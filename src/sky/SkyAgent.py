@@ -25,9 +25,8 @@ class SkyAgent(Agent):
 
     """
 
-    def __init__(self, number, myWorldState, agType=""):
-        super(SkyAgent, self).__init__(
-            self, number, myWorldState, agType=agType)
+    def __init__(self, number, myWorldState, agType):
+        super().__init__(number, myWorldState, agType)
         # the environment
         self.agOperatingSets = []
         self.number = number

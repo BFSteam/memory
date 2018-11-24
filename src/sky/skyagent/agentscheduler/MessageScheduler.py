@@ -19,9 +19,8 @@ class MessageScheduler(AgentScheduler):
 
     """
 
-    def __init__(self, number, myWorldState, agType=""):
-        super(MessageScheduler, self).__init__(
-            self, number, myWorldState, agType=agType)
+    def __init__(self, number, myWorldState, agType):
+        super().__init__(number, myWorldState, agType)
         # the environment
         self.agOperatingSets = []
         self.number = number
