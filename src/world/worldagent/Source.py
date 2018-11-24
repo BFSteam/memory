@@ -38,7 +38,7 @@ class Source(WorldAgent):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        WorldAgent.__init__(self, number, myWorldState, agType=agType)
+        super(Source, self).__init__(self, number, myWorldState, agType=agType)
         self.news = {}
         self.reliability = random.random()
         self.spreadState = 's'
@@ -103,15 +103,15 @@ class Source(WorldAgent):
                 id_new=stringa,
                 date=common.cycle,
                 diffusion='c',
-                write=common.writeMessages
-            )
+                write=common.writeMessages)
         print(self.number, " generateNews ", n)
 
     def hasNews(self, id_source=0, date=1):
         if self.database == {}:
             return False
         for key in self.database:
-            if self.database[key]['id-source'] == id_source and self.database[key]['date-creation'] == date:
+            if self.database[key]['id-source'] == id_source and self.database[
+                    key]['date-creation'] == date:
                 return True
             else:
                 return False

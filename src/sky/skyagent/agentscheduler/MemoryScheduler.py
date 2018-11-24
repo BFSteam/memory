@@ -20,7 +20,7 @@ class MemoryScheduler(AgentScheduler):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        AgentScheduler.__init__(
+        super(MemoryScheduler, self).__init__(
             self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
@@ -41,8 +41,11 @@ class MemoryScheduler(AgentScheduler):
             "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
         self.ff = open(self.filename, 'w')
         self.w = csv.writer(self.ff)
-        printHeader(self.w, firstline=['# memorylog'],
-                    lastline=["agent", "time", "state"] + ["news" + str(i) for i in range(common.memorySize)])
+        printHeader(
+            self.w,
+            firstline=['# memorylog'],
+            lastline=["agent", "time", "state"] +
+            ["news" + str(i) for i in range(common.memorySize)])
 
     def printLog(self):
         print(self.messageLog)
@@ -52,25 +55,23 @@ class MemoryScheduler(AgentScheduler):
             e = np.empty([0])
             e = np.append(e, common.G.node[node]['agent'].number)
             e = np.append(e, common.cycle)
-            if(common.G.node[node]['agent'].number < common.N_SOURCES):
+            if (common.G.node[node]['agent'].number < common.N_SOURCES):
                 e = np.append(e, "x")
             else:
-                if(common.G.node[node]['agent'].active):
+                if (common.G.node[node]['agent'].active):
                     e = np.append(e, "u")
                 else:
                     e = np.append(e, "d")
 
-            e = np.append(e, [x.decode(
-                'utf-8') for x in list(common.G.node[node]['agent'].database.keys())])
+            e = np.append(e, [
+                x.decode('utf-8')
+                for x in list(common.G.node[node]['agent'].database.keys())
+            ])
             for i in range(3 + common.memorySize - e.shape[0]):
                 e = np.append(e, 0)
             self.registerEntry(e)
 
-    def registerEntry(
-            self,
-            entry,
-            write=True
-    ):
+    def registerEntry(self, entry, write=True):
         """
 
         creates an array to stack under the log and does it
@@ -97,14 +98,13 @@ class MemoryScheduler(AgentScheduler):
         self.ff.close()
         if write == False:
             vprint(
-                "MemoryScheduler -> writeLog called but not enabled: no file written")
+                "MemoryScheduler -> writeLog called but not enabled: no file written"
+            )
             os.remove(self.filename)
             return
 
         shutil.copy(self.filename, path)
         vprint("MemoryScheduler -> writeLog file written at", path)
         os.remove(self.filename)
-        vprint(
-            "MemoryScheduler -> writeLog tmp file",
-            self.filename,
-            "removed")
+        vprint("MemoryScheduler -> writeLog tmp file", self.filename,
+               "removed")

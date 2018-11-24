@@ -5,7 +5,7 @@ import shutil
 
 import commonVar as common
 import numpy as np
-
+from termcolor import colored
 from sky.skyagent.AgentScheduler import *
 from agTools import *
 from Tools import *
@@ -20,7 +20,7 @@ class ActivationScheduler(AgentScheduler):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        AgentScheduler.__init__(
+        super(ActivationScheduler, self).__init__(
             self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
@@ -40,17 +40,13 @@ class ActivationScheduler(AgentScheduler):
             "src", 'tmp/act_log_temp.%s.txt' % os.getpid())
         self.ff = open(self.filename, 'w')
         self.w = csv.writer(self.ff)
-        printHeader(self.w, firstline=['#activationlog'],
-                    lastline=['agent', 'time', 'type', 'dtime'])
+        printHeader(
+            self.w,
+            firstline=['#activationlog'],
+            lastline=['agent', 'time', 'type', 'dtime'])
 
-    def registerEntry(
-            self,
-            agent=-1,
-            date=-1,
-            atype='c',
-            atime=-1,
-            write=True
-    ):
+    def registerEntry(self, agent=-1, date=-1, atype='c', atime=-1,
+                      write=True):
         """
 
         creates an array to stack under the log and does it
@@ -58,10 +54,7 @@ class ActivationScheduler(AgentScheduler):
         """
         if write == False:
             return
-        self.w.writerow([agent,
-                         date,
-                         atype,
-                         atime])
+        self.w.writerow([agent, date, atype, atime])
 
     def writeLog(self, path='./defALog.csv', write=True):
         """
@@ -74,14 +67,17 @@ class ActivationScheduler(AgentScheduler):
         self.ff.close()
         if write == False:
             vprint(
-                "ActivationScheduler -> writeLog called but not enabled: no file written")
+                colored(
+                    "ActivationScheduler -> writeLog called but not enabled: no file written",
+                    "yellow"))
             os.remove(self.filename)
             return
 
         shutil.copy(self.filename, path)
-        vprint("ActivationScheduler -> writeLog file written at", path)
-        os.remove(self.filename)
         vprint(
-            "ActivationScheduler -> writeLog tmp file",
-            self.filename,
-            "removed")
+            "ActivationScheduler -> writeLog file written at",
+            path,
+        )
+        os.remove(self.filename)
+        vprint("ActivationScheduler -> writeLog tmp file", self.filename,
+               "removed")

@@ -20,7 +20,7 @@ class MessageScheduler(AgentScheduler):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        AgentScheduler.__init__(
+        super(MessageScheduler, self).__init__(
             self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
@@ -40,20 +40,20 @@ class MessageScheduler(AgentScheduler):
             "src", 'tmp/msg_log_temp.%s.txt' % os.getpid())
         self.ff = open(self.filename, 'w')
         self.w = csv.writer(self.ff)
-        printHeader(self.w, firstline=['#messagelog'],
-                    lastline=["source", "timec", "news", "ag1", "ag2", "time", "type"])
+        printHeader(
+            self.w,
+            firstline=['#messagelog'],
+            lastline=["source", "timec", "news", "ag1", "ag2", "time", "type"])
 
-    def registerEntry(
-            self,
-            id_src=-1,
-            date_creation=-1,
-            sender=-1,
-            reciver=-1,
-            id_new='null',
-            date=-1,
-            diffusion='n',
-            write=True
-    ):
+    def registerEntry(self,
+                      id_src=-1,
+                      date_creation=-1,
+                      sender=-1,
+                      reciver=-1,
+                      id_new='null',
+                      date=-1,
+                      diffusion='n',
+                      write=True):
         """
 
         creates an array to stack under the log and does it
@@ -75,27 +75,20 @@ class MessageScheduler(AgentScheduler):
         if write == False:
             return
 
-        self.w.writerow([
-            id_src,
-            date_creation,
-            id_new,
-            sender,
-            reciver,
-            date,
-            diffusion])
+        self.w.writerow(
+            [id_src, date_creation, id_new, sender, reciver, date, diffusion])
 
     def writeLog(self, path='./defMLog.csv', write=True):
         self.ff.close()
         if write == False:
             vprint(
-                "MessageScheduler -> writeLog called but not enabled: no file written")
+                "MessageScheduler -> writeLog called but not enabled: no file written"
+            )
             os.remove(self.filename)
             return
 
         shutil.copy(self.filename, path)
         vprint("MessageScheduler -> writeLog file written at", path)
         os.remove(self.filename)
-        vprint(
-            "MessageScheduler -> writeLog tmp file",
-            self.filename,
-            "removed")
+        vprint("MessageScheduler -> writeLog tmp file", self.filename,
+               "removed")

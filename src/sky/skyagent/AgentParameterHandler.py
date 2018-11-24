@@ -14,7 +14,8 @@ class AgentParameterHandler(SkyAgent):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        SkyAgent.__init__(self, number, myWorldState, agType=agType)
+        super(AgentParameterHandler, self).__init__(
+            self, number, myWorldState, agType=agType)
         self.agOperatingSets = []
         self.number = number
         if myWorldState != 0:

@@ -12,7 +12,6 @@ from Agent import *
 
 # Agent must be the partent class of every object. Must inherit from SuperAgent
 class WorldAgent(Agent):
-
     """
 
     Create the parent agent
@@ -34,7 +33,8 @@ class WorldAgent(Agent):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        Agent.__init__(self, number, myWorldState, agType=agType)
+        super(WorldAgent, self).__init__(
+            self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
         self.number = number
@@ -55,15 +55,10 @@ class WorldAgent(Agent):
                 graph.initializeEdges()  # if last creates edges
 
         self.active = True
-        self.databaseCols = ['id-n',
-                             'new',
-                             'id-source',
-                             'date-creation',
-                             'relevance',
-                             'id-send',
-                             'date-send',
-                             'id-recive',
-                             'date-recive']
+        self.databaseCols = [
+            'id-n', 'new', 'id-source', 'date-creation', 'relevance',
+            'id-send', 'date-send', 'id-recive', 'date-recive'
+        ]
         self.database = {}
         self.spreadState = 'r'
         print("agent", self.agType, "#", self.number, "has been created")

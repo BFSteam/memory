@@ -42,8 +42,9 @@ class User(WorldAgent):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        WorldAgent.__init__(self, number, myWorldState,
-                            agType=agType)  # parent constructor
+        super(User, self).__init__(
+            self, number, myWorldState, agType=agType)  # parent constructor
+
         self.database = {}
         self.dblacklist = {}
         self.debunker = False
@@ -140,8 +141,7 @@ class User(WorldAgent):
             date=common.cycle,
             weight=weight,
             cr='a',
-            write=common.writeConnections
-        )
+            write=common.writeConnections)
 
     def removeEdge(self, n):
         """
@@ -156,8 +156,7 @@ class User(WorldAgent):
             date=common.cycle,
             weight=common.G[self.number][n]['weight'],
             cr='r',
-            write=common.writeConnections
-        )
+            write=common.writeConnections)
         common.G.remove_edge(self.number, n)
 
     def updateWeight(self, neighbor, value, r=common.pRemove):
@@ -174,8 +173,7 @@ class User(WorldAgent):
             date=common.cycle,
             weight=common.G[self.number][neighbor]['weight'],
             cr='u',
-            write=common.writeConnections
-        )
+            write=common.writeConnections)
 
     def distance(self, n, a='scalar'):
         """
@@ -206,7 +204,7 @@ class User(WorldAgent):
                 for key in self.database:
                     if self.distance(self.database[key]['new']) < tmin:
                         tmin = self.distance(self.database[key]['new'])
-                del(self.database[key])
+                del (self.database[key])
                 return True
         return False
 
@@ -222,7 +220,7 @@ class User(WorldAgent):
             if self.database[key]['date-creation'] < tdate:
                 tdate = self.database[key]['date-creation']
                 kmin = key
-            del(self.database[kmin])
+            del (self.database[kmin])
         return True
 
     def forgetRandomNews(self, news=0, rnd=common.pForget):
@@ -237,29 +235,26 @@ class User(WorldAgent):
             if self.database == {}:
                 return False
             else:
-                forgot = self.database[random.choice(
-                    list(self.database))]
+                forgot = self.database[random.choice(list(self.database))]
                 if news == 0:
-                    del(forgot)
+                    del (forgot)
                     return True
 
                 elif forgot != news:
                     #uf.vprint("Agent", self.number, "forgot", forgot)
-                    del(forgot)
+                    del (forgot)
                     return True
                 else:
                     return False
 
-    def remember(
-            self,
-            news,
-            cutoldest=common.flags['toggleCutOldest'],
-            forgetNews=common.flags['toggleForgetNews'],
-            tiredness=common.flags['toggleTiredness'],
-            threshold=common.tRemember,
-            rnd=common.pForget,
-            id_send=-1
-    ):
+    def remember(self,
+                 news,
+                 cutoldest=common.flags['toggleCutOldest'],
+                 forgetNews=common.flags['toggleForgetNews'],
+                 tiredness=common.flags['toggleTiredness'],
+                 threshold=common.tRemember,
+                 rnd=common.pForget,
+                 id_send=-1):
         """
 
         register news in a log file 'memory'.
@@ -325,12 +320,7 @@ class User(WorldAgent):
             return True
         return False
 
-    def blacklist(
-            self,
-            news,
-            t=common.blacklistOld,
-            e=common.blacklistError
-    ):
+    def blacklist(self, news, t=common.blacklistOld, e=common.blacklistError):
         """Blacklist news
 
         Blacklist is ordered from past to present
@@ -375,8 +365,7 @@ class User(WorldAgent):
                     kmax = key
             return data[kmax]
 
-    def findKeyDistanceMinMax(
-            self, data, innerkey, minor=True, a='scalar'):
+    def findKeyDistanceMinMax(self, data, innerkey, minor=True, a='scalar'):
         """
 
         Given a dict of dict and an innerkey 'findKeyMinMax' returns the
@@ -456,8 +445,7 @@ class User(WorldAgent):
         self.switchActivation()
         return False
 
-    def readNews(self,
-                 old=common.vOld):
+    def readNews(self, old=common.vOld):
         """
 
         read news from node n
@@ -518,15 +506,15 @@ class User(WorldAgent):
         if common.G.node[n]['agent'].database == {}:
             return False
         tdata = self.findKeyDistanceMinMax(
-            data=common.G.node[n]['agent'].database, innerkey='new', minor=False)
+            data=common.G.node[n]['agent'].database,
+            innerkey='new',
+            minor=False)
         return (n, tdata)
 
-    def becomeActive(
-            self,
-            t=common.tActivation,
-            p=common.pActivation,
-            probabilityFunction=0
-    ):
+    def becomeActive(self,
+                     t=common.tActivation,
+                     p=common.pActivation,
+                     probabilityFunction=0):
         """
 
         If user is inactive for some time t
@@ -542,19 +530,16 @@ class User(WorldAgent):
         if probabilityFunction == 0:
             pass
         if self.inactiveTime >= t:
-            if random.random(
-            ) < common.timeActiveArray[self.inactiveTime - 1]:
+            if random.random() < common.timeActiveArray[self.inactiveTime - 1]:
                 # if random.random() < 1 - p *
                 # np.exp(-self.inactiveTime):
                 self.switchActivation()
 
-    def becomeInactive(
-            self,
-            t=common.tInactivation,
-            p=common.pInactivation,
-            tiredness=common.flags['toggleTiredness'],
-            probabilityFunction=0
-    ):
+    def becomeInactive(self,
+                       t=common.tInactivation,
+                       p=common.pInactivation,
+                       tiredness=common.flags['toggleTiredness'],
+                       probabilityFunction=0):
         """
 
         If user is actie for some time t
@@ -578,8 +563,7 @@ class User(WorldAgent):
         if tiredness is True:
             p = p * self.tiredness
         if self.activeTime > t:
-            if random.random(
-            ) < common.timeInactiveArray[self.activeTime - 1]:
+            if random.random() < common.timeInactiveArray[self.activeTime - 1]:
                 self.switchActivation()
                 #self.tiredness = 1
 
@@ -649,8 +633,7 @@ class User(WorldAgent):
                 id_new=iWantToRemember['id-n'],
                 date=common.cycle,
                 diffusion='p',
-                write=common.writeMessages
-            )
+                write=common.writeMessages)
         #
         # register news in memory
         remembered = self.remember(iWantToRemember)
@@ -680,20 +663,17 @@ class User(WorldAgent):
 
         """
 
-        if any([self.isUser(x)
-                for x in self.listNeighbours()]) is False:
+        if any([self.isUser(x) for x in self.listNeighbours()]) is False:
             return True
         else:
             return False
 
-    def activeDiffusion(
-            self,
-            p=common.pActiveDiffusion,
-            threshold=common.tActiveDiffusion,
-            q=common.pWeight,
-            r=common.pRemove,
-            tiredness=common.flags['toggleTiredness']
-    ):
+    def activeDiffusion(self,
+                        p=common.pActiveDiffusion,
+                        threshold=common.tActiveDiffusion,
+                        q=common.pWeight,
+                        r=common.pRemove,
+                        tiredness=common.flags['toggleTiredness']):
         """Active diffusion
 
         performs active diffusion with the best news in memory
@@ -728,10 +708,10 @@ class User(WorldAgent):
                 continue
             #
             # look for bestweight
-            if common.G.get_edge_data(
-                    *(self.number, neighbour))['weight'] > bestWeight:
-                bestWeight = common.G.get_edge_data(
-                    *(self.number, neighbour))['weight']
+            if common.G.get_edge_data(*(self.number,
+                                        neighbour))['weight'] > bestWeight:
+                bestWeight = common.G.get_edge_data(*(self.number,
+                                                      neighbour))['weight']
                 bestNeighbour = neighbour
 
         # find random user neighbor
@@ -756,23 +736,19 @@ class User(WorldAgent):
             id_new=bestNews['id-n'],
             date=common.cycle,
             diffusion='a',
-            write=common.writeMessages
-        )
+            write=common.writeMessages)
 
-        dist = common.G.node[finalNeighbour]['agent'].distance(
-            bestNews['new'])
+        dist = common.G.node[finalNeighbour]['agent'].distance(bestNews['new'])
         #
         # bad news
         if dist < threshold:
             value = -q * dist
-            self.updateWeight(neighbor=finalNeighbour,
-                              value=value, r=r)
+            self.updateWeight(neighbor=finalNeighbour, value=value, r=r)
         #
         # good news
         elif dist > 1 - threshold:
             value = q * dist
-            self.updateWeight(neighbor=finalNeighbour,
-                              value=value, r=r)
+            self.updateWeight(neighbor=finalNeighbour, value=value, r=r)
         else:
             # they are still... friends... I guess?
             pass
@@ -835,8 +811,8 @@ class User(WorldAgent):
             for secondnode in common.G.node[firstnode]['agent'].listNeighbours(
             ):
                 nlist.append(secondnode)
-                dlist.append(self.distance(
-                    common.G.node[secondnode]['agent'].state))
+                dlist.append(
+                    self.distance(common.G.node[secondnode]['agent'].state))
         nlist = [x for (y, x) in sorted(zip(dlist, nlist))]
         while True and not nlist:
             n2 = nlist[random.randint(0, 10)]
@@ -896,7 +872,8 @@ class User(WorldAgent):
         if self.database == {}:
             return False
         for key in self.database:
-            if self.database[key]['id-source'] == id_source and self.database[key]['date-creation'] == date:
+            if self.database[key]['id-source'] == id_source and self.database[
+                    key]['date-creation'] == date:
                 return True
             else:
                 return False
@@ -932,8 +909,7 @@ class User(WorldAgent):
                 p=common.pActiveDiffusion,
                 threshold=common.tActiveDiffusion,
                 q=common.pWeight,
-                r=common.pRemove
-            )
+                r=common.pRemove)
             self.prevDiff = 'a'
 
     def otherDiffusion(self):
@@ -942,7 +918,6 @@ class User(WorldAgent):
                 p=common.pActiveDiffusion,
                 threshold=common.tActiveDiffusion,
                 q=common.pWeight,
-                r=common.pRemove
-            )
+                r=common.pRemove)
         else:
             self.passiveDiffusion()

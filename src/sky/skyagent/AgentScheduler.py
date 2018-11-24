@@ -13,7 +13,8 @@ class AgentScheduler(SkyAgent):
     """
 
     def __init__(self, number, myWorldState, agType=""):
-        SkyAgent.__init__(self, number, myWorldState, agType=agType)
+        super(AgentScheduler, self).__init__(
+            self, number, myWorldState, agType=agType)
         # the environment
         self.agOperatingSets = []
         self.number = number

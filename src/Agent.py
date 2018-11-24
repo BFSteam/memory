@@ -9,8 +9,8 @@ from Tools import *
 
 
 class Agent(
-        SuperAgent):  # Agent must be the partent class of every object. Must inherit from SuperAgent
-
+        SuperAgent
+):  # Agent must be the partent class of every object. Must inherit from SuperAgent
     """
 
     Create the parent agent
@@ -37,6 +37,7 @@ class Agent(
     """
 
     def __init__(self, number, myWorldState, agType=""):
+        super(Agent, self).__init__()
         # the environment
         self.agOperatingSets = []
         self.number = number
