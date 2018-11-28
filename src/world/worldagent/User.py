@@ -46,8 +46,7 @@ class User(WorldAgent):
     def __init__(self, number, myWorldState, agType):
         super().__init__(number, myWorldState, agType)  # parent constructor
 
-        self.database = {}
-        self.newdb = db.database()
+        self.database = db.database()
         self.dblacklist = {}
         self.debunker = False
         self.spreadState = 'i'

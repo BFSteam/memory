@@ -63,8 +63,7 @@ class MemoryScheduler(AgentScheduler):
                     e = np.append(e, "d")
 
             e = np.append(e, [
-                x.decode('utf-8')
-                for x in list(common.G.node[node]['agent'].database.keys())
+                x for x in list(common.G.node[node]['agent'].database.keys())
             ])
             for i in range(3 + common.memorySize - e.shape[0]):
                 e = np.append(e, 0)

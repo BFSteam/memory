@@ -18,13 +18,16 @@ def loadParameters(self):
         projectVersion = "Unknown"
     print("\nProject version " + projectVersion)
 
-    mySeed = int(uf.digit_input(
-        msg="random number seed (1 to get it from the clock) ", DEFAULT=1))
+    mySeed = int(
+        uf.digit_input(
+            msg="random number seed (1 to get it from the clock) ", DEFAULT=1))
     common.SEED = mySeed
     if mySeed == 1:
         random.seed()
+        np.random.seed()
     else:
         random.seed(mySeed)
+        np.random.seed(mySeed)
 
     common.configFile = input("config file ")
     common.configFile = '../../memory/src/confg.ini' if common.configFile == "" else common.configFile
@@ -43,7 +46,6 @@ def loadParameters(self):
     # self.worldYSize= input("Y size of the world? ")
     self.worldYSize = 50
     #print("Y size of the world? ", self.worldYSize)
-
     """
     common.N_SOURCES = int(uf.digit_input(
         msg="How many sources? (default = " + str(common.N_SOURCES) + ") ", DEFAULT=common.N_SOURCES))

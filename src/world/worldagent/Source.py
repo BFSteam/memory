@@ -3,6 +3,9 @@ import binascii
 import os
 import random
 
+from random import choice
+from string import digits, ascii_lowercase, ascii_uppercase
+
 import commonVar as common
 
 from agTools import *
@@ -88,7 +91,9 @@ class Source(WorldAgent):
         # the first part is the id-source, id-mittant, time
         self.database = {}
         for i in range(n):
-            stringa = binascii.b2a_hex(os.urandom(8))
+            #stringa = binascii.b2a_hex(os.urandom(8))
+            allchars = digits + ascii_lowercase + ascii_uppercase
+            stringa = "".join([choice(allchars) for i in range(16)])
             self.database[stringa] = {}
             self.database[stringa]['id-n'] = stringa
             self.database[stringa]['new'] = self.createNews()
