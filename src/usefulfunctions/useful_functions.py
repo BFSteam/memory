@@ -1,6 +1,8 @@
 import commonVar as common
 import sys
 import csv
+import numpy as np
+
 
 def vprint(*args, sep=' ', end='\n', file=None):
     """
@@ -60,7 +62,11 @@ def singleNewsStringsizer(agent):
 
     return str([agent.database[key]['id-n'] for key in agent.database])
 
-def printHeader(w = csv.writer(open("temp.txt", "w")), firstline="#FIRST_LINE", lastline="#LAST_LINE"):
+
+def printHeader(
+        w=csv.writer(open("temp.txt", "w")),
+        firstline="#FIRST_LINE",
+        lastline="#LAST_LINE"):
     w.writerow(firstline)
     w.writerow(['#'])
     w.writerow(['#simulation with:', common.N_CYCLES])
@@ -75,5 +81,10 @@ def printHeader(w = csv.writer(open("temp.txt", "w")), firstline="#FIRST_LINE", 
     w.writerow(['#memorySize', common.memorySize])
     w.writerow(lastline)
 
+
 def hill(x, p, k, n):
-    return ( -0.5 +( 1 / (1 + (k/x)**n)) ) * (1-p)*2 + p
+    return (-0.5 + (1 / (1 + (k / x)**n))) * (1 - p) * 2 + p
+
+
+def norm(x, ord=None, axis=None, keepdim=False):
+    return x / np.sum(x)

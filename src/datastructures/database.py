@@ -39,7 +39,7 @@ class database(dict):
         return k in self.__dict__
 
     def update(self, *args, **kwargs):
-        print('update')
+        #print('update')
         return self.__dict__.update(*args, **kwargs)
 
     def keys(self):
@@ -58,7 +58,7 @@ class database(dict):
         return self.__cmp__(self.__dict__, dict_)
 
     def __contains__(self, item):
-        print('contains')
+        #print('contains')
         return item in self.__dict__
 
     def __iter__(self):

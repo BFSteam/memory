@@ -7,6 +7,8 @@ from random import choice
 from string import digits, ascii_lowercase, ascii_uppercase
 
 import commonVar as common
+import datastructures.database as db
+import datastructures.news as nw
 
 from agTools import *
 from Tools import *
@@ -42,14 +44,14 @@ class Source(WorldAgent):
 
     def __init__(self, number, myWorldState, agType):
         super().__init__(number, myWorldState, agType)
-        self.news = {}
+        self.news = nw.news()
         self.reliability = random.random()
         self.spreadState = 's'
         self.genState(n=3, noise=0.15)
 
         print(self.state)
-        if (common.cycle / 100.).is_integer():
-            self.generateNews()
+        #if (common.cycle / 100.).is_integer():
+        self.generateNews()
         print(self.news)
 
     def createNews(self, p=0.1):
@@ -89,7 +91,7 @@ class Source(WorldAgent):
         """
 
         # the first part is the id-source, id-mittant, time
-        self.database = {}
+        self.database = db.database()
         for i in range(n):
             #stringa = binascii.b2a_hex(os.urandom(8))
             allchars = digits + ascii_lowercase + ascii_uppercase

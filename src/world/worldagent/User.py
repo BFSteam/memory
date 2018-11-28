@@ -6,12 +6,13 @@ import commonVar as common
 #import sky.skyagent.agentscheduler.MessageScheduler as ms
 import numpy as np
 import datastructures.database as db
-import datastructures.news as n
+import datastructures.news as nw
 
 from agTools import *
 #from numpy import linalg as LA
 from Tools import *
 from world.WorldAgent import *
+from usefulfunctions.useful_functions import norm
 
 
 class User(WorldAgent):
@@ -85,14 +86,14 @@ class User(WorldAgent):
             self.active = True
             self.activeTime = random.randint(0, 1)
 
-    def norm(self, x, ord=None, axis=None, keepdims=False):
-        """
-        return norm of vector.
-        different norms can be chosen
-
-        """
-        return x / np.sum(x)
-        # return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
+    #def norm(self, x, ord=None, axis=None, keepdims=False):
+    #    """
+    #    return norm of vector.
+    #    different norms can be chosen
+    #
+    #    """
+    #    return x / np.sum(x)
+    #    # return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
 
     def listNeighbours(self):
         """return neighbour list. call with no arguments
@@ -654,7 +655,7 @@ class User(WorldAgent):
         if news == {}:
             return False
         self.state = self.state + p * news['relevance'] * news['new']
-        self.state = self.norm(self.state)
+        self.state = norm(self.state)
         return True
 
     def onlySources(self):
