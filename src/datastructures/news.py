@@ -1,4 +1,9 @@
 class news(dict):
+    """
+    dict class that prevents adding keys not listed.
+    Auto assigns deleted items with none
+    """
+
     def __init__(self, *arg, **kw):
         super(news, self).__init__(*arg, **kw)
         self.init_vars()
@@ -30,9 +35,13 @@ class news(dict):
         return len(self.__dict__)
 
     def __delitem__(self, key):
+        """
+        keys are not deleted. None is assigned instead
+        """
         print('del')
-
         del self.__dict__[key]
+        if key in news._news_parameters:
+            self.__dict__[key] = None
 
     def clear(self):
         print('clear')
@@ -86,3 +95,6 @@ class news(dict):
     def init_vars(self):
         for n in news._news_parameters:
             self.__dict__[n] = None
+
+    def __eq__(self, other):
+        return self.__dict__ == other

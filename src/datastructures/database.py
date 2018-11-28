@@ -1,8 +1,17 @@
 class database(dict):
+    """
+    Dictionary class
+    Items can only be added or deleted.
+    Update value of a key is not allowed
+    """
+
     def __init__(self, *arg, **kw):
         super(database, self).__init__(*arg, **kw)
 
     def __setitem__(self, key, item):
+        """
+        prevented overload of existent key
+        """
         if key not in self.__dict__:
             self.__dict__[key] = item
         else:
@@ -57,3 +66,6 @@ class database(dict):
 
     def __unicode__(self):
         return unicode(repr(self.__dict__))
+
+    def __eq__(self, other):
+        return self.__dict__ == other
