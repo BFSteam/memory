@@ -22,9 +22,9 @@ class ConfigReader():
         common.N_SOURCES = self.config['INIT'].getint('N_SOURCES')
         common.N_CYCLES = self.config['INIT'].getint('N_CYCLES')
         common.N_AGENTS = common.N_USERS + common.N_SOURCES
-        common.averageDegree = self.config['INIT'].getfloat(
-            'averageDegree')
+        common.averageDegree = self.config['INIT'].getfloat('averageDegree')
         common.prop = self.config['INIT'].getfloat('prop')
+        common.networkfilepath = self.config['INIT'].get('networkfilepath')
         common.P_a = common.averageDegree / common.N_USERS
         common.P_s = common.prop * common.P_a
 
@@ -42,10 +42,8 @@ class ConfigReader():
         common.pForget = self.config['EXEC'].getfloat('pForget')
         common.vOld = self.config['EXEC'].getfloat('vOld')
         common.pActivation = self.config['EXEC'].getfloat('pActivation')
-        common.tInactivation = self.config['EXEC'].getfloat(
-            'tInactivation')
-        common.pInactivation = self.config['EXEC'].getfloat(
-            'pInactivation')
+        common.tInactivation = self.config['EXEC'].getfloat('tInactivation')
+        common.pInactivation = self.config['EXEC'].getfloat('pInactivation')
         common.pChange = self.config['EXEC'].getfloat('pChange')
         common.pActiveDiffusion = self.config['EXEC'].getfloat(
             'pActiveDiffusion')
@@ -58,8 +56,7 @@ class ConfigReader():
 
         # SLAPP
         common.verbose = self.config['SLAPP'].getboolean('verbose')
-        common.projectVersion = self.config['SLAPP'].get(
-            'projectVersion')
+        common.projectVersion = self.config['SLAPP'].get('projectVersion')
         common.toBeExecuted = self.config['SLAPP'].get('toBeExecuted')
         common.debug = self.config['SLAPP'].getboolean('debug')
 
@@ -76,10 +73,8 @@ class ConfigReader():
         # LOG
         common.writeConnections = self.config['LOG'].getboolean(
             'writeConnections')
-        common.writeMessages = self.config['LOG'].getboolean(
-            'writeMessages')
-        common.writeMemories = self.config['LOG'].getboolean(
-            'writeMemories')
+        common.writeMessages = self.config['LOG'].getboolean('writeMessages')
+        common.writeMemories = self.config['LOG'].getboolean('writeMemories')
         common.writeActivations = self.config['LOG'].getboolean(
             'writeActivations')
         common.lineBuffer = self.config['LOG'].getint('lineBuffer')

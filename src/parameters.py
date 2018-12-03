@@ -1,4 +1,5 @@
 # parameters.py
+import csv
 import random
 
 import commonVar as common
@@ -47,20 +48,6 @@ def loadParameters(self):
     self.worldYSize = 50
     #print("Y size of the world? ", self.worldYSize)
     """
-    common.N_SOURCES = int(uf.digit_input(
-        msg="How many sources? (default = " + str(common.N_SOURCES) + ") ", DEFAULT=common.N_SOURCES))
-    file = open(common.project + "/sources.txt", "w")
-    for i in range(common.N_SOURCES):
-        file.write(str(i) + '\n')
-    file.close()
-
-    common.N_USERS = int(uf.digit_input(
-        DEFAULT=common.N_USERS, msg="How many users? (default = " + str(common.N_USERS) + ") "))
-    file = open(common.project + "/users.txt", "w")
-    for i in range(common.N_USERS):
-        file.write(str(common.N_SOURCES + i) + '\n')
-    file.close()
-
     common.averageDegree = uf.digit_input(
         msg="Enter average degree for users? (default = " + str(common.averageDegree) + ") ", DEFAULT=common.averageDegree)
     common.P_a = common.averageDegree / common.N_USERS
@@ -74,3 +61,33 @@ def loadParameters(self):
     common.configreader.readConfigFile(common.configFile)
     common.configreader.setCommonVars()
     self.nCycles = common.N_CYCLES
+
+    #set variables accordingly to adjacency matrix if defined
+    # find maximum number in adjacency matrix
+    if common.networkfilepath != "":
+        maxnumber = 0
+        with open(common.networkfilepath, 'r') as configfile:
+            reader = csv.reader(configfile, delimiter=",")
+            for row in reader:
+                if row == []: continue
+                maxnumber = max(maxnumber, int(row[0]), int(row[1]))
+
+    #count starts from 0
+    maxnumber += 1
+    common.N_USERS = maxnumber - common.N_SOURCES
+    common.N_AGENTS = common.N_USERS + common.N_SOURCES
+
+    # write files users.txt sources.txt accordingly
+    #common.N_SOURCES = int(uf.digit_input(
+    #    msg="How many sources? (default = " + str(common.N_SOURCES) + ") ", DEFAULT=common.N_SOURCES))
+    file = open(common.project + "/sources.txt", "w")
+    for i in range(common.N_SOURCES):
+        file.write(str(i) + '\n')
+    file.close()
+
+    #common.N_USERS = int(uf.digit_input(
+    #    DEFAULT=common.N_USERS, msg="How many users? (default = " + str(common.N_USERS) + ") "))
+    file = open(common.project + "/users.txt", "w")
+    for i in range(common.N_USERS):
+        file.write(str(common.N_SOURCES + i) + '\n')
+    file.close()

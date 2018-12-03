@@ -1,3 +1,4 @@
+import csv
 import os
 import random
 import warnings
@@ -7,9 +8,9 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
-
 warnings.filterwarnings("ignore", ".*GUI is implemented.*")
 import usefulfunctions.useful_functions as uf
+
 #import seaborn as sns
 
 
@@ -31,36 +32,55 @@ def initializeEdges():
     random initialization of edges
 
     """
-
-    for i in list(common.G.nodes()):
-        for j in list(common.G.nodes()):
-            if j > i:
-                if i < common.N_SOURCES and j < common.N_SOURCES:
-                    pass
-                elif i >= common.N_SOURCES and j >= common.N_SOURCES:
-                    if random.random() < common.P_a:
-                        common.G.add_edge(
-                            i, j, weight=0.3 + 0.7 * random.random())
-                        common.conlog.registerEntry(
-                            first=i,
-                            second=j,
-                            date=common.cycle,
-                            weight=common.G[i][j]['weight'],
-                            cr='a',
-                            write=common.writeConnections
-                        )
-                else:
-                    if random.random() < common.P_s:
-                        common.G.add_edge(
-                            i, j, weight=0.3 + 0.7 * random.random())
-                        common.conlog.registerEntry(
-                            first=i,
-                            second=j,
-                            date=common.cycle,
-                            weight=common.G[i][j]['weight'],
-                            cr='a',
-                            write=common.writeConnections
-                        )
+    if common.networkfilepath != "":
+        with open(common.networkfilepath, "r") as adj:
+            reader = csv.reader(adj, delimiter=",")
+            for row in reader:
+                if row == []: continue
+                try:
+                    first = int(row[0])
+                    second = int(row[1])
+                    weight = int(row[2])
+                except:
+                    first = int(row[0])
+                    second = int(row[1])
+                    weight = np.random.random_sample()
+                common.G.add_edge(first, second, weight=weight)
+                common.conlog.registerEntry(
+                    first=first,
+                    second=second,
+                    date=common.cycle,
+                    weight=weight,
+                    cr='a',
+                    write=common.writeConnections)
+    else:
+        for i in list(common.G.nodes()):
+            for j in list(common.G.nodes()):
+                if j > i:
+                    if i < common.N_SOURCES and j < common.N_SOURCES:
+                        pass
+                    elif i >= common.N_SOURCES and j >= common.N_SOURCES:
+                        if random.random() < common.P_a:
+                            common.G.add_edge(
+                                i, j, weight=0.3 + 0.7 * random.random())
+                            common.conlog.registerEntry(
+                                first=i,
+                                second=j,
+                                date=common.cycle,
+                                weight=common.G[i][j]['weight'],
+                                cr='a',
+                                write=common.writeConnections)
+                        else:
+                            if random.random() < common.P_s:
+                                common.G.add_edge(
+                                    i, j, weight=0.3 + 0.7 * random.random())
+                                common.conlog.registerEntry(
+                                    first=i,
+                                    second=j,
+                                    date=common.cycle,
+                                    weight=common.G[i][j]['weight'],
+                                    cr='a',
+                                    write=common.writeConnections)
 
 
 # using networkX and matplotlib case
@@ -100,19 +120,19 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
         print(common.G.node[0]['agent'].hasNews(id_source=0, date=1))
 
         for i in list(common.G.nodes()):
-            if common.G.node[i]['agent'].hasNews(
-                    id_source=0, date=1) is True:
+            if common.G.node[i]['agent'].hasNews(id_source=0, date=1) is True:
                 c.append('#ffa500')
                 continue
-            elif common.G.node[i]['agent'].hasNews(id_source=1, date=1) is True:
+            elif common.G.node[i]['agent'].hasNews(
+                    id_source=1, date=1) is True:
                 c.append('#ff748c')
                 continue
-            elif common.G.node[i]['agent'].hasNews(id_source=2, date=1) is True:
+            elif common.G.node[i]['agent'].hasNews(
+                    id_source=2, date=1) is True:
                 c.append('#38ffc8')
                 continue
             else:
-                if common.G.nodes()[
-                        i]['agent'].number < common.N_SOURCES:
+                if common.G.nodes()[i]['agent'].number < common.N_SOURCES:
                     c.append('red')
                     continue
                 else:
@@ -140,18 +160,14 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     if l is True:  # draw labels
         nx.draw_networkx_labels(common.G, pos, font_size=8)
 
-    plt.title(
-        'seed:' + str(common.SEED) +
-        'u:' + str(common.N_USERS) +
-        's:' + str(common.N_SOURCES) +
-        'av.deg.:' + str(common.averageDegree) +
-        't:' + str(common.cycle) + "/" + str(common.N_CYCLES)
-    )
+    plt.title('seed:' + str(common.SEED) + 'u:' + str(common.N_USERS) + 's:' +
+              str(common.N_SOURCES) + 'av.deg.:' + str(common.averageDegree) +
+              't:' + str(common.cycle) + "/" + str(common.N_CYCLES))
     # plt.show()  # show plot
     if not os.path.exists(common.project.replace("src", "log")):
         os.makedirs(common.project.replace("src", "log"))
-    plotpath = common.project.replace(
-        "src", "log/plot-%04d.pdf" % common.cycle)
+    plotpath = common.project.replace("src",
+                                      "log/plot-%04d.pdf" % common.cycle)
     plt.savefig(plotpath)
     print("saved plot:", plotpath)
     if common.graphicStatus == "PythonViaTerminal":

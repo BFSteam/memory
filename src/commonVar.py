@@ -23,10 +23,10 @@ configFile = "config.ini"
 SEED = 1
 
 # number of users
-N_USERS = 1000
+N_USERS = 1
 
 # number of sources
-N_SOURCES = 20
+N_SOURCES = 0
 
 # number of total agents
 N_AGENTS = N_USERS + N_SOURCES
@@ -185,7 +185,7 @@ lineBuffer = 1000
 # are. They need also to be computed correctly by AgentConfigReader
 #
 P_a = float(averageDegree) / N_USERS  # do not overwrite
-P_s = prop * P_a                      # do not overwrite
+P_s = prop * P_a  # do not overwrite
 # ---------------------------------------------------------------------
 #
 # These variables have no need to be overwritten
@@ -201,15 +201,9 @@ G_edge_labels = 0
 # custom hill function to activate and deactivate users
 # 200 total numerical values pre-computed to optimize speed
 timeActiveArray = [
-    hill(
-        x + 1,
-        pActivation,
-        tActivation,
-        3) for x in range(100)]
+    hill(x + 1, pActivation, tActivation, 3) for x in range(100)
+]
 timeInactiveArray = [
-    hill(
-        x + 1,
-        pInactivation,
-        tInactivation,
-        3) for x in range(100)]
+    hill(x + 1, pInactivation, tInactivation, 3) for x in range(100)
+]
 # ---------------------------------------------------------------------
