@@ -62,6 +62,8 @@ def loadParameters(self):
     common.configreader.setCommonVars()
     self.nCycles = common.N_CYCLES
 
+    print("using config file ", common.configFile)
+    print("using network file ", common.networkfilepath)
     #set variables accordingly to adjacency matrix if defined
     # find maximum number in adjacency matrix
     if common.networkfilepath != "":
@@ -69,14 +71,16 @@ def loadParameters(self):
         with open(common.networkfilepath, 'r') as configfile:
             reader = csv.reader(configfile, delimiter=",")
             for row in reader:
-                if row == []: continue
+                #if row == [] or "" in row: continue
                 maxnumber = max(maxnumber, int(row[0]), int(row[1]))
 
     #count starts from 0
     maxnumber += 1
+    print("max number of users found ", maxnumber)
     common.N_USERS = maxnumber - common.N_SOURCES
     common.N_AGENTS = common.N_USERS + common.N_SOURCES
-
+    print("running with ", common.N_USERS, " users and ", common.N_SOURCES,
+          " sources")
     # write files users.txt sources.txt accordingly
     #common.N_SOURCES = int(uf.digit_input(
     #    msg="How many sources? (default = " + str(common.N_SOURCES) + ") ", DEFAULT=common.N_SOURCES))
