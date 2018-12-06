@@ -109,11 +109,9 @@ class User(WorldAgent):
     def isUser(self, n):
         """return True if node n is a user
         """
-
-        if n < common.N_SOURCES:
-            return False
-        else:
+        if common.G.node[n]['agent'].agType == 'users':
             return True
+        return False
 
     def isMemoryEmpty(self):
         """return True if memory empty

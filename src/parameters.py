@@ -81,6 +81,7 @@ def loadParameters(self):
     common.N_AGENTS = common.N_USERS + common.N_SOURCES
     print("running with ", common.N_USERS, " users and ", common.N_SOURCES,
           " sources")
+
     # write files users.txt sources.txt accordingly
     #common.N_SOURCES = int(uf.digit_input(
     #    msg="How many sources? (default = " + str(common.N_SOURCES) + ") ", DEFAULT=common.N_SOURCES))

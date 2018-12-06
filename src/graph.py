@@ -53,6 +53,14 @@ def initializeEdges():
                     weight=weight,
                     cr='a',
                     write=common.writeConnections)
+        tempindex = np.random.randint(0, common.N_AGENTS)
+        if -1 not in common.source_index and common.source_index[
+                0] < common.N_AGENTS:
+            tempindex = common.source_index[0]
+        tempagent = common.G.node[0]['agent']
+        common.G.node[0]['agent'] = common.G.node[tempindex]['agent']
+        common.G.node[tempindex]['agent'] = tempagent
+
     else:
         for i in list(common.G.nodes()):
             for j in list(common.G.nodes()):

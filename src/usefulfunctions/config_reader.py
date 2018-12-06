@@ -27,6 +27,9 @@ class ConfigReader():
         common.networkfilepath = self.config['INIT'].get('networkfilepath')
         common.P_a = common.averageDegree / common.N_USERS
         common.P_s = common.prop * common.P_a
+        common.source_index = [
+            int(x) for x in self.config['INIT']['SOURCE_INDEX'].split(',')
+        ]
 
         # USER
         common.dim = self.config['USER'].getint('dim')
