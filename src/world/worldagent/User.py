@@ -45,22 +45,25 @@ class User(WorldAgent):
     """
 
     def __init__(self, number, myWorldState, agType):
-        super().__init__(number, myWorldState, agType)  # parent constructor
+        super().__init__(number, myWorldState, agType)
 
-        self.database = db.database()
-        self.dblacklist = {}
-        self.debunker = False
-        self.spreadState = 'i'
-        self.active = False
-        self.inactiveTime = 0
-        self.activeTime = 0
-        self.activate()
-        self.genState(n=0, noise=0.15)
-        self.tiredness = 1
-        self.prevDiff = 'a' if random.random() < 0.5 else 'p'
+        self.database = db.database()  # News database
+        self.dblacklist = db.database()  # Blacklist database
+        self.debunker = False  # Agent is a debunker or not
+        self.spreadState = 'i'  # Agent starts infective
+        self.active = False  # Agent is active or not
+        self.inactiveTime = 0  #
+        self.activeTime = 0  #
+        self.activate()  # Agent starts active or inactive randomly
+        self.genState(n=0, noise=0.15)  # mind state is generated
+        self.tiredness = 1  # agent starts not tired
+        self.prevDiff = 'a' if random.random(
+        ) < 0.5 else 'p'  # random rpevious diffusion to prevent otherDiffusion from failing
 
     def activate_debunker(self, p=common.pInitDebunker):
         """Initial debunking initialization
+
+        TODO NO DEBUNKERS RIGHT NOW
         """
         if p == 1:
             self.debunker = True
@@ -429,6 +432,8 @@ class User(WorldAgent):
 
         Increments the correct active or inactive time of the agent
         """
+        if common.flags['toggleActivateWithProba'] is True:
+            return
         if self.active is True:
             self.activeTime += 1
         else:
@@ -437,7 +442,6 @@ class User(WorldAgent):
     def probaActivation(self, x, function, par):
         """Uses a function defined in commonVar to determine
         the  probability of activation
-
         """
         if random.random() < function(x, par):
             self.continueActivation()
@@ -511,11 +515,10 @@ class User(WorldAgent):
             minor=False)
         return (n, tdata)
 
-    def becomeActive(self,
-                     t=common.tActivation,
-                     p=common.pActivation,
-                     probabilityFunction=0):
+    def becomeActive(self, t=common.tActivation, p=common.pActivation):
         """
+
+        Used only if ACTIVATION
 
         If user is inactive for some time t
         become active with a probability p
@@ -526,9 +529,8 @@ class User(WorldAgent):
         p: probability of activation
 
         """
-
-        if probabilityFunction == 0:
-            pass
+        if common.flags['toggleActivateWithProba'] is True:
+            return
         if self.inactiveTime >= t:
             if random.random() < common.timeActiveArray[self.inactiveTime - 1]:
                 # if random.random() < 1 - p *
@@ -901,6 +903,9 @@ class User(WorldAgent):
         print(self.database)
 
     def diffusion(self):
+        """
+        one diffusion at random
+        """
         if random.random() < 0.5:
             self.passiveDiffusion()
             self.prevDiff = 'p'
@@ -913,6 +918,10 @@ class User(WorldAgent):
             self.prevDiff = 'a'
 
     def otherDiffusion(self):
+        """
+        if activediffusion -> passivediffuson
+        else -> activediffusion
+        """
         if self.prevDiff == 'p':
             self.activeDiffusion(
                 p=common.pActiveDiffusion,
