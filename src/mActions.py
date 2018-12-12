@@ -76,8 +76,11 @@ def createTheAgent_Class(self, line, num, agType, agClass):
         try:
             exec("import " + agClass)
             common.agClassVerified = True
-        except BaseException:
-            print("Missing file " + agClass + ".py")
+        except BaseException as e:
+            print("Failed to import " + agClass + ".py")
+            print(e)
+            print(str(e))
+            print(e.args)
             os.sys.exit(1)
 
     agClassFile = agClass
