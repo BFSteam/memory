@@ -43,7 +43,7 @@ class MemoryScheduler(AgentScheduler):
         printHeader(
             self.w,
             firstline=['# memorylog'],
-            lastline=["agent", "time", "state", "spreadstate"] +
+            lastline=["agent", "time", "state"] +
             ["news" + str(i) for i in range(common.memorySize)])
 
     def printLog(self):
@@ -54,14 +54,14 @@ class MemoryScheduler(AgentScheduler):
             e = np.empty([0])
             e = np.append(e, common.G.node[node]['agent'].number)
             e = np.append(e, common.cycle)
-            if (common.G.node[node]['agent'].agType == "sources"):
+            if (common.G.node[node]['agent'].number < common.N_SOURCES):
                 e = np.append(e, "x")
             else:
                 if (common.G.node[node]['agent'].active):
                     e = np.append(e, "u")
                 else:
                     e = np.append(e, "d")
-            e = np.append(e, common.G.node[node]['agent'].spreadState)
+
             e = np.append(e, [
                 x for x in list(common.G.node[node]['agent'].database.keys())
             ])

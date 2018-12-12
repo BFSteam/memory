@@ -65,13 +65,9 @@ def initializeEdges():
         for i in list(common.G.nodes()):
             for j in list(common.G.nodes()):
                 if j > i:
-                    if common.G.node[i][
-                            'agent'].agType == "sources" and common.G.node[j][
-                                'agent'].agType == "sources":
+                    if i < common.N_SOURCES and j < common.N_SOURCES:
                         pass
-                    elif common.G.node[i][
-                            'agent'].agType == "users" and common.G.node[j][
-                                'agent'].agType == "users":
+                    elif i >= common.N_SOURCES and j >= common.N_SOURCES:
                         if random.random() < common.P_a:
                             common.G.add_edge(
                                 i, j, weight=0.3 + 0.7 * random.random())
