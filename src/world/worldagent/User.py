@@ -98,7 +98,7 @@ class User(WorldAgent):
     #    return x / np.sum(x)
     #    # return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
 
-    def listNeighbours(self):
+    def get_listlist_of_all_self_neighbors(self):
         """return neighbour list. call with no arguments
         """
         return list(common.G.neighbors(self.number))
@@ -464,7 +464,7 @@ class User(WorldAgent):
         """
 
         temp = []
-        l = self.listNeighbours()
+        l = self.get_listlist_of_all_self_neighbors()
         for ne in l:
             if self.isUser(ne):
                 if self.getAllNewsFromUser(ne) is False:
@@ -665,7 +665,10 @@ class User(WorldAgent):
 
         """
 
-        if any([self.isUser(x) for x in self.listNeighbours()]) is False:
+        if any([
+                self.isUser(x)
+                for x in self.get_listlist_of_all_self_neighbors()
+        ]) is False:
             return True
         else:
             return False
@@ -703,7 +706,7 @@ class User(WorldAgent):
             self.database, 'new', minor=False)
         bestWeight = 0
         bestNeighbour = self.number
-        for neighbour in self.listNeighbours():
+        for neighbour in self.get_listlist_of_all_self_neighbors():
             #
             # d not diffuse to source
             if self.isUser(neighbour) is False:
@@ -718,7 +721,8 @@ class User(WorldAgent):
 
         # find random user neighbor
         while True:
-            shuffledNeighbour = random.choice(self.listNeighbours())
+            shuffledNeighbour = random.choice(
+                self.get_listlist_of_all_self_neighbors())
             if self.isUser(shuffledNeighbour) is True:
                 break
         #
@@ -793,13 +797,13 @@ class User(WorldAgent):
         #
         # check if user is not connected to any node and rewire it
         # randomly
-        if self.listNeighbours() == []:
+        if self.get_listlist_of_all_self_neighbors() == []:
             if d1 > threshold:
                 self.addEdge(n1)
                 return True
             else:
                 return False
-        for firstnode in self.listNeighbours():
+        for firstnode in self.get_listlist_of_all_self_neighbors():
             #
             # check if user is connected only to sources
             if self.onlySources() is True:
@@ -810,15 +814,15 @@ class User(WorldAgent):
                 d2 = -1
                 continue
             #
-            for secondnode in common.G.node[firstnode]['agent'].listNeighbours(
-            ):
+            for secondnode in common.G.node[firstnode][
+                    'agent'].get_list_of_all_self_neighbors():
                 nlist.append(secondnode)
                 dlist.append(
                     self.distance(common.G.node[secondnode]['agent'].state))
         nlist = [x for (y, x) in sorted(zip(dlist, nlist))]
         while True and not nlist:
             n2 = nlist[random.randint(0, 10)]
-            if n2 in self.listNeighbours():
+            if n2 in self.get_listlist_of_all_self_neighbors():
                 nlist.remove(n2)
                 continue
             else:
@@ -839,16 +843,17 @@ class User(WorldAgent):
         """
         #
         # if empty neighbors
-        if self.listNeighbours() == []:
+        if self.get_listlist_of_all_self_neighbors() == []:
             return False
         #
         # if only one neighbor
-        if len(self.listNeighbours()) == 1:
+        if len(self.get_listlist_of_all_self_neighbors()) == 1:
             return False
         #
         # remove edge randomly
         if random.random() < p:
-            self.removeEdge(random.choice(self.listNeighbours()))
+            self.removeEdge(
+                random.choice(self.get_listlist_of_all_self_neighbors()))
             return True
         #
         # or
@@ -856,7 +861,7 @@ class User(WorldAgent):
         # remove the most distant neighbor
         d = 1
         n = self.number
-        for node in self.listNeighbours():
+        for node in self.get_listlist_of_all_self_neighbors():
             if self.distance(common.G.node[node]['agent'].state) < d:
                 d = self.distance(common.G.node[node]['agent'].state)
                 n = node

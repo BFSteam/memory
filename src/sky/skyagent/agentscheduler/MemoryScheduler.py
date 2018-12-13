@@ -43,7 +43,7 @@ class MemoryScheduler(AgentScheduler):
         printHeader(
             self.w,
             firstline=['# memorylog'],
-            lastline=["agent", "time", "state"] +
+            lastline=["agent", "time", "state", "spreadstate"] +
             ["news" + str(i) for i in range(common.memorySize)])
 
     def printLog(self):
@@ -61,11 +61,11 @@ class MemoryScheduler(AgentScheduler):
                     e = np.append(e, "u")
                 else:
                     e = np.append(e, "d")
-
+            e = np.append(e, common.G.node[node]['agent'].spreadState)
             e = np.append(e, [
                 x for x in list(common.G.node[node]['agent'].database.keys())
             ])
-            for i in range(3 + common.memorySize - e.shape[0]):
+            for i in range(4 + common.memorySize - e.shape[0]):
                 e = np.append(e, 0)
             self.registerEntry(e)
 
