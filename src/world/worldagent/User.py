@@ -54,7 +54,7 @@ class User(WorldAgent):
         self.active = False  # Agent is active or not
         self.inactiveTime = 0  #
         self.activeTime = 0  #
-        self.activate()  # Agent starts active or inactive randomly
+        self.activate_agent()  # Agent starts active or inactive randomly
         self.genState(n=0, noise=0.15)  # mind state is generated
         self.tiredness = 1  # agent starts not tired
         self.prevDiff = 'a' if random.random(
@@ -72,7 +72,7 @@ class User(WorldAgent):
         else:
             self.debunker = True
 
-    def activate(self, p=common.pInitActivation):
+    def activate_agent(self, p=common.pInitActivation):
         """Initial activity initialization
 
         activate the agent with a probability p.
@@ -116,7 +116,7 @@ class User(WorldAgent):
             return True
         return False
 
-    def isMemoryEmpty(self):
+    def is_memory_empty(self):
         """return True if memory empty
         """
         return True if len(self.database) == 0 else False
@@ -395,7 +395,7 @@ class User(WorldAgent):
                     kmax = key
             return data[kmax]
 
-    def switchActivation(self):
+    def switch_activation(self):
         """ Switch active state of an agent
 
         switches activation of the user and resets the counters
@@ -419,11 +419,11 @@ class User(WorldAgent):
         self.inactiveTime = 0
         self.activeTime = 0
 
-    def timeStateActivation(self):
+    def timeStateActivation(self):  ########################################
         """If active return active state
         If inactive inactiveState
         """
-        if self.activate is True:
+        if self.activate_agent is True:
             return self.activeTime
         return self.inactiveTime
 
@@ -446,7 +446,7 @@ class User(WorldAgent):
         if random.random() < function(x, par):
             self.continueActivation()
             return True
-        self.switchActivation()
+        self.switch_activation()
         return False
 
     def readNews(self, old=common.vOld):
@@ -535,7 +535,7 @@ class User(WorldAgent):
             if random.random() < common.timeActiveArray[self.inactiveTime - 1]:
                 # if random.random() < 1 - p *
                 # np.exp(-self.inactiveTime):
-                self.switchActivation()
+                self.switch_activation()
 
     def becomeInactive(self,
                        t=common.tInactivation,
@@ -566,7 +566,7 @@ class User(WorldAgent):
             p = p * self.tiredness
         if self.activeTime > t:
             if random.random() < common.timeInactiveArray[self.activeTime - 1]:
-                self.switchActivation()
+                self.switch_activation()
                 #self.tiredness = 1
 
     def checkActivation(
@@ -658,13 +658,12 @@ class User(WorldAgent):
         self.state = norm(self.state)
         return True
 
-    def onlySources(self):
+    def is_conected_with_only_sources(self):
         """
 
         if user is connected only with sources return True
 
         """
-
         if any([
                 self.isUser(x)
                 for x in self.get_listlist_of_all_self_neighbors()
@@ -693,12 +692,12 @@ class User(WorldAgent):
             return False
         #
         # check if memory is empty
-        if self.isMemoryEmpty():
+        if self.is_memory_empty():
             return False
         #
         # check if user is connected only to sources
         # active diffusion is performed with users
-        if self.onlySources() is True:
+        if self.is_conected_with_only_sources() is True:
             return False
         #
         #
@@ -806,7 +805,7 @@ class User(WorldAgent):
         for firstnode in self.get_listlist_of_all_self_neighbors():
             #
             # check if user is connected only to sources
-            if self.onlySources() is True:
+            if self.is_conected_with_only_sources() is True:
                 return False
             #
             # skip adding connection from source
