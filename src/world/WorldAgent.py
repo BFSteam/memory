@@ -87,7 +87,7 @@ class WorldAgent(Agent):
     def getGraph(self):
         return common.G
 
-    def hasNews(self, id_source=0, date=1):
+    def has_news_in_database(self, id_source=0, date=1):
         pass
 
     def debug(self):

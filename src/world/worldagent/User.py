@@ -867,7 +867,7 @@ class User(WorldAgent):
         self.removeEdge(n)
         return True
 
-    def hasNews(self, id_source=0, date=1):
+    def has_news_in_database(self, id_source=0, date=1):
         """
 
         chech if user has a certain news inside his memory
@@ -906,7 +906,7 @@ class User(WorldAgent):
         print(self.number)
         print(self.database)
 
-    def diffusion(self):
+    def random_diffusion(self):
         """
         one diffusion at random
         """
@@ -921,7 +921,7 @@ class User(WorldAgent):
                 r=common.pRemove)
             self.prevDiff = 'a'
 
-    def otherDiffusion(self):
+    def other_diffusion(self):
         """
         if activediffusion -> passivediffuson
         else -> activediffusion

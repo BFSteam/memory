@@ -125,17 +125,19 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
     clearNetworkXdisplay()
     c = []
     if clrs == 'state':  # draw colors thinking of state
-        print(common.G.node[0]['agent'].hasNews(id_source=0, date=1))
+        print(common.G.node[0]['agent'].has_news_in_database(
+            id_source=0, date=1))
 
         for i in list(common.G.nodes()):
-            if common.G.node[i]['agent'].hasNews(id_source=0, date=1) is True:
+            if common.G.node[i]['agent'].has_news_in_database(
+                    id_source=0, date=1) is True:
                 c.append('#ffa500')
                 continue
-            elif common.G.node[i]['agent'].hasNews(
+            elif common.G.node[i]['agent'].has_news_in_database(
                     id_source=1, date=1) is True:
                 c.append('#ff748c')
                 continue
-            elif common.G.node[i]['agent'].hasNews(
+            elif common.G.node[i]['agent'].has_news_in_database(
                     id_source=2, date=1) is True:
                 c.append('#38ffc8')
                 continue

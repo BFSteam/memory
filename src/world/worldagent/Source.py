@@ -113,7 +113,7 @@ class Source(WorldAgent):
                 write=common.writeMessages)
         print(self.number, " generateNews ", n)
 
-    def hasNews(self, id_source=0, date=1):
+    def has_news_in_database(self, id_source=0, date=1):
         if self.database == {}:
             return False
         for key in self.database:
