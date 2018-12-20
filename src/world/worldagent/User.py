@@ -211,7 +211,7 @@ class User(WorldAgent):
                 return True
         return False
 
-    def cutOldestNews(self):
+    def cut_oldest_news(self):
         """
 
         forget oldest news
@@ -300,7 +300,7 @@ class User(WorldAgent):
         # chose between oldest or random news
         while len(self.database) > common.memorySize:
             if cutoldest is True:
-                self.cutOldestNews()
+                self.cut_oldest_news()
             else:
                 self.forgetRandomNews(news=0, rnd=1.)
         #
