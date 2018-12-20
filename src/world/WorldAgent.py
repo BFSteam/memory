@@ -46,8 +46,8 @@ class WorldAgent(Agent):
 
         self.state = np.zeros([common.dim])
 
-        if graph.getGraph() == 0:
-            graph.createGraph()  # if first agent create the graph
+        if graph.get_graph() == 0:
+            graph.create_graph()  # if first agent create the graph
         common.G.add_node(self.number, agent=self)  # adds himself
         if common.cycle == 1:  # create link only if you are only at the first step of the clock and if you are the last user
             if len(common.G.nodes()) == common.N_AGENTS:
@@ -84,7 +84,7 @@ class WorldAgent(Agent):
         self.state = self.state / self.state.sum()
         return self.state
 
-    def getGraph(self):
+    def get_graph(self):
         return common.G
 
     def has_news_in_database(self, id_source=0, date=1):

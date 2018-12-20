@@ -14,7 +14,11 @@ import usefulfunctions.useful_functions as uf
 #import seaborn as sns
 
 
-def createGraph():
+def create_graph():
+    """
+    Creates the graph and dictionaries to display colors, pos...
+    Stores the graph in commonVar module
+    """
     global colors, pos
 
     # graph undirected to set weight specify them as a parameter creating the
@@ -106,7 +110,7 @@ def clearNetworkXdisplay():
     plt.clf()
 
 
-def getGraph():
+def get_graph():
     """
 
     returns the graph if exists

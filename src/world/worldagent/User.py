@@ -130,7 +130,7 @@ class User(WorldAgent):
 
         return common.G.nodes(data=True)[n][1]['agent'].state
 
-    def addEdge(self, n, weight=0.3 + 0.7 * random.random()):
+    def add_edge(self, n, weight=0.3 + 0.7 * random.random()):
         """
 
         create link with a node with id a
@@ -146,7 +146,7 @@ class User(WorldAgent):
             cr='a',
             write=common.writeConnections)
 
-    def removeEdge(self, n):
+    def remove_edge(self, n):
         """
 
         removes link with a node with id a
@@ -168,7 +168,7 @@ class User(WorldAgent):
         """
         common.G[self.number][neighbor]['weight'] += value
         if common.G[self.number][neighbor]['weight'] < r:
-            self.removeEdge(neighbor)
+            self.remove_edge(neighbor)
 
         common.conlog.registerEntry(
             first=self.number,
@@ -763,7 +763,7 @@ class User(WorldAgent):
 
         return True
 
-    def createEdge(self, threshold=common.tCreateEdge):
+    def preferential_add_edge(self, threshold=common.tCreateEdge):
         """Preferential creation of edge
 
         adds edge between the user and another node in the graph
@@ -798,7 +798,7 @@ class User(WorldAgent):
         # randomly
         if self.get_listlist_of_all_self_neighbors() == []:
             if d1 > threshold:
-                self.addEdge(n1)
+                self.add_edge(n1)
                 return True
             else:
                 return False
@@ -828,12 +828,12 @@ class User(WorldAgent):
                 break
         d2 = self.distance(common.G.node[n2]['agent'].state)
         if d1 > d2:
-            self.addEdge(n1, weight=0.3 + 0.7 * random.random())
+            self.add_edge(n1, weight=0.3 + 0.7 * random.random())
         else:
-            self.addEdge(n2, weight=0.3 + 0.7 * random.random())
+            self.add_edge(n2, weight=0.3 + 0.7 * random.random())
         return True
 
-    def deleteEdge(self, p=0.1):
+    def preferential_remove_edge(self, p=0.1):
         """Preferential delete
 
         deletes a random edge with a low probability or the one
@@ -851,7 +851,7 @@ class User(WorldAgent):
         #
         # remove edge randomly
         if random.random() < p:
-            self.removeEdge(
+            self.remove_edge(
                 random.choice(self.get_listlist_of_all_self_neighbors()))
             return True
         #
@@ -864,7 +864,7 @@ class User(WorldAgent):
             if self.distance(common.G.node[node]['agent'].state) < d:
                 d = self.distance(common.G.node[node]['agent'].state)
                 n = node
-        self.removeEdge(n)
+        self.remove_edge(n)
         return True
 
     def has_news_in_database(self, id_source=0, date=1):
