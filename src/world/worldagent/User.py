@@ -8,6 +8,9 @@ import numpy as np
 import datastructures.database as db
 import datastructures.news as nw
 
+from random import choice
+from string import digits, ascii_lowercase, ascii_uppercase
+
 from agTools import *
 #from numpy import linalg as LA
 from Tools import *
@@ -50,7 +53,7 @@ class User(WorldAgent):
         self.database = db.database()  # News database
         self.dblacklist = db.database()  # Blacklist database
         self.debunker = False  # Agent is a debunker or not
-        self.spreadState = 'i'  # Agent starts infective
+        self.spreadState = 's'  # Agent starts infective
         self.active = False  # Agent is active or not
         self.inactiveTime = 0  #
         self.activeTime = 0  #
@@ -98,18 +101,18 @@ class User(WorldAgent):
     #    return x / np.sum(x)
     #    # return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
 
-    def get_listlist_of_all_self_neighbors(self):
+    def get_list_of_all_self_neighbors(self):
         """return neighbour list. call with no arguments
         """
         return list(common.G.neighbors(self.number))
 
-    def listActiveNeighbors(self):  # NOT TESTED YET
+    def get_list_of_all_active_neighbors(self):  # NOT TESTED YET
         """return a list of only active neighbors
         """
         n = list(common.G.neighbors(self.number))
-        return [x for x in n if common.G.node[x].active == True]
+        return [x for x in n if common.G.node[x].active is True]
 
-    def isUser(self, n):
+    def is_user(self, n):
         """return True if node n is a user
         """
         if common.G.node[n]['agent'].agType == 'users':
@@ -464,9 +467,9 @@ class User(WorldAgent):
         """
 
         temp = []
-        l = self.get_listlist_of_all_self_neighbors()
+        l = self.get_list_of_all_self_neighbors()
         for ne in l:
-            if self.isUser(ne):
+            if self.is_user(ne):
                 if self.getAllNewsFromUser(ne) is False:
                     continue
                 else:
@@ -664,10 +667,9 @@ class User(WorldAgent):
         if user is connected only with sources return True
 
         """
-        if any([
-                self.isUser(x)
-                for x in self.get_listlist_of_all_self_neighbors()
-        ]) is False:
+        if any(
+            [self.is_user(x)
+             for x in self.get_list_of_all_self_neighbors()]) is False:
             return True
         else:
             return False
@@ -705,10 +707,10 @@ class User(WorldAgent):
             self.database, 'new', minor=False)
         bestWeight = 0
         bestNeighbour = self.number
-        for neighbour in self.get_listlist_of_all_self_neighbors():
+        for neighbour in self.get_list_of_all_self_neighbors():
             #
             # d not diffuse to source
-            if self.isUser(neighbour) is False:
+            if self.is_user(neighbour) is False:
                 continue
             #
             # look for bestweight
@@ -721,8 +723,8 @@ class User(WorldAgent):
         # find random user neighbor
         while True:
             shuffledNeighbour = random.choice(
-                self.get_listlist_of_all_self_neighbors())
-            if self.isUser(shuffledNeighbour) is True:
+                self.get_list_of_all_self_neighbors())
+            if self.is_user(shuffledNeighbour) is True:
                 break
         #
         # chose random neighbor with proba p
@@ -796,20 +798,20 @@ class User(WorldAgent):
         #
         # check if user is not connected to any node and rewire it
         # randomly
-        if self.get_listlist_of_all_self_neighbors() == []:
+        if self.get_list_of_all_self_neighbors() == []:
             if d1 > threshold:
                 self.add_edge(n1)
                 return True
             else:
                 return False
-        for firstnode in self.get_listlist_of_all_self_neighbors():
+        for firstnode in self.get_list_of_all_self_neighbors():
             #
             # check if user is connected only to sources
             if self.is_conected_with_only_sources() is True:
                 return False
             #
             # skip adding connection from source
-            if self.isUser(firstnode) is False:
+            if self.is_user(firstnode) is False:
                 d2 = -1
                 continue
             #
@@ -821,7 +823,7 @@ class User(WorldAgent):
         nlist = [x for (y, x) in sorted(zip(dlist, nlist))]
         while True and not nlist:
             n2 = nlist[random.randint(0, 10)]
-            if n2 in self.get_listlist_of_all_self_neighbors():
+            if n2 in self.get_list_of_all_self_neighbors():
                 nlist.remove(n2)
                 continue
             else:
@@ -842,17 +844,17 @@ class User(WorldAgent):
         """
         #
         # if empty neighbors
-        if self.get_listlist_of_all_self_neighbors() == []:
+        if self.get_list_of_all_self_neighbors() == []:
             return False
         #
         # if only one neighbor
-        if len(self.get_listlist_of_all_self_neighbors()) == 1:
+        if len(self.get_list_of_all_self_neighbors()) == 1:
             return False
         #
         # remove edge randomly
         if random.random() < p:
             self.remove_edge(
-                random.choice(self.get_listlist_of_all_self_neighbors()))
+                random.choice(self.get_list_of_all_self_neighbors()))
             return True
         #
         # or
@@ -860,7 +862,7 @@ class User(WorldAgent):
         # remove the most distant neighbor
         d = 1
         n = self.number
-        for node in self.get_listlist_of_all_self_neighbors():
+        for node in self.get_list_of_all_self_neighbors():
             if self.distance(common.G.node[node]['agent'].state) < d:
                 d = self.distance(common.G.node[node]['agent'].state)
                 n = node
@@ -934,3 +936,73 @@ class User(WorldAgent):
                 r=common.pRemove)
         else:
             self.passiveDiffusion()
+
+    #######################################################
+    # imported from source
+
+    def create_news(self, p=0.1):
+        """
+
+        creates one news 'near' to the source's mind state
+        this can be used only by Sources -> Infected -> i
+        """
+        if self.spreadState != 'i':
+            return
+        tmp = self.state
+        for j in range(common.dim):
+            tmp[j] += 0.1 * random.random()
+        tmp = tmp / tmp.sum()
+        return tmp
+
+    def generate_news(self, n=1):
+        """
+
+        generates a dictionary of n news:
+        each new is distant from zero to p from
+        the mind state of the source
+
+        news{
+            n0{
+                id-source:...,
+                date-source:...,
+                new:...,
+                ...,
+                relevance:...
+            }
+
+            n1{...
+            }
+            ...
+        }
+
+        """
+
+        # can be used only by sources -> infected -> i
+        if self.spreadState != 'i':
+            return
+
+        # the first part is the id-source, id-mittant, time
+        self.database = db.database()
+        for i in range(n):
+            #stringa = binascii.b2a_hex(os.urandom(8))
+            allchars = digits + ascii_lowercase + ascii_uppercase
+            stringa = "".join([choice(allchars) for i in range(16)])
+            self.database[stringa] = {}
+            self.database[stringa]['id-n'] = stringa
+            self.database[stringa]['new'] = self.create_news()
+            self.database[stringa]['id-source'] = self.number
+            self.database[stringa]['date-creation'] = common.cycle
+            self.database[stringa]['relevance'] = random.random()
+            common.msglog.registerEntry(
+                id_src=self.number,
+                date_creation=common.cycle,
+                sender=self.number,
+                reciver=self.number,
+                id_new=stringa,
+                date=common.cycle,
+                diffusion='c',
+                write=common.writeMessages)
+        print(self.number, " generateNews ", n)
+
+    # end importing from source
+    #########################################################

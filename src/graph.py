@@ -36,11 +36,15 @@ def initializeEdges():
     random initialization of edges
 
     """
+
+    # read adjacency matrix from file
     if common.networkfilepath != "":
         with open(common.networkfilepath, "r") as adj:
             reader = csv.reader(adj, delimiter=",")
             for row in reader:
                 if row == []: continue
+
+                # try to read all the columns
                 try:
                     first = int(row[0])
                     second = int(row[1])
@@ -49,6 +53,8 @@ def initializeEdges():
                     first = int(row[0])
                     second = int(row[1])
                     weight = np.random.random_sample()
+
+                # create edge on the graph and register entry in the log file
                 common.G.add_edge(first, second, weight=weight)
                 common.conlog.registerEntry(
                     first=first,
@@ -57,6 +63,9 @@ def initializeEdges():
                     weight=weight,
                     cr='a',
                     write=common.writeConnections)
+
+        # === this block is gonna be deprecated soon ======================
+        print('old block: source agent swapped: deprecating in the future')
         tempindex = np.random.randint(0, common.N_AGENTS)
         if -1 not in common.source_index and common.source_index[
                 0] < common.N_AGENTS:
@@ -64,8 +73,14 @@ def initializeEdges():
         tempagent = common.G.node[0]['agent']
         common.G.node[0]['agent'] = common.G.node[tempindex]['agent']
         common.G.node[tempindex]['agent'] = tempagent
+        # === end block ===================================================
 
+    # ================================================================
+    # old code used to creating random network
+    # may be dismissed in future
+    # not used if adjacency matrix is passed
     else:
+        print('old block: random network: deprecating in the future')
         for i in list(common.G.nodes()):
             for j in list(common.G.nodes()):
                 if j > i:
@@ -93,6 +108,7 @@ def initializeEdges():
                                     weight=common.G[i][j]['weight'],
                                     cr='a',
                                     write=common.writeConnections)
+    # ================================================================
 
 
 # using networkX and matplotlib case
@@ -124,7 +140,7 @@ def get_graph():
         return 0
 
 
-def drawGraph(n=True, e=True, l=True, clrs='state', static=True):
+def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
 
     clearNetworkXdisplay()
     c = []
