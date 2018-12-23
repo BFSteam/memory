@@ -1,6 +1,8 @@
 # WorldAgent.py
 import random
 
+import datastructures.database as db
+
 import commonVar as common
 import graph as graph
 import numpy as np
@@ -46,19 +48,26 @@ class WorldAgent(Agent):
 
         self.state = np.zeros([common.dim])
 
+        # =========================================================================================
+        #
+        # GRAPH CREATION
+        #
         if graph.get_graph() == 0:
             graph.create_graph()  # if first agent create the graph
         common.G.add_node(self.number, agent=self)  # adds himself
-        if common.cycle == 1:  # create link only if you are only at the first step of the clock and if you are the last user
-            if len(common.G.nodes()) == common.N_AGENTS:
-                graph.initializeEdges()  # if last creates edges
+        # create link only if you are only at the first step of the clock
+        # and if you are the last user
+        if common.cycle == 1 and len(common.G.nodes()) == common.N_AGENTS:
+            graph.initializeEdges()  # if last creates edges
+        #
+        # =========================================================================================
 
         self.active = True
-        self.databaseCols = [
-            'id-n', 'new', 'id-source', 'date-creation', 'relevance',
-            'id-send', 'date-send', 'id-recive', 'date-recive'
-        ]
-        self.database = {}
+        #self.databaseCols = [
+        #    'id-n', 'new', 'id-source', 'date-creation', 'relevance',
+        #    'id-send', 'date-send', 'id-recive', 'date-recive'
+        #]
+        self.database = db.database()
         self.spreadState = 'r'
         print("agent", self.agType, "#", self.number, "has been created")
 

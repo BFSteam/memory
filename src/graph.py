@@ -162,7 +162,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
                 c.append('#38ffc8')
                 continue
             else:
-                if common.G.nodes()[i]['agent'].number < common.N_SOURCES:
+                if common.G.nodes()[i]['agent'].spreadState == "i":
                     c.append('red')
                     continue
                 else:
@@ -175,7 +175,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
 
     node_size = []
     for i in list(common.G.nodes()):
-        if common.G.nodes()[i]['agent'].number < common.N_SOURCES:
+        if common.G.nodes()[i]['agent'].spreadState == "i":
             node_size.append(100)
         else:
             node_size.append(60)

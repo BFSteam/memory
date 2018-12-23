@@ -3,8 +3,7 @@ import csv
 import random
 
 # color output
-from colorama import init, Fore, Back, Style
-init(autoreset=True)
+from coloroutput import DEBUG_LABEL, LOG_LABEL, OK_LABEL, INPUT_LABEL, WARNING_MSG, ERROR_MSG
 
 import commonVar as common
 import numpy as np
@@ -13,11 +12,6 @@ import sys
 from usefulfunctions.config_reader import *
 
 from Tools import *
-
-debuglabel = "[ " + Fore.BLACK + Back.YELLOW + "DEBUG" + Fore.RESET + Back.RESET + " ] "  # [ LOG ]
-loglabel = "[ " + Fore.YELLOW + "LOG" + Fore.RESET + " ] "  # [ LOG ]
-oklabel = "[ " + Fore.GREEN + "OK" + Fore.RESET + " ] "  # [ OK ]
-inputlabel = "[ " + Fore.BLACK + Back.WHITE + " INPUT " + Fore.RESET + Back.RESET + " ] "
 
 
 def loadParameters(self):
@@ -34,7 +28,7 @@ def loadParameters(self):
     #
     # GLOBAL SEED IS SET HERE
     #
-    print(inputlabel)
+    print(INPUT_LABEL)
     mySeed = int(
         uf.digit_input(
             msg="random number seed (1 to get it from the clock) ", DEFAULT=1))
@@ -52,7 +46,7 @@ def loadParameters(self):
     #
     # SET CONFIG FILE
     #
-    print(inputlabel)
+    print(INPUT_LABEL)
     # set default config file path
     common.configFile = '../../memory/src/confg.ini'
     #ask for config file path
@@ -65,11 +59,11 @@ def loadParameters(self):
     common.configreader = ConfigReader()
     common.configreader.readConfigFile(common.configFile)
     common.configreader.setCommonVars()
-    print(debuglabel + "using config file: ", common.configFile)
-    print(debuglabel + "using network file: ", common.networkfilepath)
+    print(DEBUG_LABEL + "using config file: ", common.configFile)
+    print(DEBUG_LABEL + "using network file: ", common.networkfilepath)
     # this line wal left here to not forget to set the max number of cycles
     self.nCycles = common.N_CYCLES
-    print(debuglabel + 'number of cycles', common.N_CYCLES)
+    print(DEBUG_LABEL + 'number of cycles', common.N_CYCLES)
     #
     # =========================================================================================
 
@@ -117,21 +111,21 @@ def loadParameters(self):
 
     #count starts from 0
     maxnumber += 1
-    print(debuglabel + "max number of users found ", maxnumber)
+    print(DEBUG_LABEL + "max number of users found ", maxnumber)
     common.N_USERS = maxnumber - common.N_SOURCES
     common.N_AGENTS = common.N_USERS + common.N_SOURCES
-    print(debuglabel + "running with ", common.N_USERS,
+    print(DEBUG_LABEL + "running with ", common.N_USERS,
           " (S) SANE/IGNORANT users and ", common.N_SOURCES,
           " (I) INFECTED/SPREADER users")
-    print(Fore.YELLOW +
+    print(WARNING_MSG +
           "WARNIG: THIS NEED TO BE CHANGED WITH SPREADERS AND IGNORANTS")
     print(
-        Fore.YELLOW +
+        WARNING_MSG +
         "THIS WARNING WILL STAY UNTIL CHANGES ON ALL THE PROGRAM ARE COMMITTED"
     )
     if common.N_SOURCES != 0:
         print(
-            Fore.RED +
+            ERROR_MSG +
             'ERROR: Using sources is not possible anymore: define spread state of users instead'
         )
         sys.exit(1)

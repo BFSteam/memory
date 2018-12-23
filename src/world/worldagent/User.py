@@ -437,6 +437,8 @@ class User(WorldAgent):
         """
         if common.flags['toggleActivateWithProba'] is True:
             return
+        print("CONTINUEACTIVATION")
+        print(self.active)
         if self.active is True:
             self.activeTime += 1
         else:
@@ -802,8 +804,7 @@ class User(WorldAgent):
             if d1 > threshold:
                 self.add_edge(n1)
                 return True
-            else:
-                return False
+            return False
         for firstnode in self.get_list_of_all_self_neighbors():
             #
             # check if user is connected only to sources
@@ -883,8 +884,7 @@ class User(WorldAgent):
             if self.database[key]['id-source'] == id_source and self.database[
                     key]['date-creation'] == date:
                 return True
-            else:
-                return False
+            return False
 
     def chooseNews(self, newsdict):
         """
@@ -947,7 +947,7 @@ class User(WorldAgent):
         this can be used only by Sources -> Infected -> i
         """
         if self.spreadState != 'i':
-            return
+            return None
         tmp = self.state
         for j in range(common.dim):
             tmp[j] += 0.1 * random.random()
