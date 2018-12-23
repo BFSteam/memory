@@ -2,6 +2,7 @@
 import random
 
 import datastructures.database as db
+from coloroutput import LOG_LABEL
 
 import commonVar as common
 import graph as graph
@@ -69,7 +70,8 @@ class WorldAgent(Agent):
         #]
         self.database = db.database()
         self.spreadState = 'r'
-        print("agent", self.agType, "#", self.number, "has been created")
+        #print(LOG_LABEL, "agent", self.agType, "#", self.number,
+        #"has been created")
 
     def genState(self, n=1, noise=0.15):
         # source state

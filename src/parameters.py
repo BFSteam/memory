@@ -112,23 +112,22 @@ def loadParameters(self):
     #count starts from 0
     maxnumber += 1
     print(DEBUG_LABEL + "max number of users found ", maxnumber)
-    common.N_USERS = maxnumber - common.N_SOURCES
-    common.N_AGENTS = common.N_USERS + common.N_SOURCES
-    print(DEBUG_LABEL + "running with ", common.N_USERS,
-          " (S) SANE/IGNORANT users and ", common.N_SOURCES,
-          " (I) INFECTED/SPREADER users")
+    common.N_USERS = maxnumber
+    common.N_AGENTS = maxnumber
+    print(DEBUG_LABEL + "running with\n", common.N_USERS,
+          " (S) SANE/IGNORANT users.\n", common.N_SOURCES,
+          " of them are (I) INFECTED/SPREADER")
     print(WARNING_MSG +
           "WARNIG: THIS NEED TO BE CHANGED WITH SPREADERS AND IGNORANTS")
     print(
         WARNING_MSG +
         "THIS WARNING WILL STAY UNTIL CHANGES ON ALL THE PROGRAM ARE COMMITTED"
     )
-    if common.N_SOURCES != 0:
-        print(
-            ERROR_MSG +
-            'ERROR: Using sources is not possible anymore: define spread state of users instead'
-        )
-        sys.exit(1)
+    print(
+        WARNING_MSG +
+        'WARNING: Using sources is not possible anymore: define spread state of users instead'
+    )
+    print(WARNING_MSG + 'testing ... ... ... ...')
 
     #
     # write files users.txt sources.txt accordingly

@@ -54,13 +54,19 @@ class MemoryScheduler(AgentScheduler):
             e = np.empty([0])
             e = np.append(e, common.G.node[node]['agent'].number)
             e = np.append(e, common.cycle)
-            if (common.G.node[node]['agent'].number < common.N_SOURCES):
-                e = np.append(e, "x")
+
+            # old block used to distinguish between users and sources
+            #
+            #if (common.G.node[node]['agent'].number < common.N_SOURCES):
+            #    e = np.append(e, "x")
+            #else:
+            #
+            # end old block
+
+            if (common.G.node[node]['agent'].active):
+                e = np.append(e, "u")
             else:
-                if (common.G.node[node]['agent'].active):
-                    e = np.append(e, "u")
-                else:
-                    e = np.append(e, "d")
+                e = np.append(e, "d")
             e = np.append(e, common.G.node[node]['agent'].spreadState)
             e = np.append(e, [
                 x for x in list(common.G.node[node]['agent'].database.keys())

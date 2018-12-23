@@ -1,5 +1,5 @@
 # 1
-sources generateNews
+users generate_news
 # 2
 users random_diffusion
 users other_diffusion
