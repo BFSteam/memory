@@ -64,15 +64,26 @@ def initializeEdges():
                     cr='a',
                     write=common.writeConnections)
 
-        # === this block is gonna be deprecated soon ======================
-        print('old block: source agent swapped: deprecating in the future')
-        tempindex = np.random.randint(0, common.N_AGENTS)
+        # new untested block
+        #
         if -1 not in common.source_index and common.source_index[
                 0] < common.N_AGENTS:
-            tempindex = common.source_index[0]
-        tempagent = common.G.node[0]['agent']
-        common.G.node[0]['agent'] = common.G.node[tempindex]['agent']
-        common.G.node[tempindex]['agent'] = tempagent
+            common.G.node[common.source_index[0]]['agent'].spreadState = 's'
+        else:
+            common.G.node[np.random.randint(
+                0, common.N_AGENTS)]['agent'].spreadState = 's'
+        #
+        # end block
+
+        # === this block is gonna be deprecated soon ======================
+        #print('old block: source agent swapped: deprecating in the future')
+        #tempindex = np.random.randint(0, common.N_AGENTS)
+        #if -1 not in common.source_index and common.source_index[
+        #        0] < common.N_AGENTS:
+        #    tempindex = common.source_index[0]
+        #tempagent = common.G.node[0]['agent']
+        #common.G.node[0]['agent'] = common.G.node[tempindex]['agent']
+        #common.G.node[tempindex]['agent'] = tempagent
         # === end block ===================================================
 
     # ================================================================
