@@ -68,10 +68,10 @@ def initializeEdges():
         #
         if -1 not in common.source_index and common.source_index[
                 0] < common.N_AGENTS:
-            common.G.node[common.source_index[0]]['agent'].spreadState = 's'
+            common.G.node[common.source_index[0]]['agent'].spreadState = 'i'
         else:
             common.G.node[np.random.randint(
-                0, common.N_AGENTS)]['agent'].spreadState = 's'
+                0, common.N_AGENTS)]['agent'].spreadState = 'i'
         #
         # end block
 
@@ -152,37 +152,57 @@ def get_graph():
 
 
 def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
-
+    state_color_dict = {  # light active, dark inactive
+        's': {  # sane -> green
+            'active': '#008000',
+            'inactive': '#004000'
+        },
+        'i': {  # infective -> red
+            'active': '#FF0000',
+            'inactive': '#990000'
+        },
+        'r': {  # recovery -> blue
+            'active': '#0000FF',
+            'inactive': '#000099'
+        }
+    }
     clearNetworkXdisplay()
     c = []
     if clrs == 'state':  # draw colors thinking of state
-        print(common.G.node[0]['agent'].has_news_in_database(
-            id_source=0, date=1))
-
         for i in list(common.G.nodes()):
-            if common.G.node[i]['agent'].has_news_in_database(
-                    id_source=0, date=1) is True:
-                c.append('#ffa500')
-                continue
-            elif common.G.node[i]['agent'].has_news_in_database(
-                    id_source=1, date=1) is True:
-                c.append('#ff748c')
-                continue
-            elif common.G.node[i]['agent'].has_news_in_database(
-                    id_source=2, date=1) is True:
-                c.append('#38ffc8')
-                continue
-            else:
-                if common.G.nodes()[i]['agent'].spreadState == "i":
-                    c.append('red')
-                    continue
-                else:
-                    if common.G.nodes[i]['agent'].active is True:
-                        c.append('blue')
-                        continue
-                    else:
-                        c.append('grey')
-                        continue
+            try:
+                temp_state = 'active' if (
+                    common.G.node[i]['agent'].active is True) else 'inactive'
+                c.append(state_color_dict[common.G.node[i]['agent'].
+                                          spreadState][temp_state])
+            except:
+                c.append('#808080')
+        #print(common.G.node[0]['agent'].has_news_in_database(
+        #    id_source=0, date=1))
+        #for i in list(common.G.nodes()):
+        #    if common.G.node[i]['agent'].has_news_in_database(
+        #            id_source=0, date=1) is True:
+        #        c.append('#ffa500')
+        #        continue
+        #    elif common.G.node[i]['agent'].has_news_in_database(
+        #            id_source=1, date=1) is True:
+        #        c.append('#ff748c')
+        #        continue
+        #    elif common.G.node[i]['agent'].has_news_in_database(
+        #            id_source=2, date=1) is True:
+        #        c.append('#38ffc8')
+        #        continue
+        #    else:
+        #        if common.G.nodes()[i]['agent'].spreadState == "s":
+        #            c.append('red')
+        #            continue
+        #        else:
+        #            if common.G.nodes[i]['agent'].active is True:
+        #                c.append('blue')
+        #                continue
+        #            else:
+        #                c.append('grey')
+        #                continue
 
     node_size = []
     for i in list(common.G.nodes()):

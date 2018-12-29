@@ -143,5 +143,5 @@ def loadParameters(self):
     #    DEFAULT=common.N_USERS, msg="How many users? (default = " + str(common.N_USERS) + ") "))
     file = open(common.project + "/users.txt", "w")
     for i in range(common.N_USERS):
-        file.write(str(common.N_SOURCES + i) + '\n')
+        file.write(str(i) + '\n')
     file.close()
