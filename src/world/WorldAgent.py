@@ -48,6 +48,15 @@ class WorldAgent(Agent):
         self.agType = agType
 
         self.state = np.zeros([common.dim])
+        self.active = True
+        #self.databaseCols = [
+        #    'id-n', 'new', 'id-source', 'date-creation', 'relevance',
+        #    'id-send', 'date-send', 'id-recive', 'date-recive'
+        #]
+        self.database = db.database()
+        self.spreadState = 's'
+        #print(LOG_LABEL, "agent", self.agType, "#", self.number,
+        #"has been created")
 
         # =========================================================================================
         #
@@ -59,19 +68,10 @@ class WorldAgent(Agent):
         # create link only if you are only at the first step of the clock
         # and if you are the last user
         if common.cycle == 1 and len(common.G.nodes()) == common.N_AGENTS:
-            graph.initializeEdges()  # if last creates edges
+            graph.initialize_edges()  # if last creates edges
+            graph.change_s_to_i()
         #
         # =========================================================================================
-
-        self.active = True
-        #self.databaseCols = [
-        #    'id-n', 'new', 'id-source', 'date-creation', 'relevance',
-        #    'id-send', 'date-send', 'id-recive', 'date-recive'
-        #]
-        self.database = db.database()
-        self.spreadState = 'r'
-        #print(LOG_LABEL, "agent", self.agType, "#", self.number,
-        #"has been created")
 
     def genState(self, n=1, noise=0.15):
         # source state

@@ -30,7 +30,7 @@ def create_graph():
     common.G_edge_labels = {}  # copy the address of the labels of the edges
 
 
-def initializeEdges():
+def initialize_edges():
     """
 
     random initialization of edges
@@ -63,17 +63,6 @@ def initializeEdges():
                     weight=weight,
                     cr='a',
                     write=common.writeConnections)
-
-        # new untested block
-        #
-        if -1 not in common.source_index and common.source_index[
-                0] < common.N_AGENTS:
-            common.G.node[common.source_index[0]]['agent'].spreadState = 'i'
-        else:
-            common.G.node[np.random.randint(
-                0, common.N_AGENTS)]['agent'].spreadState = 'i'
-        #
-        # end block
 
         # === this block is gonna be deprecated soon ======================
         #print('old block: source agent swapped: deprecating in the future')
@@ -120,6 +109,29 @@ def initializeEdges():
                                     cr='a',
                                     write=common.writeConnections)
     # ================================================================
+
+
+def change_s_to_i():
+    # new untested block
+    #
+    temp_index = 0
+    if -1 not in common.source_index and common.source_index[
+            0] < common.N_AGENTS:
+        temp_index = common.source_index[0]
+    else:
+        temp_index = np.random.randint(0, common.N_AGENTS)
+
+    common.G.node[temp_index]['agent'].spreadState = 'i'
+    print(range(len(common.G.nodes)))
+    for i in range(len(common.G.nodes)):
+        print(common.G.node[i]['agent'], '\n')
+    #print(temp_index)
+    #print(len(common.G.nodes))
+    #print(common.G.nodes(data=True))
+    #print(common.G.node[temp_index - 1]['agent'])
+    #print(common.G.node[temp_index]['agent'].database)
+    #
+    # end block
 
 
 # using networkX and matplotlib case
@@ -169,7 +181,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
     clearNetworkXdisplay()
     c = []
     if clrs == 'state':  # draw colors thinking of state
-        for i in list(common.G.nodes()):
+        for i in list(common.G.nodes):
             try:
                 temp_activation = 'active' if (
                     common.G.node[i]['agent'].active is True) else 'inactive'
@@ -207,7 +219,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
         #                continue
 
     node_size = []
-    for i in list(common.G.nodes()):
+    for i in list(common.G.nodes):
         if common.G.nodes()[i]['agent'].spreadState == "i":
             node_size.append(120)
         else:

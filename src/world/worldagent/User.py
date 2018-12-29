@@ -53,7 +53,7 @@ class User(WorldAgent):
         self.database = db.database()  # News database
         self.dblacklist = db.database()  # Blacklist database
         self.debunker = False  # Agent is a debunker or not
-        self.spreadState = 's'  # Agent starts infective
+        self.spreadState = 's'  # Agent starts ignorants
         self.active = False  # Agent is active or not
         self.inactiveTime = 0  #
         self.activeTime = 0  #
@@ -62,6 +62,19 @@ class User(WorldAgent):
         self.tiredness = 1  # agent starts not tired
         self.prevDiff = 'a' if random.random(
         ) < 0.5 else 'p'  # random rpevious diffusion to prevent otherDiffusion from failing
+
+    #def __repr__(self):
+    #    print("User()")
+
+    def __str__(self):
+        try:
+            return (
+                '===================\n' + 'User\n' + '-------------------\n' +
+                'number: {0}\nspread state: {1}\nactive: {2}\n' +
+                '===================').format(self.number, self.spreadState,
+                                              self.active)
+        except TypeError as ter:
+            return "Type Error"
 
     def activate_debunker(self, p=common.pInitDebunker):
         """Initial debunking initialization
