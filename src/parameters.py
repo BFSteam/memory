@@ -34,8 +34,42 @@ def loadParameters(self):
             msg="random number seed (1 to get it from the clock) ", DEFAULT=1))
     common.SEED = mySeed
     if mySeed == 1:
-        random.seed()
-        np.random.seed()
+        # good for now
+        # TODO for best practice implement a class like this
+        # from https://stackoverflow.com/questions/5012560/how-to-query-seed-used-by-random-random
+        #import random
+        #
+        #class Random(random.Random):
+        #    def seed(self, a=None, version=2):
+        #        from os import urandom as _urandom
+        #        from hashlib import sha512 as _sha512
+        #        if a is None:
+        #            try:
+        #                # Seed with enough bytes to span the 19937 bit
+        #                # state space for the Mersenne Twister
+        #                a = int.from_bytes(_urandom(2500), 'big')
+        #            except NotImplementedError:
+        #                import time
+        #                a = int(time.time() * 256)  # use fractional seconds
+        #
+        #        if version == 2:
+        #            if isinstance(a, (str, bytes, bytearray)):
+        #                if isinstance(a, str):
+        #                    a = a.encode()
+        #                    a += _sha512(a).digest()
+        #                    a = int.from_bytes(a, 'big')
+        #
+        #        self._current_seed = a
+        #        super().seed(a)
+        #
+        #    def get_seed(self):
+        #        return self._current_seed
+        random_seed = random.randrange(2**32 - 1)
+        random.seed(random_seed)
+        np.random.seed(random_seed)
+        common.SEED = random_seed
+        mySeed = random_seed
+
     else:
         random.seed(mySeed)
         np.random.seed(mySeed)

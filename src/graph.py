@@ -171,11 +171,13 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
     if clrs == 'state':  # draw colors thinking of state
         for i in list(common.G.nodes()):
             try:
-                temp_state = 'active' if (
+                temp_activation = 'active' if (
                     common.G.node[i]['agent'].active is True) else 'inactive'
-                c.append(state_color_dict[common.G.node[i]['agent'].
-                                          spreadState][temp_state])
-            except:
+                temp_spreading_state = common.G.node[i]['agent'].spreadState
+                c.append(
+                    state_color_dict[temp_spreading_state][temp_activation])
+            except KeyError as kex:
+                print(kex)
                 c.append('#808080')
         #print(common.G.node[0]['agent'].has_news_in_database(
         #    id_source=0, date=1))
@@ -207,7 +209,7 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
     node_size = []
     for i in list(common.G.nodes()):
         if common.G.nodes()[i]['agent'].spreadState == "i":
-            node_size.append(100)
+            node_size.append(120)
         else:
             node_size.append(60)
     pos = nx.spring_layout(common.G)
@@ -221,9 +223,9 @@ def drawGraph(n=True, e=True, l=True, clrs='state', static=True, shape=True):
     if l is True:  # draw labels
         nx.draw_networkx_labels(common.G, pos, font_size=8)
 
-    plt.title('seed:' + str(common.SEED) + 'u:' + str(common.N_USERS) + 's:' +
-              str(common.N_SOURCES) + 'av.deg.:' + str(common.averageDegree) +
-              't:' + str(common.cycle) + "/" + str(common.N_CYCLES))
+    plt.title('seed: ' + str(common.SEED) + ' users: ' + str(common.N_USERS) +
+              ' initial spreaders: ' + str(common.N_SOURCES) + ' time: ' +
+              str(common.cycle) + "/" + str(common.N_CYCLES))
     # plt.show()  # show plot
     if not os.path.exists(common.project.replace("src", "log")):
         os.makedirs(common.project.replace("src", "log"))
