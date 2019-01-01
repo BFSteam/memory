@@ -32,12 +32,13 @@ class MemoryScheduler(AgentScheduler):
         self.agType = agType
 
         #self.memoryLog = np.empty((0, 3 + common.memorySize))
+        self.filename = common.project.replace(
+            "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
+        # end overload from parent class
 
         common.memlog = self
         if not os.path.exists(common.project.replace("src", "tmp")):
             os.makedirs(common.project.replace("src", "tmp"))
-        self.filename = common.project.replace(
-            "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
         self.ff = open(self.filename, 'w')
         self.w = csv.writer(self.ff)
         printHeader(

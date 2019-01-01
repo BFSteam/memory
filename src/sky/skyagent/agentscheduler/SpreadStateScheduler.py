@@ -35,12 +35,14 @@ class SreadStateScheduler(AgentScheduler):
             self.myWorldState = myWorldState
         self.agType = agType
 
-        #self.connectionLog = np.empty((0, 5))
-        common.actlog = self
-        if not os.path.exists(common.project.replace("src", "tmp")):
-            os.makedirs(common.project.replace("src", "tmp"))
         self.filename = common.project.replace(
             "src", 'tmp/sp_st__log_temp.%s.txt' % os.getpid())
+
+        #self.connectionLog = np.empty((0, 5))
+
+        common.sprlog = self
+        if not os.path.exists(common.project.replace("src", "tmp")):
+            os.makedirs(common.project.replace("src", "tmp"))
         self.ff = open(self.filename, 'w')
         self.w = csv.writer(self.ff)
         printHeader(
@@ -48,12 +50,12 @@ class SreadStateScheduler(AgentScheduler):
             firstline=['#spreadStatelog'],
             lastline=['time', 'agent', 'state1', 'state2'])
 
-    def registerEntry(self,
-                      agent=-1,
-                      date=-1,
-                      state1='x',
-                      state2='y',
-                      write=True):
+    def register_entry(self,
+                       agent=-1,
+                       date=-1,
+                       state1='x',
+                       state2='y',
+                       write=True):
         """
 
         creates an array to stack under the log and does it
@@ -62,29 +64,3 @@ class SreadStateScheduler(AgentScheduler):
         if write == False:
             return
         self.w.writerow([date, agent, state1, state2])
-
-    def writeLog(self, path='./defSLog.csv', write=True):
-        """
-
-        saves the log from temp to path
-        appends the remaining log rows
-        deletes the temp
-
-        """
-        self.ff.close()
-        if write == False:
-            vprint(
-                WARNING_MSG +
-                "SpreadStateScheduler -> writeLog called but not enabled: no file written"
-            )
-            os.remove(self.filename)
-            return
-
-        shutil.copy(self.filename, path)
-        vprint(
-            LOG_LABEL + "SpreadStateScheduler -> writeLog file written at",
-            path,
-        )
-        os.remove(self.filename)
-        vprint(LOG_LABEL + "SpreadStateScheduler -> writeLog tmp file",
-               self.filename, "removed")

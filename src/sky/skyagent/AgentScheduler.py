@@ -1,6 +1,9 @@
 # AgentScheduler
+import csv
 import os
 import shutil
+
+import commonVar as common
 
 from Tools import *
 from agTools import *
@@ -30,6 +33,29 @@ class AgentScheduler(SkyAgent):
             self.myWorldState = myWorldState
         self.agType = agType
 
+        self.filename = common.project.replace(
+            "src", "tmp/default_log_temp_.%s.txt" % os.getpid())
+        self.ff = open(self.filename, 'w')
+        self.writer = csv.writer(self.ff)
+        self.chunk = []
+        self.active = True
+
+    def register_entry_in_chunk(self, entry):
+        if self.active is not True:
+            return
+        self.chunk.append(entry)
+        if len(self.chunk) > common.lineBuffer:
+            self.write_chunk_on_temp_file()
+            self.empty_chunk()
+
+    def write_chunk_on_temp_file(self):
+        for row in self.chunk:
+            self.writer.writerow(row)
+
+    def empty_chunk(self):
+        self.chunk = []
+
+    # TODO maybe save_and_close_log_file is a better name
     def write_and_close_log_file(self, path='./defLog.csv', write=True):
         """
         default write log function
