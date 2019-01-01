@@ -40,9 +40,11 @@ class ActivationScheduler(AgentScheduler):
         self.filename = common.project.replace(
             "src", 'tmp/act_log_temp.%s.txt' % os.getpid())
         self.ff = open(self.filename, 'w')
-        self.w = csv.writer(self.ff)
+        self.writer = csv.writer(self.ff)
+        self.chunk = []
+        self.active = common.writeActivations
         printHeader(
-            self.w,
+            self.writer,
             firstline=['#activationlog'],
             lastline=['agent', 'time', 'type', 'dtime'])
 
@@ -55,7 +57,7 @@ class ActivationScheduler(AgentScheduler):
         """
         if write == False:
             return
-        self.w.writerow([agent, date, atype, atime])
+        self.register_entry_in_chunk([agent, date, atype, atime])
 
     #
     # DEPRECATING

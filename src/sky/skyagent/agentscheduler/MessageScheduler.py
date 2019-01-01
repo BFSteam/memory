@@ -38,12 +38,17 @@ class MessageScheduler(AgentScheduler):
         self.filename = common.project.replace(
             "src", 'tmp/msg_log_temp.%s.txt' % os.getpid())
         self.ff = open(self.filename, 'w')
-        self.w = csv.writer(self.ff)
+        self.writer = csv.writer(self.ff)
+        self.chunk = []
+        self.active = common.writeActivations
         printHeader(
-            self.w,
+            self.writer,
             firstline=['#messagelog'],
             lastline=["source", "timec", "news", "ag1", "ag2", "time", "type"])
 
+    #
+    # DEPRECATING
+    #
     def registerEntry(self,
                       id_src=-1,
                       date_creation=-1,
@@ -74,7 +79,7 @@ class MessageScheduler(AgentScheduler):
         if write == False:
             return
 
-        self.w.writerow(
+        self.register_entry_in_chunk(
             [id_src, date_creation, id_new, sender, reciver, date, diffusion])
 
     #
