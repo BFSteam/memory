@@ -49,6 +49,7 @@ class AgentScheduler(SkyAgent):
             self.empty_chunk()
 
     def write_chunk_on_temp_file(self):
+        print("[", self.agType, ":", self.number, "] REACHED MAX CHUNK LIMIT")
         for row in self.chunk:
             self.writer.writerow(row)
 

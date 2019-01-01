@@ -38,9 +38,11 @@ class ConnectionScheduler(AgentScheduler):
         self.filename = common.project.replace(
             "src", 'tmp/con_log_temp.%s.txt' % os.getpid())
         self.ff = open(self.filename, 'w')
-        self.w = csv.writer(self.ff)
+        self.write = csv.writer(self.ff)
+        self.chunk = []
+        self.active = common.writeConnections
         printHeader(
-            self.w,
+            self.write,
             firstline=['#connectionlog'],
             lastline=['ag1', 'ag2', 'time', 'weight', 'type'])
 
@@ -58,7 +60,7 @@ class ConnectionScheduler(AgentScheduler):
         """
         if write == False:
             return
-        self.w.writerow([first, second, date, weight, cr])
+        self.register_entry_in_chunk([first, second, date, weight, cr])
 
     #
     # DEPRECATING

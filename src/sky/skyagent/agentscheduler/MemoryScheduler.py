@@ -40,9 +40,11 @@ class MemoryScheduler(AgentScheduler):
         if not os.path.exists(common.project.replace("src", "tmp")):
             os.makedirs(common.project.replace("src", "tmp"))
         self.ff = open(self.filename, 'w')
-        self.w = csv.writer(self.ff)
+        self.writer = csv.writer(self.ff)
+        self.chunk = []
+        self.active = common.writeMemories
         printHeader(
-            self.w,
+            self.writer,
             firstline=['# memorylog'],
             lastline=["agent", "time", "state", "spreadstate"] +
             ["news" + str(i) for i in range(common.memorySize)])
@@ -74,7 +76,7 @@ class MemoryScheduler(AgentScheduler):
             ])
             for i in range(4 + common.memorySize - e.shape[0]):
                 e = np.append(e, 0)
-            self.registerEntry(e)
+            self.register_entry_in_chunk(e)
 
     def registerEntry(self, entry, write=True):
         """
@@ -97,7 +99,7 @@ class MemoryScheduler(AgentScheduler):
         """
         if write == False:
             return
-        self.w.writerow(entry)
+        self.register_entry_in_chunk(entry)
 
     #
     # DEPRECATING
