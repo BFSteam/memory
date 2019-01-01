@@ -16,6 +16,8 @@ class ActivationScheduler(AgentScheduler):
     """
 
     AMMS
+    This scheduler is called every time the state of an agent changes
+    from active to inactive and vice versa
 
     """
 
@@ -55,6 +57,9 @@ class ActivationScheduler(AgentScheduler):
             return
         self.w.writerow([agent, date, atype, atime])
 
+    #
+    # DEPRECATING
+    #
     def writeLog(self, path='./defALog.csv', write=True):
         """
 
@@ -74,7 +79,7 @@ class ActivationScheduler(AgentScheduler):
 
         shutil.copy(self.filename, path)
         vprint(
-            "ActivationScheduler -> writeLog file written at",
+            self.agType + "ActivationScheduler -> writeLog file written at",
             path,
         )
         os.remove(self.filename)

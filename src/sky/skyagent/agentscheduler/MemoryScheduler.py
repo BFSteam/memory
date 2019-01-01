@@ -98,6 +98,9 @@ class MemoryScheduler(AgentScheduler):
             return
         self.w.writerow(entry)
 
+    #
+    # DEPRECATING
+    #
     def writeLog(self, path='./defMLog.csv', write=True):
         self.ff.close()
         if write == False:

@@ -3,3 +3,4 @@ msglogs sky.skyagent.agentscheduler.MessageScheduler
 conlogs sky.skyagent.agentscheduler.ConnectionScheduler
 memlogs sky.skyagent.agentscheduler.MemoryScheduler
 actlogs sky.skyagent.agentscheduler.ActivationScheduler
+sprlogs sky.skyagent.agentscheduler.SpreadStateScheduler

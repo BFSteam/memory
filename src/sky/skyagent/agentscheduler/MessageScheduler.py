@@ -77,6 +77,9 @@ class MessageScheduler(AgentScheduler):
         self.w.writerow(
             [id_src, date_creation, id_new, sender, reciver, date, diffusion])
 
+    #
+    # DEPRECATING
+    #
     def writeLog(self, path='./defMLog.csv', write=True):
         self.ff.close()
         if write == False:

@@ -71,28 +71,32 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         path = common.project.replace(
             "src", "log/connectionLog" + str(common.localtime) + ".csv")
-        common.conlog.writeLog(path=path, write=common.writeConnections)
+        common.conlog.write_and_close_log_file(
+            path=path, write=common.writeConnections)
         # -------------------------------------------------------------
         #
         # MESSAGE LOG
         #
         path = common.project.replace(
             "src", "log/messageLog" + str(common.localtime) + ".csv")
-        common.msglog.writeLog(path=path, write=common.writeMessages)
+        common.msglog.write_and_close_log_file(
+            path=path, write=common.writeMessages)
         # -------------------------------------------------------------
         #
         # MEMORY LOG
         #
         path = common.project.replace(
             "src", "log/memoryLog" + str(common.localtime) + ".csv")
-        common.memlog.writeLog(path=path, write=common.writeMemories)
+        common.memlog.write_and_close_log_file(
+            path=path, write=common.writeMemories)
         # -------------------------------------------------------------
         #
         # ACTIVATION LOG
         #
         path = common.project.replace(
             "src", "log/activationLog" + str(common.localtime) + ".csv")
-        common.actlog.writeLog(path=path, write=common.writeMemories)
+        common.actlog.write_and_close_log_file(
+            path=path, write=common.writeMemories)
         # -------------------------------------------------------------
         # -------------------------------------------------------------
         #
