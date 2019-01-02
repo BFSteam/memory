@@ -36,7 +36,6 @@ class MemoryScheduler(AgentScheduler):
             "src", 'tmp/mem_log_temp.%s.txt' % os.getpid())
         # end overload from parent class
 
-        common.memlog = self
         if not os.path.exists(common.project.replace("src", "tmp")):
             os.makedirs(common.project.replace("src", "tmp"))
         self.ff = open(self.filename, 'w')
@@ -48,6 +47,7 @@ class MemoryScheduler(AgentScheduler):
             firstline=['# memorylog'],
             lastline=["agent", "time", "state", "spreadstate"] +
             ["news" + str(i) for i in range(common.memorySize)])
+        common.memlog = self
 
     def printLog(self):
         print(self.messageLog)

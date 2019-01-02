@@ -30,6 +30,10 @@ class ConfigReader():
         common.source_index = [
             int(x) for x in self.config['INIT']['SOURCE_INDEX'].split(',')
         ]
+        print([key for key in self.config['INIT']])
+        common.logDirName = (str(common.localtime) if
+                             self.config['INIT']['LOG_DIR_NAME'] == 'default'
+                             else str(self.config['INIT']['LOG_DIR_NAME']))
 
         # USER
         common.dim = self.config['USER'].getint('dim')
@@ -80,6 +84,8 @@ class ConfigReader():
         common.writeMemories = self.config['LOG'].getboolean('writeMemories')
         common.writeActivations = self.config['LOG'].getboolean(
             'writeActivations')
+        common.writeSpreadStates = self.config['LOG'].getboolean(
+            'writeSpreadStates')
         common.lineBuffer = self.config['LOG'].getint('lineBuffer')
 
     def readConfigFile(self, configFile):

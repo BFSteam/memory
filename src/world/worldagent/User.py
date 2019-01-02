@@ -676,6 +676,14 @@ class User(WorldAgent):
         self.state = norm(self.state)
         return True
 
+    def change_spreading_state(self, state):
+        self.spreadState = state
+        common.sprlog.registerEntry(
+            date=common.cycle,
+            agent=self.number,
+            state1=self.spreadState,
+            state2=state)
+
     def is_conected_with_only_sources(self):
         """
 

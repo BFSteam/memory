@@ -11,7 +11,6 @@ import usefulfunctions.cumulative_functions as cf
 from usefulfunctions.useful_functions import hill
 #
 configFile = "config.ini"
-
 # ---------------------------------------------------------------------
 #
 # Initial parameters initialization
@@ -176,6 +175,7 @@ writeConnections = True
 writeMessages = True
 writeMemories = True
 writeActivations = True
+writeSpreadStates = True
 lineBuffer = 1000
 # ---------------------------------------------------------------------
 #

@@ -14,7 +14,7 @@ from coloroutput import DEBUG_LABEL, LOG_LABEL, OK_LABEL, INPUT_LABEL, WARNING_M
 from usefulfunctions.useful_functions import printHeader, vprint
 
 
-class SreadStateScheduler(AgentScheduler):
+class SpreadStateScheduler(AgentScheduler):
     """
 
     SSS
@@ -36,26 +36,28 @@ class SreadStateScheduler(AgentScheduler):
         self.agType = agType
 
         self.filename = common.project.replace(
-            "src", 'tmp/sp_st__log_temp.%s.txt' % os.getpid())
+            "src", 'tmp/sp_st_log_temp.%s.txt' % os.getpid())
 
         #self.connectionLog = np.empty((0, 5))
 
-        common.sprlog = self
         if not os.path.exists(common.project.replace("src", "tmp")):
             os.makedirs(common.project.replace("src", "tmp"))
         self.ff = open(self.filename, 'w')
-        self.w = csv.writer(self.ff)
+        self.writer = csv.writer(self.ff)
+        self.chunk = []
+        self.active = common.writeActivations  # TODO add writeSpreadStates to config.ini file
         printHeader(
-            self.w,
+            self.writer,
             firstline=['#spreadStatelog'],
             lastline=['time', 'agent', 'state1', 'state2'])
+        common.sprlog = self
 
-    def register_entry(self,
-                       agent=-1,
-                       date=-1,
-                       state1='x',
-                       state2='y',
-                       write=True):
+    def registerEntry(self,
+                      agent=-1,
+                      date=-1,
+                      state1='x',
+                      state2='y',
+                      write=True):
         """
 
         creates an array to stack under the log and does it
@@ -63,4 +65,4 @@ class SreadStateScheduler(AgentScheduler):
         """
         if write == False:
             return
-        self.w.writerow([date, agent, state1, state2])
+        self.register_entry_in_chunk([date, agent, state1, state2])

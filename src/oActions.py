@@ -12,6 +12,11 @@ from Tools import *
 from usefulfunctions.useful_functions import worldAgentStringsizer, singleNewsStringsizer, printHeader
 from world.WorldAgent import *
 
+import errno
+import shutil
+from os import listdir
+from os.path import isfile, join
+
 
 def do1b(address):  # visualizeNet in observerActions.txt
 
@@ -36,8 +41,23 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
     """
 
     if cycle == address.nCycles:
+
+        # create log directory if it doesn't exist
         if not os.path.exists(common.project.replace("src", "log")):
             os.makedirs(common.project.replace("src", "log"))
+
+        # create destination path and directory appending datetime to logDirName
+        destination_path = common.project.replace(
+            'src', 'log/' + common.logDirName + '/' + common.localtime + '/')
+        try:
+            os.makedirs(destination_path)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+        # copy config file
+        shutil.copyfile(
+            common.configFile,
+            destination_path + 'config' + str(common.localtime) + '.ini')
         # -------------------------------------------------------------
         # -------------------------------------------------------------
         #
@@ -47,8 +67,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # GML
         #
-        path = common.project.replace(
-            "src", "log/graph" + str(common.localtime) + ".gml")
+        path = destination_path + "graph.gml"
         nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
         print("saved", path)
         # -------------------------------------------------------------
@@ -69,34 +88,37 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # CONNECTION LOG
         #
-        path = common.project.replace(
-            "src", "log/connectionLog" + str(common.localtime) + ".csv")
+        path = destination_path + "connectionLog.csv"
         common.conlog.write_and_close_log_file(
             path=path, write=common.writeConnections)
         # -------------------------------------------------------------
         #
         # MESSAGE LOG
         #
-        path = common.project.replace(
-            "src", "log/messageLog" + str(common.localtime) + ".csv")
+        path = destination_path + "messageLog.csv"
         common.msglog.write_and_close_log_file(
             path=path, write=common.writeMessages)
         # -------------------------------------------------------------
         #
         # MEMORY LOG
         #
-        path = common.project.replace(
-            "src", "log/memoryLog" + str(common.localtime) + ".csv")
+        path = destination_path + "memoryLog.csv"
         common.memlog.write_and_close_log_file(
             path=path, write=common.writeMemories)
         # -------------------------------------------------------------
         #
         # ACTIVATION LOG
         #
-        path = common.project.replace(
-            "src", "log/activationLog" + str(common.localtime) + ".csv")
+        path = destination_path + "activationLog.csv"
         common.actlog.write_and_close_log_file(
-            path=path, write=common.writeMemories)
+            path=path, write=common.writeActivations)
+        # -------------------------------------------------------------
+        #
+        # SPREADING STATE LOG
+        #
+        path = destination_path + "spreadStateLog.csv"
+        common.sprlog.write_and_close_log_file(
+            path=path, write=common.writeSpreadStates)
         # -------------------------------------------------------------
         # -------------------------------------------------------------
         #
@@ -106,8 +128,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # DEGREE DISTRIBUTION
         #
-        path = common.project.replace(
-            "src", "log/degree_distr" + str(common.localtime) + ".csv")
+        path = destination_path + "degree_distr.csv"
         with open(path, "w") as ff:
             w = csv.writer(ff)
             printHeader(
@@ -120,8 +141,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # CLUSTERING COEFFICIENT
         #
-        path = common.project.replace(
-            "src", "log/clustering" + str(common.localtime) + ".csv")
+        path = destination_path + "clustering.csv"
         clus = nx.clustering(common.G)
         with open(path, "w") as ff:
             w = csv.writer(ff)
@@ -135,8 +155,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # DIAMETER
         #
-        path = common.project.replace(
-            "src", "log/diameter" + str(common.localtime) + ".csv")
+        path = destination_path + "diameter.csv"
         diam = nx.diameter(
             max(nx.connected_component_subgraphs(common.G), key=len))
         with open(path, "w") as ff:
@@ -148,8 +167,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # K - CORE
         #
-        path = common.project.replace(
-            "src", "log/kcore" + str(common.localtime) + ".csv")
+        path = destination_path + "kcore.csv"
         common.G.remove_edges_from(nx.selfloop_edges(common.G))
         kcore = nx.core_number(common.G)
         with open(path, "w") as ff:
@@ -158,26 +176,6 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
             for key, val in dict(kcore).items():
                 w.writerow([key, val])
         # -------------------------------------------------------------
-        import errno
-        import shutil
-        from os import listdir
-        from os.path import isfile, join
-
-        try:
-            os.makedirs(
-                common.project.replace("src", "log/" + str(common.localtime)))
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                raise
-        sourceDir = common.project.replace("src", "log/")
-        destDir = common.project.replace("src",
-                                         "log/" + str(common.localtime) + "/")
-        files = [f for f in listdir(sourceDir) if isfile(join(sourceDir, f))]
-        files = [f for f in files if str(common.localtime) in f]
-        for f in files:
-            shutil.move(sourceDir + f, destDir)
-        shutil.copyfile(common.configFile,
-                        destDir + 'config' + str(common.localtime) + '.ini')
 
         try:
             from pybeep.pybeep import PyBeep
