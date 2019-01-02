@@ -677,12 +677,21 @@ class User(WorldAgent):
         return True
 
     def change_spreading_state(self, state):
+        """
+        Changes the spreading state of a user and calls
+        the logger if changed
+        returns True if the state changed
+        """
+        oldstate = self.spreadState
         self.spreadState = state
-        common.sprlog.registerEntry(
-            date=common.cycle,
-            agent=self.number,
-            state1=self.spreadState,
-            state2=state)
+        if oldstate != state:
+            common.sprlog.registerEntry(
+                date=common.cycle,
+                agent=self.number,
+                state1=oldstate,
+                state2=state)
+            return True
+        return False
 
     def is_conected_with_only_sources(self):
         """

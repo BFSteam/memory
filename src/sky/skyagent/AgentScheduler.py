@@ -45,11 +45,12 @@ class AgentScheduler(SkyAgent):
             return
         self.chunk.append(entry)
         if len(self.chunk) > common.lineBuffer:
+            print("[", self.agType, ":", self.number,
+                  "] REACHED MAX CHUNK LIMIT")
             self.write_chunk_on_temp_file()
             self.empty_chunk()
 
     def write_chunk_on_temp_file(self):
-        print("[", self.agType, ":", self.number, "] REACHED MAX CHUNK LIMIT")
         for row in self.chunk:
             self.writer.writerow(row)
 
@@ -61,6 +62,7 @@ class AgentScheduler(SkyAgent):
         """
         default write log function
         """
+        self.write_chunk_on_temp_file()
         self.ff.close()
         if write == False:
             vprint(WARNING_MSG + "[", self.agType, ":", self.number,
