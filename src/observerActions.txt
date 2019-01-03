@@ -1,4 +1,4 @@
-modelStep ask_all ask_one clock visualizeNet
+modelStep ask_all ask_one clock
 modelStep ask_all ask_one clock
 modelStep ask_all ask_one clock
 modelStep ask_all ask_one clock

@@ -1036,3 +1036,6 @@ class User(WorldAgent):
 
     # end importing from source
     #########################################################
+
+    def become_stifler(self):
+        self.change_spreading_state('r')
