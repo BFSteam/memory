@@ -1,1 +1,1 @@
-sprlogs actlogs msglogs conlogs memlogs users
+deglogs clslogs dmtlogs kcrlogs sprlogs actlogs msglogs conlogs memlogs users

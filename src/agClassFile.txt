@@ -4,3 +4,7 @@ conlogs sky.skyagent.agentscheduler.ConnectionScheduler
 memlogs sky.skyagent.agentscheduler.MemoryScheduler
 actlogs sky.skyagent.agentscheduler.ActivationScheduler
 sprlogs sky.skyagent.agentscheduler.SpreadStateScheduler
+kcrlogs sky.skyagent.agentscheduler.KCoreScheduler
+dmtlogs sky.skyagent.agentscheduler.DiameterScheduler
+clslogs sky.skyagent.agentscheduler.ClusteringScheduler
+deglogs sky.skyagent.agentscheduler.DegreeScheduler

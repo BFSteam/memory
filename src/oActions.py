@@ -126,6 +126,34 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # -------------------------------------------------------------
         #
+        # K CORE NEW
+        #
+        path = destination_path + "k_core_new.csv"
+        common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
+        common.kcrlog.write_and_close_log_file(path=path, write=True)
+        # -------------------------------------------------------------
+        #
+        # DEGREE DISTRIBUTION NEW
+        #
+        path = destination_path + "degree_dist_new.csv"
+        common.deglog.registerEntry(date=common.cycle, graph=common.G)
+        common.deglog.write_and_close_log_file(path=path, write=True)
+        # -------------------------------------------------------------
+        #
+        # CLUSTERING COEFFICIENT NEW
+        #
+        path = destination_path + "clustering_new.csv"
+        common.clslog.registerEntry(date=common.cycle, graph=common.G)
+        common.clslog.write_and_close_log_file(path=path, write=True)
+        # -------------------------------------------------------------
+        #
+        # DIAMETER NEW
+        #
+        path = destination_path + "diameter_new.csv"
+        common.dmtlog.registerEntry(date=common.cycle, graph=common.G)
+        common.dmtlog.write_and_close_log_file(path=path, write=True)
+        # -------------------------------------------------------------
+        #
         # DEGREE DISTRIBUTION
         #
         path = destination_path + "degree_distr.csv"
