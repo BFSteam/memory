@@ -86,6 +86,12 @@ class ConfigReader():
             'writeActivations')
         common.writeSpreadStates = self.config['LOG'].getboolean(
             'writeSpreadStates')
+        common.writeKCore = self.config['LOG'].getboolean('writeKCore')
+        common.writeDegree = self.config['LOG'].getboolean('writeDegree')
+        common.writeClustering = self.config['LOG'].getboolean(
+            'writeClustering')
+        common.writeDiameter = self.config['LOG'].getboolean('writeDiameter')
+
         common.lineBuffer = self.config['LOG'].getint('lineBuffer')
 
     def readConfigFile(self, configFile):

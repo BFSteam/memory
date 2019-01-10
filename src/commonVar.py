@@ -176,6 +176,10 @@ writeMessages = True
 writeMemories = True
 writeActivations = True
 writeSpreadStates = True
+writeKCore = True
+writeDegree = True
+writeClustering = True
+writeDiameter = True
 lineBuffer = 1000
 # ---------------------------------------------------------------------
 #

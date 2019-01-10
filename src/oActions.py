@@ -128,81 +128,85 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # K CORE NEW
         #
-        path = destination_path + "k_core_new.csv"
+        path = destination_path + "k_core.csv"
         common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
-        common.kcrlog.write_and_close_log_file(path=path, write=True)
+        common.kcrlog.write_and_close_log_file(
+            path=path, write=common.writeKCore)
         # -------------------------------------------------------------
         #
         # DEGREE DISTRIBUTION NEW
         #
-        path = destination_path + "degree_dist_new.csv"
+        path = destination_path + "degree_dist.csv"
         common.deglog.registerEntry(date=common.cycle, graph=common.G)
-        common.deglog.write_and_close_log_file(path=path, write=True)
+        common.deglog.write_and_close_log_file(
+            path=path, write=common.writeDegree)
         # -------------------------------------------------------------
         #
         # CLUSTERING COEFFICIENT NEW
         #
-        path = destination_path + "clustering_new.csv"
+        path = destination_path + "clustering.csv"
         common.clslog.registerEntry(date=common.cycle, graph=common.G)
-        common.clslog.write_and_close_log_file(path=path, write=True)
+        common.clslog.write_and_close_log_file(
+            path=path, write=common.writeClustering)
         # -------------------------------------------------------------
         #
         # DIAMETER NEW
         #
-        path = destination_path + "diameter_new.csv"
+        path = destination_path + "diameter.csv"
         common.dmtlog.registerEntry(date=common.cycle, graph=common.G)
-        common.dmtlog.write_and_close_log_file(path=path, write=True)
+        common.dmtlog.write_and_close_log_file(
+            path=path, write=common.writeDiameter)
         # -------------------------------------------------------------
         #
         # DEGREE DISTRIBUTION
         #
-        path = destination_path + "degree_distr.csv"
-        with open(path, "w") as ff:
-            w = csv.writer(ff)
-            printHeader(
-                w,
-                firstline=['#degree distribution'],
-                lastline=['node', 'degree'])
-            for key, val in dict(common.G.degree()).items():
-                w.writerow([key, val])
+        #path = destination_path + "degree_distr.csv"
+        #with open(path, "w") as ff:
+        #    w = csv.writer(ff)
+        #    printHeader(
+        #        w,
+        #        firstline=['#degree distribution'],
+        #        lastline=['node', 'degree'])
+        #    for key, val in dict(common.G.degree()).items():
+        #        w.writerow([key, val])
         # -------------------------------------------------------------
         #
         # CLUSTERING COEFFICIENT
         #
-        path = destination_path + "clustering.csv"
-        clus = nx.clustering(common.G)
-        with open(path, "w") as ff:
-            w = csv.writer(ff)
-            printHeader(
-                w,
-                firstline=['#clustering per node'],
-                lastline=['node', 'clustering coeff'])
-            for key, val in clus.items():
-                w.writerow([key, val])
+        #path = destination_path + "clustering.csv"
+        #clus = nx.clustering(common.G)
+        #with open(path, "w") as ff:
+        #    w = csv.writer(ff)
+        #    printHeader(
+        #        w,
+        #        firstline=['#clustering per node'],
+        #        lastline=['node', 'clustering coeff'])
+        #    for key, val in clus.items():
+        #        w.writerow([key, val])
         # -------------------------------------------------------------
         #
         # DIAMETER
         #
-        path = destination_path + "diameter.csv"
-        diam = nx.diameter(
-            max(nx.connected_component_subgraphs(common.G), key=len))
-        with open(path, "w") as ff:
-            w = csv.writer(ff)
-            printHeader(
-                w, firstline=['#diameter'], lastline=['diameter', 'memsize'])
-            w.writerow([diam, common.memorySize])
+        #path = destination_path + "diameter.csv"
+        #diam = nx.diameter(
+        #    max(nx.connected_component_subgraphs(common.G), key=len))
+        #with open(path, "w") as ff:
+        #    w = csv.writer(ff)
+        #    printHeader(
+        #        w, firstline=['#diameter'], lastline=['diameter', 'memsize'])
+        #    w.writerow([diam, common.memorySize])
         # -------------------------------------------------------------
         #
         # K - CORE
         #
-        path = destination_path + "kcore.csv"
-        common.G.remove_edges_from(nx.selfloop_edges(common.G))
-        kcore = nx.core_number(common.G)
-        with open(path, "w") as ff:
-            w = csv.writer(ff)
-            printHeader(w, firstline=['#k-core'], lastline=['node', 'k-core'])
-            for key, val in dict(kcore).items():
-                w.writerow([key, val])
+        #path = destination_path + "kcore.csv"
+        #common.G.remove_edges_from(nx.selfloop_edges(common.G))
+        #kcore = nx.core_number(common.G)
+        #with open(path, "w") as ff:
+        #    w = csv.writer(ff)
+        #    printHeader(w, firstline=['#k-core'], lastline=['node', 'k-core'])
+        #    for key, val in dict(kcore).items():
+        #        w.writerow([key, val])
         # -------------------------------------------------------------
 
         try:

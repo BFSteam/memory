@@ -183,9 +183,6 @@ class User(WorldAgent):
         and comunicates the changes to the conlog
         """
         common.G[self.number][neighbor]['weight'] += value
-        if common.G[self.number][neighbor]['weight'] < r:
-            self.remove_edge(neighbor)
-
         common.conlog.registerEntry(
             first=self.number,
             second=neighbor,
@@ -193,6 +190,15 @@ class User(WorldAgent):
             weight=common.G[self.number][neighbor]['weight'],
             cr='u',
             write=common.writeConnections)
+        if common.G[self.number][neighbor]['weight'] < r:
+            common.conlog.registerEntry(
+                first=self.number,
+                second=neighbor,
+                date=common.cycle,
+                weight=common.G[self.number][neighbor]['weight'],
+                cr='r',
+                write=common.writeConnections)
+            self.remove_edge(neighbor)
 
     def distance(self, n, a='scalar'):
         """
@@ -1038,4 +1044,8 @@ class User(WorldAgent):
     #########################################################
 
     def become_stifler(self):
-        self.change_spreading_state('r')
+        """
+        user can become stifler only if infected and only if active
+        """
+        if self.spreadState == 'i' and self.active is True:
+            self.change_spreading_state('r')

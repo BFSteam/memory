@@ -73,6 +73,7 @@ def loadParameters(self):
     else:
         random.seed(mySeed)
         np.random.seed(mySeed)
+    print(WARNING_MSG, "SEED", mySeed)
     #
     # =========================================================================================
 
