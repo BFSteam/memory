@@ -122,6 +122,7 @@ def change_s_to_i():
         temp_index = np.random.randint(0, common.N_AGENTS)
 
     common.G.node[temp_index]['agent'].change_spreading_state('i')
+    common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
     #print(range(len(common.G.nodes)))
     #for i in range(len(common.G.nodes)):
     #    print(common.G.node[i]['agent'], '\n')
