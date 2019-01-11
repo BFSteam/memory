@@ -727,6 +727,12 @@ class User(WorldAgent):
         the orher randomly to a neighbour
         """
         #
+        # SELF CHECKING: CAN I DIFFUSE?
+        #
+        # cannot diffuse if is S or R
+        if self.spreadState == 's' or self.spreadState == 'r':
+            return False
+        #
         # cannot diffuse if is inactive
         if self.checkActivation() is False:
             return False
@@ -737,8 +743,11 @@ class User(WorldAgent):
         #
         # check if user is connected only to sources
         # active diffusion is performed with users
+        ####################################################### DEPRECATING
         if self.is_conected_with_only_sources() is True:
+            print("THIS FUNCTION WILL BE DEPRECATED SOON")
             return False
+        ###################################################################
         #
         #
         bestNews = self.findKeyDistanceMinMax(
@@ -747,9 +756,13 @@ class User(WorldAgent):
         bestNeighbour = self.number
         for neighbour in self.get_list_of_all_self_neighbors():
             #
-            # d not diffuse to source
+            # NOT SELF CHECKING: CAN I DIFFUSE TO...?
+            #
+            # do not diffuse to source
+            ####################################################### DEPRECATING
             if self.is_user(neighbour) is False:
                 continue
+            ###################################################################
             #
             # look for bestweight
             if common.G.get_edge_data(*(self.number,
@@ -782,6 +795,8 @@ class User(WorldAgent):
             date=common.cycle,
             diffusion='a',
             write=common.writeMessages)
+        # become infected
+        common.G.node[finalNeighbour]['agent'].change_spreading_state('i')
 
         dist = common.G.node[finalNeighbour]['agent'].distance(bestNews['new'])
         #
