@@ -41,8 +41,8 @@ class AgentScheduler(SkyAgent):
         self.active = True
 
     def register_entry_in_chunk(self, entry):
-        if self.active is not True:
-            return
+        #if self.active is not True:
+        #    return
         self.chunk.append(entry)
         if len(self.chunk) > common.lineBuffer:
             print("[", self.agType, ":", self.number,

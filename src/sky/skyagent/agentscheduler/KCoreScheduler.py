@@ -59,8 +59,8 @@ class KCoreScheduler(AgentScheduler):
         creates an array to stack under the log and does it
 
         """
-        if write == False:
-            return
+        #if write == False:
+        #    return
         kcore = nx.core_number(graph)
         for key, val in dict(kcore).items():
             self.register_entry_in_chunk(
