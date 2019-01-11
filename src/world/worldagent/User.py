@@ -712,12 +712,12 @@ class User(WorldAgent):
         else:
             return False
 
-    def activeDiffusion(self,
-                        p=common.pActiveDiffusion,
-                        threshold=common.tActiveDiffusion,
-                        q=common.pWeight,
-                        r=common.pRemove,
-                        tiredness=common.flags['toggleTiredness']):
+    def active_diffusion(self,
+                         p=common.pActiveDiffusion,
+                         threshold=common.tActiveDiffusion,
+                         q=common.pWeight,
+                         r=common.pRemove,
+                         tiredness=common.flags['toggleTiredness']):
         """Active diffusion
 
         performs active diffusion with the best news in memory
@@ -952,7 +952,7 @@ class User(WorldAgent):
             self.passiveDiffusion()
             self.prevDiff = 'p'
         else:
-            self.activeDiffusion(
+            self.active_diffusion(
                 p=common.pActiveDiffusion,
                 threshold=common.tActiveDiffusion,
                 q=common.pWeight,
@@ -965,7 +965,7 @@ class User(WorldAgent):
         else -> activediffusion
         """
         if self.prevDiff == 'p':
-            self.activeDiffusion(
+            self.active_diffusion(
                 p=common.pActiveDiffusion,
                 threshold=common.tActiveDiffusion,
                 q=common.pWeight,
