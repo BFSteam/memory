@@ -52,7 +52,9 @@ class MemoryScheduler(AgentScheduler):
     def printLog(self):
         print(self.messageLog)
 
-    def updateLog(self):
+    def updateLog(self, write=True):
+        if write == False:
+            return
         for node in range(len(common.G.nodes())):
             e = np.empty([0])
             e = np.append(e, common.G.node[node]['agent'].number)

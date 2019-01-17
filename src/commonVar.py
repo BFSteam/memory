@@ -159,8 +159,15 @@ flags = {
     'toggleForgetNews': True,
     'toggleTiredness': True,
     'toggleCutOldest': True,
-    'toggleActivateWithProba': True
+    'toggleActivateWithProba': True,
+    'toggleActivation': True
 }
+
+toggleForgetNews = True
+toggleTiredness = True
+toggleCutOldest = True
+toggleActivateWithProba = True
+toggleActivation = True
 
 # function used for activation of agents
 cumulative = cf.exponential_cumulative

@@ -76,6 +76,8 @@ class ConfigReader():
             'toggleCutOldest')
         common.toggleActivateWithProba = self.config['FLAGS'].getboolean(
             'toggleActivateWithProba')
+        common.toggleActivation = self.config['FLAGS'].getboolean(
+            'toggleActivation')
 
         # LOG
         common.writeConnections = self.config['LOG'].getboolean(

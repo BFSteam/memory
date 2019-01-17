@@ -54,7 +54,7 @@ class User(WorldAgent):
         self.dblacklist = db.database()  # Blacklist database
         self.debunker = False  # Agent is a debunker or not
         self.spreadState = 's'  # Agent starts ignorants
-        self.active = False  # Agent is active or not
+        self.active = True  # Agent is active or not default active
         self.inactiveTime = 0  #
         self.activeTime = 0  #
         self.activate_agent()  # Agent starts active or inactive randomly
@@ -95,6 +95,8 @@ class User(WorldAgent):
         Used at initialization
 
         """
+        if common.toggleActivation is False:
+            return
         if p == 1:
             self.active = True
             self.inactiveTime = random.randint(0, 5)
@@ -274,9 +276,9 @@ class User(WorldAgent):
 
     def remember(self,
                  news,
-                 cutoldest=common.flags['toggleCutOldest'],
-                 forgetNews=common.flags['toggleForgetNews'],
-                 tiredness=common.flags['toggleTiredness'],
+                 cutoldest=common.toggleCutOldest,
+                 forgetNews=common.toggleForgetNews,
+                 tiredness=common.toggleTiredness,
                  threshold=common.tRemember,
                  rnd=common.pForget,
                  id_send=-1):
@@ -423,6 +425,8 @@ class User(WorldAgent):
         switches activation of the user and resets the counters
         """
 
+        if common.toggleActivation is False:
+            return
         if self.active is True:
             self.active = False
             self.tiredness = 1
@@ -454,7 +458,7 @@ class User(WorldAgent):
 
         Increments the correct active or inactive time of the agent
         """
-        if common.flags['toggleActivateWithProba'] is True:
+        if common.toggleActivateWithProba is True:
             return
         print("CONTINUEACTIVATION")
         print(self.active)
@@ -553,7 +557,9 @@ class User(WorldAgent):
         p: probability of activation
 
         """
-        if common.flags['toggleActivateWithProba'] is True:
+        if common.toggleActivation is False:
+            return
+        if common.toggleActivateWithProba is True:
             return
         if self.inactiveTime >= t:
             if random.random() < common.timeActiveArray[self.inactiveTime - 1]:
@@ -564,7 +570,7 @@ class User(WorldAgent):
     def becomeInactive(self,
                        t=common.tInactivation,
                        p=common.pInactivation,
-                       tiredness=common.flags['toggleTiredness'],
+                       tiredness=common.toggleTiredness,
                        probabilityFunction=0):
         """
 
@@ -599,7 +605,7 @@ class User(WorldAgent):
             t_active=common.tActivation,
             p_active=common.pActivation,
             p_inactive=common.pInactivation,
-            tiredness=common.flags['toggleTiredness'],
+            tiredness=common.toggleTiredness,
     ):
         """
 
@@ -609,7 +615,8 @@ class User(WorldAgent):
         Possibly changeable in the future
 
         """
-
+        if common.toggleActivation is False:
+            return True
         if self.active is False:
             #uf.vprint("Agent", self.number, "is active")
             self.inactiveTime += 1
@@ -631,7 +638,7 @@ class User(WorldAgent):
         [ ( 1, {'id-n':dkbjga, ...} ), ... ]
 
         """
-        if common.flags['toggleActivateWithProba'] is True:
+        if common.toggleActivateWithProba is True:
             active = self.probaActivation(
                 x=self.timeStateActivation(),
                 function=common.cumulative,
@@ -717,7 +724,7 @@ class User(WorldAgent):
                          threshold=common.tActiveDiffusion,
                          q=common.pWeight,
                          r=common.pRemove,
-                         tiredness=common.flags['toggleTiredness']):
+                         tiredness=common.toggleTiredness):
         """Active diffusion
 
         performs active diffusion with the best news in memory
