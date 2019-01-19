@@ -18,3 +18,5 @@ except ImportError:
     LOG_LABEL = "[ LOG ] "  # [ LOG ]
     OK_LABEL = "[ OK ] "  # [ OK ]
     INPUT_LABEL = "[ INPUT ] "
+    WARNING_MSG = "[ WARNING ] "
+    ERROR_MSG = "[ ERROR ] "
