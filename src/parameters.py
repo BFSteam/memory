@@ -100,42 +100,9 @@ def loadParameters(self):
     self.nCycles = common.N_CYCLES
     print(DEBUG_LABEL + 'number of cycles', common.N_CYCLES)
     #
-    # =========================================================================================
-
-    # =========================================================================================
-    #
-    # SLAPP OLD VARIABLES UNUSED
-    # DO NOT EDIT OR DELETE
-    #
-    # nAgents, worldXSize, worldYSize are variables from the object ModelSwarm in ModelSwarm.py
-    self.nAgents = 0
-    # self.worldXSize= input("X size of the world? ")
-    self.worldXSize = 50
-    #print("X size of the world? ", self.worldXSize)
-    # self.worldYSize= input("Y size of the world? ")
-    self.worldYSize = 50
-    #print("Y size of the world? ", self.worldYSize)
-    #
-    # =========================================================================================
-
-    # =========================================================================================
-    #
-    # OLD BLOCK USED WHEN ADJ OR CONFIG FILE IS NOT SPECIFIED
-    # DEPRECATING
-    #
-    #common.averageDegree = uf.digit_input(
-    #    msg="Enter average degree for users? (default = " + str(common.averageDegree) + ") ", DEFAULT=common.averageDegree)
-    #common.P_a = common.averageDegree / common.N_USERS
-    #common.P_s = 10 * common.P_a
-    #common.N_AGENTS = common.N_USERS + common.N_SOURCES
-    #common.N_CYCLES = uf.digit_input(
-    #    msg="How many cycles? (default " + str(common.N_CYCLES) + ") ", DEFAULT=common.N_CYCLES)
-    #
-    # =========================================================================================
-
-    # =========================================================================================
-    #set variables accordingly to adjacency matrix if defined
+    # set variables accordingly to adjacency matrix if defined
     # find maximum number in adjacency matrix
+    #
     if common.networkfilepath != "":
         maxnumber = 0
         with open(common.networkfilepath, 'r') as configfile:
@@ -180,3 +147,51 @@ def loadParameters(self):
     for i in range(common.N_USERS):
         file.write(str(i) + '\n')
     file.close()
+    #
+    # =========================================================================================
+
+    # =========================================================================================
+    #
+    # SET INITIAL SEED OF INFORMATION
+    #
+    print(INPUT_LABEL)
+    s_i = int(
+        uf.digit_input(
+            msg="initial spreader (insert negative or none to get it random) ",
+            DEFAULT=-1))
+    common.source_index = s_i
+    if common.source_index < 0 or common.source_index >= common.N_AGENTS:
+        common.source_index = np.random.randint(0, common.N_AGENTS)
+    print("SOURCE INDEX", common.source_index)
+    # =========================================================================================
+
+    # =========================================================================================
+    #
+    # SLAPP OLD VARIABLES UNUSED
+    # DO NOT EDIT OR DELETE
+    #
+    # nAgents, worldXSize, worldYSize are variables from the object ModelSwarm in ModelSwarm.py
+    self.nAgents = 0
+    # self.worldXSize= input("X size of the world? ")
+    self.worldXSize = 50
+    #print("X size of the world? ", self.worldXSize)
+    # self.worldYSize= input("Y size of the world? ")
+    self.worldYSize = 50
+    #print("Y size of the world? ", self.worldYSize)
+    #
+    # =========================================================================================
+
+    # =========================================================================================
+    #
+    # OLD BLOCK USED WHEN ADJ OR CONFIG FILE IS NOT SPECIFIED
+    # DEPRECATING
+    #
+    #common.averageDegree = uf.digit_input(
+    #    msg="Enter average degree for users? (default = " + str(common.averageDegree) + ") ", DEFAULT=common.averageDegree)
+    #common.P_a = common.averageDegree / common.N_USERS
+    #common.P_s = 10 * common.P_a
+    #common.N_AGENTS = common.N_USERS + common.N_SOURCES
+    #common.N_CYCLES = uf.digit_input(
+    #    msg="How many cycles? (default " + str(common.N_CYCLES) + ") ", DEFAULT=common.N_CYCLES)
+    #
+    # =========================================================================================

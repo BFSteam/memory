@@ -30,6 +30,9 @@ N_SOURCES = 0
 # number of total agents
 N_AGENTS = N_USERS + N_SOURCES
 
+# index of initial seed of information
+source_index = -1
+
 # number of total iterations
 N_CYCLES = 1000
 

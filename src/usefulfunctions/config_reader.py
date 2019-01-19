@@ -16,7 +16,10 @@ class ConfigReader():
         self.config = ConfigParser()
 
     def setCommonVars(self):
+        # =================================================================
+        #
         # INIT
+        #
         #common.SEED = self.config['INIT'].getint('SEED')
         common.N_USERS = self.config['INIT'].getint('N_USERS')
         common.N_SOURCES = self.config['INIT'].getint('N_SOURCES')
@@ -27,22 +30,34 @@ class ConfigReader():
         common.networkfilepath = self.config['INIT'].get('networkfilepath')
         common.P_a = common.averageDegree / common.N_USERS
         common.P_s = common.prop * common.P_a
-        common.source_index = [
-            int(x) for x in self.config['INIT']['SOURCE_INDEX'].split(',')
-        ]
-        print([key for key in self.config['INIT']])
+        #common.source_index = [
+        #    int(x) for x in self.config['INIT']['SOURCE_INDEX'].split(',')
+        #]
+        #print([key for key in self.config['INIT']])
         common.logDirName = (str(common.localtime) if
                              self.config['INIT']['LOG_DIR_NAME'] == 'default'
                              else str(self.config['INIT']['LOG_DIR_NAME']))
-
+        # =================================================================
+        #
         # USER
+        #
         common.dim = self.config['USER'].getint('dim')
         common.memorySize = self.config['USER'].getint('memorySize')
 
+        ###################################################################
+        # DEPRECATING BLOCK
+        # =================================================================
+        #
         # SOURCE
+        #
         common.overwrite = self.config['SOURCE'].getboolean('overwrite')
+        # END DEEPRECATING BLOCK
+        ###################################################################
 
+        # =================================================================
+        #
         # EXEC
+        #
         common.pInitActivation = self.config['EXEC'].getfloat(
             'pInitActivation')
         common.tRemember = self.config['EXEC'].getfloat('tRemember')
@@ -61,13 +76,19 @@ class ConfigReader():
         common.tCreateEdge = self.config['EXEC'].getfloat('tCreateEdge')
         common.pDeleteEdge = self.config['EXEC'].getfloat('pDeleteEdge')
 
+        # =================================================================
+        #
         # SLAPP
+        #
         common.verbose = self.config['SLAPP'].getboolean('verbose')
         common.projectVersion = self.config['SLAPP'].get('projectVersion')
         common.toBeExecuted = self.config['SLAPP'].get('toBeExecuted')
         common.debug = self.config['SLAPP'].getboolean('debug')
 
+        # =================================================================
+        #
         # FLAGS
+        #
         common.toggleForgetNews = self.config['FLAGS'].getboolean(
             'toggleForgetNews')
         common.toggleTiredness = self.config['FLAGS'].getboolean(
@@ -79,7 +100,10 @@ class ConfigReader():
         common.toggleActivation = self.config['FLAGS'].getboolean(
             'toggleActivation')
 
+        # =================================================================
+        #
         # LOG
+        #
         common.writeConnections = self.config['LOG'].getboolean(
             'writeConnections')
         common.writeMessages = self.config['LOG'].getboolean('writeMessages')

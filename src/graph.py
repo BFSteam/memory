@@ -114,14 +114,12 @@ def initialize_edges():
 def change_s_to_i():
     # new untested block
     #
-    temp_index = 0
-    if -1 not in common.source_index and common.source_index[
-            0] < common.N_AGENTS:
-        temp_index = common.source_index[0]
-    else:
-        temp_index = np.random.randint(0, common.N_AGENTS)
-
-    common.G.node[temp_index]['agent'].change_spreading_state('i')
+    #temp_index = 0
+    #if common.source_index >= 0 and common.source_index < common.N_AGENTS:
+    #    temp_index = common.source_index
+    #else:
+    #    temp_index = np.random.randint(0, common.N_AGENTS)
+    common.G.node[common.source_index]['agent'].change_spreading_state('i')
     common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
     #print(range(len(common.G.nodes)))
     #for i in range(len(common.G.nodes)):
