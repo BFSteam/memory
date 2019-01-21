@@ -55,9 +55,9 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
             if e.errno != errno.EEXIST:
                 raise
         # copy config file
-        shutil.copyfile(
-            common.configFile,
-            destination_path + 'config' + str(common.localtime) + '.ini')
+        #shutil.copyfile(
+        #    common.configFile,
+        #    destination_path + 'config' + str(common.localtime) + '.ini')
         # -------------------------------------------------------------
         path = destination_path + "variables.csv"
         with open(path, 'w') as variables:
@@ -74,9 +74,9 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # GML
         #
-        path = destination_path + "graph.gml"
-        nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
-        print("saved", path)
+        #path = destination_path + "graph.gml"
+        #nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
+        #print("saved", path)
         # -------------------------------------------------------------
         #
         # GML different stringsizer
