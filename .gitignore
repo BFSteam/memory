@@ -1,4 +1,4 @@
-via Niccolò Paganini 0/200## Vim Gitignore ###
+#via Niccolò Paganini 0/200## Vim Gitignore ###
 # Swap
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
@@ -209,6 +209,14 @@ jup/*/*.csv
 *.gml
 ./*.pdf
 *.svg
+src/datasets/*/*.degree.csv
+src/datasets/*/*.kcore.csv
+*.csv.clean
+jup/*.feather
+jup/*/*.feather
+jup/*/*.pdf
+*.zip
+*.old
 
 # virtualenvwrapper ?
 src/temp.txt

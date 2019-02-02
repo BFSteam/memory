@@ -6,6 +6,7 @@ import random
 from coloroutput import DEBUG_LABEL, LOG_LABEL, OK_LABEL, INPUT_LABEL, WARNING_MSG, ERROR_MSG
 
 import commonVar as common
+import networkx as nx
 import numpy as np
 import usefulfunctions.useful_functions as uf
 import sys
@@ -103,6 +104,10 @@ def loadParameters(self):
     # set variables accordingly to adjacency matrix if defined
     # find maximum number in adjacency matrix
     #
+
+    temp_G = nx.Graph()
+    temp_degree = []
+    temp_kcore = []
     if common.networkfilepath != "":
         maxnumber = 0
         with open(common.networkfilepath, 'r') as configfile:
@@ -110,6 +115,9 @@ def loadParameters(self):
             for row in reader:
                 #if row == [] or "" in row: continue
                 maxnumber = max(maxnumber, int(row[0]), int(row[1]))
+                temp_G.add_edge(int(row[0]), int(row[1]))
+            temp_kcore = nx.core_number(temp_G)
+            temp_degree = nx.degree(temp_G)
 
     #count starts from 0
     maxnumber += 1
@@ -151,20 +159,56 @@ def loadParameters(self):
     # =========================================================================================
 
     # =========================================================================================
+    #     __    ___ _______  __   __  _______  ____  ______
+    #    / /   /   /__  /\ \/ /  /  |/  / __ \/ __ \/ ____/
+    #   / /   / /| | / /  \  /  / /|_/ / / / / / / / __/
+    #  / /___/ ___ |/ /__ / /  / /  / / /_/ / /_/ / /___
+    # /_____/_/  |_/____//_/  /_/  /_/\____/_____/_____/
     #
-    # SET INITIAL SEED OF INFORMATION
+    # If Lazy Mode is on the input seed is calculated based on the k-core
+    # Simulation is performed taking k-core as the initial parameter
+    #
+    # If Lazy Mode is off input seed is given from input
     #
     print(INPUT_LABEL)
-    s_i = int(
-        uf.digit_input(
-            msg="initial spreader (insert negative or none to get it random) ",
-            DEFAULT=-1))
-    common.source_index = s_i
-    if common.source_index < 0 or common.source_index >= common.N_AGENTS:
-        common.source_index = np.random.randint(0, common.N_AGENTS)
-    print("SOURCE INDEX", common.source_index)
-    # =========================================================================================
+    # raw_input returns the empty string for "enter"
+    yes = {'yes', 'y', 'ye'}
+    no = {'no', 'n', ''}
+    yesnochoice = input('Set "Lazy Mode" on? [y/N]:').lower()
+    print(yesnochoice)
+    if yesnochoice in yes:
+        print("LAZY MODE ON")
+        print(INPUT_LABEL)
+        s_i = int(
+            uf.digit_input(
+                msg=
+                "initial spreader k-core (insert non positive or none to get it random) ",
+                DEFAULT=-1))
+        max_si = max(temp_kcore.values())
+        ss_ii = [key for key, val in temp_kcore.items() if val == s_i]
+        if s_i <= 0 or s_i > max_si or ss_ii == []:
+            s_i = np.random.randint(0, common.N_AGENTS)
+        else:
+            s_i = ss_ii[np.random.choice(len(ss_ii), replace=False)]
+        common.source_index = s_i
+        print("SOURCE INDEX", common.source_index)
 
+    elif yesnochoice in no:
+        print("LAZY MODE OFF")
+        print(INPUT_LABEL)
+        s_i = int(
+            uf.digit_input(
+                msg=
+                "initial spreader (insert negative or none to get it random) ",
+                DEFAULT=-1))
+        common.source_index = s_i
+        if common.source_index < 0 or common.source_index >= common.N_AGENTS:
+            common.source_index = np.random.randint(0, common.N_AGENTS)
+        print("SOURCE INDEX", common.source_index)
+    else:
+        return
+        #sys.stdout.write("Please respond with 'yes' or 'no'")
+        print("LAZY MODE OFF")
     # =========================================================================================
     #
     # SLAPP OLD VARIABLES UNUSED
