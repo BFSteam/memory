@@ -31,6 +31,7 @@ def do2a(address, cycle):  # ask_all in observerActions.txt
     # if cycle % 25 == 0 :
     #    print("Time =", cycle)
     common.memlog.updateLog(write=common.writeMemories)
+    common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
 
 
 def do2b(address, cycle):  # ask_one in observerActions.txt

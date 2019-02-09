@@ -14,6 +14,7 @@ class news(dict):
         'id-source',
         'date-creation',
         'relevance',
+        'sender',
     ]
 
     def __setitem__(self, key, item):

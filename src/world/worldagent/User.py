@@ -457,7 +457,7 @@ class User(WorldAgent):
         """The agents stays in its active or inactive state
 
         Increments the correct active or inactive time of the agent
-        """
+    """
         if common.toggleActivateWithProba is True:
             return
         print("CONTINUEACTIVATION")
@@ -790,35 +790,43 @@ class User(WorldAgent):
             finalNeighbour = shuffledNeighbour
         else:
             finalNeighbour = bestNeighbour
-        #
-        #
-        common.G.node[finalNeighbour]['agent'].remember(bestNews)
-        common.msglog.registerEntry(
-            id_src=bestNews['id-source'],
-            date_creation=bestNews['date-creation'],
-            sender=self.number,
-            reciver=bestNeighbour,
-            id_new=bestNews['id-n'],
-            date=common.cycle,
-            diffusion='a',
-            write=common.writeMessages)
-        # become infected
-        common.G.node[finalNeighbour]['agent'].change_spreading_state('i')
 
-        dist = common.G.node[finalNeighbour]['agent'].distance(bestNews['new'])
         #
-        # bad news
-        if dist < threshold:
-            value = -q * dist
-            self.updateWeight(neighbor=finalNeighbour, value=value, r=r)
         #
-        # good news
-        elif dist > 1 - threshold:
-            value = q * dist
-            self.updateWeight(neighbor=finalNeighbour, value=value, r=r)
+        # If final neighbor is not sane
+        if common.G.node[finalNeighbour]['agent'].spreadState != 's':
+            self.become_stifler(probability=0.1)
+        #
+        # If final neighbor is sane
         else:
-            # they are still... friends... I guess?
-            pass
+            common.G.node[finalNeighbour]['agent'].remember(bestNews)
+            common.msglog.registerEntry(
+                id_src=bestNews['id-source'],
+                date_creation=bestNews['date-creation'],
+                sender=self.number,
+                reciver=bestNeighbour,
+                id_new=bestNews['id-n'],
+                date=common.cycle,
+                diffusion='a',
+                write=common.writeMessages)
+            # become infected
+            common.G.node[finalNeighbour]['agent'].change_spreading_state('i')
+
+            dist = common.G.node[finalNeighbour]['agent'].distance(
+                bestNews['new'])
+            #
+            # bad news
+            if dist < threshold:
+                value = -q * dist
+                self.updateWeight(neighbor=finalNeighbour, value=value, r=r)
+                #
+                # good news
+            elif dist > 1 - threshold:
+                value = q * dist
+                self.updateWeight(neighbor=finalNeighbour, value=value, r=r)
+            else:
+                # they are still... friends... I guess?
+                pass
 
         if tiredness is True:
             self.tiredness = self.tiredness * 1.3
@@ -1065,9 +1073,10 @@ class User(WorldAgent):
     # end importing from source
     #########################################################
 
-    def become_stifler(self):
+    def become_stifler(self, probability=1):
         """
         user can become stifler only if infected and only if active
         """
-        if self.spreadState == 'i' and self.active is True:
-            self.change_spreading_state('r')
+        if np.random.random() < probability:
+            if self.spreadState == 'i' and self.active is True:
+                self.change_spreading_state('r')

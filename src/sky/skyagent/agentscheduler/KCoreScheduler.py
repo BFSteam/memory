@@ -50,7 +50,7 @@ class KCoreScheduler(AgentScheduler):
         printHeader(
             self.writer,
             firstline=['# kCoreLog'],
-            lastline=['time', 'agent', 'k-core', 'state'])
+            lastline=['time', 'agent', 'k-core', 'state', 'degree'])
         common.kcrlog = self
 
     def registerEntry(self, date=-1, graph=None, write=True):
@@ -63,5 +63,7 @@ class KCoreScheduler(AgentScheduler):
         #    return
         kcore = nx.core_number(graph)
         for key, val in dict(kcore).items():
-            self.register_entry_in_chunk(
-                [date, key, val, graph.node[key]['agent'].spreadState])
+            self.register_entry_in_chunk([
+                date, key, val, graph.node[key]['agent'].spreadState,
+                graph.degree(key)
+            ])
