@@ -20,8 +20,12 @@ def pareto_cumulative(x, a, m):
 
 
 def power_cumulative(x, a):
-    if a < 0:
+    """Returns the probability [0,1) of being in an active state
+    following a power law P(x;a) ~ x ^ - (a + 1)
+    """
+
+    if a <= 0:
         raise Exception('Parameter a cannot be < 0')
-    if 0 <= x <= 1:
-        return x**a
+    if x >= 1:
+        return x**(-a - 1)
     return 0

@@ -99,6 +99,8 @@ class ConfigReader():
             'toggleActivateWithProba')
         common.toggleActivation = self.config['FLAGS'].getboolean(
             'toggleActivation')
+        common.toggleDiffuseToInactive = self.config['FLAGS'].getboolean(
+            'toggleDiffuseToInactive')
 
         # =================================================================
         #

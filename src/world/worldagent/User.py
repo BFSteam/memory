@@ -858,7 +858,7 @@ class User(WorldAgent):
         #
         # If final neighbor is not sane
         if common.G.node[finalNeighbour]['agent'].spreadState != 's':
-            self.become_stifler(probability=0.5)
+            self.become_stifler(probability=1)
         #
         # If final neighbor is sane
         else:
@@ -1146,7 +1146,7 @@ class User(WorldAgent):
 
     def random_activation(self):
         self.change_activation_with_probability(
-            x=self.time_state_activation(), function=power_cumulative, par=2.)
+            x=self.time_state_activation(), function=power_cumulative, par=3.)
         #if np.random.random() < 0.5:
         #    self.active = False
         #self.active = True
