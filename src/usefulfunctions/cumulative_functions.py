@@ -27,5 +27,5 @@ def power_cumulative(x, a):
     if a <= 0:
         raise Exception('Parameter a cannot be < 0')
     if x >= 1:
-        return x**(-a - 1)
-    return 0
+        return .6 * x**(-a - 1)
+    return -1

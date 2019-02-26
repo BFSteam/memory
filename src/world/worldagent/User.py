@@ -841,26 +841,55 @@ class User(WorldAgent):
                                                       neighbour))['weight']
                 bestNeighbour = neighbour
 
-        # find random user neighbor
-        while True:
-            shuffledNeighbour = random.choice(
-                self.get_list_of_all_self_neighbors())
-            if self.is_user(shuffledNeighbour) is True:
-                break
         #
-        # chose random neighbor with proba p
-        if random.random() < p:
-            finalNeighbour = shuffledNeighbour
+        # Find a random neighbor
+        listOfNeighbors = self.get_list_of_all_self_neighbors()
+        if common.toggleDiffuseToInactive is False:
+            # if cannot diffuse to inactive filter active neighbors
+            listOfNeighbors = [
+                ne for ne in listOfNeighbors if ne.active == True
+            ]
+        # if no active neighbors take 0
+        if listOfNeighbors == []:
+            shuffledNeighbor = 0
+        # if active neighbors exist take one random
         else:
-            finalNeighbour = bestNeighbour
+            while True:
+                shuffledNeighbour = random.choice(listOfNeighbors)
+                if self.is_user(shuffledNeighbour) is True:
+                    break
+                print("this is a warning. you are not supposed to read this")
 
+        finalNeighbour = bestNeighbour
+        if common.toggleDiffuseToInactive is False:
+            # If best neighbor is non active chose random active neigbor
+            # If no active neighbor => become stifler
+            if finalNeighbour.active is False:
+                finalNeighbour = shuffledNeighbour
+
+        # chose random neighbor with proba p
+        #if random.random() < p:
+        #    finalNeighbour = shuffledNeighbour
+        #else:
+        #    finalNeighbour = bestNeighbour
+
+        # DEPRECATED ##########################################################
+        #
+        # find random user neighbor
+        #while True:
+        #    shuffledNeighbour = random.choice(
+        #        self.get_list_of_all_self_neighbors())
+        #    if self.is_user(shuffledNeighbour) is True:
+        #        break
+        #######################################################################
         #
         #
-        # If final neighbor is not sane
-        if common.G.node[finalNeighbour]['agent'].spreadState != 's':
+        # If final neighbor is not sane or all neighbors are inactive
+        if finalNeighbour == 0 or common.G.node[finalNeighbour][
+                'agent'].spreadState != 's':
             self.become_stifler(probability=1)
         #
-        # If final neighbor is sane
+        # If final neighbor is sane and non 0
         else:
             common.G.node[finalNeighbour]['agent'].remember(bestNews)
             common.msglog.registerEntry(
@@ -894,6 +923,7 @@ class User(WorldAgent):
         if tiredness is True:
             self.tiredness = self.tiredness * 1.3
 
+        self.switch_activation()
         return True
 
     def preferential_add_edge(self, threshold=common.tCreateEdge):
@@ -1146,7 +1176,7 @@ class User(WorldAgent):
 
     def random_activation(self):
         self.change_activation_with_probability(
-            x=self.time_state_activation(), function=power_cumulative, par=3.)
+            x=self.inactiveTime, function=power_cumulative, par=1.)
         #if np.random.random() < 0.5:
         #    self.active = False
         #self.active = True
