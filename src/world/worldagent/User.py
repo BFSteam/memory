@@ -858,7 +858,7 @@ class User(WorldAgent):
         #
         # If final neighbor is not sane
         if common.G.node[finalNeighbour]['agent'].spreadState != 's':
-            self.become_stifler(probability=1)
+            self.become_stifler(probability=0.5)
         #
         # If final neighbor is sane
         else:
