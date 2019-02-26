@@ -137,7 +137,8 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         # K CORE NEW
         #
         path = destination_path + "k_core.csv"
-        common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
+        # already registered in do2a
+        #common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
         common.kcrlog.write_and_close_log_file(path=path, write=True)
         # -------------------------------------------------------------
         #

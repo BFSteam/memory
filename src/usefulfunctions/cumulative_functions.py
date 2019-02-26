@@ -22,6 +22,6 @@ def pareto_cumulative(x, a, m):
 def power_cumulative(x, a):
     if a < 0:
         raise Exception('Parameter a cannot be < 0')
-    if x >= 0 and x <= 1:
+    if 0 <= x <= 1:
         return x**a
     return 0

@@ -16,6 +16,7 @@ from agTools import *
 from Tools import *
 from world.WorldAgent import *
 from usefulfunctions.useful_functions import norm
+from usefulfunctions.cumulative_functions import power_cumulative
 
 
 class User(WorldAgent):
@@ -193,6 +194,9 @@ class User(WorldAgent):
             cr='u',
             write=common.writeConnections)
         if common.G[self.number][neighbor]['weight'] < r:
+            ##
+            ## TWO CALLS TO CONLOG
+            ##
             common.conlog.registerEntry(
                 first=self.number,
                 second=neighbor,
@@ -445,34 +449,36 @@ class User(WorldAgent):
         self.inactiveTime = 0
         self.activeTime = 0
 
-    def timeStateActivation(self):  ########################################
+    def time_state_activation(self):  ########################################
         """If active return active state
         If inactive inactiveState
         """
-        if self.activate_agent is True:
+        if self.active is True:
             return self.activeTime
         return self.inactiveTime
 
-    def continueActivation(self):
+    def continue_state_activation(self):
         """The agents stays in its active or inactive state
 
         Increments the correct active or inactive time of the agent
-    """
-        if common.toggleActivateWithProba is True:
-            return
-        print("CONTINUEACTIVATION")
-        print(self.active)
+
+        returns True if agent is active
+
+        returns False if agent is inactive
+        """
         if self.active is True:
             self.activeTime += 1
-        else:
-            self.inactiveTime += 1
+            return True
 
-    def probaActivation(self, x, function, par):
+        self.inactiveTime += 1
+        return False
+
+    def change_activation_with_probability(self, x, function, par):
         """Uses a function defined in commonVar to determine
         the  probability of activation
         """
         if random.random() < function(x, par):
-            self.continueActivation()
+            self.continue_state_activation()
             return True
         self.switch_activation()
         return False
@@ -557,6 +563,14 @@ class User(WorldAgent):
         p: probability of activation
 
         """
+        ##############################################
+        #
+        # DEPRECATING
+        #
+        #############################################
+        print("deprecated function: if you see this message it's no good")
+        pass
+
         if common.toggleActivation is False:
             return
         if common.toggleActivateWithProba is True:
@@ -590,6 +604,14 @@ class User(WorldAgent):
         tiredness: how much he is tired
 
         """
+        ##############################################
+        #
+        # DEPRECATING
+        #
+        #############################################
+        print("deprecated function: if you see this message it's no good")
+        pass
+
         if probabilityFunction != 0:
             return True
         if tiredness is True:
@@ -615,6 +637,15 @@ class User(WorldAgent):
         Possibly changeable in the future
 
         """
+
+        ##############################################
+        #
+        # DEPRECATING
+        #
+        #############################################
+        print("deprecated function: if you see this message it's no good")
+        pass
+
         if common.toggleActivation is False:
             return True
         if self.active is False:
@@ -638,16 +669,27 @@ class User(WorldAgent):
         [ ( 1, {'id-n':dkbjga, ...} ), ... ]
 
         """
-        if common.toggleActivateWithProba is True:
-            active = self.probaActivation(
-                x=self.timeStateActivation(),
-                function=common.cumulative,
-                par=common.argCumulative)
-            if active is False:
-                return False
-        else:
-            if self.checkActivation() is False:
-                return False
+
+        ##########################################
+        #
+        # Activation is handled out of the
+        # diffusion functions
+        #
+        #
+        ##########################################
+        #
+        #if common.toggleActivateWithProba is True:
+        #    active = self.probaActivation(
+        #        x=self.timeStateActivation(),
+        #        function=common.cumulative,
+        #        par=common.argCumulative)
+        #    if active is False:
+        #        return False
+        #else:
+        #    if self.checkActivation() is False:
+        #        return False
+        #
+        #########################################
 
         #
         # read news
@@ -671,8 +713,17 @@ class User(WorldAgent):
         # register news in memory
         remembered = self.remember(iWantToRemember)
         #
+        ##########################################
+        #
+        # Activation is handled out of the
+        # diffusion functions
+        #
+        #
+        ##########################################
         # tries to become inactive
-        self.becomeInactive()
+        #self.becomeInactive()
+        #
+        #########################################
         #
         # update state with news just recived
         self.changeState(iWantToRemember)
@@ -741,8 +792,20 @@ class User(WorldAgent):
             return False
         #
         # cannot diffuse if is inactive
-        if self.checkActivation() is False:
+        if self.active is False:
             return False
+        ##########################################
+        #
+        # Activation is handled out of the
+        # diffusion functions
+        #
+        #
+        ##########################################
+        #
+        #if self.checkActivation() is False:
+        #    return False
+        #
+        ##########################################
         #
         # check if memory is empty
         if self.is_memory_empty():
@@ -795,7 +858,7 @@ class User(WorldAgent):
         #
         # If final neighbor is not sane
         if common.G.node[finalNeighbour]['agent'].spreadState != 's':
-            self.become_stifler(probability=0.1)
+            self.become_stifler(probability=1)
         #
         # If final neighbor is sane
         else:
@@ -1080,3 +1143,10 @@ class User(WorldAgent):
         if np.random.random() < probability:
             if self.spreadState == 'i' and self.active is True:
                 self.change_spreading_state('r')
+
+    def random_activation(self):
+        self.change_activation_with_probability(
+            x=self.time_state_activation(), function=power_cumulative, par=2.)
+        #if np.random.random() < 0.5:
+        #    self.active = False
+        #self.active = True
