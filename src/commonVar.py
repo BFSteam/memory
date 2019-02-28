@@ -137,6 +137,9 @@ tCreateEdge = 0.6
 # probability of removing a random edge
 pDeleteEdge = 0.1
 
+# probability of transition from I to R
+pStifler = 0.5
+
 # ---------------------------------------------------------------------
 #
 # SLAPP initialization

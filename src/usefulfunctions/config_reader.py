@@ -75,6 +75,7 @@ class ConfigReader():
         common.pRemove = self.config['EXEC'].getfloat('pRemove')
         common.tCreateEdge = self.config['EXEC'].getfloat('tCreateEdge')
         common.pDeleteEdge = self.config['EXEC'].getfloat('pDeleteEdge')
+        common.pStifler = self.config['EXEC'].getfloat('pStifler')
 
         # =================================================================
         #
