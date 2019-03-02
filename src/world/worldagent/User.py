@@ -1174,9 +1174,35 @@ class User(WorldAgent):
             if self.spreadState == 'i' and self.active is True:
                 self.change_spreading_state('r')
 
+    def become_active(self):
+        if self.active == False:
+            self.switch_activation()
+            return True
+        return False
+
+    def become_inactive(self):
+        if self.active == True:
+            self.switch_activation()
+            return True
+        return False
+
     def random_activation(self):
-        self.change_activation_with_probability(
-            x=self.time_state_activation(), function=power_cumulative, par=3.5)
+        rndm = 1. * (len(self.get_list_of_all_self_neighbors()) / 576
+                     )  # 576, 71
+        if random.random() < rndm:
+            if self.active == True:
+                self.continue_state_activation()
+            else:
+                self.switch_activation()
+        else:
+            if self.active == True:
+                self.switch_activation()
+            else:
+                self.continue_state_activation()
+        #if self.number == common.source_index:
+        #    self.active = True
+        #self.change_activation_with_probability(
+        #    x=self.time_state_activation(), function=power_cumulative, par=3.5)
         #if np.random.random() < 0.5:
         #    self.active = False
         #else:
