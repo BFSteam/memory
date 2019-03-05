@@ -770,6 +770,16 @@ class User(WorldAgent):
         else:
             return False
 
+    def is_connected_with_only_state(self, state='r'):
+        """
+        if user is connected with only state return True"""
+        if all([
+                common.G.node[i]['agent'].spreadState == state
+                for i in self.get_list_of_all_self_neighbors()
+        ]):
+            return True
+        return False
+
     def active_diffusion(self,
                          p=common.pActiveDiffusion,
                          threshold=common.tActiveDiffusion,
@@ -884,12 +894,14 @@ class User(WorldAgent):
         #######################################################################
         #
         #
-        # If final neighbor is not sane or all neighbors are inactive
+        # If final neighbor is infected or all neighbors are inactive
         if finalNeighbour == 0 or common.G.node[finalNeighbour][
-                'agent'].spreadState != 's':
+                'agent'].spreadState == 'i':
             self.become_stifler(probability=common.pStifler)
+        elif common.G.node[finalNeighbour]['agent'].spreadState == 'r':
+            pass
         #
-        # If final neighbor is sane and non 0
+        # If final neighbor is non infective and non 0
         else:
             common.G.node[finalNeighbour]['agent'].remember(bestNews)
             common.msglog.registerEntry(
@@ -1207,3 +1219,20 @@ class User(WorldAgent):
         #    self.active = False
         #else:
         #    self.active = True
+
+    def contact_process(self):
+        """Single spreading for each time cycle"""
+        self.active_diffusion()
+
+    def truncated_process(self):
+        """Spread while agent is infective"""
+        while True:
+            if self.active == False:
+                break
+            if self.spreadState != 'i':
+                break
+            if self.is_connected_with_only_state('r') == True:
+                print("True")
+                self.become_stifler(probability=common.pStifler)
+                break
+            self.active_diffusion()
