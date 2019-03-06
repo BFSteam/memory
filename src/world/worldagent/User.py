@@ -802,7 +802,7 @@ class User(WorldAgent):
             return False
         #
         # cannot diffuse if is inactive
-        if self.active is False:
+        if self.active == False:
             return False
         ##########################################
         #
@@ -829,9 +829,11 @@ class User(WorldAgent):
             return False
         ###################################################################
         #
-        #
+        # Find best news in memory based on distance
         bestNews = self.findKeyDistanceMinMax(
             self.database, 'new', minor=False)
+        #
+        # Find the best neighbour based on weight
         bestWeight = 0
         bestNeighbour = self.number
         for neighbour in self.get_list_of_all_self_neighbors():
@@ -856,17 +858,19 @@ class User(WorldAgent):
         listOfNeighbors = self.get_list_of_all_self_neighbors()
         if common.toggleDiffuseToInactive is False:
             # if cannot diffuse to inactive filter active neighbors
+            # from all neighbors
             listOfNeighbors = [
-                ne for ne in listOfNeighbors if ne.active == True
+                ne for ne in listOfNeighbors
+                if common.G.node[ne]['agent'].active == True
             ]
-        # if no active neighbors take 0
+        # if no active neighbors take 0 as shuffledNeighbor
         if listOfNeighbors == []:
-            shuffledNeighbor = 0
+            shuffledNeighbor = -1
         # if active neighbors exist take one random
         else:
             while True:
-                shuffledNeighbour = random.choice(listOfNeighbors)
-                if self.is_user(shuffledNeighbour) is True:
+                shuffledNeighbor = random.choice(listOfNeighbors)
+                if self.is_user(shuffledNeighbor) is True:
                     break
                 print("this is a warning. you are not supposed to read this")
 
@@ -874,12 +878,12 @@ class User(WorldAgent):
         if common.toggleDiffuseToInactive is False:
             # If best neighbor is non active chose random active neigbor
             # If no active neighbor => become stifler
-            if finalNeighbour.active is False:
-                finalNeighbour = shuffledNeighbour
+            if common.G.node[finalNeighbour]['agent'].active is False:
+                finalNeighbour = shuffledNeighbor
 
         # chose random neighbor with proba p
         if random.random() < p:
-            finalNeighbour = shuffledNeighbour
+            finalNeighbour = shuffledNeighbor
         else:
             finalNeighbour = bestNeighbour
 
@@ -887,19 +891,19 @@ class User(WorldAgent):
         #
         # find random user neighbor
         #while True:
-        #    shuffledNeighbour = random.choice(
+        #    shuffledNeighbor = random.choice(
         #        self.get_list_of_all_self_neighbors())
-        #    if self.is_user(shuffledNeighbour) is True:
+        #    if self.is_user(shuffledNeighbor) is True:
         #        break
         #######################################################################
         #
         #
         # If final neighbor is infected or all neighbors are inactive
-        if finalNeighbour == 0 or common.G.node[finalNeighbour][
+        if finalNeighbour < 0 or common.G.node[finalNeighbour][
                 'agent'].spreadState == 'i':
             self.become_stifler(probability=common.pStifler)
         elif common.G.node[finalNeighbour]['agent'].spreadState == 'r':
-            pass
+            self.become_stifler(probability=common.pStifler)
         #
         # If final neighbor is non infective and non 0
         else:
@@ -1199,7 +1203,7 @@ class User(WorldAgent):
         return False
 
     def random_activation(self):
-        rndm = 1. * (len(self.get_list_of_all_self_neighbors()) / 576
+        rndm = 1. * (len(self.get_list_of_all_self_neighbors()) / 71
                      )  # 576, 71
         if random.random() < rndm:
             if self.active == True:
@@ -1226,6 +1230,7 @@ class User(WorldAgent):
 
     def truncated_process(self):
         """Spread while agent is infective"""
+        #self.apathy()
         while True:
             if self.active == False:
                 break
@@ -1236,3 +1241,15 @@ class User(WorldAgent):
                 self.become_stifler(probability=common.pStifler)
                 break
             self.active_diffusion()
+
+    def activate_spreader(self):
+        if self.number == common.source_index:
+            self.become_active()
+            print(self.number)
+
+    def apathy(self, probability=0.1):
+        """S->R with proba lambda*(1-p)"""
+        if self.spreadState != 'i':
+            return
+        if random.random() > probability:
+            self.become_stifler(probability=common.pStifler)
