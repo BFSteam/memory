@@ -102,6 +102,7 @@ class ConfigReader():
             'toggleActivation')
         common.toggleDiffuseToInactive = self.config['FLAGS'].getboolean(
             'toggleDiffuseToInactive')
+        common.toggleApathy = self.config['FLAGS'].getboolean('toggleApathy')
 
         # =================================================================
         #

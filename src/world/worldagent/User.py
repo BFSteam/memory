@@ -1203,6 +1203,8 @@ class User(WorldAgent):
         return False
 
     def random_activation(self):
+        if common.toggleActivation is False:
+            return
         rndm = 1. * (len(self.get_list_of_all_self_neighbors()) / 71
                      )  # 576, 71
         if random.random() < rndm:
@@ -1243,12 +1245,16 @@ class User(WorldAgent):
             self.active_diffusion()
 
     def activate_spreader(self):
+        if common.toggleActivation == False:
+            return
         if self.number == common.source_index:
             self.become_active()
             print(self.number)
 
     def apathy(self, probability=0.1):
         """S->R with proba lambda*(1-p)"""
+        if common.toggleApathy == False:
+            return
         if self.spreadState != 'i':
             return
         if random.random() > probability:

@@ -175,6 +175,7 @@ toggleCutOldest = True
 toggleActivateWithProba = True
 toggleActivation = True
 toggleDiffuseToInactive = True
+toggleApathy = True
 
 # function used for activation of agents
 cumulative = cf.exponential_cumulative
