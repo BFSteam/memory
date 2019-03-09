@@ -195,6 +195,7 @@ writeKCore = True
 writeDegree = True
 writeClustering = True
 writeDiameter = True
+writeVariables = True
 lineBuffer = 1000
 # ---------------------------------------------------------------------
 #

@@ -63,13 +63,15 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #    common.configFile,
         #    destination_path + 'config' + str(common.localtime) + '.ini')
         # -------------------------------------------------------------
-        path = destination_path + "variables.csv"
-        with open(path, 'w') as variables:
-            writer = csv.writer(variables, delimiter=",")
-            for i in [
-                    item for item in dir(common) if not item.startswith("__")
-            ]:
-                writer.writerow([i, getattr(common, i)])
+        if common.writeVariables == True:
+            path = destination_path + "variables.csv"
+            with open(path, 'w') as variables:
+                writer = csv.writer(variables, delimiter=",")
+                for i in [
+                        item for item in dir(common)
+                        if not item.startswith("__")
+                ]:
+                    writer.writerow([i, getattr(common, i)])
         # -------------------------------------------------------------
         #
         # GML's

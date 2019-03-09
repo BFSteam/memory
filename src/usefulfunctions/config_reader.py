@@ -121,7 +121,7 @@ class ConfigReader():
         common.writeClustering = self.config['LOG'].getboolean(
             'writeClustering')
         common.writeDiameter = self.config['LOG'].getboolean('writeDiameter')
-
+        common.writeVariables = self.config['LOG'].getboolean('writeVariables')
         common.lineBuffer = self.config['LOG'].getint('lineBuffer')
 
     def readConfigFile(self, configFile):
