@@ -832,6 +832,7 @@ class User(WorldAgent):
         # Find best news in memory based on distance
         bestNews = self.findKeyDistanceMinMax(
             self.database, 'new', minor=False)
+
         #
         # Find the best neighbour based on weight
         bestWeight = 0
@@ -901,12 +902,20 @@ class User(WorldAgent):
         # If final neighbor is infected or all neighbors are inactive
         if finalNeighbour < 0 or common.G.node[finalNeighbour][
                 'agent'].spreadState == 'i':
-            self.become_stifler(probability=common.pStifler)
+            self.become_stifler()
         elif common.G.node[finalNeighbour]['agent'].spreadState == 'r':
-            self.become_stifler(probability=common.pStifler)
+            self.become_stifler()
         #
         # If final neighbor is non infective and non 0
         else:
+            if common.toggleOldNews is True:
+                if common.cycle - bestNews['date-creation'] - common.vOld > 0:
+                    if random.random() < (1 - np.exp(
+                            -0.5 * (common.cycle - bestNews['date-creation'] -
+                                    common.vOld))):
+                        common.G.node[finalNeighbour]['agent'].become_stifler()
+                        self.become_stifler()
+                        return
             common.G.node[finalNeighbour]['agent'].remember(bestNews)
             common.msglog.registerEntry(
                 id_src=bestNews['id-source'],
@@ -1182,10 +1191,11 @@ class User(WorldAgent):
     # end importing from source
     #########################################################
 
-    def become_stifler(self, probability=1):
+    def become_stifler(self, probability=common.pStifler):
         """
         user can become stifler only if infected and only if active
         """
+        #probability = 1 - (len(self.get_list_of_all_self_neighbors()) / 71)
         if np.random.random() < probability:
             if self.spreadState == 'i' and self.active is True:
                 self.change_spreading_state('r')
@@ -1240,7 +1250,7 @@ class User(WorldAgent):
                 break
             if self.is_connected_with_only_state('r') == True:
                 print("True")
-                self.become_stifler(probability=common.pStifler)
+                self.become_stifler()
                 break
             self.active_diffusion()
 
@@ -1258,4 +1268,4 @@ class User(WorldAgent):
         if self.spreadState != 'i':
             return
         if random.random() > probability:
-            self.become_stifler(probability=common.pStifler)
+            self.become_stifler()

@@ -176,7 +176,7 @@ toggleActivateWithProba = True
 toggleActivation = True
 toggleDiffuseToInactive = True
 toggleApathy = True
-
+toggleOldNews = True
 # function used for activation of agents
 cumulative = cf.exponential_cumulative
 argCumulative = 1.  # , second argumet for pareto
