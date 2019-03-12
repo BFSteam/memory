@@ -87,4 +87,4 @@ def hill(x, p, k, n):
 
 
 def norm(x, ord=None, axis=None, keepdim=False):
-    return x / np.sum(x)
+    return x / np.linalg.norm(x)

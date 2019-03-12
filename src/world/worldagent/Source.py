@@ -9,6 +9,7 @@ from string import digits, ascii_lowercase, ascii_uppercase
 import commonVar as common
 import datastructures.database as db
 import datastructures.news as nw
+from usefulfunctions.useful_functions import norm
 
 from agTools import *
 from Tools import *
@@ -64,7 +65,7 @@ class Source(WorldAgent):
         tmp = self.state
         for j in range(common.dim):
             tmp[j] += 0.1 * random.random()
-        tmp = tmp / tmp.sum()
+        tmp = norm(tmp)
         return tmp
 
     def generateNews(self, n=1):

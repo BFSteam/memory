@@ -104,6 +104,10 @@ class ConfigReader():
             'toggleDiffuseToInactive')
         common.toggleApathy = self.config['FLAGS'].getboolean('toggleApathy')
         common.toggleOldNews = self.config['FLAGS'].getboolean('toggleOldNews')
+        common.toggleThresholdOnNews = self.config['FLAGS'].getboolean(
+            'toggleThresholdOnNews')
+        common.toggleThresholdOnAgents = self.config['FLAGS'].getboolean(
+            'toggleThresholdOnAgents')
         # =================================================================
         #
         # LOG

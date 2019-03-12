@@ -3,6 +3,7 @@ import random
 
 import datastructures.database as db
 from coloroutput import LOG_LABEL
+from usefulfunctions.useful_functions import norm
 
 import commonVar as common
 import graph as graph
@@ -92,7 +93,7 @@ class WorldAgent(Agent):
         else:
             for i in range(self.state.shape[0]):
                 self.state[i] += np.random.random_sample()
-        self.state = self.state / self.state.sum()
+        self.state = norm(self.state)
         return self.state
 
     def get_graph(self):

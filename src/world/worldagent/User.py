@@ -114,7 +114,7 @@ class User(WorldAgent):
     #    different norms can be chosen
     #
     #    """
-    #    return x / np.sum(x)
+    #    return norm(x)
     #    # return x / LA.norm(x, ord=ord, axis=axis, keepdims=keepdims)
 
     def get_list_of_all_self_neighbors(self):
@@ -1135,7 +1135,7 @@ class User(WorldAgent):
         tmp = self.state
         for j in range(common.dim):
             tmp[j] += 0.1 * random.random()
-        tmp = tmp / tmp.sum()
+        tmp = norm(tmp)
         return tmp
 
     def generate_news(self, n=1):
@@ -1238,11 +1238,14 @@ class User(WorldAgent):
 
     def contact_process(self):
         """Single spreading for each time cycle"""
+        if self.number != common.source_index:
+            self.apathy()
         self.active_diffusion()
 
     def truncated_process(self):
         """Spread while agent is infective"""
-        #self.apathy()
+        if self.number != common.source_index:
+            self.apathy()
         while True:
             if self.active == False:
                 break
@@ -1261,7 +1264,7 @@ class User(WorldAgent):
             self.become_active()
             print(self.number)
 
-    def apathy(self, probability=0.1):
+    def apathy(self, probability=0.005):
         """S->R with proba lambda*(1-p)"""
         if common.toggleApathy == False:
             return
