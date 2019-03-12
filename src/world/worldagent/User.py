@@ -223,6 +223,9 @@ class User(WorldAgent):
         if a == 'scalar':
             return np.dot(self.state, n)
 
+    def distance_s1_s2(self, s1, s2):
+        return np.dot(s1, s2)
+
     def ifBeautifulForgetWorse(self, threshold=common.tRemember):
         """
 
@@ -908,6 +911,9 @@ class User(WorldAgent):
         #
         # If final neighbor is non infective and non 0
         else:
+            ### begin old news block
+            #
+            # if news is too old
             if common.toggleOldNews is True:
                 if common.cycle - bestNews['date-creation'] - common.vOld > 0:
                     if random.random() < (1 - np.exp(
@@ -916,6 +922,39 @@ class User(WorldAgent):
                         common.G.node[finalNeighbour]['agent'].become_stifler()
                         self.become_stifler()
                         return
+            ### end old news block
+
+            ### begin immunity block
+            #  _                                 _ _
+            # (_)_ __ ___  _ __ ___  _   _ _ __ (_) |_ _   _
+            # | | '_ ` _ \| '_ ` _ \| | | | '_ \| | __| | | |
+            # | | | | | | | | | | | | |_| | | | | | |_| |_| |
+            # |_|_| |_| |_|_| |_| |_|\__,_|_| |_|_|\__|\__, |
+            #                                          |___/
+            #
+            #  _     ____       ___    ___       _ _
+            # / |   |___ \     ( _ )  ( _ )     | | |
+            # | |     __) |    / _ \/\/ _ \/\   | | |
+            # | |_   / __/ _  | (_>  < (_>  <_  | | |
+            # |_( ) |_____( )  \___/\/\___/\( ) | | |
+            #   |/        |/                |/  |_|_|
+            #
+            # 1
+            # if too distant from spreader
+            if common.toggleThresholdOnAgents is True:
+                if self.distance(common.G.node[finalNeighbour]
+                                 ['agent'].state) < common.tImmunityA:
+                    common.G.node[finalNeighbour]['agent'].become_stifler()
+                    return
+            # 2
+            # if too distant from news
+            if common.toggleThresholdOnNews is True:
+                if self.distance_s1_s2(
+                        bestNews['new'], common.G.node[finalNeighbour]
+                    ['agent'].state) < common.tImmunityN:
+                    common.G.node[finalNeighbour]['agent'].become_stifler()
+                    return
+            ### end immunity block
             common.G.node[finalNeighbour]['agent'].remember(bestNews)
             common.msglog.registerEntry(
                 id_src=bestNews['id-source'],

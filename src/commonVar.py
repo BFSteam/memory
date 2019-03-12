@@ -140,6 +140,12 @@ pDeleteEdge = 0.1
 # probability of transition from I to R
 pStifler = 0.5
 
+# threshold of being immune to a news
+tImmunityN = 0.9992
+
+# threshold of being immune to an agent
+tImmunityA = 0.9992
+
 # ---------------------------------------------------------------------
 #
 # SLAPP initialization
