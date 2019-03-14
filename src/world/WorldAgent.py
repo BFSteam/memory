@@ -74,7 +74,7 @@ class WorldAgent(Agent):
         #
         # =========================================================================================
 
-    def genState(self, n=1, noise=0.15):
+    def genState(self, n=1, noise=15):
         # source state
         # inizializzato a zero
         # number of relevant topics for the source: 1, 2 or 3

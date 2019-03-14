@@ -939,19 +939,33 @@ class User(WorldAgent):
             # |_( ) |_____( )  \___/\/\___/\( ) | | |
             #   |/        |/                |/  |_|_|
             #
+            tnews = False
+            tagent = False
+            dagent = self.distance(
+                common.G.node[finalNeighbour]['agent'].state)
+            dnews = self.distance_s1_s2(
+                bestNews['new'], common.G.node[finalNeighbour]['agent'].state)
+
+            if dagent < common.tImmunityA:
+                if random.random() < 1 - dagent:
+                    tagent = True
+            if dnews < common.tImmunityN:
+                if random.random() < 1 - dnews:
+                    tnews = True
             # 1
             # if too distant from spreader
-            if common.toggleThresholdOnAgents is True:
-                if self.distance(common.G.node[finalNeighbour]
-                                 ['agent'].state) < common.tImmunityA:
+            if common.toggleThresholdOnAgents is True and common.toggleThresholdOnNews is False:
+                if tagent is True:
                     common.G.node[finalNeighbour]['agent'].become_stifler()
                     return
             # 2
             # if too distant from news
-            if common.toggleThresholdOnNews is True:
-                if self.distance_s1_s2(
-                        bestNews['new'], common.G.node[finalNeighbour]
-                    ['agent'].state) < common.tImmunityN:
+            elif common.toggleThresholdOnNews is True and common.toggleThresholdOnAgents is False:
+                if tnews is True:
+                    common.G.node[finalNeighbour]['agent'].become_stifler()
+                    return
+            elif common.toggleThresholdOnNews is True or common.toggleThresholdOnAgents is True:
+                if tnews is True and tagent is True:
                     common.G.node[finalNeighbour]['agent'].become_stifler()
                     return
             ### end immunity block
