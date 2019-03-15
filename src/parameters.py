@@ -191,8 +191,20 @@ def loadParameters(self):
         else:
             s_i = ss_ii[np.random.choice(len(ss_ii), replace=False)]
         common.source_index = s_i
+        #
+        # second seed default kcore = 1
+        s_i = 1
+        ss_ii = [key for key, val in temp_kcore.items() if val == s_i]
+        if s_i <= 0 or s_i > max_si or ss_ii == []:
+            s_i = np.random.randint(0, common.N_AGENTS)
+        else:
+            while True:
+                s_i = ss_ii[np.random.choice(len(ss_ii), replace=False)]
+                if s_i != common.source_index:
+                    break
+        common.source_index_2 = s_i
         print("SOURCE INDEX", common.source_index)
-
+        print("SOURCE INDEX2", common.source_index_2)
     elif yesnochoice in no:
         print("LAZY MODE OFF")
         print(INPUT_LABEL)
