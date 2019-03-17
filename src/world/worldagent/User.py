@@ -1268,8 +1268,9 @@ class User(WorldAgent):
     def random_activation(self):
         if common.toggleActivation is False:
             return
-        rndm = 1. * (len(self.get_list_of_all_self_neighbors()) / 71
-                     )  # 576, 71
+        #rndm = 1. * (len(self.get_list_of_all_self_neighbors()) / 71
+        #             )  # 576, 71
+        rndm = 0.5
         if random.random() < rndm:
             if self.active == True:
                 self.continue_state_activation()
