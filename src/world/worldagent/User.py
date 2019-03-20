@@ -1270,21 +1270,21 @@ class User(WorldAgent):
             return
         #rndm = 1. * (len(self.get_list_of_all_self_neighbors()) / 71
         #             )  # 576, 71
-        #rndm = 0.5
-        #if random.random() < rndm:
-        #    if self.active == True:
-        #        self.continue_state_activation()
-        #    else:
-        #        self.switch_activation()
+        rndm = 0.5
+        if random.random() < rndm:
+            if self.active == True:
+                self.continue_state_activation()
+            else:
+                self.switch_activation()
         #else:
         #    if self.active == True:
         #        self.switch_activation()
         #    else:
         #        self.continue_state_activation()
-        if self.number == common.source_index:
-            self.active = True
-        self.change_activation_with_probability(
-            x=self.time_state_activation(), function=power_cumulative, par=3.5)
+        #if self.number == common.source_index:
+        #    self.active = True
+        #self.change_activation_with_probability(
+        #    x=self.time_state_activation(), function=power_cumulative, par=3.5)
         #if np.random.random() < 0.5:
         #    self.active = False
         #else:

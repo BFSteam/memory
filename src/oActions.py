@@ -32,9 +32,9 @@ def do2a(address, cycle):  # ask_all in observerActions.txt
     #    print("Time =", cycle)
 
     common.memlog.updateLog(write=common.writeMemories)
-    if cycle == 1:
-        print("miao")
-        common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
+    #if cycle == 1:
+    #print("miao")
+    common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
 
 
 def do2b(address, cycle):  # ask_one in observerActions.txt
@@ -143,7 +143,7 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         path = destination_path + "k_core.csv"
         # already registered in do2a
-        common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
+        #common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
         common.kcrlog.write_and_close_log_file(path=path, write=True)
         # -------------------------------------------------------------
         #
