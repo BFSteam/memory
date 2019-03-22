@@ -1306,7 +1306,7 @@ class User(WorldAgent):
             if self.spreadState != 'i':
                 break
             if self.is_connected_with_only_state('r') == True:
-                print("True")
+                #print("True")
                 self.become_stifler()
                 break
             self.active_diffusion()

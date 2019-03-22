@@ -123,9 +123,9 @@ def change_s_to_i():
 
     #
     # Second news off
-    #if common.source_index_2 >= 0:
-    #    common.G.node[common.source_index_2]['agent'].change_spreading_state(
-    #        'i')
+    if common.source_index_2 >= 0:
+        common.G.node[common.source_index_2]['agent'].change_spreading_state(
+            'i')
 
     #common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
     #print(range(len(common.G.nodes)))

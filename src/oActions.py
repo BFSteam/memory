@@ -36,6 +36,29 @@ def do2a(address, cycle):  # ask_all in observerActions.txt
     #print("miao")
     common.kcrlog.registerEntry(date=common.cycle, graph=common.G)
 
+    # create log directory if it doesn't exist
+    if not os.path.exists(common.project.replace("src", "log")):
+        os.makedirs(common.project.replace("src", "log"))
+
+    # create destination path and directory appending datetime to logDirName
+    destination_path = common.project.replace(
+        'src', 'log/' + common.logDirName + '/' + common.localtime + '/')
+    try:
+        os.makedirs(destination_path)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
+
+    #path = destination_path + str(common.cycle) + "graph.gml"
+    #nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
+    #print("saved", path)
+
+    path = common.project.replace(
+        "src",
+        "log/graphN" + str(common.localtime) + str(common.cycle) + ".gml")
+    nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
+    print("saved", path)
+
 
 def do2b(address, cycle):  # ask_one in observerActions.txt
     """
@@ -80,18 +103,18 @@ def do2b(address, cycle):  # ask_one in observerActions.txt
         #
         # GML
         #
-        #path = destination_path + "graph.gml"
+        #path = destination_path + str(common.cycle) + "graph.gml"
         #nx.write_gml(common.G, path, stringizer=worldAgentStringsizer)
         #print("saved", path)
         # -------------------------------------------------------------
         #
         # GML different stringsizer
         #
-        # path = common.project.replace(
+        #path = common.project.replace(
         #    "src",
-        #    "log/graphN" + str(common.localtime) + ".gml")
-        # nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
-        # print("saved", path)
+        #    "log/graphN" + str(common.localtime) + str(common.cycle) + ".gml")
+        #nx.write_gml(common.G, path, stringizer=singleNewsStringsizer)
+        #print("saved", path)
         # -------------------------------------------------------------
         # -------------------------------------------------------------
         #
